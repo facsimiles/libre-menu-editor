@@ -1,0 +1,115 @@
+{
+
+    "WINDOW_TITLE": "Hauptmenü",
+
+
+
+    "GREETER_WINDOW_HEAD": "Information",
+
+    "GREETER_WINDOW_BODY": "Einige Systeme zeigen Änderungen erst nach erneuter Benutzer-Anmeldung an",
+
+    "GREETER_BUTTON_TEXT": "Verstanden",
+
+
+
+    "UNSAVED_DIALOG_HEAD": "Änderungen",
+
+    "UNSAVED_DIALOG_BODY": "Möchten Sie die Änderungen verwerfen?",
+
+
+
+    "UNSAVED_DIALOG_BACK_BUTTON_TEXT": "Zurück",
+
+    "UNSAVED_DIALOG_SAVE_BUTTON_TEXT": "Speichern",
+
+    "UNSAVED_DIALOG_DISCARD_BUTTON_TEXT": "Verwerfen",
+
+
+
+    "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Unbenannte Anwendung",
+
+    "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Unbenannte Aktion",
+
+
+
+    "SHOW_DISABLED_SWITCH_LABEL": "Deaktivierte anzeigen",
+
+    "SHOW_HIDDEN_SWITCH_LABEL": "Verborgene anzeigen",
+
+    "RESET_BUTTON_LABEL": "Starter zurücksetzen",
+
+    "DELETE_BUTTON_LABEL": "Starter löschen",
+
+    "FILE_BUTTON_LABEL": "Datei anzeigen",
+
+    "DIRECTORY_BUTTON_LABEL": "Speicherort öffnen",
+
+
+
+    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Datei auswählen",
+
+    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Symboldatei auswählen",
+
+
+
+    "SAVE_BUTTON_LABEL": "Speichern",
+
+    "RELOAD_BUTTON_LABEL": "Abbrechen",
+
+
+
+    "INFO_BAR_LABEL_TEXT": "Bitte wählen Sie die Aktion aus die Sie löschen wollen",
+
+    "INFO_BAR_CANCEL_BUTTON_LABEL": "Fertig",
+
+
+
+    "DESCRIPTION_GROUP_TITLE": "Beschreibung",
+
+    "ACTIONS_GROUP_TITLE": "Aktionen",
+
+    "DISPLAY_GROUP_TITLE": "Sichtbarkeit",
+
+
+
+    "ICON_CHOOSER_ROW_TITLE": "Symbol",
+
+    "NAME_ENTRY_ROW_TITLE": "Name",
+
+    "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
+
+    "COMMAND_CHOOSER_ROW_TITLE": "Befehl",
+
+
+
+    "DISPLAY_SWITCH_ROW_TITLE": "Anwendung in der Übersicht anzeigen",
+
+
+
+    "LOAD_MULTIPLE_ERROR_TEXT": "%s Dateien konnten nicht geladen werden",
+
+    "LOAD_SINGLE_ERROR_TEXT": "Datei '%s' konnte nicht geladen werden",
+
+
+
+    "STARTER_SAVE_MESSAGE_TEXT": "Einstellungen für '%s' wurden gespeichert",
+
+    "STARTER_SAVE_ERROR_TEXT": "Einstellungen konnten nicht gespeichert werden",
+
+
+
+    "STARTER_CREATE_MESSAGE_TEXT": "Starter für '%s' wurde erstellt",
+
+    "STARTER_CREATE_ERROR_TEXT": "Starter konnte nicht erstellt werden",
+
+
+
+    "STARTER_RESET_MESSAGE_TEXT": "Starter für '%s' wurde zurückgesetzt",
+
+    "STARTER_RESET_ERROR_TEXT": "Starter konnte nicht zurückgesetzt werden",
+
+    "STARTER_DELETE_MESSAGE_TEXT": "Starter für '%s' wurde gelöscht",
+
+    "STARTER_DELETE_ERROR_TEXT": "Starter konnte nicht gelöscht werden"
+
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>page.codeberg.libre_menu_editor.LibreMenuEditor</id>
+  <launchable type="desktop-id">page.codeberg.libre_menu_editor.LibreMenuEditor.desktop</launchable>
+  <name>Main Menu</name>
+  <name xml:lang="de">Hauptmenü</name>
+  <summary>Customize the menu</summary>
+  <summary xml:lang="de">Das Menü bearbeiten</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <developer_name>libre-menu-editor</developer_name>
+  <content_rating type="oars-1.0"/>
+  <description>
+    <p>Libre Menu Editor will list all application-launchers that are installed on your system. You can then use a clean, modern and intuitive interface with powerful search to customize them to your needs.</p>
+    <p xml:lang="de">Libre Menu Editor listet alle auf Ihrem System installierten Anwendungsstarter auf. Anschließend können Sie eine saubere, moderne und intuitive Benutzeroberfläche mit zuverlässiger Suchfunktion verwenden, um Anwendungsstarter nach Ihren Wünschen anzupassen.</p>
+    <p>The following features are included:</p>
+    <p xml:lang="de">Folgende Funktionen sind beinhaltet:</p>
+    <ul>
+      <li>create and remove custom launchers</li>
+      <li xml:lang="de">benutzerdefinierte Starter erstellen und entfernen</li>
+      <li>set launchers icons to a specific file or icon-name</li>
+      <li xml:lang="de">bestimmte Dateien oder Symbolnamen als Anwendungssymbole verwenden</li>
+      <li>make launchers execute a specific file or command</li>
+      <li xml:lang="de">bestimmte Dateien oder Befehle zur Ausführung verwenden</li>
+      <li>customize launchers names and comments</li>
+      <li xml:lang="de">Namen und Kommentare von Startern anpassen</li>
+      <li>create, edit and remove launcher-actions</li>
+      <li xml:lang="de">Starter-Aktionen erstellen, bearbeiten und löschen</li>
+      <li>show or hide launchers in the main-menu</li>
+      <li xml:lang="de">Starter im Hauptmenü anzeigen oder verstecken</li>
+      <li>enable or disable launchers</li>
+      <li xml:lang="de">Starter aktivieren oder deaktivieren</li>
+      <li>reset launchers back to their default state</li>
+      <li xml:lang="de">Starter auf System-Standard zurücksetzen</li>
+      <li>open launcher configuration-files in your default text-editor</li>
+      <li xml:lang="de">Konfigurationsdateien von Startern im Standard-Textbearbeitungsprogramm öffnen</li>
+      <li>open launcher configuration-files in your file-manager</li>
+      <li xml:lang="de">Konfigurationsdateien von Startern im Dateiverwaltungsprogramm öffnen</li>
+    </ul>
+  </description>
+  <url type="homepage">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
+  <url type="vcs-browser">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
+  <url type="translate">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
+  <url type="bugtracker">https://codeberg.org/libre-menu-editor/libre-menu-editor/issues</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/1.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.0" date="2023-07-01"/>
+  </releases>
+  <update_contact>libre-menu-editor@proton.me</update_contact>
+</component>

@@ -1,0 +1,44 @@
+#!/usr/bin/python3
+
+# Copyright (C) 2022 Free Software Foundation, Inc.
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+
+import os, sys
+
+try:
+
+    project_dir = os.path.join(os.path.sep, "app", "share", "libre-menu-editor")
+
+    sys.path.append(project_dir)
+
+    from main import Application
+
+    os.environ["APP_RUNNING_AS_FLATPAK"] = "true"
+
+except ModuleNotFoundError:
+
+    project_dir = os.path.join(os.path.sep, "usr", "share", "libre-menu-editor")
+
+    sys.path.append(project_dir)
+
+    from main import Application
+
+
+if __name__ == "__main__":
+
+    app = Application(project_dir, application_id="page.codeberg.libre_menu_editor.LibreMenuEditor")
+
+    app.run()

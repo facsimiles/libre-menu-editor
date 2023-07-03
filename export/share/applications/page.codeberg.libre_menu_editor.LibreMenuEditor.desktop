@@ -1,0 +1,23 @@
+[Desktop Entry]
+Name=Main Menu
+Name[de]=Hauptmenü
+Name[it]=Menù Principale
+Comment=Customize the menu
+Comment[de]=Das Menü bearbeiten
+Comment[it]=Modifica il menù
+Keywords=Menu;Desktop;App;Launcher;Shortcut;Editor
+
+Type=Application
+Icon=page.codeberg.libre_menu_editor.LibreMenuEditor
+Exec=libre-menu-editor
+Categories=GNOME;GTK;Utility
+StartupNotify=true
+
+X-Flatpak=page.codeberg.libre_menu_editor.LibreMenuEditor
+Actions=new-launcher
+
+[Desktop Action new-launcher]
+Name=New Launcher
+Name[de]=Neuer Starter
+Name[it]=Nuovo Lanciatore
+Exec=libre-menu-editor --new
