@@ -5,7 +5,7 @@ Name[it]=Menù Principale
 Comment=Customize the menu
 Comment[de]=Das Menü bearbeiten
 Comment[it]=Modifica il menù
-Keywords=Menu;Desktop;App;Launcher;Shortcut;Editor
+Keywords=libre-menu-editor;app;desktop;editor;entry;launcher;menu;shortcut
 
 Type=Application
 Icon=page.codeberg.libre_menu_editor.LibreMenuEditor
