@@ -4,8 +4,14 @@
   <launchable type="desktop-id">page.codeberg.libre_menu_editor.LibreMenuEditor.desktop</launchable>
   <name>Main Menu</name>
   <name xml:lang="de">Hauptmenü</name>
+  <name xml:lang="fr">Menu Principal</name>
+  <name xml:lang="it">Menù Principale</name>
+  <name xml:lang="pl">Menu Główne</name>
   <summary>Customize the menu</summary>
   <summary xml:lang="de">Das Menü bearbeiten</summary>
+  <summary xml:lang="fr">Modifier le menu</summary>
+  <summary xml:lang="it">Modifica il menù</summary>
+  <summary xml:lang="pl">Edycja menu</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <developer_name>libre-menu-editor</developer_name>

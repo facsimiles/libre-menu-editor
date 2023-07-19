@@ -1,12 +1,14 @@
 [Desktop Entry]
 Name=Main Menu
 Name[de]=Hauptmenü
+Name[fr]=Menu Principal
 Name[it]=Menù Principale
 Name[pl]=Menu Główne
 Comment=Customize the menu
 Comment[de]=Das Menü bearbeiten
+Comment[fr]=Modifier le menu
 Comment[it]=Modifica il menù
-Comment[pl]=Dostosowywanie menu
+Comment[pl]=Edycja menu
 Keywords=libre-menu-editor;app;desktop;editor;entry;launcher;menu;shortcut
 
 Type=Application
@@ -21,6 +23,7 @@ Actions=new-launcher
 [Desktop Action new-launcher]
 Name=New Launcher
 Name[de]=Neuer Starter
+Name[fr]=Nouveau Lanceur
 Name[it]=Nuovo Lanciatore
 Name[pl]=Nowy Launcher
 Exec=libre-menu-editor --new
