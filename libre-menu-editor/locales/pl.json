@@ -1,0 +1,115 @@
+{
+
+    "WINDOW_TITLE": "Menu Główne",
+
+
+
+    "GREETER_WINDOW_HEAD": "Informacja",
+
+    "GREETER_WINDOW_BODY": "Niektóre systemy nie wyświetlają zmian dopóki użytkownik nie zaloguje się ponownie",
+
+    "GREETER_BUTTON_TEXT": "Kontynuuj",
+
+
+
+    "UNSAVED_DIALOG_HEAD": "Niezapisane zmiany",
+
+    "UNSAVED_DIALOG_BODY": "Czy na pewno chcesz odrzucić zmiany?",
+
+
+
+    "UNSAVED_DIALOG_BACK_BUTTON_TEXT": "Powrót",
+
+    "UNSAVED_DIALOG_SAVE_BUTTON_TEXT": "Zapisz",
+
+    "UNSAVED_DIALOG_DISCARD_BUTTON_TEXT": "Odrzuć",
+
+
+
+    "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Nieznana Aplikacja",
+
+    "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Nieznana Akcja",
+
+
+
+    "SHOW_DISABLED_SWITCH_LABEL": "Pokaż wyłączone",
+
+    "SHOW_HIDDEN_SWITCH_LABEL": "Pokaż schowane",
+
+    "RESET_BUTTON_LABEL": "Zresetuj Launcher",
+
+    "DELETE_BUTTON_LABEL": "Usuń Launcher",
+
+    "FILE_BUTTON_LABEL": "Otwórz plik",
+
+    "DIRECTORY_BUTTON_LABEL": "Otwórz folder",
+
+
+
+    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Wybierz plik",
+
+    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Wybierz ikonę",
+
+
+
+    "SAVE_BUTTON_LABEL": "Zapisz",
+
+    "RELOAD_BUTTON_LABEL": "Anuluj",
+
+
+
+    "INFO_BAR_LABEL_TEXT": "Wybierz akcje, które chcesz usunąć",
+
+    "INFO_BAR_CANCEL_BUTTON_LABEL": "Gotowe",
+
+
+
+    "DESCRIPTION_GROUP_TITLE": "Opis",
+
+    "ACTIONS_GROUP_TITLE": "Akcje",
+
+    "DISPLAY_GROUP_TITLE": "Wyświetlanie",
+
+
+
+    "ICON_CHOOSER_ROW_TITLE": "Ikona",
+
+    "NAME_ENTRY_ROW_TITLE": "Nazwa",
+
+    "COMMENT_ENTRY_ROW_TITLE": "Komentarz",
+
+    "COMMAND_CHOOSER_ROW_TITLE": "Komenda",
+
+
+
+    "DISPLAY_SWITCH_ROW_TITLE": "Wyświetlaj tę aplikację w Overview",
+
+
+
+    "LOAD_MULTIPLE_ERROR_TEXT": "Ładowanie %s plików nie powiodło się",
+
+    "LOAD_SINGLE_ERROR_TEXT": "Ładowanie pliku nie powiodło się: '%s'",
+
+
+
+    "STARTER_SAVE_MESSAGE_TEXT": "Konfiguracja dla '%s' została zapisana",
+
+    "STARTER_SAVE_ERROR_TEXT": "Zapisywanie konfiguracji nie powiodło się",
+
+
+
+    "STARTER_CREATE_MESSAGE_TEXT": "Launcher dla '%s' został stworzony",
+
+    "STARTER_CREATE_ERROR_TEXT": "Tworzenie launchera nie powiodło się",
+
+
+
+    "STARTER_RESET_MESSAGE_TEXT": "Launcher dla '%s' został zresetowany",
+
+    "STARTER_RESET_ERROR_TEXT": "Resetowanie launchera nie powiodło się",
+
+    "STARTER_DELETE_MESSAGE_TEXT": "Launcher dla '%s' został usunięty",
+
+    "STARTER_DELETE_ERROR_TEXT": "Usuwanie launchera nie powiodło się"
+
+}
