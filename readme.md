@@ -48,7 +48,7 @@ sudo make install
 sudo gtk-update-icon-cache -f /usr/share/icons/hicolor
 ```
 
-## Contribute translations
+## Contribute missing translations
 
 1. Check if the translation exists in the [locales](https://codeberg.org/libre-menu-editor/libre-menu-editor/src/branch/main/libre-menu-editor/locales) directory
 
@@ -61,9 +61,3 @@ sudo gtk-update-icon-cache -f /usr/share/icons/hicolor
 5. Download and translate the [page.codeberg.libre_menu_editor.LibreMenuEditor.desktop](https://codeberg.org/libre-menu-editor/libre-menu-editor/raw/branch/main/export/share/applications/page.codeberg.libre_menu_editor.LibreMenuEditor.desktop) file
 
 6. Open a [new issue](https://codeberg.org/libre-menu-editor/libre-menu-editor/issues/new) and upload the translated files
-
-## Translation contributions
-
-- albano.battistella contributed to [italian](https://codeberg.org/libre-menu-editor/libre-menu-editor/raw/branch/main/libre-menu-editor/it.json) translations
-
-- jacekpoz contributed to [polish](https://codeberg.org/libre-menu-editor/libre-menu-editor/raw/branch/main/libre-menu-editor/pl.json) translations

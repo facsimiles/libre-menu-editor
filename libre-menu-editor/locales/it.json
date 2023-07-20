@@ -36,13 +36,13 @@
 
     "SHOW_HIDDEN_SWITCH_LABEL": "Mostra nascosto",
 
-    "RESET_BUTTON_LABEL": "Resetta Lanciatore",
+    "RESET_BUTTON_LABEL": "Resetta lanciatore",
 
-    "DELETE_BUTTON_LABEL": "Cancella Lanciatore",
+    "DELETE_BUTTON_LABEL": "Cancella lanciatore",
 
     "FILE_BUTTON_LABEL": "Visualizza documento",
 
-    "DIRECTORY_BUTTON_LABEL": "Visualizza Directory",
+    "DIRECTORY_BUTTON_LABEL": "Visualizza cartella",
 
 
 
@@ -82,7 +82,7 @@
 
 
 
-    "DISPLAY_SWITCH_ROW_TITLE": "Mostra questa applicazione in panoramica",
+    "DISPLAY_SWITCH_ROW_TITLE": "Mostra questa applicazione nel menu principale",
 
 
 

@@ -36,13 +36,13 @@
 
     "SHOW_HIDDEN_SWITCH_LABEL": "Show hidden",
 
-    "RESET_BUTTON_LABEL": "Reset Launcher",
+    "RESET_BUTTON_LABEL": "Reset launcher",
 
-    "DELETE_BUTTON_LABEL": "Delete Launcher",
+    "DELETE_BUTTON_LABEL": "Delete launcher",
 
-    "FILE_BUTTON_LABEL": "View Document",
+    "FILE_BUTTON_LABEL": "View document",
 
-    "DIRECTORY_BUTTON_LABEL": "View Directory",
+    "DIRECTORY_BUTTON_LABEL": "View directory",
 
 
 
@@ -58,7 +58,7 @@
 
 
 
-    "INFO_BAR_LABEL_TEXT": "Please select the Actions that you want to delete",
+    "INFO_BAR_LABEL_TEXT": "Please select the actions that you want to delete",
 
     "INFO_BAR_CANCEL_BUTTON_LABEL": "Done",
 
@@ -82,7 +82,7 @@
 
 
 
-    "DISPLAY_SWITCH_ROW_TITLE": "Show this Application in Overview",
+    "DISPLAY_SWITCH_ROW_TITLE": "Show this application in the main menu",
 
 
 

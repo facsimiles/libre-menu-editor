@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=Main Menu
 Name[de]=Hauptmenü
+Name[es]=Menú Principal
 Name[fr]=Menu Principal
 Name[it]=Menù Principale
 Name[pl]=Menu Główne
 Comment=Customize the menu
 Comment[de]=Das Menü bearbeiten
+Comment[es]=Modificar el menú
 Comment[fr]=Modifier le menu
 Comment[it]=Modifica il menù
 Comment[pl]=Edycja menu
@@ -23,6 +25,7 @@ Actions=new-launcher
 [Desktop Action new-launcher]
 Name=New Launcher
 Name[de]=Neuer Starter
+Name[es]=Nuevo Lanzador
 Name[fr]=Nouveau Lanceur
 Name[it]=Nuovo Lanciatore
 Name[pl]=Nowy Launcher
