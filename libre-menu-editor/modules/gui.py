@@ -185,6 +185,10 @@ class IconFinder():
 
                         return alternative
 
+                else:
+
+                    return name
+
             except KeyError:
 
                 return name
