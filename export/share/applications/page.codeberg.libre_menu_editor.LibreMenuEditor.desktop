@@ -11,11 +11,12 @@ Comment[es]=Modificar el menú
 Comment[fr]=Modifier le menu
 Comment[it]=Modifica il menù
 Comment[pl]=Edycja menu
-Keywords=libre-menu-editor;app;desktop;editor;entry;launcher;menu;shortcut
+Keywords=libre-menu-editor;app;desktop;editor;entry;launch;menu;shortcut;start
 
 Type=Application
 Icon=page.codeberg.libre_menu_editor.LibreMenuEditor
-Exec=libre-menu-editor
+Exec=libre-menu-editor %F
+MimeType=application/x-desktop
 Categories=GNOME;GTK;Utility
 StartupNotify=true
 

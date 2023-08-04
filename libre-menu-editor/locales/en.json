@@ -1,76 +1,118 @@
 {
 
-    "WINDOW_TITLE": "Main Menu",
+    "APPLICATION_NAME": "Main Menu",
 
+    "GREETER_PAGE_HEAD": "Information",
 
+    "GREETER_PAGE_BODY": "This program changes configuration files that are not intended for subsequent change. On some systems it can therefore happen that some changes will only become visible after a long time or after the user logs in again",
 
-    "GREETER_WINDOW_HEAD": "Information",
+    "GREETER_PAGE_BUTTON_LABEL": "Continue",
 
-    "GREETER_WINDOW_BODY": "Some systems do not display changes until the user logs in again",
+    "START_PAGE_HEAD": "Customize the Menu",
 
-    "GREETER_BUTTON_TEXT": "Continue",
+    "START_PAGE_BODY": "Create a new application launcher or select an existing one from the sidebar",
 
+    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Cancel",
 
+    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Open",
 
-    "UNSAVED_DIALOG_HEAD": "Unsaved changes",
+    "INSTALL_DIALOG_HEAD": "Installation",
 
-    "UNSAVED_DIALOG_BODY": "Do you want to discard the changes?",
+    "INSTALL_DIALOG_BODY": "Do you want to add this application to the main menu?",
 
+    "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Back",
 
+    "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Save",
 
-    "UNSAVED_DIALOG_BACK_BUTTON_TEXT": "Back",
+    "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Install",
 
-    "UNSAVED_DIALOG_SAVE_BUTTON_TEXT": "Save",
+    "DISCARD_DIALOG_HEAD": "Unsaved changes",
 
-    "UNSAVED_DIALOG_DISCARD_BUTTON_TEXT": "Discard",
+    "DISCARD_DIALOG_BODY": "Do you want to discard the changes?",
 
+    "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Back",
 
+    "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Save",
+
+    "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Discard",
+
+    "RESET_DIALOG_HEAD": "Reset",
+
+    "RESET_DIALOG_BODY": "Do you want to reset this application? This action can not be undone",
+
+    "RESET_DIALOG_BACK_BUTTON_LABEL": "Back",
+
+    "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Continue",
+
+    "DELETE_DIALOG_HEAD": "Delete",
+
+    "DELETE_DIALOG_BODY": "Do you want to delete this application? This action can not be undone",
+
+    "DELETE_DIALOG_BACK_BUTTON_LABEL": "Back",
+
+    "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Continue",
 
     "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Unnamed Application",
 
     "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Unnamed Action",
 
+    "VISIBLE_SWITCH_LABEL": "Show hidden",
 
+    "RESET_MENU_BUTTON_LABEL": "Reset launcher",
 
-    "SHOW_DISABLED_SWITCH_LABEL": "Show disabled",
+    "DELETE_MENU_BUTTON_LABEL": "Delete launcher",
 
-    "SHOW_HIDDEN_SWITCH_LABEL": "Show hidden",
+    "REMOVE_MENU_BUTTON_LABEL": "Remove launcher",
 
-    "RESET_BUTTON_LABEL": "Reset launcher",
+    "FILE_MENU_BUTTON_LABEL": "Open document",
 
-    "DELETE_BUTTON_LABEL": "Delete launcher",
+    "SHORTCUTS_MENU_BUTTON_LABEL": "Keyboard shortcuts",
 
-    "FILE_BUTTON_LABEL": "View document",
+    "ABOUT_MENU_BUTTON_LABEL": "About Main Menu",
 
-    "DIRECTORY_BUTTON_LABEL": "View directory",
+    "SEARCH_SHORTCUT_TEXT": "Search launchers",
 
+    "VISIBLE_SHORTCUT_TEXT": "Show hidden",
 
+    "SAVE_SHORTCUT_TEXT": "Save changes",
 
-    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Choose File",
+    "DISCARD_SHORTCUT_TEXT": "Discard changes",
 
-    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Choose Icon",
+    "REMOVE_SHORTCUT_TEXT": "Remove changes",
 
+    "CREATE_SHORTCUT_TEXT": "Create launcher",
 
+    "FILE_SHORTCUT_TEXT": "Open document",
+
+    "MENU_SHORTCUT_TEXT": "Open menu",
+
+    "QUIT_SHORTCUT_TEXT": "Quit application",
+
+    "EDIT_SHORTCUT_GROUP_TITLE": "Edit",
+
+    "FIND_SHORTCUT_GROUP_TITLE": "Find",
+
+    "GENERAL_SHORTCUT_GROUP_TITLE": "General",
+
+    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Choose icon",
+
+    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Choose executable file",
+
+    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Choose directory",
 
     "SAVE_BUTTON_LABEL": "Save",
 
-    "RELOAD_BUTTON_LABEL": "Cancel",
+    "BANNER_LABEL_TEXT": "Please select the actions you want to delete",
 
-
-
-    "INFO_BAR_LABEL_TEXT": "Please select the actions that you want to delete",
-
-    "INFO_BAR_CANCEL_BUTTON_LABEL": "Done",
-
-
+    "BANNER_CANCEL_BUTTON_LABEL": "Done",
 
     "DESCRIPTION_GROUP_TITLE": "Description",
 
+    "EXECUTION_GROUP_TITLE": "Execution",
+
     "ACTIONS_GROUP_TITLE": "Actions",
 
-    "DISPLAY_GROUP_TITLE": "Display",
-
-
+    "VISIBLE_GROUP_TITLE": "Display",
 
     "ICON_CHOOSER_ROW_TITLE": "Icon",
 
@@ -80,36 +122,36 @@
 
     "COMMAND_CHOOSER_ROW_TITLE": "Command",
 
+    "DIRECTORY_CHOOSER_ROW_TITLE": "Directory",
 
+    "VISIBLE_SWITCH_ROW_TITLE": "Show this application in the main menu",
 
-    "DISPLAY_SWITCH_ROW_TITLE": "Show this application in the main menu",
+    "NOTIFY_SWITCH_ROW_TITLE": "Display a startup animation",
 
-
+    "TERMINAL_SWITCH_ROW_TITLE": "Display a terminal window",
 
     "LOAD_MULTIPLE_ERROR_TEXT": "Failed to load %s Files",
 
     "LOAD_SINGLE_ERROR_TEXT": "Failed to load File '%s'",
 
-
+    "OPEN_FILE_ERROR_TEXT": "Failed to open configurations for '%s'",
 
     "STARTER_SAVE_MESSAGE_TEXT": "Configurations for '%s' have been saved",
 
-    "STARTER_SAVE_ERROR_TEXT": "Failed to save Configurations",
-
-
+    "STARTER_SAVE_ERROR_TEXT": "Failed to save configurations",
 
     "STARTER_CREATE_MESSAGE_TEXT": "Launcher for '%s' has been created",
 
-    "STARTER_CREATE_ERROR_TEXT": "Failed to create Launcher",
-
-
+    "STARTER_CREATE_ERROR_TEXT": "Failed to create launcher",
 
     "STARTER_RESET_MESSAGE_TEXT": "Launcher for '%s' has been reset",
 
-    "STARTER_RESET_ERROR_TEXT": "Failed to reset Launcher",
+    "STARTER_RESET_ERROR_TEXT": "Failed to reset launcher",
 
     "STARTER_DELETE_MESSAGE_TEXT": "Launcher for '%s' has been deleted",
 
-    "STARTER_DELETE_ERROR_TEXT": "Failed to delete Launcher"
+    "STARTER_DELETE_ERROR_TEXT": "Failed to delete launcher",
+    
+    "STARTER_REMOVE_MESSAGE_TEXT": "Launcher for '%s' has been removed"
 
 }

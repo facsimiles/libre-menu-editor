@@ -28,24 +28,32 @@
       <li xml:lang="de">benutzerdefinierte Starter erstellen und entfernen</li>
       <li>set launcher-icons to a specific file or icon-name</li>
       <li xml:lang="de">bestimmte Dateien oder Symbolnamen als Anwendungssymbole verwenden</li>
+      <li>search through icons of your installed icon-theme</li>
+      <li xml:lang="de">Symbole des installierten Symbolthemas durchsuchen</li>
       <li>make launchers execute a specific file or command</li>
       <li xml:lang="de">bestimmte Dateien oder Befehle zur Ausführung verwenden</li>
+      <li>choose a working directory for the execution</li>
+      <li xml:lang="de">ein Arbeitsverzeichnis für den Befehl auswählen</li>
       <li>change launcher names and comments</li>
       <li xml:lang="de">Namen und Kommentare von Startern ändern</li>
       <li>create, edit and remove launcher-actions</li>
       <li xml:lang="de">Starter-Aktionen erstellen, bearbeiten und löschen</li>
       <li>show or hide launchers in the main menu</li>
       <li xml:lang="de">Starter im Hauptmenü anzeigen oder verstecken</li>
-      <li>enable or disable launchers in all menus</li>
-      <li xml:lang="de">Starter aktivieren oder deaktivieren</li>
-      <li>show hidden and disabled launchers in the sidebar</li>
-      <li xml:lang="de">verborgene und deaktivierte Starter in der Seitenleiste anzeigen</li>
+      <li>enable or disable the startup-animation</li>
+      <li xml:lang="de">Startanimation einschalten oder abschalten</li>
+      <li>show a terminal-window during execution</li>
+      <li xml:lang="de">während der Ausführung eine Konsole anzeigen</li>
+      <li>open .desktop files through the context-menu</li>
+      <li xml:lang="de">.desktop Dateien über das Kontextmenü öffnen</li>
+      <li>add existing .desktop files to the main menu</li>
+      <li xml:lang="de">existierende .desktop Dateien ins Hauptmenü einfügen</li>
+      <li>show hidden launchers in the sidebar</li>
+      <li xml:lang="de">versteckte Starter in der Seitenleiste anzeigen</li>
       <li>reset launchers back to their default states</li>
       <li xml:lang="de">Starter auf System-Standard zurücksetzen</li>
       <li>open launcher configuration-files in your default text-editor</li>
       <li xml:lang="de">Konfigurationsdateien von Startern im Standard-Textbearbeitungsprogramm öffnen</li>
-      <li>open launcher configuration-files in your file-manager</li>
-      <li xml:lang="de">Konfigurationsdateien von Startern im Dateiverwaltungsprogramm öffnen</li>
       <li>find launchers by typing or by pulling out the sidebar</li>
       <li xml:lang="de">Starter durch Eingabe oder durch Ausziehen der Seitenleiste finden</li>
       <li>navigate the interface with your keyboard</li>
@@ -59,9 +67,13 @@
   <screenshots>
     <screenshot type="default">
       <image>https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/1.png</image>
+      <image>https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/2.png</image>
+      <image>https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/3.png</image>
+      <image>https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/4.png</image>
+      <image>https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/5.png</image>
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.0" date="2023-07-20"/>
+    <release version="1.2" date="2023-08-01"/>
   </releases>
 </component>

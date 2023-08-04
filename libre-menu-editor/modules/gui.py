@@ -16,7 +16,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-import os, subprocess, gi
+import os, subprocess, threading, gi
 
 gi.require_version("Adw", "1")
 
@@ -27,6 +27,8 @@ gi.require_version("Gdk", "4.0")
 gi.require_version("Gio", "2.0")
 
 gi.require_version("GLib", "2.0")
+
+gi.require_version("GObject", "2.0")
 
 gi.require_version("Pango", "1.0")
 
@@ -39,6 +41,8 @@ from gi.repository import Gdk
 from gi.repository import Gio
 
 from gi.repository import GLib
+
+from gi.repository import GObject
 
 from gi.repository import Pango
 
@@ -53,6 +57,12 @@ class Timeout():
 class Spacing():
 
     DEFAULT = 6
+
+    LARGE = 11
+
+    LARGER = 24
+
+    LARGEST = 36
 
 
 class Margin():
@@ -87,11 +97,6 @@ class Keyval():
     F2 = 65471
 
 
-class ImageSize():
-
-    LARGE = 96
-
-
 class IconNotFoundError(Exception):
 
     pass
@@ -105,9 +110,53 @@ class IconFinder():
 
         self._application_window = app.get_application_window()
 
+        self._alternatives = {}
+
+        self._legacy_icons = {}
+
         self._icon_theme = Gtk.IconTheme.get_for_display(self._application_window.get_display())
 
-        self._alternatives = {}
+        self._load_legacy_icons(*self._icon_theme.get_search_path())
+
+    def _load_legacy_icons(self, *paths):
+
+        for path in paths:
+
+            if os.path.exists(path):
+
+                for name in os.listdir(path):
+
+                    icon_path = os.path.join(path, name)
+
+                    if os.path.isfile(icon_path):
+
+                        self._legacy_icons[".".join(name.split(".")[:-1])] = icon_path
+
+                        self._legacy_icons[name] = icon_path
+
+    def get_search_paths(self):
+
+        return self._icon_theme.get_search_path()
+
+    def add_search_paths(self, *paths):
+
+        for path in paths:
+
+            if not path in self._icon_theme.get_search_path():
+
+                self._icon_theme.add_search_path(path)
+
+                self._load_legacy_icons(path)
+
+    def get_alternatives(self, name):
+
+        if name in self._alternatives:
+
+            return list(self._alternatives[name])
+
+        else:
+
+            raise IconNotFoundError(name)
 
     def add_alternatives(self, name, *alternatives):
 
@@ -121,118 +170,568 @@ class IconFinder():
 
                 self._alternatives[name].append(alternative)
 
-    def add_search_path(self, path):
-
-        if not path in self._icon_theme.get_search_path():
-
-            self._icon_theme.add_search_path(path)
-
-    def get_image(self, *icons):
+    def get_image(self, icon, missing_ok=True):
 
         image = Gtk.Image()
 
-        self.set_image(image, *icons)
+        self.set_image(image, icon, missing_ok=missing_ok)
 
         return image
 
-    def set_image(self, image, *icons):
+    def set_image(self, image, icon, missing_ok=True):
 
-        for icon in icons:
+        try:
 
-            name = self.get_name(icon)
+            name = self.get_name(icon, missing_ok=False)
 
-            if self._icon_theme.has_icon(name):
+            image.set_from_icon_name(name)
 
-                image.set_from_icon_name(name)
+            return True
 
-                return True
+        except IconNotFoundError:
 
-            else:
+            if icon in self._legacy_icons:
 
-                if os.getenv("APP_RUNNING_AS_FLATPAK"):
+                icon = self._legacy_icons[icon]
 
-                    icon = self._application.get_flatpak_sandbox_system_path(icon)
+            elif not icon.endswith("-symbolic") and f"{icon}-symbolic" in self._legacy_icons:
 
-                if os.path.exists(icon):
+                icon = self._legacy_icons[f"{icon}-symbolic"]
 
-                    try:
+            if os.getenv("APP_RUNNING_AS_FLATPAK"):
 
-                        texture = Gdk.Texture.new_from_filename(icon)
+                icon = self._application.get_flatpak_sandbox_system_path(icon)
 
-                    except GLib.GError:
+            if os.path.exists(icon) and os.path.isfile(icon) and os.access(icon, os.R_OK):
 
-                        pass
+                try:
 
-                    else:
+                    texture = Gdk.Texture.new_from_filename(icon)
 
-                        image.set_from_paintable(texture)
+                except GLib.GError:
 
-                        return True
-
-        else:
-
-            raise IconNotFoundError(*icons)
-
-    def get_name(self, name):
-
-        if not self._icon_theme.has_icon(name):
-
-            try:
-
-                for alternative in self._alternatives[name]:
-
-                    if self._icon_theme.has_icon(alternative):
-
-                        return alternative
+                    pass
 
                 else:
 
-                    return name
+                    image.set_from_paintable(texture)
 
-            except KeyError:
+                    return True
 
-                return name
+            elif missing_ok:
 
-        else:
+                if not os.path.sep in icon:
+
+                    image.set_from_icon_name(icon)
+
+                else:
+
+                    image.set_from_file(icon)
+
+                return False
+
+            else:
+
+                raise IconNotFoundError(icon)
+
+    def get_name(self, name, missing_ok=True):
+
+        if self._icon_theme.has_icon(name):
 
             return name
 
+        elif not name.endswith("-symbolic") and self._icon_theme.has_icon(f"{name}-symbolic"):
 
-class SuffixLabel(Gtk.Label):
+            return f"{name}-symbolic"
 
-    def __init__(self):
+        elif name in self._alternatives:
 
-        Gtk.Label.__init__(self)
+            for alternative in self._alternatives[name]:
 
-        self.set_halign(Gtk.Align.END)
+                if self._icon_theme.has_icon(alternative):
 
-        self.set_margin_start(Margin.LARGEST)
+                    return alternative
 
-        self.set_ellipsize(Pango.EllipsizeMode.END)
+                elif not alternative.endswith("-symbolic") and self._icon_theme.has_icon(f"{alternative}-symbolic"):
 
+                    return f"{alternative}-symbolic"
 
-class SuffixEntry(Gtk.Entry):
+        if missing_ok:
 
-    def __init__(self):
+            return name
 
-        Gtk.Entry.__init__(self)
+        else:
 
-        self.set_hexpand(True)
+            raise IconNotFoundError(name)
 
-        self.set_margin_start(Margin.LARGEST)
+    def get_theme(self):
 
-        self.set_halign(Gtk.Align.FILL)
-
-        self.set_valign(Gtk.Align.CENTER)
-
-        self.set_alignment(1)
+        return self._icon_theme
 
 
-class EntryRow(Adw.ActionRow):
+class IconName(GObject.Object):
 
-    def __init__(self, app):
+    name = GObject.Property(type=str)
 
-        Adw.ActionRow.__init__(self)
+    def __init__(self, name):
+
+        super().__init__()
+
+        self.name = name
+
+
+class IconBrowserRow(Adw.PreferencesRow):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        self._icon_finder = app.get_icon_finder()
+
+        self._events = basic.EventManager()
+
+        self._icon_names = []
+
+        self._string_separator = ";"
+
+        self._search_string = ""
+
+        self._lower_string = ""
+
+        self._can_set_active = False
+
+        self._entry = {}
+
+        self._entry_timeout_id = None
+
+        self._search_delay = 60
+
+        self._search_thread = None
+
+        self._search_interrupted = False
+
+        self._name_slices = []
+
+        self._slice_length = 90
+
+        self._slice_call_id = None
+
+        self._list_store = Gio.ListStore()
+
+        self._selection_model = Gtk.NoSelection()
+
+        self._selection_model.set_model(self._list_store)
+
+        self._factory = Gtk.SignalListItemFactory()
+
+        self._factory.connect("setup", self._on_factory_setup)
+
+        self._factory.connect("bind", self._on_factory_bind)
+
+        self._grid_view = Gtk.GridView()
+
+        self._grid_view.set_max_columns(48)
+
+        self._grid_view.set_margin_top(Margin.DEFAULT)
+
+        self._grid_view.set_margin_bottom(Margin.DEFAULT)
+
+        self._grid_view.set_margin_start(Margin.DEFAULT)
+
+        self._grid_view.set_margin_end(Margin.DEFAULT)
+
+        self._grid_view.set_single_click_activate(True)
+
+        self._grid_view.connect("activate", self._on_grid_view_activate)
+
+        self._grid_view.set_model(self._selection_model)
+
+        self._grid_view.set_factory(self._factory)
+
+        self._scrolled_window = Gtk.ScrolledWindow()
+
+        self._scrolled_window.set_child(self._grid_view)
+
+        self._scrolled_window.set_size_request(-1, 240)
+
+        self._revealer = Gtk.Revealer()
+
+        self._revealer.set_reveal_child(False)
+
+        self._revealer.set_child(self._scrolled_window)
+
+        self._revealer.connect("notify::reveal-child", self._on_revealer_reveal_child_changed)
+
+        self._revealer.connect("notify::child-revealed", self._on_revealer_child_revealed_changed)
+
+        self._entry_event_controller_focus = Gtk.EventControllerFocus()
+
+        self._entry_event_controller_focus.connect_after("enter", self._on_event_controller_focus_enter)
+
+        self._entry_event_controller_focus.connect_after("leave", self._on_event_controller_focus_leave)
+
+        self._entry_event_controller_key = Gtk.EventControllerKey()
+
+        self._entry_event_controller_key.connect("key-pressed", self._on_event_controller_key_pressed)
+
+        self._main_event_controller_focus = Gtk.EventControllerFocus()
+
+        self._main_event_controller_focus.connect_after("enter", self._on_event_controller_focus_enter)
+
+        self._main_event_controller_focus.connect_after("leave", self._on_event_controller_focus_leave)
+
+        self._main_event_controller_key = Gtk.EventControllerKey()
+
+        self._main_event_controller_key.connect("key-pressed", self._on_event_controller_key_pressed)
+
+        self.set_margin_top(1)
+
+        self.set_activatable(False)
+
+        self.add_css_class("view")
+
+        self.add_controller(self._main_event_controller_focus)
+
+        self.add_controller(self._main_event_controller_key)
+
+        self.set_child(self._revealer)
+
+        self.set_visible(False)
+
+        GLib.idle_add(self._update_search_data)
+
+    def _on_event_controller_focus_enter(self, controller):
+
+        if not self._entry["widget"].get_text() == self._default_text:
+
+            self.set_active(True)
+
+    def _on_event_controller_focus_leave(self, controller):
+
+        GLib.idle_add(self._after_event_controller_focus_leave)
+
+    def _after_event_controller_focus_leave(self):
+
+        if not self.get_parent().get_focus_child():
+
+            self.set_active(False)
+
+    def _on_event_controller_key_pressed(self, controller, keyval, keycode, state):
+
+        if keyval == 65307:
+
+            if self.get_active():
+
+                self._entry["widget"].grab_focus()
+
+            self._toggle_set_active()
+
+    def _on_entry_activated(self, entry):
+
+        self._toggle_set_active()
+
+    def _on_revealer_reveal_child_changed(self, revealer, gparam):
+
+        if self._revealer.get_reveal_child():
+
+            self.show()
+
+    def _on_revealer_child_revealed_changed(self, revealer, gparam):
+
+        if not self._revealer.get_child_revealed():
+
+            self.hide()
+
+    def _on_factory_setup(self, factory, list_item):
+
+        image = Gtk.Image()
+
+        image.set_pixel_size(48)
+
+        list_item.set_child(image)
+
+    def _on_factory_bind(self, factory, list_item):
+
+        list_item.get_child().set_from_icon_name(list_item.get_item().name)
+
+    def _on_grid_view_activate(self, grid_view, position):
+
+        self.set_default_text(self._list_store[position].name)
+
+        self._entry["widget"].grab_focus()
+
+        self.set_active(False)
+
+    def _on_entry_changed(self, entry):
+
+        if self._entry_timeout_id:
+
+            GLib.source_remove(self._entry_timeout_id)
+
+        self._entry_timeout_id = GLib.timeout_add(self._search_delay, self._after_entry_changed)
+
+    def _after_entry_changed(self):
+
+        self._start_search_thread()
+
+        self._entry_timeout_id = None
+
+        return GLib.SOURCE_REMOVE
+
+    def _toggle_set_active(self):
+
+        if not self.get_active():
+
+            self._entry["widget"].grab_focus()
+
+            self.set_active(True)
+
+        else:
+
+            self.set_active(False)
+
+    def _update_search_data(self):
+
+        self._icon_names = self._icon_finder.get_theme().get_icon_names()
+
+        self._search_string = self._string_separator.join(self._icon_names)
+
+        self._lower_string = self._search_string.lower()
+
+    def _start_search_thread(self):
+
+        self._stop_search_thread()
+
+        self._list_store.remove_all()
+
+        self._search_thread = threading.Thread(target=self._search_thread_target)
+
+        self._search_thread.start()
+
+    def _stop_search_thread(self):
+
+        if self._entry_timeout_id:
+
+            GLib.source_remove(self._entry_timeout_id)
+
+            self._entry_timeout_id = None
+
+        if self._slice_call_id:
+
+            GLib.source_remove(self._slice_call_id)
+
+            self._slice_call_id = None
+
+        if self._search_thread:
+
+            self._search_interrupted = True
+
+            self._search_thread.join()
+
+            self._search_interrupted = False
+
+            self._search_thread = None
+
+            return True
+
+    def _search_thread_target(self):
+
+        text = self._entry["widget"].get_text()
+
+        names = self._get_names(text, exclude=[text])
+
+        if len(names):
+
+            self._name_slices = [names[i:i+self._slice_length] for i in range(0, len(names), self._slice_length)]
+
+            self._slice_call_id = GLib.idle_add(self._add_next_slice)
+
+            self._can_set_active = True
+
+            if not text == self._default_text:
+
+                GLib.idle_add(self.set_active, True)
+
+            else:
+
+                GLib.idle_add(self.set_active, False)
+
+        else:
+
+            self._can_set_active = False
+
+            GLib.idle_add(self.set_active, False)
+
+        self._search_thread = None
+
+    def _add_next_slice(self):
+
+        try:
+
+            self._list_store.splice(len(self._list_store), 0, self._name_slices.pop(0))
+
+        except IndexError:
+
+            self._slice_call_id = None
+
+            return GLib.SOURCE_REMOVE
+
+        else:
+
+            self._slice_call_id = GLib.idle_add(self._add_next_slice)
+
+            return GLib.SOURCE_REMOVE
+
+    def _get_names(self, text, exclude=[]):
+
+        names = []
+
+        for string in text.lower().split(self._string_separator):
+
+            if len(string):
+
+                start_pos = 0
+
+                while not self._search_interrupted:
+
+                    try:
+
+                        start_pos = self._lower_string.index(string, start_pos)
+
+                    except ValueError:
+
+                        break
+
+                    else:
+
+                        start_pos -= 1
+
+                        while not self._search_string[start_pos:start_pos + len(self._string_separator)] == self._string_separator:
+
+                            start_pos -= 1
+
+                            if start_pos < 1:
+
+                                start_pos = 0
+
+                                break
+
+                        else:
+
+                            start_pos += 1
+
+                        try:
+
+                            end_pos = self._search_string.index(self._string_separator, start_pos)
+
+                        except ValueError:
+
+                            name = self._search_string[start_pos:]
+
+                            if not name in exclude:
+
+                                names.append(IconName(name))
+
+                            break
+
+                        else:
+
+                            name = self._search_string[start_pos:end_pos]
+
+                            if not name in exclude:
+
+                                names.append(IconName(name))
+
+                            start_pos = end_pos + len(self._string_separator)
+
+                            if not len(self._search_string) > start_pos:
+
+                                break
+
+                else:
+
+                    return []
+
+        else:
+
+            return names
+
+    def get_search_entry(self):
+
+        return self._entry["widget"]
+
+    def set_search_entry(self, entry):
+
+        try:
+
+            self._entry["widget"].remove_controller(self._entry_event_controller_focus)
+
+            self._entry["widget"].remove_controller(self._entry_event_controller_key)
+
+            self._entry["widget"].disconnect(self._entry["entry-activated-event-id"])
+
+            self._entry["widget"].disconnect(self._entry["changed-event-id"])
+
+        except KeyError:
+
+            pass
+
+        entry.add_controller(self._entry_event_controller_focus)
+
+        entry.add_controller(self._entry_event_controller_key)
+
+        self._entry["entry-activated-event-id"] = entry.connect("entry-activated", self._on_entry_activated)
+
+        self._entry["changed-event-id"] = entry.connect("changed", self._on_entry_changed)
+
+        self._entry["widget"] = entry
+
+    def get_default_text(self):
+
+        return self._default_text
+
+    def set_default_text(self, text):
+
+        self._default_text = text
+
+        if not text == self._entry["widget"].get_text():
+
+            self._entry["widget"].set_text(text)
+
+    def get_active(self):
+
+        return self._revealer.get_reveal_child()
+
+    def set_active(self, value, check=True):
+
+        if check and not self._can_set_active:
+
+            value = False
+
+        elif not self.get_parent().get_focus_child():
+
+            value = False
+
+        self._revealer.set_reveal_child(value)
+
+
+class EntryRow(Adw.EntryRow):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+        try:
+
+            self.add_css_class(os.getenv("CUSTOM_ROW_STYLE"))
+
+        except TypeError:
+
+            pass
+
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
         self._icon_finder = app.get_icon_finder()
 
@@ -240,143 +739,43 @@ class EntryRow(Adw.ActionRow):
 
         self._events.add("text-changed", object, str)
 
-        self._events.add("edit-mode-enabled-changed", bool)
+        self._event_controller_focus = Gtk.EventControllerFocus()
 
-        self._show_edit_button = True
+        self._event_controller_focus.connect("leave", self._on_event_controller_focus_leave)
 
-        self._edit_mode_enabled = False
+        self._editable = self.get_delegate()
 
-        self._text = ""
+        self._editable.set_valign(Gtk.Align.CENTER)
 
-        self._label = SuffixLabel()
+        self._editable.add_controller(self._event_controller_focus)
 
-        self._entry = SuffixEntry()
+        self._label = Gtk.Label()
 
-        self._entry.connect("activate", self._on_entry_activate)
+        self._label.add_css_class("dim-label")
 
-        self._edit_button = Gtk.ToggleButton()
+        self.add_prefix(self._label)
 
-        self._edit_button.set_can_focus(False)
+        self.set_enable_undo(True)
 
-        self._edit_button.set_valign(Gtk.Align.CENTER)
+        self.connect("changed", self._on_changed)
 
-        self._edit_button.set_icon_name(self._icon_finder.get_name("document-edit-symbolic"))
+    def _on_event_controller_focus_leave(self, controller):
 
-        self._edit_button.add_css_class("flat")
+        self.select_region(0, 0)
 
-        self._edit_button.connect("toggled", self._on_edit_button_toggled)
+    def _on_changed(self, editable):
 
-        self._stack = Gtk.Stack()
-
-        self._stack.set_hexpand(True)
-
-        self._stack.add_child(self._label)
-
-        self._stack.add_child(self._entry)
-
-        self._event_controller_key = Gtk.EventControllerKey()
-
-        self._event_controller_key.connect("key-pressed", self._on_event_controller_key_pressed)
-
-        self.set_activatable(True)
-
-        self.set_title_lines(1)
-
-        self.add_controller(self._event_controller_key)
-
-        self.connect("activated", self._on_activated)
-
-        self.add_suffix(self._stack)
-
-        self.add_suffix(self._edit_button)
-
-    def _on_activated(self, action_row):
-
-        self.set_edit_mode_enabled(self.get_edit_mode_enabled() == False)
-
-    def _on_event_controller_key_pressed(self, controller, keyval, keycode, state):
-
-        if keyval == Keyval.ESCAPE:
-
-            self._entry.set_text(self.get_text())
-
-            self.set_edit_mode_enabled(False)
-
-        elif keyval == Keyval.F2:
-
-            self.set_edit_mode_enabled(self._edit_mode_enabled == False)
-
-    def _on_edit_button_toggled(self, toggle_button):
-
-        self.set_edit_mode_enabled(self._edit_button.get_active())
-
-    def _on_entry_activate(self, entry):
-
-        self.set_edit_mode_enabled(False)
-
-    def get_show_edit_button(self):
-
-        return self._show_edit_button
-
-    def set_show_edit_button(self, value):
-
-        if not self._edit_mode_enabled:
-
-            self._edit_button.set_visible(value)
-
-        self._show_edit_button = value
-
-    def get_edit_mode_enabled(self):
-
-        return self._edit_mode_enabled
-
-    def set_edit_mode_enabled(self, value):
-
-        if value and not self._edit_mode_enabled:
-
-            self._stack.set_visible_child(self._entry)
-
-            self._entry.grab_focus()
-
-            self._entry.set_text(self.get_text())
-
-            self._entry.set_position(-1)
-
-            self._edit_button.set_active(True)
-
-            self._edit_button.set_visible(True)
-
-            self._events.trigger("edit-mode-enabled-changed", bool(value))
-
-        elif not value and self._edit_mode_enabled:
-
-            self.grab_focus()
-
-            self._stack.set_visible_child(self._label)
-
-            if not self._text == self._entry.get_text():
-
-                self.set_text(self._entry.get_text())
-
-            self._edit_button.set_active(False)
-
-            self._edit_button.set_visible(self._show_edit_button)
-
-            self._events.trigger("edit-mode-enabled-changed", bool(value))
-
-        self._edit_mode_enabled = value
-
-    def get_text(self):
-
-        return self._text
-
-    def set_text(self, text):
-
-        self._text = text
+        text = editable.get_text()
 
         self._events.trigger("text-changed", self, text)
 
-        self._label.set_text(text)
+    def set_title(self, string):
+
+        self._label.set_text(string)
+
+    def get_title(self):
+
+        return self._label.get_text()
 
     def hook(self, event, callback, *args):
 
@@ -389,31 +788,57 @@ class EntryRow(Adw.ActionRow):
 
 class PathChooserRow(EntryRow):
 
-    def __init__(self, app):
+    def __init__(self, app, action, *args, **kwargs):
 
-        EntryRow.__init__(self, app)
+        super().__init__(app, *args, **kwargs)
 
         self._icon_finder = app.get_icon_finder()
 
         self._application_window = app.get_application_window()
 
-        self._events.hook("edit-mode-enabled-changed", self._on_edit_mode_enabled_changed)
-
         self._error_image = self._icon_finder.get_image("action-unavailable-symbolic")
 
         self._default_image = self._icon_finder.get_image("document-open-symbolic")
 
+        self._chooser_button_event_controller_key = Gtk.EventControllerKey()
+
+        self._chooser_button_event_controller_key.connect(
+
+            "key-pressed", self._on_chooser_button_event_controller_key_pressed
+
+            )
+
         self._chooser_button = Gtk.Button()
-
-        self._chooser_button.set_valign(Gtk.Align.CENTER)
-
-        self._chooser_button.set_child(self._default_image)
-
-        self._chooser_button.connect("clicked", self._on_chooser_button_clicked)
 
         self._chooser_button.add_css_class("flat")
 
-        self._file_chooser_dialog = Gtk.FileChooserNative()
+        self._chooser_button.set_valign(Gtk.Align.CENTER)
+
+        self._chooser_button.connect("clicked", self._on_chooser_button_clicked)
+
+        self._chooser_button.add_controller(self._chooser_button_event_controller_key)
+
+        self._chooser_button.set_child(self._default_image)
+
+        self._dialog_accept_button = Gtk.Button()
+
+        self._dialog_accept_button.add_css_class("suggested-action")
+
+        self._dialog_cancel_button = Gtk.Button()
+
+        if not os.getenv("APP_RUNNING_AS_FLATPAK") == "true" or os.getenv("USE_NATIVE_DIALOGS") == "true":
+
+            self._file_chooser_dialog = Gtk.FileChooserNative(action=action)
+
+        else:
+
+            self._file_chooser_dialog = Gtk.FileChooserDialog(action=action)
+
+            self._file_chooser_dialog.add_action_widget(self._dialog_accept_button, Gtk.ResponseType.ACCEPT)
+
+            self._file_chooser_dialog.add_action_widget(self._dialog_cancel_button, Gtk.ResponseType.CANCEL)
+
+            self._file_chooser_dialog.set_default_response(Gtk.ResponseType.ACCEPT)
 
         self._file_chooser_dialog.connect("response", self._on_file_chooser_dialog_response)
 
@@ -421,19 +846,39 @@ class PathChooserRow(EntryRow):
 
         self._file_chooser_dialog.set_modal(True)
 
-        self.set_show_edit_button(False)
-
         self.add_suffix(self._chooser_button)
 
-    def _on_edit_mode_enabled_changed(self, event, value):
+        try:
 
-        self._chooser_button.set_visible(value == False)
+            self._edit_gizmo = self.get_child().get_first_child().get_next_sibling()
+
+            self._edit_image = self._edit_gizmo.get_next_sibling().get_next_sibling().get_next_sibling()
+
+            self._edit_image.unparent()
+
+        except AttributeError:
+
+            pass
+
+    def _on_chooser_button_event_controller_key_pressed(self, controller, keyval, keycode, state):
+
+        text = self._editable.get_text()
+
+        controller.forward(self._editable)
+
+        if not text == self._editable.get_text():
+
+            if not self._editable.has_focus():
+
+                self._editable.grab_focus_without_selecting()
+
+            return True
 
     def _on_file_chooser_dialog_response(self, dialog, response):
 
         self._file_chooser_dialog.hide()
 
-        if response == -3:
+        if response == Gtk.ResponseType.ACCEPT:
 
             self.set_text(self._file_chooser_dialog.get_file().get_path())
 
@@ -441,112 +886,264 @@ class PathChooserRow(EntryRow):
 
         self._file_chooser_dialog.show()
 
-    def get_chooser_button(self):
+    def get_dialog_accept_button_label(self, text):
 
-        return self._chooser_button
+        return self._dialog_accept_button.get_label()
+
+    def set_dialog_accept_button_label(self, text):
+
+        self._dialog_accept_button.set_label(text)
+
+    def get_dialog_cancel_button_label(self):
+
+        return self._dialog_cancel_button.get_label()
+
+    def set_dialog_cancel_button_label(self, text):
+
+        self._dialog_cancel_button.set_label(text)
 
     def set_dialog_title(self, text):
 
         self._file_chooser_dialog.set_title(text)
 
-    def set_text(self, text):
+    def get_dialog_title(self):
 
-        self._text = text
+        return self._file_chooser_dialog.get_title()
+
+
+class FileChooserRow(PathChooserRow):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(app, action=Gtk.FileChooserAction.OPEN, *args, **kwargs)
+
+
+class DirectoryChooserRow(PathChooserRow):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(app, action=Gtk.FileChooserAction.SELECT_FOLDER, *args, **kwargs)
+
+    def _on_changed(self, editable):
+
+        text = editable.get_text()
 
         self._events.trigger("text-changed", self, text)
 
-
-class CommandChooserRow(PathChooserRow):
-
-    def __init__(self, app):
-
-        PathChooserRow.__init__(self, app)
-
-        self._application_window = app.get_application_window()
-
-        self.connect("unmap", self._on_unmap)
-
-    def _on_unmap(self, widget):
-
-        self.remove_css_class("error")
-
-    def set_text(self, text):
-
-        PathChooserRow.set_text(self, text)
-
-        self._label.set_text(text)
-
-        if not os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
-
-            if os.path.exists(text) and os.path.isfile(text) and os.access(text, os.X_OK):
-
-                self.remove_css_class("error")
-
-            elif not subprocess.getstatusoutput("type %s" % text.split(" ")[0])[0]:
-
-                self.remove_css_class("error")
-
-            elif not len(text):
-
-                self.remove_css_class("error")
-
-            else:
-
-                self.add_css_class("error")
-
-
-class IconChooserRow(PathChooserRow):
-
-    def __init__(self, app):
-
-        PathChooserRow.__init__(self, app)
-
-        self._icon_finder = app.get_icon_finder()
-
-        self._application_window = app.get_application_window()
-
-        self.connect("unmap", self._on_unmap)
-
-    def _on_unmap(self, widget):
-
-        self.remove_css_class("error")
-
-    def set_text(self, text):
-
-        PathChooserRow.set_text(self, text)
-
-        self._label.set_text(os.path.basename(text))
-
         if len(text):
 
-            try:
-
-                image = self._icon_finder.get_image(text)
-
-            except IconNotFoundError:
-
-                self.add_css_class("error")
-
-                self._chooser_button.set_child(self._error_image)
-
-            else:
+            if os.path.exists(text) and os.path.isdir(text) and os.access(text, os.R_OK):
 
                 self.remove_css_class("error")
 
-                self._chooser_button.set_child(image)
+            else:
+
+                self.add_css_class("error")
 
         else:
 
             self.remove_css_class("error")
 
-            self._chooser_button.set_child(self._default_image)
+
+class CommandChooserRow(FileChooserRow):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(app, *args, **kwargs)
+
+        self.add_css_class("error")
+
+    def _on_file_chooser_dialog_response(self, dialog, response):
+
+        self._file_chooser_dialog.hide()
+
+        if response == Gtk.ResponseType.ACCEPT:
+
+            path = self._file_chooser_dialog.get_file().get_path().replace(" ", "\ ")
+
+            self.set_text(path)
+
+    def _on_changed(self, editable):
+
+        text = editable.get_text()
+
+        self._events.trigger("text-changed", self, text)
+
+        if not len(text.replace(" ", "")):
+
+            self.add_css_class("error")
+
+        else:
+
+            self.remove_css_class("error")
+
+
+class IconChooserRow(FileChooserRow):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(app, *args, **kwargs)
+
+        self._icon_image = Gtk.Image()
+
+    def _on_changed(self, editable):
+
+        text = editable.get_text()
+
+        self._events.trigger("text-changed", self, text)
+
+        if len(text):
+
+            try:
+
+                self._icon_finder.set_image(self._icon_image, text, missing_ok=False)
+
+            except IconNotFoundError:
+
+                self.add_css_class("error")
+
+                self._icon_image.set_from_file(None)
+
+            else:
+
+                self.remove_css_class("error")
+
+        else:
+
+            self.remove_css_class("error")
+
+            self._icon_image.set_from_file(None)
+
+    def get_image(self):
+
+        return self._icon_image
+
+    def set_image(self, image):
+
+        self._icon_image = image
+
+
+class IconViewRow(Adw.PreferencesRow):
+
+    def __init__(self, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        icon_image = Gtk.Image()
+
+        self.set_image(icon_image)
+
+        self.set_activatable(False)
+
+        self.set_can_focus(False)
+
+        self.set_can_target(False)
+
+        self.add_css_class("view")
+
+    def get_image(self):
+
+        return self.get_child()
+
+    def set_image(self, image):
+
+        self.set_child(image)
+
+        image.set_pixel_size(128)
+
+        image.set_margin_top(Margin.LARGER)
+
+        image.set_margin_bottom(Margin.LARGER)
+
+        image.set_margin_start(Margin.LARGER)
+
+        image.set_margin_end(Margin.LARGER)
+
+
+class DeleteRow(Adw.ActionRow):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+        try:
+
+            self.add_css_class(os.getenv("CUSTOM_ROW_STYLE"))
+
+        except TypeError:
+
+            pass
+
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+        self._icon_finder = app.get_icon_finder()
+
+        self._title_label = Gtk.Label()
+
+        self._title_label.set_margin_end(Margin.DEFAULT)
+
+        self._text_label = Gtk.Label()
+
+        self._text_label.add_css_class("dim-label")
+
+        self._text_label.set_ellipsize(Pango.EllipsizeMode.END)
+
+        self._delete_button = Gtk.Button()
+
+        self._delete_button.set_icon_name(self._icon_finder.get_name("edit-delete-symbolic"))
+
+        self._delete_button.add_css_class("flat")
+
+        self._delete_button.set_can_focus(False)
+
+        self._delete_button.set_can_target(False)
+
+        self._delete_button.set_valign(Gtk.Align.CENTER)
+
+        self.set_activatable(True)
+
+        self.add_prefix(self._text_label)
+
+        self.add_prefix(self._title_label)
+
+        self.add_suffix(self._delete_button)
+
+    def get_title(self, text):
+
+        self._title_label.get_text(text)
+
+    def set_title(self, text):
+
+        self._title_label.set_text(text)
+
+    def get_text(self, text):
+
+        self._text_label.get_text(text)
+
+    def set_text(self, text):
+
+        self._text_label.set_text(text)
 
 
 class SwitchRow(Adw.ActionRow):
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
 
-        Adw.ActionRow.__init__(self)
+        super().__init__(*args, **kwargs)
+
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+        try:
+
+            self.add_css_class(os.getenv("CUSTOM_ROW_STYLE"))
+
+        except TypeError:
+
+            pass
+
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
         self._events = basic.EventManager()
 
@@ -617,7 +1214,7 @@ class SearchList(Gtk.Box):
 
     def __init__(self, app, *args, **kwargs):
 
-        Gtk.Box.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self._events = basic.EventManager()
 
@@ -635,11 +1232,17 @@ class SearchList(Gtk.Box):
 
         self._focus_chain_widget = None
 
+        self._reset_by_unfocus = False
+
         self._toggle_button = Gtk.ToggleButton()
 
         self._toggle_button.set_icon_name(self._icon_finder.get_name("system-search-symbolic"))
 
         self._toggle_button.connect("toggled", self._on_toggle_button_toggled)
+
+        self._search_entry_event_controller_focus = Gtk.EventControllerFocus()
+
+        self._search_entry_event_controller_focus.connect("leave", self._on_search_entry_event_controller_focus_leave)
 
         self._search_entry_event_controller_key = Gtk.EventControllerKey()
 
@@ -648,6 +1251,8 @@ class SearchList(Gtk.Box):
         self._search_entry = Gtk.SearchEntry()
 
         self._search_entry.set_hexpand(True)
+
+        self._search_entry.add_controller(self._search_entry_event_controller_focus)
 
         self._search_entry.add_controller(self._search_entry_event_controller_key)
 
@@ -723,43 +1328,71 @@ class SearchList(Gtk.Box):
 
     def _on_search_entry_search_changed(self, search_entry):
 
+        if not len(self._search_entry.get_text()) and not self._search_bar.get_focus_child():
+
+            self._search_bar.set_search_mode(False)
+
         self._update_search_results()
 
     def _on_search_bar_search_mode_enabled_changed(self, search_bar, property):
 
-        self._toggle_button.set_active(self._search_bar.get_search_mode())
+        value = self._search_bar.get_search_mode()
+
+        if self._reset_by_unfocus and self._application_window.get_focus() == self._toggle_button:
+
+            self._reset_by_unfocus = False
+
+        else:
+
+            self._toggle_button.set_active(value)
+
+        if not value and self._search_bar.get_focus_child():
+
+            self._flow_box.child_focus(Gtk.DirectionType.DOWN)
+
+    def _on_search_entry_event_controller_focus_leave(self, controller):
+
+        if self._search_bar.get_search_mode() and not len(self._search_entry.get_text()):
+
+            self._reset_by_unfocus = True
+
+            GLib.idle_add(self._search_bar.set_search_mode, False)
 
     def _on_search_entry_controller_key_pressed(self, controller, keyval, keycode, state):
 
         if keyval == Keyval.ESCAPE:
 
-            self._toggle_button.grab_focus()
-
             self._search_bar.set_search_mode(False)
 
             return True
 
-        elif keyval == Keyval.UP:
-
-            if not len(self._search_entry.get_text()):
-
-                self._search_bar.set_search_mode(False)
+        elif keyval == Keyval.UP or keyval == Keyval.PAGEUP:
 
             self._toggle_button.grab_focus()
 
+            if not len(self._search_entry.get_text()):
+
+                self._toggle_button.set_active(False)
+
             return True
 
-        elif keyval == Keyval.DOWN:
+        elif keyval == Keyval.DOWN or keyval == Keyval.PAGEDOWN:
 
             if not len(self._search_entry.get_text()):
 
                 self._search_bar.set_search_mode(False)
+
+            else:
+
+                self._flow_box.child_focus(Gtk.DirectionType.DOWN)
+
+            return True
 
     def _on_flow_box_controller_key_pressed(self, controller, keyval, keycode, state):
 
         if keyval == Keyval.ESCAPE and self._search_bar.get_search_mode():
 
-            self._toggle_button.grab_focus()
+            self._search_entry.grab_focus()
 
             self._search_bar.set_search_mode(False)
 
@@ -769,7 +1402,13 @@ class SearchList(Gtk.Box):
 
             return self._focus_chain_widget_grab_focus()
 
-        elif keyval == Keyval.UP and self._flow_box.get_focus_child() in self._get_top_children():
+        elif (
+
+        (keyval == Keyval.UP or keyval == Keyval.PAGEUP)
+
+        and self._flow_box.get_focus_child() in self._get_top_children()
+
+        ):
 
             if not self._search_bar.get_search_mode():
 
@@ -883,9 +1522,35 @@ class SearchList(Gtk.Box):
 
         self._focus_chain_widget = widget
 
+    def get_search_mode(self):
+
+        return self._search_bar.get_search_mode()
+
+    def set_search_mode(self, value):
+
+        self._search_bar.set_search_mode(value)
+
     def get_search_button(self):
 
         return self._toggle_button
+
+    def get_search_entry(self):
+
+        return self._search_entry
+
+    def get_visible_items(self):
+
+        items = []
+
+        for child in self._children:
+
+            if self._children[child]["widget"].get_visible():
+
+                items.append(child)
+
+        else:
+
+            return items
 
     def list(self):
 
@@ -907,7 +1572,7 @@ class SearchList(Gtk.Box):
 
             try:
 
-                self._icon_finder.set_image(image, icon)
+                self._icon_finder.set_image(image, icon, missing_ok=False)
 
             except IconNotFoundError:
 
@@ -929,7 +1594,7 @@ class SearchList(Gtk.Box):
 
             image = Gtk.Image()
 
-            image.set_icon_size(Gtk.IconSize.LARGE)
+            image.set_pixel_size(48)
 
             label = Gtk.Label()
 
@@ -952,6 +1617,12 @@ class SearchList(Gtk.Box):
             box.append(label)
 
             child = Gtk.FlowBoxChild()
+
+            child.add_css_class("activatable")
+
+            child.add_css_class("card")
+
+            child.add_css_class("view")
 
             child.add_css_class("frame")
 
@@ -1027,7 +1698,7 @@ class Menu(Gio.Menu):
 
     def __init__(self, app, *args, **kwargs):
 
-        Gio.Menu.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self._events = basic.EventManager()
 
@@ -1129,11 +1800,9 @@ class Application(Adw.Application):
 
     def __init__(self, project_dir, *args, **kwargs):
 
-        Adw.Application.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self._application_window = Adw.ApplicationWindow()
-
-        self._flatpak_filesystem_prefix = os.path.join(os.path.sep, "run", "host")
 
         self._project_dir = os.path.abspath(os.path.realpath(project_dir))
 
@@ -1141,11 +1810,13 @@ class Application(Adw.Application):
 
         self._config_dir = os.path.join(GLib.get_user_data_dir(), self._app_name)
 
+        self._flatpak_filesystem_prefix = os.path.join(os.path.sep, "run", "host")
+
         ###############################################################################################################
 
         self._config_manager = basic.ConfigManager(
 
-            os.path.join(self._project_dir, "config.json"),
+            os.path.join(self._project_dir, "default.json"),
 
             os.path.join(self._config_dir, "config.json")
 
@@ -1167,27 +1838,75 @@ class Application(Adw.Application):
 
         ###############################################################################################################
 
-        self._flatpak_host_user_data_dirs = [
+        self._common_user_data_dirs = [
 
             os.path.join(os.path.sep, "home", os.getenv("USER"), ".local", "share")
 
             ]
 
-        self._system_data_dirs = [
-
-            os.path.join(GLib.get_user_data_dir(), "flatpak", "exports", "share"),
-
-            os.path.join(os.path.sep, "var", "lib", "flatpak", "exports", "share"),
-
-            os.path.join(os.path.sep, "var", "lib", "snapd", "desktop")
-
-            ]
-
         ###############################################################################################################
 
-        if not os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
+        if os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
 
-            self._system_data_dirs += [
+            self._system_data_dirs = [
+
+                os.path.join(GLib.get_user_data_dir(), "flatpak", "exports", "share"),
+
+                os.path.join(os.path.sep, "var", "lib", "flatpak", "exports", "share"),
+
+                os.path.join(os.path.sep, "var", "lib", "snapd", "desktop"),
+
+                os.path.join(self._flatpak_filesystem_prefix, "usr", "local", "share"),
+
+                os.path.join(self._flatpak_filesystem_prefix, "usr", "share")
+
+                ]
+
+            self._icon_search_dirs = [
+
+                os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".icons"),
+
+                os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".pixmaps")
+
+                ]
+
+            for path in self._common_user_data_dirs:
+
+                self._icon_search_dirs.append(self._join_path_prefix(
+
+                    self._flatpak_filesystem_prefix,
+
+                    os.path.join(path, "icons")
+
+                    ))
+
+                self._icon_search_dirs.append(self._join_path_prefix(
+
+                    self._flatpak_filesystem_prefix,
+
+                    os.path.join(path, "pixmaps")
+
+                    ))
+
+            for path in self._system_data_dirs:
+
+                self._icon_search_dirs.append(os.path.join(path, "icons"))
+
+                self._icon_search_dirs.append(os.path.join(path, "pixmaps"))
+
+            self._icon_search_dirs.append(os.path.join(self.get_project_dir(), "icons"))
+
+            self._icon_finder.add_search_paths(*self._icon_search_dirs)
+
+        else:
+
+            self._system_data_dirs = [
+
+                os.path.join(GLib.get_user_data_dir(), "flatpak", "exports", "share"),
+
+                os.path.join(os.path.sep, "var", "lib", "flatpak", "exports", "share"),
+
+                os.path.join(os.path.sep, "var", "lib", "snapd", "desktop"),
 
                 os.path.join(os.path.sep, "usr", "local", "share"),
 
@@ -1203,21 +1922,27 @@ class Application(Adw.Application):
 
                         self._system_data_dirs.append(path)
 
-        else:
+            self._icon_search_dirs = [
 
-            self._system_data_dirs += [
+                os.path.join(GLib.get_user_data_dir(), "icons"),
 
-                os.path.join(self._flatpak_filesystem_prefix, "usr", "local", "share"),
+                os.path.join(GLib.get_user_data_dir(), "pixmaps"),
 
-                os.path.join(self._flatpak_filesystem_prefix, "usr", "share")
+                os.path.join(GLib.get_home_dir(), ".icons"),
+
+                os.path.join(GLib.get_home_dir(), ".pixmaps")
 
                 ]
 
-        ###############################################################################################################
+            for path in self._system_data_dirs:
 
-        for path in self._system_data_dirs:
+                self._icon_search_dirs.append(os.path.join(path, "icons"))
 
-            self._icon_finder.add_search_path(os.path.join(path, "icons"))
+                self._icon_search_dirs.append(os.path.join(path, "pixmaps"))
+
+            self._icon_search_dirs.append(os.path.join(self.get_project_dir(), "icons"))
+
+            self._icon_finder.add_search_paths(*self._icon_search_dirs)
 
         ###############################################################################################################
 
@@ -1295,7 +2020,7 @@ class Application(Adw.Application):
 
         if path.startswith(GLib.get_user_data_dir()):
 
-            for directory in self._flatpak_host_user_data_dirs:
+            for directory in self._common_user_data_dirs:
 
                 test = self._join_path_prefix(directory, path[len(GLib.get_user_data_dir()):])
 

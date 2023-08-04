@@ -13,21 +13,25 @@ finish-args:
     # to provide wayland support
   - --socket=fallback-x11
     # to support x11 if wayland is not available
-  - --filesystem=~/.var/app:ro
-    # for showing icons of custom .desktop files created by other flatpaks
-    # to avoid unreachable symlink targets in .var/app
+  - --filesystem=xdg-desktop
+    # for using program as a .desktop file editor
+  - --filesystem=xdg-download
+    # for using program as a .desktop file editor
+  - --filesystem=xdg-data/applications
+    # for reading and writing .desktop files in .local/share/applications
   - --filesystem=xdg-data/flatpak:ro
     # for reading .desktop files in .local/share/flatpak/exports/share/applications
     # to avoid unreachable symlink targets in .local/share/flatpak
-  - --filesystem=xdg-data/applications
-    # for reading and writing .desktop files in .local/share/applications
-  - --filesystem=/var/lib/flatpak
+  - --filesystem=/var/lib/flatpak:ro
     # for reading .desktop files in /var/lib/flatpak/exports/share/applications
     # to avoid unreachable symlink targets in /var/lib/flatpak
-  - --filesystem=/var/lib/snapd
+  - --filesystem=/var/lib/snapd:ro
     # for reading .desktop files in /var/lib/snapd/desktop/applications
     # to avoid unreachable symlink targets in /var/lib/snapd
-  - --filesystem=host
+  - --filesystem=~/.var/app:ro
+    # for showing icons of custom .desktop files created by other flatpaks
+    # to avoid unreachable symlink targets in .var/app
+  - --filesystem=host:ro
     # for reading .desktop files in /usr/local/share/applications
     # for reading .desktop files in /usr/share/applications
     # to avoid unreachable symlink targets

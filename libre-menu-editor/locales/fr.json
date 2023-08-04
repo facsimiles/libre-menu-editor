@@ -1,76 +1,118 @@
 {
 
-    "WINDOW_TITLE": "Menu Principal",
+    "APPLICATION_NAME": "Menu Principal",
 
+    "GREETER_PAGE_HEAD": "Information",
 
+    "GREETER_PAGE_BODY": "Ce programme modifie les fichiers de configuration qui ne sont pas destinés à une modification ultérieure. Sur certains systèmes, il peut donc arriver que certaines modifications ne deviennent visibles qu'après une longue période ou après que l'utilisateur se soit reconnecté",
 
-    "GREETER_WINDOW_HEAD": "Information",
+    "GREETER_PAGE_BUTTON_LABEL": "Continuer",
 
-    "GREETER_WINDOW_BODY": "Certains systèmes n'affichent pas de modifications tant que l'utilisateur se connecte à nouveau",
+    "START_PAGE_HEAD": "Modifier le menu",
 
-    "GREETER_BUTTON_TEXT": "Continuer",
+    "START_PAGE_BODY": "Créez un nouveau lanceur d'applications ou sélectionnez un existant dans la barre latérale",
 
+    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Annuler",
 
+    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Ouvrir",
 
-    "UNSAVED_DIALOG_HEAD": "Changements non sauvés",
+    "INSTALL_DIALOG_HEAD": "Installation",
 
-    "UNSAVED_DIALOG_BODY": "Voulez-vous rejeter les changements?",
+    "INSTALL_DIALOG_BODY": "Voulez-vous ajouter cette application au menu principal?",
 
+    "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Retour",
 
+    "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Enregistrer",
 
-    "UNSAVED_DIALOG_BACK_BUTTON_TEXT": "Retour",
+    "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Installer",
 
-    "UNSAVED_DIALOG_SAVE_BUTTON_TEXT": "Enregistrer",
+    "DISCARD_DIALOG_HEAD": "Changements non sauvés",
 
-    "UNSAVED_DIALOG_DISCARD_BUTTON_TEXT": "Rejeter",
+    "DISCARD_DIALOG_BODY": "Voulez-vous rejeter les changements?",
 
+    "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Retour",
 
+    "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Enregistrer",
+
+    "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Rejeter",
+
+    "RESET_DIALOG_HEAD": "Réinitialiser",
+
+    "RESET_DIALOG_BODY": "Voulez-vous réinitialiser cette application? cette action ne peut pas être annulée",
+
+    "RESET_DIALOG_BACK_BUTTON_LABEL": "Retour",
+
+    "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Continuer",
+
+    "DELETE_DIALOG_HEAD": "Supprimer",
+
+    "DELETE_DIALOG_BODY": "Voulez-vous supprimer cette application? cette action ne peut pas être annulée",
+
+    "DELETE_DIALOG_BACK_BUTTON_LABEL": "Retour",
+
+    "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Continuer",
 
     "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Application sans nom",
 
     "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Action sans nom",
 
+    "VISIBLE_SWITCH_LABEL": "Afficher caché",
 
+    "RESET_MENU_BUTTON_LABEL": "Réinitialiser lanceur",
 
-    "SHOW_DISABLED_SWITCH_LABEL": "Afficher désactivé",
+    "DELETE_MENU_BUTTON_LABEL": "Supprimer lanceur",
 
-    "SHOW_HIDDEN_SWITCH_LABEL": "Afficher caché",
+    "REMOVE_MENU_BUTTON_LABEL": "Jeter lanceur",
 
-    "RESET_BUTTON_LABEL": "Réinitialiser lanceur",
+    "FILE_MENU_BUTTON_LABEL": "Ouvrir document",
 
-    "DELETE_BUTTON_LABEL": "Supprimer lanceur",
+    "SHORTCUTS_MENU_BUTTON_LABEL": "Raccourcis clavier",
 
-    "FILE_BUTTON_LABEL": "Ouvrir document",
+    "ABOUT_MENU_BUTTON_LABEL": "À propos de Menu Principal",
 
-    "DIRECTORY_BUTTON_LABEL": "Ouvrir annuaire",
+    "SEARCH_SHORTCUT_TEXT": "Rechercher lanceurs",
 
+    "VISIBLE_SHORTCUT_TEXT": "Montrer caché",
 
+    "SAVE_SHORTCUT_TEXT": "Sauvegarder modifications",
 
-    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Choisir fichier",
+    "DISCARD_SHORTCUT_TEXT": "Annuler modifications",
+
+    "REMOVE_SHORTCUT_TEXT": "Supprimer modifications",
+
+    "CREATE_SHORTCUT_TEXT": "Créer lanceur",
+
+    "FILE_SHORTCUT_TEXT": "Ouvrir document",
+
+    "MENU_SHORTCUT_TEXT": "Ouvrir menu",
+
+    "QUIT_SHORTCUT_TEXT": "Quitter application",
+
+    "EDIT_SHORTCUT_GROUP_TITLE": "Modifier",
+
+    "FIND_SHORTCUT_GROUP_TITLE": "Trouver",
+
+    "GENERAL_SHORTCUT_GROUP_TITLE": "Généraux",
 
     "ICON_CHOOSER_ROW_DIALOG_TITLE": "Choisir icône",
 
+    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Choisir fichier exécutable",
 
+    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Choisir répertoire",
 
     "SAVE_BUTTON_LABEL": "Enregistrer",
 
-    "RELOAD_BUTTON_LABEL": "Annuler",
+    "BANNER_LABEL_TEXT": "Veuillez sélectionner les actions que vous souhaitez supprimer",
 
-
-
-    "INFO_BAR_LABEL_TEXT": "Veuillez sélectionner les actions que vous souhaitez supprimer",
-
-    "INFO_BAR_CANCEL_BUTTON_LABEL": "Fini",
-
-
+    "BANNER_CANCEL_BUTTON_LABEL": "Fini",
 
     "DESCRIPTION_GROUP_TITLE": "Description",
 
+    "EXECUTION_GROUP_TITLE": "Exécution",
+
     "ACTIONS_GROUP_TITLE": "Actions",
 
-    "DISPLAY_GROUP_TITLE": "Visibilité",
-
-
+    "VISIBLE_GROUP_TITLE": "Visibilité",
 
     "ICON_CHOOSER_ROW_TITLE": "Icône",
 
@@ -80,29 +122,27 @@
 
     "COMMAND_CHOOSER_ROW_TITLE": "Commande",
 
+    "DIRECTORY_CHOOSER_ROW_TITLE": "Répertoire",
 
+    "VISIBLE_SWITCH_ROW_TITLE": "Afficher cette application dans le menu principal",
 
-    "DISPLAY_SWITCH_ROW_TITLE": "Afficher cette application dans le menu principal",
+    "NOTIFY_SWITCH_ROW_TITLE": "Afficher une animation de démarrage",
 
-
+    "TERMINAL_SWITCH_ROW_TITLE": "Afficher une fenêtre de terminal",
 
     "LOAD_MULTIPLE_ERROR_TEXT": "Échec du chargement de %s fichiers",
 
     "LOAD_SINGLE_ERROR_TEXT": "Échec du chargement du fichier '%s'",
 
-
+    "OPEN_FILE_ERROR_TEXT": "Échec de l'ouverture des configurations pour '%s'",
 
     "STARTER_SAVE_MESSAGE_TEXT": "Les configurations pour '%s' ont été sauvegardées",
 
     "STARTER_SAVE_ERROR_TEXT": "Échec de l'enregistrement des configurations",
 
-
-
     "STARTER_CREATE_MESSAGE_TEXT": "Le lanceur de '%s' a été créé",
 
     "STARTER_CREATE_ERROR_TEXT": "Échec de la création du lanceur",
-
-
 
     "STARTER_RESET_MESSAGE_TEXT": "Le lanceur de '%s' a été réinitialisé",
 
@@ -110,6 +150,8 @@
 
     "STARTER_DELETE_MESSAGE_TEXT": "Le lanceur de '%s' a été supprimé",
 
-    "STARTER_DELETE_ERROR_TEXT": "Échec de la suppression du lanceur"
+    "STARTER_DELETE_ERROR_TEXT": "Échec de la suppression du lanceur",
+    
+    "STARTER_REMOVE_MESSAGE_TEXT": "Le lanceur de '%s' a été jeté"
 
 }
