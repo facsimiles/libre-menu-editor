@@ -151,7 +151,7 @@
     "STARTER_DELETE_MESSAGE_TEXT": "Launcher for '%s' has been deleted",
 
     "STARTER_DELETE_ERROR_TEXT": "Failed to delete launcher",
-    
+
     "STARTER_REMOVE_MESSAGE_TEXT": "Launcher for '%s' has been removed"
 
 }

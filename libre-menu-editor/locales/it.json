@@ -151,7 +151,7 @@
     "STARTER_DELETE_MESSAGE_TEXT": "Il lanciatore per '%s' è stato cancellato",
 
     "STARTER_DELETE_ERROR_TEXT": "Impossibile cancellare il laciatore",
-    
+
     "STARTER_REMOVE_MESSAGE_TEXT": "Il lanciatore per '%s' è stato rimosso"
 
 }

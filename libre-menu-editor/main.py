@@ -2026,19 +2026,19 @@ class Application(gui.Application):
             self._main_stack.get_visible_child() == self._settings_page):
 
             if (self._menu_button.get_menu_model() == self._reset_menu and
-            
+
                 self._reset_menu_section.get_enabled("reset")):
 
                 self._show_reset_dialog(self._reset_desktop_starter, self._current_desktop_starter_name)
 
             elif (self._menu_button.get_menu_model() == self._delete_menu and
-            
+
                 self._delete_menu_section.get_enabled("delete")):
 
                 self._show_delete_dialog(self._delete_desktop_starter, self._current_desktop_starter_name)
 
             elif (self._menu_button.get_menu_model() == self._remove_menu and
-            
+
                 self._remove_menu_section.get_enabled("remove")):
 
                 self._remove_desktop_starter(self._current_desktop_starter_name, notify_user=True)
@@ -2052,7 +2052,7 @@ class Application(gui.Application):
             if (self._settings_page.get_changed() and
 
                 (not self._current_desktop_starter_name in self._unsaved_custom_starters or
-                
+
                 self._unsaved_custom_starters[self._current_desktop_starter_name]["external"])):
 
                 self._show_discard_dialog(self._create_desktop_starter)
@@ -2208,7 +2208,7 @@ class Application(gui.Application):
         if (self._settings_page.get_changed() and
 
             (not self._current_desktop_starter_name in self._unsaved_custom_starters or
-            
+
             self._unsaved_custom_starters[self._current_desktop_starter_name]["external"])):
 
             self._show_discard_dialog(self._create_desktop_starter)
@@ -2770,7 +2770,7 @@ class Application(gui.Application):
     def _create_desktop_starter(self):
 
         if (self._current_desktop_starter_name in self._unsaved_custom_starters and
-        
+
             not self._unsaved_custom_starters[self._current_desktop_starter_name]["external"]):
 
             self._settings_page.grab_focus()
@@ -3066,11 +3066,11 @@ class Application(gui.Application):
             raise StarterNotFoundError(name)
 
         if notify_user:
-        
+
             if not len(text):
 
                 text = self._locale_manager.get("UNNAMED_APPLICATION_PLACEHOLDER_TEXT")
-        
+
             self._send_interface_alert(self._locale_manager.get("STARTER_REMOVE_MESSAGE_TEXT") % text)
 
     def _parse_desktop_starter(self, name):

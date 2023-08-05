@@ -151,7 +151,7 @@
     "STARTER_DELETE_MESSAGE_TEXT": "El lanzador de '%s' ha sido eliminado",
 
     "STARTER_DELETE_ERROR_TEXT": "No se pudo eliminar el lanzador",
-    
+
     "STARTER_REMOVE_MESSAGE_TEXT": "El lanzador de '%s' ha sido descartado"
 
 }

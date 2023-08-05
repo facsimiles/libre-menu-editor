@@ -151,7 +151,7 @@
     "STARTER_DELETE_MESSAGE_TEXT": "Le lanceur de '%s' a été supprimé",
 
     "STARTER_DELETE_ERROR_TEXT": "Échec de la suppression du lanceur",
-    
+
     "STARTER_REMOVE_MESSAGE_TEXT": "Le lanceur de '%s' a été jeté"
 
 }

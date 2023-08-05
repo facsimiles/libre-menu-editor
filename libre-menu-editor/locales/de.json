@@ -151,7 +151,7 @@
     "STARTER_DELETE_MESSAGE_TEXT": "Starter für '%s' wurde gelöscht",
 
     "STARTER_DELETE_ERROR_TEXT": "Starter konnte nicht gelöscht werden",
-    
+
     "STARTER_REMOVE_MESSAGE_TEXT": "Starter für '%s' wurde entfernt"
 
 }
