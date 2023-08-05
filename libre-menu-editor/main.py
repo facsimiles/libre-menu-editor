@@ -2125,6 +2125,8 @@ class Application(gui.Application):
 
         if not self._main_stack.get_visible_child() == self._settings_page:
 
+            self._current_desktop_starter_name = None
+
             if not self._save_button.get_parent() == None:
 
                 self._save_button.unparent()
@@ -2134,8 +2136,6 @@ class Application(gui.Application):
                 self._discard_button.unparent()
 
             if self._settings_page.get_changed():
-
-                self._current_desktop_starter_name = None
 
                 self._settings_page.reset(reset_children=False)
 
@@ -2953,23 +2953,17 @@ class Application(gui.Application):
 
             pass
 
+        if name == self._current_desktop_starter_name:
+
+            self._main_stack.set_visible_child(self._start_page)
+
     def _update_search_list_item(self, name):
 
         parser = self._desktop_starter_parsers[name]
 
         if not parser.get_visible() and not self._config_manager.get("show.hidden"):
 
-            try:
-
-                self._search_list.remove(name)
-
-            except gui.ItemNotFoundError:
-
-                pass
-
-            if name == self._current_desktop_starter_name:
-
-                self._main_stack.set_visible_child(self._start_page)
+            self._remove_search_list_item(name)
 
         else:
 
@@ -3028,10 +3022,6 @@ class Application(gui.Application):
         if self._current_desktop_starter_name in self._unsaved_custom_starters:
 
             del self._unsaved_custom_starters[self._current_desktop_starter_name]
-
-        if name == self._current_desktop_starter_name:
-
-            self._main_stack.set_visible_child(self._start_page)
 
         if name in self._desktop_starter_parsers:
 
