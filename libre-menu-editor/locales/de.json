@@ -134,7 +134,7 @@
 
     "LOAD_SINGLE_ERROR_TEXT": "Starter '%s' konnte nicht geladen werden",
 
-    "OPEN_FILE_ERROR_TEXT": "Konfigurationsdatei von '%s' konnte nicht geöffnet werden",
+    "OPEN_FILE_ERROR_TEXT": "Konfigurationsdatei konnte nicht geöffnet werden",
 
     "STARTER_SAVE_MESSAGE_TEXT": "Einstellungen für '%s' wurden gespeichert",
 

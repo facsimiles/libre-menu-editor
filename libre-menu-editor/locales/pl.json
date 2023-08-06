@@ -134,7 +134,7 @@
 
     "LOAD_SINGLE_ERROR_TEXT": "Ładowanie pliku nie powiodło się: '%s'",
 
-    "OPEN_FILE_ERROR_TEXT": "Nie udało się otworzyć konfiguracji dla '%s'",
+    "OPEN_FILE_ERROR_TEXT": "Nie udało się otworzyć konfiguracji",
 
     "STARTER_SAVE_MESSAGE_TEXT": "Konfiguracja dla '%s' została zapisana",
 

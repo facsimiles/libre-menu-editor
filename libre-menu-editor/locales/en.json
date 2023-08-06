@@ -134,7 +134,7 @@
 
     "LOAD_SINGLE_ERROR_TEXT": "Failed to load File '%s'",
 
-    "OPEN_FILE_ERROR_TEXT": "Failed to open configurations for '%s'",
+    "OPEN_FILE_ERROR_TEXT": "Failed to open configurations",
 
     "STARTER_SAVE_MESSAGE_TEXT": "Configurations for '%s' have been saved",
 

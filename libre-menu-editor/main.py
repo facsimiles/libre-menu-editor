@@ -2919,7 +2919,7 @@ class Application(gui.Application):
 
                 os.environ["APP_DEBUG_LOG"] = "{}\n{}".format(os.getenv("APP_DEBUG_LOG", ""), error)
 
-                self._send_interface_alert(self._locale_manager.get("OPEN_FILE_ERROR_TEXT") % text, error=True)
+                self._send_interface_alert(self._locale_manager.get("OPEN_FILE_ERROR_TEXT"), error=True)
 
     def _add_search_list_item(self, name):
 

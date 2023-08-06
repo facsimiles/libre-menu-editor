@@ -134,7 +134,7 @@
 
     "LOAD_SINGLE_ERROR_TEXT": "No se pudo cargar el archivo '%s'",
 
-    "OPEN_FILE_ERROR_TEXT": "No se pudo abrir configuraciones para '%s'",
+    "OPEN_FILE_ERROR_TEXT": "No se pudo abrir las configuraciones",
 
     "STARTER_SAVE_MESSAGE_TEXT": "Se han guardado configuraciones para '%s'",
 

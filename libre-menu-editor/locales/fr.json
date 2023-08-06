@@ -134,7 +134,7 @@
 
     "LOAD_SINGLE_ERROR_TEXT": "Échec du chargement du fichier '%s'",
 
-    "OPEN_FILE_ERROR_TEXT": "Échec de l'ouverture des configurations pour '%s'",
+    "OPEN_FILE_ERROR_TEXT": "Échec de l'ouverture des configurations",
 
     "STARTER_SAVE_MESSAGE_TEXT": "Les configurations pour '%s' ont été sauvegardées",
 
