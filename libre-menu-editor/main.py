@@ -382,7 +382,7 @@ class DefaultTextEditor():
 
             os.symlink(path, link)
 
-            subprocess.Popen(["xdg-open", link])
+            subprocess.run(["xdg-open", link], check=True)
 
 
 class DesktopActionGroup(Adw.PreferencesGroup):
