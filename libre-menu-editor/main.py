@@ -417,6 +417,12 @@ class DesktopActionGroup(Adw.PreferencesGroup):
 
         self._command_chooser_row.set_title(self._locale_manager.get("COMMAND_CHOOSER_ROW_TITLE"))
 
+        self._command_chooser_row.set_dialog_title(self._locale_manager.get("COMMAND_CHOOSER_ROW_DIALOG_TITLE"))
+
+        self._command_chooser_row.set_dialog_accept_button_label(self._locale_manager.get("PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL"))
+
+        self._command_chooser_row.set_dialog_cancel_button_label(self._locale_manager.get("PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL"))
+
         self._command_chooser_row.hook("text-changed", self._on_child_row_text_changed)
 
         self._delete_row = gui.DeleteRow(app)

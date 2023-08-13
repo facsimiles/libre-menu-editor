@@ -12,9 +12,9 @@
 
     "START_PAGE_BODY": "Create a new application launcher or select an existing one from the sidebar",
 
-    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Cancel",
+    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Open",
 
-    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Open",
+    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Cancel",
 
     "INSTALL_DIALOG_HEAD": "Installation",
 
@@ -126,9 +126,9 @@
 
     "VISIBLE_SWITCH_ROW_TITLE": "Show this application in the main menu",
 
-    "NOTIFY_SWITCH_ROW_TITLE": "Display a startup animation",
+    "NOTIFY_SWITCH_ROW_TITLE": "Show an animation until the application is visible",
 
-    "TERMINAL_SWITCH_ROW_TITLE": "Display a terminal window",
+    "TERMINAL_SWITCH_ROW_TITLE": "Show a terminal window during execution",
 
     "LOAD_MULTIPLE_ERROR_TEXT": "Failed to load %s Files",
 

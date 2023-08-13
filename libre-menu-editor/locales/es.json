@@ -12,9 +12,9 @@
 
     "START_PAGE_BODY": "Cree un nuevo lanzador de aplicaciones o seleccione uno existente en la barra lateral",
 
-    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Cancelar",
+    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Abrir",
 
-    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Abrir",
+    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Cancelar",
 
     "INSTALL_DIALOG_HEAD": "Instalación",
 
@@ -126,9 +126,9 @@
 
     "VISIBLE_SWITCH_ROW_TITLE": "Mostrar esta aplicación en menú principal",
 
-    "NOTIFY_SWITCH_ROW_TITLE": "Mostrar una animación de inicio",
+    "NOTIFY_SWITCH_ROW_TITLE": "Mostrar una animación hasta que la aplicación sea visible",
 
-    "TERMINAL_SWITCH_ROW_TITLE": "Muestra una ventana de terminal",
+    "TERMINAL_SWITCH_ROW_TITLE": "Mostrar una ventana de terminal durante la ejecución",
 
     "LOAD_MULTIPLE_ERROR_TEXT": "No se pudo cargar %s archivos",
 

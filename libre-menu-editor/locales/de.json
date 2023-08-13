@@ -126,9 +126,9 @@
 
     "VISIBLE_SWITCH_ROW_TITLE": "Anwendung im Hauptmenü anzeigen",
 
-    "NOTIFY_SWITCH_ROW_TITLE": "Hinweis bei Anwendungsstart anzeigen",
+    "NOTIFY_SWITCH_ROW_TITLE": "Animation anzeigen bis die Anwendung sichtbar ist",
 
-    "TERMINAL_SWITCH_ROW_TITLE": "Konsolenfenster verwenden",
+    "TERMINAL_SWITCH_ROW_TITLE": "Konsolenfenster während der Ausführung anzeigen",
 
     "LOAD_MULTIPLE_ERROR_TEXT": "%s Starter konnten nicht geladen werden",
 
