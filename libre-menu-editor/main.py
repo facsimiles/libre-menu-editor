@@ -16,7 +16,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-import os, sys, string, random, shutil, subprocess, gi
+import os, sys, string, random, shutil, threading, time, subprocess, datetime, gi
 
 gi.require_version("Adw", "1")
 
@@ -49,7 +49,9 @@ from modules import gui, basic
 
 class DesktopParser():
 
-    def __init__(self, load_path, save_path):
+    def __init__(self, app, load_path, save_path):
+
+        self._application = app
 
         self._config_parser = ConfigParser(interpolation=None, strict=False)
 
@@ -65,11 +67,11 @@ class DesktopParser():
 
             ]
 
-        self._config_parser.read(load_path)
-
         self._load_path = load_path
 
         self._save_path = save_path
+
+        self.load()
 
     def _get_action_from_section(self, section):
 
@@ -111,17 +113,9 @@ class DesktopParser():
 
                 except ValueError as error:
 
-                    if os.getenv("APP_DEBUG_MODE_ENABLED"):
+                    self._application.log(error, error=error)
 
-                        raise error
-
-                    else:
-
-                        error = f"error 1: {error}"
-
-                        os.environ["APP_DEBUG_LOG"] = "{}\n{}".format(os.getenv("APP_DEBUG_LOG", ""), error)
-
-                        return False
+                    return False
 
             else:
 
@@ -143,13 +137,19 @@ class DesktopParser():
 
                 value = "false"
 
-        self._config_parser.set(section, key, value)
+        if len(value):
 
-        if localized:
+            self._config_parser.set(section, key, value)
 
-            for locale in self._system_locale_names:
+            if localized:
 
-                self._config_parser.set(section, "%s[%s]" % (key, locale), value)
+                for locale in self._system_locale_names:
+
+                    self._config_parser.set(section, "%s[%s]" % (key, locale), value)
+
+        elif self._config_parser.has_option(section, key):
+        
+            self._config_parser.remove_option(section, key)
 
     def get_action_name(self, action):
 
@@ -313,28 +313,185 @@ class DesktopParser():
 
         self._config_parser.remove_section(self._get_section_from_action(action))
 
-    def save(self):
+    def load(self, path=None):
+
+        if path is None:
+
+            path = self._load_path
+
+        self._config_parser.clear()
+
+        self._config_parser.read(path)
+
+    def save(self, path=None):
+
+        if path is None:
+
+            path = self._save_path
 
         self._set("Actions", ";".join(self.get_actions()))
 
-        if os.path.exists(self._save_path):
+        if os.path.exists(path):
 
-            os.remove(self._save_path)
+            os.remove(path)
 
-        os.makedirs(os.path.dirname(self._save_path), exist_ok=True)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
 
-        with open(self._save_path, "w") as file:
+        with open(path, "w") as file:
 
             self._config_parser.write(file, space_around_delimiters=False)
 
 
-class DefaultTextEditor():
+class PathInspector():
 
     def __init__(self):
 
-        self._temp_dir = os.path.join(os.path.sep, "tmp", "libre-menu-editor-links")
+        self._paths = {}
 
-        self._launch_external_apps = [
+        self._delay = 0.5
+
+        self._active = False
+
+        self._stopped = False
+
+        self._events = basic.EventManager()
+
+        self._events.add("changed", str, float)
+
+        self._events.add("created", str, float)
+
+        self._events.add("deleted", str, float)
+
+        self._thread = threading.Thread(target=self._thread_target)
+
+    def _thread_target(self):
+
+        while not self._stopped:
+
+            time.sleep(self._delay)
+
+            for path in self._paths:
+
+                old_timestamp = self._paths[path]["timestamp"]
+
+                try:
+
+                    new_timestamp = os.path.getmtime(path)
+
+                    if new_timestamp > old_timestamp:
+
+                        self._paths[path]["timestamp"] = new_timestamp
+
+                        if old_timestamp:
+
+                            self._events.trigger("changed", path, float(new_timestamp))
+
+                        else:
+
+                            self._events.trigger("created", path, float(new_timestamp))
+
+                except FileNotFoundError:
+
+                    if old_timestamp:
+
+                            self._events.trigger("deleted", path, float(old_timestamp))
+
+    def add(self, path):
+
+        if not path in self._paths:
+
+            if os.path.exists(path):
+
+                self._paths[path] = {
+
+                    "timestamp": os.path.getmtime(path)
+
+                    }
+
+            else:
+
+                self._paths[path] = {
+
+                    "timestamp": 0
+
+                    }
+
+            if not self.get_active():
+
+                self.set_active(True)
+
+    def remove(self, path):
+
+        if path in self._paths:
+
+            del self._paths[path]
+
+            if not len(self._paths):
+
+                self.set_active(False)
+
+    def get_paths(self):
+
+        return list(self._paths.keys())
+
+    def get_active(self):
+
+        return self._active
+
+    def set_active(self, value):
+
+        if value and not self._active:
+
+            self._active = True
+
+            self._thread.start()
+
+        elif not value and self._active and not self._stopped:
+
+            self._stopped = True
+
+            self._thread.join()
+
+            self._stopped = False
+
+            self._active = False
+
+    def hook(self, event, callback):
+
+        return self._events.hook(event, callback)
+
+    def release(self, id):
+
+        self._events.release(id)
+
+
+class DefaultTextEditor():
+
+    def __init__(self, app):
+
+        self._application = app
+
+        self._locale_manager = app.get_locale_manager()
+
+        self._application.connect("shutdown", self._on_application_shutdown)
+
+        self._events = basic.EventManager()
+
+        self._events.add("update", str)
+
+        self._parsers = {}
+
+        self._edit_dir = os.path.join(app.get_cache_dir(), "text-editor-links")
+
+        self._path_inspector = PathInspector()
+
+        self._path_inspector.hook("changed", self._on_path_inspector_changed)
+
+        self._path_inspector.hook("created", self._on_path_inspector_created)
+
+        self._path_inspector.hook("deleted", self._on_path_inspector_deleted)
+
+        self._external_launch_apps = [
 
             Gio.AppInfo.get_default_for_type("text/plain", False)
 
@@ -342,23 +499,141 @@ class DefaultTextEditor():
 
         for app in Gio.AppInfo.get_recommended_for_type("text/plain"):
 
-            self._launch_external_apps.append(app)
+            self._external_launch_apps.append(app)
 
         for app in Gio.AppInfo.get_fallback_for_type("text/plain"):
 
-            self._launch_external_apps.append(app)
+            self._external_launch_apps.append(app)
 
         for app in Gio.AppInfo.get_all_for_type("text/plain"):
 
-            self._launch_external_apps.append(app)
+            self._external_launch_apps.append(app)
 
-    def launch(self, path):
+    def _on_application_shutdown(self, app):
 
-        for app in self._launch_external_apps:
+        self.exit()
+
+    def _on_path_inspector_changed(self, event, edit_path, timestamp):
+
+        name = os.path.basename(edit_path)[:-len(".txt")]
+
+        GLib.idle_add(self._trigger_update_event, name)
+
+    def _on_path_inspector_created(self, event, edit_path, timestamp):
+
+        name = os.path.basename(edit_path)[:-len(".txt")]
+
+        GLib.idle_add(self._trigger_update_event, name)
+
+    def _on_path_inspector_deleted(self, event, edit_path, timestamp):
+
+        GLib.idle_add(self._path_inspector.remove, edit_path)
+
+        name = os.path.basename(edit_path)[:-len(".txt")]
+
+        del self._original_paths[name]
+
+    def _get_files_identical(self, first, second):
+
+        if os.path.exists(first) and os.path.exists(second):
+
+            with open(first, "r") as first_file:
+
+                with open(second, "r") as second_file:
+
+                    if first_file.read().replace("\n\n", "\n") == second_file.read().replace("\n\n", "\n"):
+
+                        return True
+
+    def _get_copy_source_path(self, parser):
+
+        if os.path.exists(parser.get_save_path()):
+
+            return parser.get_save_path()
+
+        else:
+
+            return parser.get_load_path()
+
+    def _trigger_update_event(self, name):
+
+        parser = self._parsers[name]["parser"]
+
+        edit_path = self._parsers[name]["edit-path"]
+
+        save_path = parser.get_save_path()
+
+        if not self._get_files_identical(save_path, edit_path):
 
             try:
 
-                app.launch([Gio.File.new_for_path(path)], None)
+                parser.load(path=edit_path)
+
+                parser.save(path=edit_path)
+
+                parser.save()
+
+            except Exception as error:
+
+                self._application.log(error, error=error)
+
+                self._application.notify(self._locale_manager.get("STARTER_SAVE_ERROR_TEXT"), error=True)
+
+            else:
+
+                self._events.trigger("update", name)
+
+                text = parser.get_name()
+
+                if not len(text):
+
+                    text = self._locale_manager.get("UNNAMED_APPLICATION_PLACEHOLDER_TEXT")
+
+                self._application.notify(self._locale_manager.get("STARTER_SAVE_MESSAGE_TEXT") % text)
+
+    def get_path(self, name):
+
+        return self._parsers[name]["edit-path"]
+
+    def get_names(self):
+
+        return list(self._parsers.keys())
+
+    def launch(self, name, parser):
+
+        if not os.path.exists(self._edit_dir):
+
+            os.makedirs(self._edit_dir, exist_ok=True)
+
+        edit_path = os.path.join(self._edit_dir, f"{name}.txt")
+
+        self._parsers[name] = {
+
+            "parser": parser,
+
+            "edit-path": edit_path
+
+            }
+
+        source_path = self._get_copy_source_path(parser)
+
+        if not self._get_files_identical(source_path, edit_path):
+
+            if os.path.exists(edit_path):
+
+                os.remove(edit_path)
+
+            shutil.copy(source_path, edit_path)
+
+        if not edit_path in self._path_inspector.get_paths():
+
+            self._path_inspector.add(edit_path)
+
+        for app in self._external_launch_apps:
+
+            try:
+
+                app.launch([Gio.File.new_for_path(edit_path)], None)
 
             except:
 
@@ -370,19 +645,100 @@ class DefaultTextEditor():
 
         else:
 
-            if not os.path.exists(self._temp_dir):
+            subprocess.run(["xdg-open", edit_path], check=True)
 
-                os.makedirs(self._temp_dir, exist_ok=True)
+    def exit(self):
 
-            link = os.path.join(self._temp_dir, "{}.txt".format(os.path.basename(path)))
+        self._parsers.clear()
 
-            if os.path.exists(link) and os.path.islink(link):
+        for path in self._path_inspector.get_paths():
 
-                os.unlink(link)
+            self._path_inspector.remove(path)
 
-            os.symlink(path, link)
+        self._path_inspector.set_active(False)
 
-            subprocess.run(["xdg-open", link], check=True)
+        if os.path.exists(self._edit_dir):
+
+            for basename in os.listdir(self._edit_dir):
+
+                os.remove(os.path.join(self._edit_dir, basename))
+
+    def hook(self, event, callback):
+
+        return self._events.hook(event, callback)
+
+    def release(self, id):
+
+        self._events.release(id)
+
+
+class DebugLog():
+
+    def __init__(self, app):
+
+        self._app_name = app.get_app_name()
+
+        self._raise_errors = False
+
+        self._messages = []
+
+        self._messages.append(str(subprocess.getstatusoutput("cat /etc/*-release")[-1]))
+
+        self._messages.append("")
+
+        self._messages.append("LANG={}".format(str(os.getenv("LANG"))))
+
+        self._messages.append("APP_RUNNING_AS_FLATPAK={}".format(str(os.getenv("APP_RUNNING_AS_FLATPAK"))))
+
+        self._messages.append("XDG_SESSION_DESKTOP={}".format(str(os.getenv("XDG_SESSION_DESKTOP"))))
+
+        self._messages.append("XDG_SESSION_TYPE={}".format(str(os.getenv("XDG_SESSION_TYPE"))))
+
+        self._messages.append("")
+
+        self._messages.append("XDG_DATA_DIRS={}".format(str(os.getenv("XDG_DATA_DIRS"))))
+
+        self._messages.append("")
+
+    def get_raise_errors(self):
+
+        return self._raise_errors
+
+    def set_raise_errors(self, value):
+
+        self._raise_errors = value
+
+    def add(self, text, error=None):
+
+        if not error is None:
+
+            if self._raise_errors:
+
+                raise error
+
+        now = datetime.datetime.now()
+
+        message = "[{}][{}:{}:{}] {}".format(
+
+            self._app_name,
+
+            now.strftime("%H"),
+
+            now.strftime("%M"),
+
+            now.strftime("%S"),
+
+            text
+
+            )
+
+        self._messages.append(message)
+
+        sys.stdout.write(f"{message}\n")
+
+    def get(self):
+
+        return "\n".join(self._messages)
 
 
 class DesktopActionGroup(Adw.PreferencesGroup):
@@ -554,6 +910,10 @@ class SettingsPage(Gtk.Box):
 
         self._application = app
 
+        self._clamp_limit = 1200
+
+        self._clamp_threshold = 240
+
         self._current_name = None
 
         self._current_parser = None
@@ -581,6 +941,22 @@ class SettingsPage(Gtk.Box):
         self._top_event_controller_key = Gtk.EventControllerKey()
 
         self._top_event_controller_key.connect("key-pressed", self._on_top_controller_key_pressed)
+
+        ###############################################################################################################
+
+        self._banner_event_controller_key = Gtk.EventControllerKey()
+
+        self._banner_event_controller_key.connect("key-pressed", self._on_banner_event_controller_key_pressed)
+
+        self._banner = Adw.Banner()
+
+        self._banner.set_title(self._locale_manager.get("BANNER_LABEL_TEXT"))
+
+        self._banner.set_button_label(self._locale_manager.get("BANNER_CANCEL_BUTTON_LABEL"))
+
+        self._banner.connect("button-clicked", self._on_banner_button_clicked)
+
+        self._banner.add_controller(self._banner_event_controller_key)
 
         ###############################################################################################################
 
@@ -764,49 +1140,83 @@ class SettingsPage(Gtk.Box):
 
         ###############################################################################################################
 
-        self._banner_event_controller_key = Gtk.EventControllerKey()
-
-        self._banner_event_controller_key.connect("key-pressed", self._on_banner_event_controller_key_pressed)
-
-        self._banner = Adw.Banner()
-
-        self._banner.set_title(self._locale_manager.get("BANNER_LABEL_TEXT"))
-
-        self._banner.set_button_label(self._locale_manager.get("BANNER_CANCEL_BUTTON_LABEL"))
-
-        self._banner.connect("button-clicked", self._on_banner_button_clicked)
-
-        self._banner.add_controller(self._banner_event_controller_key)
-
-        ###############################################################################################################
-
         self._page_event_controller_key = Gtk.EventControllerKey()
 
         self._page_event_controller_key.connect("key-pressed", self._on_page_controller_key_pressed)
 
-        self._preferences_page = Adw.PreferencesPage()
+        ###############################################################################################################
 
-        self._preferences_page.add_controller(self._page_event_controller_key)
+        self._top_box = Gtk.Box()
 
-        self._preferences_page.add(self._icon_view_preferences_group)
+        self._top_box.set_spacing(gui.Spacing.LARGER)
 
-        self._preferences_page.add(self._icon_chooser_preferences_group)
+        self._top_box.set_orientation(Gtk.Orientation.VERTICAL)
 
-        self._preferences_page.add(self._description_preferences_group)
+        self._top_box.append(self._icon_view_preferences_group)
 
-        self._preferences_page.add(self._execution_preferences_group)
+        self._top_box.append(self._icon_chooser_preferences_group)
 
-        self._preferences_page.add(self._placeholder_action_group)
+        self._top_box.append(self._description_preferences_group)
 
-        self._preferences_page.add(self._visible_preferences_group)
+        self._top_box.append(self._execution_preferences_group)
 
-        self._preferences_page.add(self._display_preferences_group)
+        self._action_box = Gtk.Box()
+
+        self._action_box.set_spacing(gui.Spacing.LARGER)
+
+        self._action_box.set_orientation(Gtk.Orientation.VERTICAL)
+
+        self._action_box.append(self._placeholder_action_group)
+
+        self._bottom_box = Gtk.Box()
+
+        self._bottom_box.set_spacing(gui.Spacing.LARGER)
+
+        self._bottom_box.set_orientation(Gtk.Orientation.VERTICAL)
+
+        self._bottom_box.append(self._visible_preferences_group)
+
+        self._bottom_box.append(self._display_preferences_group)
+
+        self._main_box = Gtk.Box()
+
+        self._main_box.set_spacing(gui.Spacing.LARGER)
+
+        self._main_box.set_orientation(Gtk.Orientation.VERTICAL)
+
+        self._main_box.append(self._top_box)
+
+        self._main_box.append(self._action_box)
+
+        self._main_box.append(self._bottom_box)
+
+        self._clamp = Adw.Clamp(maximum_size=self._clamp_limit, tightening_threshold=self._clamp_threshold)
+
+        self._clamp.set_margin_top(gui.Margin.LARGER)
+
+        self._clamp.set_margin_bottom(gui.Margin.LARGER)
+
+        self._clamp.set_margin_start(gui.Margin.LARGER)
+
+        self._clamp.set_margin_end(gui.Margin.LARGER)
+
+        self._clamp.set_child(self._main_box)
+
+        self._scrolled_window = Gtk.ScrolledWindow()
+
+        self._scrolled_window.set_child(self._clamp)
+
+        self._scrolled_window.set_vexpand(True)
+
+        ###############################################################################################################
 
         self.set_orientation(Gtk.Orientation.VERTICAL)
 
         self.append(self._banner)
 
-        self.append(self._preferences_page)
+        self.append(self._scrolled_window)
+
+        ###############################################################################################################
 
         self._update_action_children_sensitive(False)
 
@@ -1030,7 +1440,7 @@ class SettingsPage(Gtk.Box):
 
         if not self._placeholder_action_visible:
 
-            self._preferences_page.add(self._placeholder_action_group)
+            self._action_box.append(self._placeholder_action_group)
 
             self._placeholder_action_visible = True
 
@@ -1038,7 +1448,7 @@ class SettingsPage(Gtk.Box):
 
         if self._placeholder_action_visible:
 
-            self._preferences_page.remove(self._placeholder_action_group)
+            self._action_box.remove(self._placeholder_action_group)
 
             self._placeholder_action_visible = False
 
@@ -1074,7 +1484,7 @@ class SettingsPage(Gtk.Box):
 
         self._current_desktop_actions.append(action)
 
-        self._preferences_page.add(desktop_action_group)
+        self._action_box.append(desktop_action_group)
 
         if set_focus:
 
@@ -1083,8 +1493,6 @@ class SettingsPage(Gtk.Box):
         self._update_top_desktop_action_group_header()
 
         self._hide_placeholder_desktop_action()
-
-        self._update_bottom_preferences_groups_position()
 
         self._update_action_children_sensitive()
 
@@ -1118,15 +1526,13 @@ class SettingsPage(Gtk.Box):
 
                 self._current_desktop_action_groups[self._current_desktop_actions[-1]].grab_focus()
 
-        self._preferences_page.remove(desktop_action_group)
+        self._action_box.remove(desktop_action_group)
 
         desktop_action_group.reset()
 
         self._desktop_action_groups_cache.append(desktop_action_group)
 
         self._update_top_desktop_action_group_header()
-
-        self._update_bottom_preferences_groups_position()
 
         self._update_action_children_sensitive()
 
@@ -1142,41 +1548,17 @@ class SettingsPage(Gtk.Box):
 
                 desktop_action_group.set_header_suffix(self._primary_header_suffix_box)
 
-    def _update_bottom_preferences_groups_position(self):
-
-        self._preferences_page.remove(self._visible_preferences_group)
-
-        self._preferences_page.add(self._visible_preferences_group)
-
-        self._preferences_page.remove(self._display_preferences_group)
-
-        self._preferences_page.add(self._display_preferences_group)
-
     def _update_input_children_sensitive(self, value=True):
 
-        for action in self._current_desktop_actions:
-
-            self._current_desktop_action_groups[action].set_sensitive(value)
+        self._action_box.set_sensitive(value)
 
         if self._delete_mode_enabled:
 
             value = False
 
-        self._primary_header_suffix_box.set_sensitive(value)
+        self._top_box.set_sensitive(value)
 
-        self._icon_view_preferences_group.set_sensitive(value)
-
-        self._icon_chooser_preferences_group.set_sensitive(value)
-
-        self._description_preferences_group.set_sensitive(value)
-
-        self._execution_preferences_group.set_sensitive(value)
-
-        self._placeholder_action_group.set_sensitive(value)
-
-        self._visible_preferences_group.set_sensitive(value)
-
-        self._display_preferences_group.set_sensitive(value)
+        self._bottom_box.set_sensitive(value)
 
     def _update_action_children_sensitive(self, value=True):
 
@@ -1917,8 +2299,6 @@ class Application(gui.Application):
 
         self._about_window.set_issue_url("https://codeberg.org/libre-menu-editor/libre-menu-editor/issues")
 
-        self._about_window.set_debug_info(self._get_debug_info())
-
         self._about_window.set_copyright("© 2022 Free Software Foundation")
 
         self._about_window.set_license_type(Gtk.License.GPL_3_0)
@@ -1949,9 +2329,33 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
-        self._text_editor = DefaultTextEditor()
+        self._text_editor = DefaultTextEditor(self)
+
+        self._text_editor.hook("update", self._on_text_editor_update)
+
+        ###############################################################################################################
+
+        self._debug_log = DebugLog(self)
+
+        ###############################################################################################################
 
         self._load_desktop_starter_dirs()
+
+    def _on_text_editor_update(self, event, name):
+
+        if name in self._desktop_starter_parsers:
+
+            parser = self._desktop_starter_parsers[name]
+
+            self._update_search_list_item(name)
+
+            if name in self._unsaved_custom_starters and not self._unsaved_custom_starters[name]["external"]:
+
+                del self._unsaved_custom_starters[name]
+
+            if name == self._current_desktop_starter_name:
+
+                self._load_settings_page(name)
 
     def _on_application_window_map(self, window):
 
@@ -2205,7 +2609,7 @@ class Application(gui.Application):
 
     def _on_about_button_clicked(self, event):
 
-        self._about_window.set_debug_info(self._get_debug_info())
+        self._about_window.set_debug_info(self._debug_log.get())
 
         self._about_window.set_visible(True)
 
@@ -2242,64 +2646,6 @@ class Application(gui.Application):
             else:
 
                 self._load_settings_page(name)
-
-    def _get_debug_info(self):
-
-        lines = []
-
-        try:
-
-            lines.append(str(subprocess.getstatusoutput("cat /etc/*-release")[-1]))
-
-            lines.append("")
-
-        except:
-
-            pass
-
-        lines.append("APP_RUNNING_AS_FLATPAK={}".format(str(os.getenv("APP_RUNNING_AS_FLATPAK"))))
-
-        lines.append("APP_DEBUG_MODE_ENABLED={}".format(str(os.getenv("APP_DEBUG_MODE_ENABLED"))))
-
-        lines.append("")
-
-        lines.append("XDG_SESSION_DESKTOP={}".format(str(os.getenv("XDG_SESSION_DESKTOP"))))
-
-        lines.append("XDG_SESSION_TYPE={}".format(str(os.getenv("XDG_SESSION_TYPE"))))
-
-        lines.append("")
-
-        lines.append("XDG_DATA_DIRS={}".format(str(os.getenv("XDG_DATA_DIRS"))))
-
-        lines.append("")
-
-        lines.append("LANG={}".format(str(os.getenv("LANG"))))
-
-        lines.append("")
-
-        debug_log = os.getenv("APP_DEBUG_LOG")
-
-        if isinstance(debug_log, str) and len(debug_log):
-
-            lines.append(debug_log)
-
-        return "\n".join(lines)
-
-    def _get_current_starter_external_path(self):
-
-        path = self._desktop_starter_parsers[self._current_desktop_starter_name].get_save_path()
-
-        if not os.path.exists(path):
-
-            path = self._desktop_starter_parsers[self._current_desktop_starter_name].get_load_path()
-
-        if os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
-
-            return self.get_flatpak_host_user_data_path(path)
-
-        else:
-
-            return path
 
     def _get_desktop_starter_has_default(self, name):
 
@@ -2387,15 +2733,7 @@ class Application(gui.Application):
 
             except Exception as error:
 
-                if os.getenv("APP_DEBUG_MODE_ENABLED"):
-
-                    raise error
-
-                else:
-
-                    error = f"error 2: {error}"
-
-                    os.environ["APP_DEBUG_LOG"] = "{}\n{}".format(os.getenv("APP_DEBUG_LOG", ""), error)
+                self.log(error, error=error)
 
     def _show_install_dialog(self, callback, *callback_args, **callback_kwargs):
 
@@ -2637,23 +2975,19 @@ class Application(gui.Application):
 
                 self._settings_page.save_desktop_starter()
 
+                if self._current_desktop_starter_name in self._text_editor.get_names():
+
+                    parser.save(path=self._text_editor.get_path(self._current_desktop_starter_name))
+
                 self._settings_page.set_always_show_save_button(False)
 
             except Exception as error:
 
-                if os.getenv("APP_DEBUG_MODE_ENABLED"):
+                self.log(error, error=error)
 
-                    raise error
+                self.notify(self._locale_manager.get("STARTER_SAVE_ERROR_TEXT"), error=True)
 
-                else:
-
-                    error = f"error 3: {error}"
-
-                    os.environ["APP_DEBUG_LOG"] = "{}\n{}".format(os.getenv("APP_DEBUG_LOG", ""), error)
-
-                    self._send_interface_alert(self._locale_manager.get("STARTER_SAVE_ERROR_TEXT"), error=True)
-
-                    return True
+                return True
 
             else:
 
@@ -2667,7 +3001,7 @@ class Application(gui.Application):
 
                     text = self._locale_manager.get("UNNAMED_APPLICATION_PLACEHOLDER_TEXT")
 
-                self._send_interface_alert(self._locale_manager.get("STARTER_SAVE_MESSAGE_TEXT") % text)
+                self.notify(self._locale_manager.get("STARTER_SAVE_MESSAGE_TEXT") % text)
 
                 self._update_search_list_item(self._current_desktop_starter_name)
 
@@ -2719,21 +3053,13 @@ class Application(gui.Application):
 
                 except Exception as error:
 
-                    if os.getenv("APP_DEBUG_MODE_ENABLED"):
+                    self.log(error, error=error)
 
-                        raise error
-
-                    else:
-
-                        error = f"error 4: {error}"
-
-                        os.environ["APP_DEBUG_LOG"] = "{}\n{}".format(os.getenv("APP_DEBUG_LOG", ""), error)
-
-                        exceptions.append(name)
+                    exceptions.append(os.path.basename(path))
 
             else:
 
-                exceptions.append(name)
+                exceptions.append(os.path.basename(path))
 
         else:
 
@@ -2741,7 +3067,7 @@ class Application(gui.Application):
 
                 if len(exceptions) == 1:
 
-                    self._send_interface_alert(
+                    self.notify(
 
                         self._locale_manager.get("LOAD_SINGLE_ERROR_TEXT") % exceptions[0],
 
@@ -2751,7 +3077,7 @@ class Application(gui.Application):
 
                 else:
 
-                    self._send_interface_alert(
+                    self.notify(
 
                         self._locale_manager.get("LOAD_MULTIPLE_ERROR_TEXT") % str(len(exceptions)),
 
@@ -2817,7 +3143,7 @@ class Application(gui.Application):
 
                     text = self._locale_manager.get("UNNAMED_APPLICATION_PLACEHOLDER_TEXT")
 
-                self._send_interface_alert(self._locale_manager.get("STARTER_CREATE_MESSAGE_TEXT") % text)
+                self.notify(self._locale_manager.get("STARTER_CREATE_MESSAGE_TEXT") % text)
 
                 self._load_settings_page(name)
 
@@ -2833,19 +3159,11 @@ class Application(gui.Application):
 
         except Exception as error:
 
-            if os.getenv("APP_DEBUG_MODE_ENABLED"):
+            self.log(error, error=error)
 
-                raise error
+            self.notify(self._locale_manager.get("STARTER_RESET_ERROR_TEXT"), error=True)
 
-            else:
-
-                error = f"error 5: {error}"
-
-                os.environ["APP_DEBUG_LOG"] = "{}\n{}".format(os.getenv("APP_DEBUG_LOG", ""), error)
-
-                self._send_interface_alert(self._locale_manager.get("STARTER_RESET_ERROR_TEXT"), error=True)
-
-                return True
+            return True
 
         parser = self._desktop_starter_parsers[name]
 
@@ -2855,7 +3173,7 @@ class Application(gui.Application):
 
             text = self._locale_manager.get("UNNAMED_APPLICATION_PLACEHOLDER_TEXT")
 
-        self._send_interface_alert(self._locale_manager.get("STARTER_RESET_MESSAGE_TEXT") % text)
+        self.notify(self._locale_manager.get("STARTER_RESET_MESSAGE_TEXT") % text)
 
         self._add_desktop_starter(name, skip_search_list=True, exist_ok=True)
 
@@ -2875,19 +3193,11 @@ class Application(gui.Application):
 
         except Exception as error:
 
-            if os.getenv("APP_DEBUG_MODE_ENABLED"):
+            self.log(error, error=error)
 
-                raise error
+            self.notify(self._locale_manager.get("STARTER_DELETE_ERROR_TEXT"), error=True)
 
-            else:
-
-                error = f"error 6: {error}"
-
-                os.environ["APP_DEBUG_LOG"] = "{}\n{}".format(os.getenv("APP_DEBUG_LOG", ""), error)
-
-                self._send_interface_alert(self._locale_manager.get("STARTER_DELETE_ERROR_TEXT"), error=True)
-
-                return True
+            return True
 
         parser = self._desktop_starter_parsers[name]
 
@@ -2897,35 +3207,23 @@ class Application(gui.Application):
 
             text = self._locale_manager.get("UNNAMED_APPLICATION_PLACEHOLDER_TEXT")
 
-        self._send_interface_alert(self._locale_manager.get("STARTER_DELETE_MESSAGE_TEXT") % text)
+        self.notify(self._locale_manager.get("STARTER_DELETE_MESSAGE_TEXT") % text)
 
         self._remove_desktop_starter(name)
 
     def _open_desktop_starter(self, name):
 
-        path = self._get_current_starter_external_path()
-
         parser = self._desktop_starter_parsers[name]
-
-        text = parser.get_name()
 
         try:
 
-            self._text_editor.launch(path)
+            self._text_editor.launch(name, parser)
 
         except Exception as error:
 
-            if os.getenv("APP_DEBUG_MODE_ENABLED"):
+            self.log(error, error=error)
 
-                raise error
-
-            else:
-
-                error = f"error 7: {error}"
-
-                os.environ["APP_DEBUG_LOG"] = "{}\n{}".format(os.getenv("APP_DEBUG_LOG", ""), error)
-
-                self._send_interface_alert(self._locale_manager.get("OPEN_FILE_ERROR_TEXT"), error=True)
+            self.notify(self._locale_manager.get("OPEN_FILE_ERROR_TEXT"), error=True)
 
     def _add_search_list_item(self, name):
 
@@ -2987,11 +3285,11 @@ class Application(gui.Application):
 
             try:
 
-                self._search_list.update(self._current_desktop_starter_name, text, icon, search_data)
+                self._search_list.update(name, text, icon, search_data)
 
             except gui.ItemNotFoundError:
 
-                self._search_list.add(self._current_desktop_starter_name, text, icon, search_data)
+                self._search_list.add(name, text, icon, search_data)
 
     def _reload_search_list_items(self):
 
@@ -3077,7 +3375,7 @@ class Application(gui.Application):
 
                 text = self._locale_manager.get("UNNAMED_APPLICATION_PLACEHOLDER_TEXT")
 
-            self._send_interface_alert(self._locale_manager.get("STARTER_REMOVE_MESSAGE_TEXT") % text)
+            self.notify(self._locale_manager.get("STARTER_REMOVE_MESSAGE_TEXT") % text)
 
     def _parse_desktop_starter(self, name):
 
@@ -3109,19 +3407,27 @@ class Application(gui.Application):
 
                 raise StarterNotFoundError(name)
 
-        parser = DesktopParser(load_path, save_path)
+        parser = DesktopParser(self, load_path, save_path)
 
         return parser
 
     def _parse_command_line_args(self):
 
+        if len(sys.argv) > 1 and "--debug" in sys.argv[1:]:
+
+            self._debug_log.set_raise_errors(True)
+
+            sys.argv.remove("--debug")
+
         if len(sys.argv) > 1 and "--new" in sys.argv[1:]:
 
             self._create_desktop_starter()
+            
+            sys.argv.remove("--new")
 
         self._load_external_starters(*sys.argv[1:])
 
-    def _send_interface_alert(self, text, error=False):
+    def notify(self, text, error=False):
 
         toast = Adw.Toast.new(text)
 
@@ -3130,6 +3436,10 @@ class Application(gui.Application):
             toast.set_timeout(gui.Timeout.DEFAULT)
 
         self._toast_overlay.add_toast(toast)
+
+    def log(self, text, error=None):
+
+        self._debug_log.add(text, error=error)
 
 if __name__ == "__main__":
 

@@ -56,7 +56,7 @@
 
     "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Unbenannte Aktion",
 
-    "VISIBLE_SWITCH_LABEL": "Versteckte anzeigen",
+    "VISIBLE_SWITCH_LABEL": "Versteckte zeigen",
 
     "RESET_MENU_BUTTON_LABEL": "Starter zurücksetzen",
 
@@ -68,11 +68,11 @@
 
     "SHORTCUTS_MENU_BUTTON_LABEL": "Tastenkürzel",
 
-    "ABOUT_MENU_BUTTON_LABEL": "Info zu Hauptmenü",
+    "ABOUT_MENU_BUTTON_LABEL": "Über Hauptmenü",
 
     "SEARCH_SHORTCUT_TEXT": "Starter durchsuchen",
 
-    "VISIBLE_SHORTCUT_TEXT": "Versteckte anzeigen",
+    "VISIBLE_SHORTCUT_TEXT": "Versteckte zeigen",
 
     "SAVE_SHORTCUT_TEXT": "Änderungen speichern",
 
@@ -80,7 +80,7 @@
 
     "REMOVE_SHORTCUT_TEXT": "Änderungen entfernen",
 
-    "CREATE_SHORTCUT_TEXT": "Starter Erstellen",
+    "CREATE_SHORTCUT_TEXT": "Starter erstellen",
 
     "FILE_SHORTCUT_TEXT": "Textdatei öffnen",
 

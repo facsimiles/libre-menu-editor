@@ -1810,6 +1810,8 @@ class Application(Adw.Application):
 
         self._config_dir = os.path.join(GLib.get_user_data_dir(), self._app_name)
 
+        self._cache_dir = os.path.join(GLib.get_user_cache_dir(), self._app_name)
+
         self._flatpak_filesystem_prefix = os.path.join(os.path.sep, "run", "host")
 
         ###############################################################################################################
@@ -2004,6 +2006,10 @@ class Application(Adw.Application):
 
         return self._config_dir
 
+    def get_cache_dir(self):
+
+        return self._cache_dir
+
     def get_config_manager(self):
 
         return self._config_manager
@@ -2015,26 +2021,6 @@ class Application(Adw.Application):
     def get_icon_finder(self):
 
         return self._icon_finder
-
-    def get_flatpak_host_user_data_path(self, path):
-
-        if path.startswith(GLib.get_user_data_dir()):
-
-            for directory in self._common_user_data_dirs:
-
-                test = self._join_path_prefix(directory, path[len(GLib.get_user_data_dir()):])
-
-                if os.path.exists(test):
-
-                    return test
-
-            else:
-
-                return test
-
-        else:
-
-            return path
 
     def get_flatpak_host_system_path(self, path):
 
