@@ -18,7 +18,10 @@ Icon=page.codeberg.libre_menu_editor.LibreMenuEditor
 Exec=libre-menu-editor %F
 MimeType=application/x-desktop
 Categories=GNOME;GTK;Utility
+
 StartupNotify=true
+StartupWMClass=libre-menu-editor
+X-GNOME-SingleWindow=true
 
 X-Flatpak=page.codeberg.libre_menu_editor.LibreMenuEditor
 Actions=new-launcher

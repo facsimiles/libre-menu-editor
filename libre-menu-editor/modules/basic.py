@@ -16,7 +16,237 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-import os, json
+import os, sys, json, threading, time, fcntl
+
+
+class PathInspector():
+
+    def __init__(self):
+
+        self._paths = {}
+
+        self._delay = 0.5
+
+        self._active = False
+
+        self._stopped = False
+
+        self._events = EventManager()
+
+        self._events.add("changed", str, float)
+
+        self._events.add("created", str, float)
+
+        self._events.add("deleted", str, float)
+
+        self._thread = threading.Thread(target=self._thread_target)
+
+    def _thread_target(self):
+
+        while not self._stopped:
+
+            time.sleep(self._delay)
+
+            for path in self._paths:
+
+                old_timestamp = self._paths[path]["timestamp"]
+
+                try:
+
+                    new_timestamp = os.path.getmtime(path)
+
+                    if new_timestamp > old_timestamp:
+
+                        self._paths[path]["timestamp"] = new_timestamp
+
+                        if old_timestamp:
+
+                            self._events.trigger("changed", path, float(new_timestamp))
+
+                        else:
+
+                            self._events.trigger("created", path, float(new_timestamp))
+
+                except FileNotFoundError:
+
+                    if old_timestamp:
+
+                            self._events.trigger("deleted", path, float(old_timestamp))
+
+    def add(self, path):
+
+        if not path in self._paths:
+
+            if os.path.exists(path):
+
+                self._paths[path] = {
+
+                    "timestamp": os.path.getmtime(path)
+
+                    }
+
+            else:
+
+                self._paths[path] = {
+
+                    "timestamp": 0
+
+                    }
+
+            if not self.get_active():
+
+                self.set_active(True)
+
+    def remove(self, path):
+
+        if path in self._paths:
+
+            del self._paths[path]
+
+            if not len(self._paths):
+
+                self.set_active(False)
+
+    def get_paths(self):
+
+        return list(self._paths.keys())
+
+    def get_active(self):
+
+        return self._active
+
+    def set_active(self, value):
+
+        if value and not self._active:
+
+            self._active = True
+
+            self._thread.start()
+
+        elif not value and self._active and not self._stopped:
+
+            self._stopped = True
+
+            self._thread.join()
+
+            self._stopped = False
+
+            self._active = False
+
+    def hook(self, event, callback):
+
+        return self._events.hook(event, callback)
+
+    def release(self, id):
+
+        self._events.release(id)
+
+
+class ProcessManager():
+
+    def __init__(self, lock_path, argv_path, exit=True):
+
+        os.makedirs(os.path.dirname(lock_path), exist_ok=True)
+
+        os.makedirs(os.path.dirname(argv_path), exist_ok=True)
+
+        try:
+
+            self._lock_file = open(lock_path, "w+")
+
+            fcntl.lockf(self._lock_file, fcntl.LOCK_EX | fcntl.LOCK_NB)
+
+        except IOError as error:
+
+            with open(argv_path, "a") as file:
+
+                file.writelines(sys.argv[1:])
+
+            if exit:
+
+                sys.exit(int(exit))
+
+            else:
+
+                raise error
+
+        else:
+
+            self._lock_path = lock_path
+
+            self._argv_path = argv_path
+
+            self._events = EventManager()
+
+            self._events.add("activate", list)
+
+            self._path_inspector = PathInspector()
+
+            self._path_inspector.hook("created", self._on_path_inspector_created)
+
+            self._path_inspector.hook("changed", self._on_path_inspector_changed)
+
+            self._initial_args = sys.argv[1:]
+
+    def _on_path_inspector_created(self, event, path, timestamp):
+
+        self._parse_argv_file(path)
+
+    def _on_path_inspector_changed(self, event, path, timestamp):
+
+        self._parse_argv_file(path)
+
+    def _parse_argv_file(self, path):
+
+        if os.path.exists(path):
+
+            with open(path, "r") as file:
+
+                args = file.readlines()
+
+                os.remove(path)
+
+            self._trigger_argv_event(args)
+
+        else:
+
+            self._trigger_argv_event([])
+
+    def _trigger_argv_event(self, args):
+
+        args =  list(filter(None, args))
+
+        self._events.trigger("activate", args)
+
+    def get_active(self):
+
+        return self._path_inspector.get_active()
+
+    def set_active(self, value):
+
+        if value:
+
+            if len(self._initial_args):
+
+                self._trigger_argv_event(self._initial_args)
+
+                self._initial_args.clear()
+
+            if not self._argv_path in self._path_inspector.get_paths():
+
+                self._path_inspector.add(self._argv_path)
+
+                return
+
+        self._path_inspector.set_active(value)
+
+    def hook(self, event, callback):
+
+        return self._events.hook(event, callback)
+
+    def release(self, id):
+
+        self._events.release(id)
 
 
 class EventAlreadyExistingError(Exception):

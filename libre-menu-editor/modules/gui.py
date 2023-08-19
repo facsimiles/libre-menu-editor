@@ -1954,6 +1954,8 @@ class Application(Adw.Application):
 
     def _on_activate(self, app):
 
+        GLib.set_prgname(self._app_name)
+
         self._application_window.set_default_size(
 
             self._config_manager.get("window.width"),

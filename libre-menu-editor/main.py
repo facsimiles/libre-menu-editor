@@ -16,7 +16,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-import os, sys, string, random, shutil, threading, time, subprocess, datetime, gi
+import os, sys, string, random, shutil, subprocess, datetime, gi
 
 gi.require_version("Adw", "1")
 
@@ -148,7 +148,7 @@ class DesktopParser():
                     self._config_parser.set(section, "%s[%s]" % (key, locale), value)
 
         elif self._config_parser.has_option(section, key):
-        
+
             self._config_parser.remove_option(section, key)
 
     def get_action_name(self, action):
@@ -342,129 +342,6 @@ class DesktopParser():
             self._config_parser.write(file, space_around_delimiters=False)
 
 
-class PathInspector():
-
-    def __init__(self):
-
-        self._paths = {}
-
-        self._delay = 0.5
-
-        self._active = False
-
-        self._stopped = False
-
-        self._events = basic.EventManager()
-
-        self._events.add("changed", str, float)
-
-        self._events.add("created", str, float)
-
-        self._events.add("deleted", str, float)
-
-        self._thread = threading.Thread(target=self._thread_target)
-
-    def _thread_target(self):
-
-        while not self._stopped:
-
-            time.sleep(self._delay)
-
-            for path in self._paths:
-
-                old_timestamp = self._paths[path]["timestamp"]
-
-                try:
-
-                    new_timestamp = os.path.getmtime(path)
-
-                    if new_timestamp > old_timestamp:
-
-                        self._paths[path]["timestamp"] = new_timestamp
-
-                        if old_timestamp:
-
-                            self._events.trigger("changed", path, float(new_timestamp))
-
-                        else:
-
-                            self._events.trigger("created", path, float(new_timestamp))
-
-                except FileNotFoundError:
-
-                    if old_timestamp:
-
-                            self._events.trigger("deleted", path, float(old_timestamp))
-
-    def add(self, path):
-
-        if not path in self._paths:
-
-            if os.path.exists(path):
-
-                self._paths[path] = {
-
-                    "timestamp": os.path.getmtime(path)
-
-                    }
-
-            else:
-
-                self._paths[path] = {
-
-                    "timestamp": 0
-
-                    }
-
-            if not self.get_active():
-
-                self.set_active(True)
-
-    def remove(self, path):
-
-        if path in self._paths:
-
-            del self._paths[path]
-
-            if not len(self._paths):
-
-                self.set_active(False)
-
-    def get_paths(self):
-
-        return list(self._paths.keys())
-
-    def get_active(self):
-
-        return self._active
-
-    def set_active(self, value):
-
-        if value and not self._active:
-
-            self._active = True
-
-            self._thread.start()
-
-        elif not value and self._active and not self._stopped:
-
-            self._stopped = True
-
-            self._thread.join()
-
-            self._stopped = False
-
-            self._active = False
-
-    def hook(self, event, callback):
-
-        return self._events.hook(event, callback)
-
-    def release(self, id):
-
-        self._events.release(id)
-
-
 class DefaultTextEditor():
 
     def __init__(self, app):
@@ -483,7 +360,7 @@ class DefaultTextEditor():
 
         self._edit_dir = os.path.join(app.get_cache_dir(), "text-editor-links")
 
-        self._path_inspector = PathInspector()
+        self._path_inspector = basic.PathInspector()
 
         self._path_inspector.hook("changed", self._on_path_inspector_changed)
 
@@ -2339,7 +2216,33 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
+        self._process_manager = basic.ProcessManager(
+
+            os.path.join(self._config_dir, "lock"),
+
+            os.path.join(self._config_dir, "argv")
+
+            )
+
+        self._process_manager.hook("activate", self._on_process_manager_activate)
+
+        ###############################################################################################################
+
+        self.connect("shutdown", self._on_application_shutdown)
+
         self._load_desktop_starter_dirs()
+
+    def _on_process_manager_activate(self, event, args):
+
+        GLib.idle_add(self._after_process_manager_activate, args)
+
+    def _after_process_manager_activate(self, args):
+
+        if len(args):
+
+            self._parse_command_line_args(args)
+
+        self._application_window.present()
 
     def _on_text_editor_update(self, event, name):
 
@@ -2357,13 +2260,17 @@ class Application(gui.Application):
 
                 self._load_settings_page(name)
 
+    def _on_application_shutdown(self, app):
+
+        self._process_manager.set_active(False)
+
     def _on_application_window_map(self, window):
 
         if self._config_manager.get("greeter.confirmed"):
 
             self._main_stack.set_visible_child(self._start_page)
 
-            self._parse_command_line_args()
+            self._process_manager.set_active(True)
 
         else:
 
@@ -2481,7 +2388,7 @@ class Application(gui.Application):
 
         elif control_modifier_pressed and keyval == 113: # Q
 
-            self.quit()
+            self._application_window.close()
 
     def _on_install_dialog_response(self, message_dialog, response):
 
@@ -2529,7 +2436,7 @@ class Application(gui.Application):
 
         self._left_area_box.set_visible(True)
 
-        self._parse_command_line_args()
+        self._process_manager.set_active(True)
 
     def _on_main_stack_visible_child_changed(self, stack, gparam):
 
@@ -3411,21 +3318,21 @@ class Application(gui.Application):
 
         return parser
 
-    def _parse_command_line_args(self):
+    def _parse_command_line_args(self, args):
 
-        if len(sys.argv) > 1 and "--debug" in sys.argv[1:]:
+        if len(args) and "--debug" in args:
 
             self._debug_log.set_raise_errors(True)
 
-            sys.argv.remove("--debug")
+            args.remove("--debug")
 
-        if len(sys.argv) > 1 and "--new" in sys.argv[1:]:
+        if len(args) and "--new" in args:
 
             self._create_desktop_starter()
-            
-            sys.argv.remove("--new")
 
-        self._load_external_starters(*sys.argv[1:])
+            args.remove("--new")
+
+        self._load_external_starters(*args)
 
     def notify(self, text, error=False):
 
