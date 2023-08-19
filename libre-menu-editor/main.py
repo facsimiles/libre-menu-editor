@@ -145,11 +145,25 @@ class DesktopParser():
 
                 for locale in self._system_locale_names:
 
-                    self._config_parser.set(section, "%s[%s]" % (key, locale), value)
+                    localized_key = "%s[%s]" % (key, locale)
 
-        elif self._config_parser.has_option(section, key):
+                    self._config_parser.set(section, localized_key, value)
 
-            self._config_parser.remove_option(section, key)
+        else:
+        
+            if self._config_parser.has_option(section, key):
+
+                self._config_parser.remove_option(section, key)
+
+            if localized:
+
+                for locale in self._system_locale_names:
+        
+                    localized_key = "%s[%s]" % (key, locale)
+        
+                    if self._config_parser.has_option(section, localized_key):
+
+                        self._config_parser.remove_option(section, localized_key)
 
     def get_action_name(self, action):
 
