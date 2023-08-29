@@ -460,9 +460,9 @@ class DefaultTextEditor():
 
                 parser.load(path=edit_path)
 
-                parser.save(path=edit_path)
-
                 parser.save()
+
+                parser.save(path=edit_path)
 
             except Exception as error:
 
@@ -2186,7 +2186,7 @@ class Application(gui.Application):
 
         self._about_window.set_developer_name("libre-menu-editor")
 
-        self._about_window.set_version("1.2")
+        self._about_window.set_version("1.3")
 
         self._about_window.set_issue_url("https://codeberg.org/libre-menu-editor/libre-menu-editor/issues")
 

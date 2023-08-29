@@ -71,7 +71,9 @@ class PathInspector():
 
                     if old_timestamp:
 
-                            self._events.trigger("deleted", path, float(old_timestamp))
+                        self._paths[path]["timestamp"] = 0
+
+                        self._events.trigger("deleted", path, float(old_timestamp))
 
     def add(self, path):
 
