@@ -162,7 +162,7 @@ class ProcessManager():
 
             with open(argv_path, "a") as file:
 
-                file.writelines(sys.argv[1:])
+                file.writelines("\n{}".format("\n".join(sys.argv[1:])))
 
             if exit:
 
@@ -204,7 +204,7 @@ class ProcessManager():
 
             with open(path, "r") as file:
 
-                args = file.readlines()
+                args = file.read().splitlines()
 
                 os.remove(path)
 

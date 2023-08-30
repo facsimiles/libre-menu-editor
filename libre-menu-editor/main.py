@@ -150,7 +150,7 @@ class DesktopParser():
                     self._config_parser.set(section, localized_key, value)
 
         else:
-        
+
             if self._config_parser.has_option(section, key):
 
                 self._config_parser.remove_option(section, key)
@@ -158,9 +158,9 @@ class DesktopParser():
             if localized:
 
                 for locale in self._system_locale_names:
-        
+
                     localized_key = "%s[%s]" % (key, locale)
-        
+
                     if self._config_parser.has_option(section, localized_key):
 
                         self._config_parser.remove_option(section, localized_key)
@@ -345,11 +345,13 @@ class DesktopParser():
 
         self._set("Actions", ";".join(self.get_actions()))
 
-        if os.path.exists(path):
+        if not os.path.exists(path):
+
+            os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+
+        else:
 
             os.remove(path)
-
-        os.makedirs(os.path.dirname(path), exist_ok=True)
 
         with open(path, "w") as file:
 
@@ -2950,63 +2952,19 @@ class Application(gui.Application):
 
     def _load_external_starters(self, *paths):
 
+        paths = list(set(paths))
+
         exceptions = []
 
-        for path in reversed(paths):
+        for name, data in self._unsaved_custom_starters.items():
 
-            if os.path.exists(path) and os.path.isfile(path) and os.access(path, os.R_OK):
+            if data["external"] and data["load-path"] in paths:
 
-                name = self._get_random_unused_desktop_starter_name()
-
-                self._unsaved_custom_starters[name] = {
-
-                    "load-path": path,
-
-                    "save-path": path,
-
-                    "external": True
-
-                    }
-
-                try:
-
-                    self._add_desktop_starter(name)
-
-                except Exception as error:
-
-                    self.log(error, error=error)
-
-                    exceptions.append(os.path.basename(path))
-
-            else:
-
-                exceptions.append(os.path.basename(path))
+                paths.remove(data["load-path"])
 
         else:
 
-            if len(exceptions):
-
-                if len(exceptions) == 1:
-
-                    self.notify(
-
-                        self._locale_manager.get("LOAD_SINGLE_ERROR_TEXT") % exceptions[0],
-
-                        error=True
-
-                        )
-
-                else:
-
-                    self.notify(
-
-                        self._locale_manager.get("LOAD_MULTIPLE_ERROR_TEXT") % str(len(exceptions)),
-
-                        error=True
-
-                        )
-
-            else:
+            if not len(paths):
 
                 try:
 
@@ -3019,6 +2977,76 @@ class Application(gui.Application):
                 else:
 
                     self._settings_page.grab_focus()
+
+            else:
+
+                for path in reversed(paths):
+
+                    if os.path.exists(path) and os.path.isfile(path) and os.access(path, os.R_OK):
+
+                        name = self._get_random_unused_desktop_starter_name()
+
+                        self._unsaved_custom_starters[name] = {
+
+                            "load-path": path,
+
+                            "save-path": path,
+
+                            "external": True
+
+                            }
+
+                        try:
+
+                            self._add_desktop_starter(name)
+
+                        except Exception as error:
+
+                            self.log(error, error=error)
+
+                            exceptions.append(os.path.basename(path))
+
+                    else:
+
+                        exceptions.append(os.path.basename(path))
+
+                else:
+
+                    if len(exceptions):
+
+                        if len(exceptions) == 1:
+
+                            self.notify(
+
+                                self._locale_manager.get("LOAD_SINGLE_ERROR_TEXT") % exceptions[0],
+
+                                error=True
+
+                                )
+
+                        else:
+
+                            self.notify(
+
+                                self._locale_manager.get("LOAD_MULTIPLE_ERROR_TEXT") % str(len(exceptions)),
+
+                                error=True
+
+                                )
+
+                    else:
+
+                        try:
+
+                            self._load_settings_page(name)
+
+                        except UnboundLocalError:
+
+                            return True
+
+                        else:
+
+                            self._settings_page.grab_focus()
 
     def _create_desktop_starter(self):
 
