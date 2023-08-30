@@ -64,11 +64,13 @@
 
     "REMOVE_MENU_BUTTON_LABEL": "Remove launcher",
 
-    "FILE_MENU_BUTTON_LABEL": "Open document",
+    "FILE_MENU_BUTTON_LABEL": "Edit document",
+
+    "OPEN_MENU_BUTTON_LABEL": "Open launcher",
 
     "SHORTCUTS_MENU_BUTTON_LABEL": "Keyboard shortcuts",
 
-    "ABOUT_MENU_BUTTON_LABEL": "About Main Menu",
+    "ABOUT_MENU_BUTTON_LABEL": "About this app",
 
     "SEARCH_SHORTCUT_TEXT": "Search launchers",
 
@@ -82,11 +84,15 @@
 
     "CREATE_SHORTCUT_TEXT": "Create launcher",
 
-    "FILE_SHORTCUT_TEXT": "Open document",
+    "FILE_SHORTCUT_TEXT": "Edit document",
+
+    "OPEN_SHORTCUT_TEXT": "Open launcher",
 
     "MENU_SHORTCUT_TEXT": "Open menu",
 
     "QUIT_SHORTCUT_TEXT": "Quit application",
+
+    "SHORTCUTS_SHORTCUT_TEXT": "Show shortcuts",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Edit",
 

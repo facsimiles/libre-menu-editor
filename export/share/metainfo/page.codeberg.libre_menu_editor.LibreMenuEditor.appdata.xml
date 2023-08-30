@@ -44,8 +44,8 @@
       <li xml:lang="de">Startanimation einschalten oder abschalten</li>
       <li>show a terminal-window during execution</li>
       <li xml:lang="de">während der Ausführung eine Konsole anzeigen</li>
-      <li>open .desktop files through the context-menu</li>
-      <li xml:lang="de">.desktop Dateien über das Kontextmenü öffnen</li>
+      <li>open .desktop files via the application-menu or the file-manager</li>
+      <li xml:lang="de">.desktop Dateien über das Anwendungsmenü oder den Dateimanager öffnen</li>
       <li>add existing .desktop files to the main menu</li>
       <li xml:lang="de">existierende .desktop Dateien ins Hauptmenü einfügen</li>
       <li>show hidden launchers in the sidebar</li>
@@ -74,6 +74,6 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.3" date="2023-08-19"/>
+    <release version="1.3" date="2023-08-31"/>
   </releases>
 </component>

@@ -64,11 +64,13 @@
 
     "REMOVE_MENU_BUTTON_LABEL": "Jeter lanceur",
 
-    "FILE_MENU_BUTTON_LABEL": "Ouvrir document",
+    "FILE_MENU_BUTTON_LABEL": "Modifier document",
+
+    "OPEN_MENU_BUTTON_LABEL": "Ouvrir lanceur",
 
     "SHORTCUTS_MENU_BUTTON_LABEL": "Raccourcis clavier",
 
-    "ABOUT_MENU_BUTTON_LABEL": "À propos de Menu Principal",
+    "ABOUT_MENU_BUTTON_LABEL": "À propos cette app",
 
     "SEARCH_SHORTCUT_TEXT": "Rechercher lanceurs",
 
@@ -82,11 +84,15 @@
 
     "CREATE_SHORTCUT_TEXT": "Créer lanceur",
 
-    "FILE_SHORTCUT_TEXT": "Ouvrir document",
+    "FILE_SHORTCUT_TEXT": "Modifier document",
+
+    "OPEN_SHORTCUT_TEXT": "Ouvrir lanceur",
 
     "MENU_SHORTCUT_TEXT": "Ouvrir menu",
 
     "QUIT_SHORTCUT_TEXT": "Quitter application",
+
+    "SHORTCUTS_SHORTCUT_TEXT": "Afficher raccourcis",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Modifier",
 

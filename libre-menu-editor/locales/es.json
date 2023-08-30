@@ -64,11 +64,13 @@
 
     "REMOVE_MENU_BUTTON_LABEL": "Descartar lanzador",
 
-    "FILE_MENU_BUTTON_LABEL": "Documento abierto",
+    "FILE_MENU_BUTTON_LABEL": "Editar documento",
+
+    "OPEN_MENU_BUTTON_LABEL": "Lanzador abierto",
 
     "SHORTCUTS_MENU_BUTTON_LABEL": "Atajos de teclado",
 
-    "ABOUT_MENU_BUTTON_LABEL": "Acerca de Menú Principal",
+    "ABOUT_MENU_BUTTON_LABEL": "Acerca esta app",
 
     "SEARCH_SHORTCUT_TEXT": "Lanzadores de búsqueda",
 
@@ -82,11 +84,15 @@
 
     "CREATE_SHORTCUT_TEXT": "Crear lanzador",
 
-    "FILE_SHORTCUT_TEXT": "Documento abierto",
+    "FILE_SHORTCUT_TEXT": "Editar documento",
+
+    "OPEN_SHORTCUT_TEXT": "Lanzador abierto",
 
     "MENU_SHORTCUT_TEXT": "Menú abierto",
 
     "QUIT_SHORTCUT_TEXT": "Dejar la aplicación",
+
+    "SHORTCUTS_SHORTCUT_TEXT": "Mostrar atajos",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Editar",
 

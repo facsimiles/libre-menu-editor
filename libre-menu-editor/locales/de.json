@@ -58,13 +58,15 @@
 
     "VISIBLE_SWITCH_LABEL": "Versteckte zeigen",
 
-    "RESET_MENU_BUTTON_LABEL": "Starter zurücksetzen",
+    "RESET_MENU_BUTTON_LABEL": "Zurücksetzen",
 
     "DELETE_MENU_BUTTON_LABEL": "Starter löschen",
 
     "REMOVE_MENU_BUTTON_LABEL": "Starter entfernen",
 
-    "FILE_MENU_BUTTON_LABEL": "Textdatei öffnen",
+    "FILE_MENU_BUTTON_LABEL": "Text bearbeiten",
+
+    "OPEN_MENU_BUTTON_LABEL": "Datei öffnen",
 
     "SHORTCUTS_MENU_BUTTON_LABEL": "Tastenkürzel",
 
@@ -82,11 +84,15 @@
 
     "CREATE_SHORTCUT_TEXT": "Starter erstellen",
 
-    "FILE_SHORTCUT_TEXT": "Textdatei öffnen",
+    "FILE_SHORTCUT_TEXT": "Text bearbeiten",
+
+    "OPEN_SHORTCUT_TEXT": "Datei öffnen",
 
     "MENU_SHORTCUT_TEXT": "Menü anzeigen",
 
     "QUIT_SHORTCUT_TEXT": "Anwendung beenden",
+
+    "SHORTCUTS_SHORTCUT_TEXT": "Tastenkürzel anzeigen",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Bearbeiten",
 
@@ -126,7 +132,7 @@
 
     "VISIBLE_SWITCH_ROW_TITLE": "Anwendung im Hauptmenü anzeigen",
 
-    "NOTIFY_SWITCH_ROW_TITLE": "Animation anzeigen bis die Anwendung sichtbar ist",
+    "NOTIFY_SWITCH_ROW_TITLE": "Startanimation abspielen bis die Anwendung sichtbar ist",
 
     "TERMINAL_SWITCH_ROW_TITLE": "Konsolenfenster während der Ausführung anzeigen",
 

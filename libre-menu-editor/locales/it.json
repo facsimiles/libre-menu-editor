@@ -64,11 +64,13 @@
 
     "REMOVE_MENU_BUTTON_LABEL": "Rimuovere lanciatore",
 
-    "FILE_MENU_BUTTON_LABEL": "Documento aperto",
+    "FILE_MENU_BUTTON_LABEL": "Modifica documento",
+
+    "OPEN_MENU_BUTTON_LABEL": "Aprire lanciatore",
 
     "SHORTCUTS_MENU_BUTTON_LABEL": "Scorciatoie da tastiera",
 
-    "ABOUT_MENU_BUTTON_LABEL": "Info su Menù Principale",
+    "ABOUT_MENU_BUTTON_LABEL": "Su questa app",
 
     "SEARCH_SHORTCUT_TEXT": "Cerca lanciatori",
 
@@ -80,13 +82,17 @@
 
     "REMOVE_SHORTCUT_TEXT": "Rimuovere modifiche",
 
-    "CREATE_SHORTCUT_TEXT": "Crea lanciatore",
+    "CREATE_SHORTCUT_TEXT": "Creare lanciatore",
 
-    "FILE_SHORTCUT_TEXT": "Documento aperto",
+    "FILE_SHORTCUT_TEXT": "Modifica documento",
+
+    "OPEN_SHORTCUT_TEXT": "Aprire lanciatore",
 
     "MENU_SHORTCUT_TEXT": "Menu aperto",
 
     "QUIT_SHORTCUT_TEXT": "Smettere applicazione",
+
+    "SHORTCUTS_SHORTCUT_TEXT": "Mostra scorciatoie",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Modificare",
 

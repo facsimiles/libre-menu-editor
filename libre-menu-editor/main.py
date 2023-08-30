@@ -1884,15 +1884,27 @@ class Application(gui.Application):
 
         self._view_menu_section.hook("visible", self._on_visible_switch_changed)
 
+        self._open_menu_section = gui.Menu(self)
+
+        self._open_menu_section.add_button("open", self._locale_manager.get("OPEN_MENU_BUTTON_LABEL"))
+
+        self._open_menu_section.hook("open", self._on_open_button_clicked)
+
+        self._external_menu_section = gui.Menu(self)
+
+        self._external_menu_section.add_button("file", self._locale_manager.get("FILE_MENU_BUTTON_LABEL"))
+
+        self._external_menu_section.hook("file", self._on_file_button_clicked)
+
+        self._external_menu_section.add_button("open", self._locale_manager.get("OPEN_MENU_BUTTON_LABEL"))
+
+        self._external_menu_section.hook("open", self._on_open_button_clicked)
+
         self._reset_menu_section = gui.Menu(self)
 
         self._reset_menu_section.add_button("reset", self._locale_manager.get("RESET_MENU_BUTTON_LABEL"))
 
         self._reset_menu_section.hook("reset", self._on_reset_button_clicked)
-
-        self._reset_menu_section.add_button("file", self._locale_manager.get("FILE_MENU_BUTTON_LABEL"))
-
-        self._reset_menu_section.hook("file", self._on_file_button_clicked)
 
         self._delete_menu_section = gui.Menu(self)
 
@@ -1900,19 +1912,11 @@ class Application(gui.Application):
 
         self._delete_menu_section.hook("delete", self._on_delete_button_clicked)
 
-        self._delete_menu_section.add_button("file", self._locale_manager.get("FILE_MENU_BUTTON_LABEL"))
-
-        self._delete_menu_section.hook("file", self._on_file_button_clicked)
-
         self._remove_menu_section = gui.Menu(self)
 
         self._remove_menu_section.add_button("remove", self._locale_manager.get("REMOVE_MENU_BUTTON_LABEL"))
 
         self._remove_menu_section.hook("remove", self._on_remove_button_clicked)
-
-        self._remove_menu_section.add_button("file", self._locale_manager.get("FILE_MENU_BUTTON_LABEL"))
-
-        self._remove_menu_section.hook("file", self._on_file_button_clicked)
 
         self._help_menu_section = gui.Menu(self)
 
@@ -1932,6 +1936,8 @@ class Application(gui.Application):
 
         self._start_menu.append_section(None, self._view_menu_section)
 
+        self._start_menu.append_section(None, self._open_menu_section)
+
         self._start_menu.append_section(None, self._help_menu_section)
 
         self._reset_menu = gui.Menu(self)
@@ -1939,6 +1945,8 @@ class Application(gui.Application):
         self._reset_menu.append_section(None, self._view_menu_section)
 
         self._reset_menu.append_section(None, self._reset_menu_section)
+
+        self._reset_menu.append_section(None, self._external_menu_section)
 
         self._reset_menu.append_section(None, self._help_menu_section)
 
@@ -1948,6 +1956,8 @@ class Application(gui.Application):
 
         self._delete_menu.append_section(None, self._delete_menu_section)
 
+        self._delete_menu.append_section(None, self._external_menu_section)
+
         self._delete_menu.append_section(None, self._help_menu_section)
 
         self._remove_menu = gui.Menu(self)
@@ -1955,6 +1965,8 @@ class Application(gui.Application):
         self._remove_menu.append_section(None, self._view_menu_section)
 
         self._remove_menu.append_section(None, self._remove_menu_section)
+
+        self._remove_menu.append_section(None, self._external_menu_section)
 
         self._remove_menu.append_section(None, self._help_menu_section)
 
@@ -2087,6 +2099,11 @@ class Application(gui.Application):
                         <property name="title">{}</property>
                         </object></child>
 
+                    </object></child>
+
+                    <child><object class="GtkShortcutsGroup">
+                    <property name="title">{}</property>
+
                         <child><object class="GtkShortcutsShortcut">
                         <property name="accelerator">{}</property>
                         <property name="title">{}</property>
@@ -2117,10 +2134,15 @@ class Application(gui.Application):
                         <property name="title">{}</property>
                         </object></child>
 
-                    </object></child>
+                        <child><object class="GtkShortcutsShortcut">
+                        <property name="accelerator">{}</property>
+                        <property name="title">{}</property>
+                        </object></child>
 
-                    <child><object class="GtkShortcutsGroup">
-                    <property name="title">{}</property>
+                        <child><object class="GtkShortcutsShortcut">
+                        <property name="accelerator">{}</property>
+                        <property name="title">{}</property>
+                        </object></child>
 
                         <child><object class="GtkShortcutsShortcut">
                         <property name="accelerator">{}</property>
@@ -2140,6 +2162,20 @@ class Application(gui.Application):
 
             """.format(
 
+                self._locale_manager.get("FIND_SHORTCUT_GROUP_TITLE"),
+
+                "&lt;ctrl&gt;f", self._locale_manager.get("SEARCH_SHORTCUT_TEXT"),
+
+                "&lt;ctrl&gt;h", self._locale_manager.get("VISIBLE_SHORTCUT_TEXT"),
+
+                self._locale_manager.get("GENERAL_SHORTCUT_GROUP_TITLE"),
+
+                "&lt;ctrl&gt;q", self._locale_manager.get("QUIT_SHORTCUT_TEXT"),
+
+                "&lt;ctrl&gt;question", self._locale_manager.get("SHORTCUTS_SHORTCUT_TEXT"),
+
+                "F10", self._locale_manager.get("MENU_SHORTCUT_TEXT"),
+
                 self._locale_manager.get("EDIT_SHORTCUT_GROUP_TITLE"),
 
                 "&lt;ctrl&gt;s", self._locale_manager.get("SAVE_SHORTCUT_TEXT"),
@@ -2152,17 +2188,7 @@ class Application(gui.Application):
 
                 "&lt;ctrl&gt;e", self._locale_manager.get("FILE_SHORTCUT_TEXT"),
 
-                self._locale_manager.get("FIND_SHORTCUT_GROUP_TITLE"),
-
-                "&lt;ctrl&gt;f", self._locale_manager.get("SEARCH_SHORTCUT_TEXT"),
-
-                "&lt;ctrl&gt;h", self._locale_manager.get("VISIBLE_SHORTCUT_TEXT"),
-
-                self._locale_manager.get("GENERAL_SHORTCUT_GROUP_TITLE"),
-
-                "&lt;ctrl&gt;q", self._locale_manager.get("QUIT_SHORTCUT_TEXT"),
-
-                "F10", self._locale_manager.get("MENU_SHORTCUT_TEXT"),
+                "&lt;ctrl&gt;o", self._locale_manager.get("OPEN_SHORTCUT_TEXT")
 
             ), -1)
 
@@ -2225,6 +2251,42 @@ class Application(gui.Application):
         self._text_editor = DefaultTextEditor(self)
 
         self._text_editor.hook("update", self._on_text_editor_update)
+
+        ###############################################################################################################
+
+        self._open_dialog_file_filter = Gtk.FileFilter()
+
+        self._open_dialog_file_filter.add_mime_type("application/x-desktop")
+
+        self._open_dialog_accept_button = Gtk.Button()
+
+        self._open_dialog_accept_button.add_css_class("suggested-action")
+
+        self._open_dialog_accept_button.set_label(self._locale_manager.get("PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL"))
+
+        self._open_dialog_cancel_button = Gtk.Button()
+
+        self._open_dialog_cancel_button.set_label(self._locale_manager.get("PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL"))
+
+        if not os.getenv("APP_RUNNING_AS_FLATPAK") == "true" or os.getenv("USE_NATIVE_DIALOGS") == "true":
+
+            self._open_file_chooser_dialog = Gtk.FileChooserNative(select_multiple=True, filter=self._open_dialog_file_filter)
+
+        else:
+
+            self._open_file_chooser_dialog = Gtk.FileChooserDialog(select_multiple=True, filter=self._open_dialog_file_filter)
+
+            self._open_file_chooser_dialog.add_action_widget(self._open_dialog_accept_button, Gtk.ResponseType.ACCEPT)
+
+            self._open_file_chooser_dialog.add_action_widget(self._open_dialog_cancel_button, Gtk.ResponseType.CANCEL)
+
+            self._open_file_chooser_dialog.set_default_response(Gtk.ResponseType.ACCEPT)
+
+        self._open_file_chooser_dialog.connect("response", self._on_open_file_chooser_dialog_response)
+
+        self._open_file_chooser_dialog.set_transient_for(self._application_window)
+
+        self._open_file_chooser_dialog.set_modal(True)
 
         ###############################################################################################################
 
@@ -2400,11 +2462,31 @@ class Application(gui.Application):
 
             self._main_stack.get_visible_child() == self._settings_page):
 
-            self._open_desktop_starter(self._current_desktop_starter_name)
+            self._edit_desktop_starter(self._current_desktop_starter_name)
+
+        elif (control_modifier_pressed and keyval == 111 and # O
+
+             not self._main_stack.get_visible_child() == self._greeter_page):
+
+            self._open_file_chooser_dialog.show()
 
         elif control_modifier_pressed and keyval == 113: # Q
 
             self._application_window.close()
+
+        elif control_modifier_pressed and keyval == 223: # ?
+
+            self._shortcuts_window.set_visible(True)
+
+    def _on_open_file_chooser_dialog_response(self, dialog, response):
+
+        self._open_file_chooser_dialog.hide()
+
+        if response == Gtk.ResponseType.ACCEPT:
+
+            paths = [file.get_path() for file in self._open_file_chooser_dialog.get_files()]
+
+            self._load_external_starters(*paths)
 
     def _on_install_dialog_response(self, message_dialog, response):
 
@@ -2524,7 +2606,11 @@ class Application(gui.Application):
 
     def _on_file_button_clicked(self, event):
 
-        self._open_desktop_starter(self._current_desktop_starter_name)
+        self._edit_desktop_starter(self._current_desktop_starter_name)
+
+    def _on_open_button_clicked(self, event):
+
+        self._open_file_chooser_dialog.show()
 
     def _on_shortcuts_button_clicked(self, event):
 
@@ -2952,9 +3038,19 @@ class Application(gui.Application):
 
     def _load_external_starters(self, *paths):
 
-        paths = list(set(paths))
+        exceptions = {}
 
-        exceptions = []
+        filtered_paths = []
+
+        for path in paths:
+
+            if not path in filtered_paths:
+
+                filtered_paths.append(os.path.abspath(path))
+
+        else:
+
+            paths = filtered_paths
 
         for name, data in self._unsaved_custom_starters.items():
 
@@ -3004,21 +3100,27 @@ class Application(gui.Application):
 
                             self.log(error, error=error)
 
-                            exceptions.append(os.path.basename(path))
+                            exceptions[os.path.basename(path)] = name
 
                     else:
 
-                        exceptions.append(os.path.basename(path))
+                        exceptions[os.path.basename(path)] = None
 
                 else:
 
                     if len(exceptions):
 
+                        for name in exceptions.values():
+
+                            if not name is None:
+
+                                del self._unsaved_custom_starters[name]
+
                         if len(exceptions) == 1:
 
                             self.notify(
 
-                                self._locale_manager.get("LOAD_SINGLE_ERROR_TEXT") % exceptions[0],
+                                self._locale_manager.get("LOAD_SINGLE_ERROR_TEXT") % list(exceptions.keys())[0],
 
                                 error=True
 
@@ -3160,7 +3262,7 @@ class Application(gui.Application):
 
         self._remove_desktop_starter(name)
 
-    def _open_desktop_starter(self, name):
+    def _edit_desktop_starter(self, name):
 
         parser = self._desktop_starter_parsers[name]
 
