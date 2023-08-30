@@ -100,11 +100,13 @@
 
     "GENERAL_SHORTCUT_GROUP_TITLE": "General",
 
-    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Elija icono",
+    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Elegir icono",
 
-    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Elija el archivo ejecutable",
+    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Elegir archivo ejecutable",
 
-    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Elija directorio",
+    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Elegir directorio",
+
+    "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Elegir lanzador",
 
     "SAVE_BUTTON_LABEL": "Guardar",
 

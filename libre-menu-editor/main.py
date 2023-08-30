@@ -2258,21 +2258,21 @@ class Application(gui.Application):
 
         self._open_dialog_file_filter.add_mime_type("application/x-desktop")
 
-        self._open_dialog_accept_button = Gtk.Button()
-
-        self._open_dialog_accept_button.add_css_class("suggested-action")
-
-        self._open_dialog_accept_button.set_label(self._locale_manager.get("PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL"))
-
-        self._open_dialog_cancel_button = Gtk.Button()
-
-        self._open_dialog_cancel_button.set_label(self._locale_manager.get("PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL"))
-
         if not os.getenv("APP_RUNNING_AS_FLATPAK") == "true" or os.getenv("USE_NATIVE_DIALOGS") == "true":
 
             self._open_file_chooser_dialog = Gtk.FileChooserNative(select_multiple=True, filter=self._open_dialog_file_filter)
 
         else:
+
+            self._open_dialog_accept_button = Gtk.Button()
+
+            self._open_dialog_accept_button.add_css_class("suggested-action")
+
+            self._open_dialog_accept_button.set_label(self._locale_manager.get("PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL"))
+
+            self._open_dialog_cancel_button = Gtk.Button()
+
+            self._open_dialog_cancel_button.set_label(self._locale_manager.get("PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL"))
 
             self._open_file_chooser_dialog = Gtk.FileChooserDialog(select_multiple=True, filter=self._open_dialog_file_filter)
 
@@ -2281,6 +2281,8 @@ class Application(gui.Application):
             self._open_file_chooser_dialog.add_action_widget(self._open_dialog_cancel_button, Gtk.ResponseType.CANCEL)
 
             self._open_file_chooser_dialog.set_default_response(Gtk.ResponseType.ACCEPT)
+
+        self._open_file_chooser_dialog.set_title(self._locale_manager.get("OPEN_FILE_CHOOSER_DIALOG_TITLE"))
 
         self._open_file_chooser_dialog.connect("response", self._on_open_file_chooser_dialog_response)
 

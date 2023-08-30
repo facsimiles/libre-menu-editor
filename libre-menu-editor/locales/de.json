@@ -10,7 +10,7 @@
 
     "START_PAGE_HEAD": "Hauptmenü bearbeiten",
 
-    "START_PAGE_BODY": "Erstellen sie einen neuen Anwendungsstarter oder wählen Sie einen vorhandenen aus der Seitenleiste aus",
+    "START_PAGE_BODY": "Erstellen Sie einen neuen Anwendungsstarter oder wählen Sie einen vorhandenen aus der Seitenleiste aus",
 
     "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Öffnen",
 
@@ -106,9 +106,11 @@
 
     "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Ordner auswählen",
 
+    "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Anwendungsstarter auswählen",
+
     "SAVE_BUTTON_LABEL": "Speichern",
 
-    "BANNER_LABEL_TEXT": "Bitte wählen Sie die Aktion aus die Sie löschen wollen",
+    "BANNER_LABEL_TEXT": "Bitte wählen Sie die Aktionen aus die Sie löschen wollen",
 
     "BANNER_CANCEL_BUTTON_LABEL": "Fertig",
 
