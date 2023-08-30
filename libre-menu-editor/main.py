@@ -3044,9 +3044,11 @@ class Application(gui.Application):
 
         for path in paths:
 
+            path = os.path.abspath(path)
+
             if not path in filtered_paths:
 
-                filtered_paths.append(os.path.abspath(path))
+                filtered_paths.append(path)
 
         else:
 
