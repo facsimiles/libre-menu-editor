@@ -45,9 +45,9 @@
       <li>show a terminal-window during execution</li>
       <li xml:lang="de">während der Ausführung eine Konsole anzeigen</li>
       <li>open .desktop files via the application-menu or the file-manager</li>
-      <li xml:lang="de">.desktop Dateien über das Anwendungsmenü oder den Dateimanager öffnen</li>
-      <li>add existing .desktop files to the main menu</li>
-      <li xml:lang="de">existierende .desktop Dateien ins Hauptmenü einfügen</li>
+      <li xml:lang="de">eigene .desktop Dateien über das Anwendungsmenü oder den Dateimanager öffnen</li>
+      <li>manually install .desktop files to the main menu</li>
+      <li xml:lang="de">eigene .desktop Dateien ins Hauptmenü einfügen</li>
       <li>show hidden launchers in the sidebar</li>
       <li xml:lang="de">versteckte Starter in der Seitenleiste anzeigen</li>
       <li>reset launchers back to their default states</li>
