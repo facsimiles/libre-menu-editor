@@ -1449,6 +1449,8 @@ class SettingsPage(Gtk.Box):
 
             value = False
 
+        self._primary_header_suffix_box.set_sensitive(value)
+
         self._top_box.set_sensitive(value)
 
         self._bottom_box.set_sensitive(value)
