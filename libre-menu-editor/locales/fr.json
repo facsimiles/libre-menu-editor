@@ -4,7 +4,7 @@
 
     "GREETER_PAGE_HEAD": "Information",
 
-    "GREETER_PAGE_BODY": "Ce programme modifie les fichiers de configuration qui ne sont pas destinés à une modification ultérieure. Sur certains systèmes, il peut donc arriver que certaines modifications ne deviennent visibles qu'après une longue période ou après que l'utilisateur se soit reconnecté",
+    "GREETER_PAGE_BODY": "Ce programme modifie des fichiers de configuration qui ne sont pas destinés à une modification ultérieure. Sur certains systèmes, il peut donc arriver que certaines modifications ne deviennent visibles qu'après une longue période ou après que l'utilisateur se soit reconnecté",
 
     "GREETER_PAGE_BUTTON_LABEL": "Continuer",
 
@@ -38,7 +38,7 @@
 
     "RESET_DIALOG_HEAD": "Réinitialiser",
 
-    "RESET_DIALOG_BODY": "Voulez-vous réinitialiser cette application? cette action ne peut pas être annulée",
+    "RESET_DIALOG_BODY": "Voulez-vous réinitialiser cette application? Cette action ne peut pas être annulée.",
 
     "RESET_DIALOG_BACK_BUTTON_LABEL": "Retour",
 
@@ -46,7 +46,7 @@
 
     "DELETE_DIALOG_HEAD": "Supprimer",
 
-    "DELETE_DIALOG_BODY": "Voulez-vous supprimer cette application? cette action ne peut pas être annulée",
+    "DELETE_DIALOG_BODY": "Voulez-vous supprimer cette application? Cette action ne peut pas être annulée.",
 
     "DELETE_DIALOG_BACK_BUTTON_LABEL": "Retour",
 
@@ -56,63 +56,63 @@
 
     "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Action sans nom",
 
-    "VISIBLE_SWITCH_LABEL": "Afficher caché",
+    "VISIBLE_SWITCH_LABEL": "Afficher les éléments cachés",
 
-    "RESET_MENU_BUTTON_LABEL": "Réinitialiser lanceur",
+    "RESET_MENU_BUTTON_LABEL": "Réinitialiser le lanceur",
 
-    "DELETE_MENU_BUTTON_LABEL": "Supprimer lanceur",
+    "DELETE_MENU_BUTTON_LABEL": "Supprimer le lanceur",
 
-    "REMOVE_MENU_BUTTON_LABEL": "Jeter lanceur",
+    "REMOVE_MENU_BUTTON_LABEL": "Jeter le lanceur",
 
-    "FILE_MENU_BUTTON_LABEL": "Modifier document",
+    "FILE_MENU_BUTTON_LABEL": "Modifier le document",
 
-    "OPEN_MENU_BUTTON_LABEL": "Ouvrir lanceur",
+    "OPEN_MENU_BUTTON_LABEL": "Ouvrir le lanceur",
 
     "SHORTCUTS_MENU_BUTTON_LABEL": "Raccourcis clavier",
 
-    "ABOUT_MENU_BUTTON_LABEL": "À propos cette app",
+    "ABOUT_MENU_BUTTON_LABEL": "À propos de cette app",
 
-    "SEARCH_SHORTCUT_TEXT": "Rechercher lanceurs",
+    "SEARCH_SHORTCUT_TEXT": "Rechercher des lanceurs",
 
-    "VISIBLE_SHORTCUT_TEXT": "Montrer caché",
+    "VISIBLE_SHORTCUT_TEXT": "Montrer les éléments cachés",
 
-    "SAVE_SHORTCUT_TEXT": "Sauvegarder modifications",
+    "SAVE_SHORTCUT_TEXT": "Sauvegarder les modifications",
 
-    "DISCARD_SHORTCUT_TEXT": "Annuler modifications",
+    "DISCARD_SHORTCUT_TEXT": "Annuler les modifications",
 
     "REMOVE_SHORTCUT_TEXT": "Supprimer modifications",
 
-    "CREATE_SHORTCUT_TEXT": "Créer lanceur",
+    "CREATE_SHORTCUT_TEXT": "Créer un lanceur",
 
-    "FILE_SHORTCUT_TEXT": "Modifier document",
+    "FILE_SHORTCUT_TEXT": "Modifier le document",
 
-    "OPEN_SHORTCUT_TEXT": "Ouvrir lanceur",
+    "OPEN_SHORTCUT_TEXT": "Ouvrir le lanceur",
 
-    "MENU_SHORTCUT_TEXT": "Ouvrir menu",
+    "MENU_SHORTCUT_TEXT": "Ouvrir le menu",
 
-    "QUIT_SHORTCUT_TEXT": "Quitter application",
+    "QUIT_SHORTCUT_TEXT": "Quitter l'application",
 
-    "SHORTCUTS_SHORTCUT_TEXT": "Afficher raccourcis",
+    "SHORTCUTS_SHORTCUT_TEXT": "Afficher les raccourcis",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Modifier",
 
     "FIND_SHORTCUT_GROUP_TITLE": "Trouver",
 
-    "GENERAL_SHORTCUT_GROUP_TITLE": "Généraux",
+    "GENERAL_SHORTCUT_GROUP_TITLE": "Général",
 
-    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Choisir icône",
+    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Choisir une icône",
 
-    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Choisir fichier exécutable",
+    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Choisir un fichier exécutable",
 
-    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Choisir répertoire",
+    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Choisir un répertoire",
 
-    "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Choisir lanceur",
+    "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Choisir un lanceur",
 
     "SAVE_BUTTON_LABEL": "Enregistrer",
 
     "BANNER_LABEL_TEXT": "Veuillez sélectionner les actions que vous souhaitez supprimer",
 
-    "BANNER_CANCEL_BUTTON_LABEL": "Fini",
+    "BANNER_CANCEL_BUTTON_LABEL": "Terminé",
 
     "DESCRIPTION_GROUP_TITLE": "Description",
 
