@@ -1,6 +1,6 @@
 app-id: page.codeberg.libre_menu_editor.LibreMenuEditor
 runtime: org.gnome.Platform
-runtime-version: "44"
+runtime-version: "46"
 sdk: org.gnome.Platform
 # sdk: org.gnome.Sdk
 command: libre-menu-editor

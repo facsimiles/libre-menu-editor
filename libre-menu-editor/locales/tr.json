@@ -1,0 +1,165 @@
+{
+
+    "APPLICATION_NAME": "Ana Menü",
+
+    "GREETER_PAGE_HEAD": "Bilgi",
+
+    "GREETER_PAGE_BODY": "Bu program, sonradan değiştirilmesi amaçlanmayan yapılandırma dosyalarını değiştirir. Bu nedenle bazı sistemlerde bazı değişiklikler ancak uzun bir süre sonra veya kullanıcı tekrar oturum açtıktan sonra görünür hale gelebilir",
+
+    "GREETER_PAGE_BUTTON_LABEL": "Sürdür",
+
+    "START_PAGE_HEAD": "Menüyü Özelleştir",
+
+    "START_PAGE_BODY": "Yeni uygulama başlatıcı oluşturun ya da kenar çubuğundan var olan bir uygulamayı seçin",
+
+    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Aç",
+
+    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "İptal",
+
+    "INSTALL_DIALOG_HEAD": "Kurulum",
+
+    "INSTALL_DIALOG_BODY": "Bu uygulama ana menüye eklensin mi?",
+
+    "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Geri",
+
+    "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Kaydet",
+
+    "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Kur",
+
+    "DISCARD_DIALOG_HEAD": "Kaydedilmemiş Değişiklikler",
+
+    "DISCARD_DIALOG_BODY": "Değişiklikler gözden çıkarılsın mı?",
+
+    "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Geri",
+
+    "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Kaydet",
+
+    "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Gözden Çıkar",
+
+    "RESET_DIALOG_HEAD": "Sıfırla",
+
+    "RESET_DIALOG_BODY": "Bu uygulama sıfırlansın mı? Bu işlem geri alınamaz",
+
+    "RESET_DIALOG_BACK_BUTTON_LABEL": "Geri",
+
+    "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Sürdür",
+
+    "DELETE_DIALOG_HEAD": "Sil",
+
+    "DELETE_DIALOG_BODY": "Bu uygulama silinsin mi? Bu işlem geri alınamaz",
+
+    "DELETE_DIALOG_BACK_BUTTON_LABEL": "Geri",
+
+    "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Sürdür",
+
+    "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Adsız Uygulama",
+
+    "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Adsız Eylem",
+
+    "VISIBLE_SWITCH_LABEL": "Gizlileri Göster",
+
+    "RESET_MENU_BUTTON_LABEL": "Başlatıcıyı Sıfırla",
+
+    "DELETE_MENU_BUTTON_LABEL": "Başlatıcıyı Sil",
+
+    "REMOVE_MENU_BUTTON_LABEL": "Başlatıcıyı Kaldır",
+
+    "FILE_MENU_BUTTON_LABEL": "Belgeyi Düzenle",
+
+    "OPEN_MENU_BUTTON_LABEL": "Başlatıcıyı Aç",
+
+    "SHORTCUTS_MENU_BUTTON_LABEL": "Klavye Kısayolları",
+
+    "ABOUT_MENU_BUTTON_LABEL": "Bu Uygulama Hakkında",
+
+    "SEARCH_SHORTCUT_TEXT": "Başlatıcıları ara",
+
+    "VISIBLE_SHORTCUT_TEXT": "Gizlileri Göster",
+
+    "SAVE_SHORTCUT_TEXT": "Değişiklikleri kaydet",
+
+    "DISCARD_SHORTCUT_TEXT": "Değişiklikleri gözden çıkar",
+
+    "REMOVE_SHORTCUT_TEXT": "Değişiklikleri kaldır",
+
+    "CREATE_SHORTCUT_TEXT": "Başlatıcı oluştur",
+
+    "FILE_SHORTCUT_TEXT": "Belgeyi düzenle",
+
+    "OPEN_SHORTCUT_TEXT": "Başlatıcıyı aç",
+
+    "MENU_SHORTCUT_TEXT": "Menüyü aç",
+
+    "QUIT_SHORTCUT_TEXT": "Uygulamadan çık",
+
+    "SHORTCUTS_SHORTCUT_TEXT": "Kısayolları göster",
+
+    "EDIT_SHORTCUT_GROUP_TITLE": "Düzenle",
+
+    "FIND_SHORTCUT_GROUP_TITLE": "Bul",
+
+    "GENERAL_SHORTCUT_GROUP_TITLE": "Genel",
+
+    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Simge Seç",
+
+    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Yürütülebilir Dosyayı Seç",
+
+    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Dizin Seç",
+
+    "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Başlatıcıyı Seç",
+
+    "SAVE_BUTTON_LABEL": "Kaydet",
+
+    "BANNER_LABEL_TEXT": "Silmek istediğiniz eylemi seçin",
+
+    "BANNER_CANCEL_BUTTON_LABEL": "Bitti",
+
+    "DESCRIPTION_GROUP_TITLE": "Açıklama",
+
+    "EXECUTION_GROUP_TITLE": "Yürütme",
+
+    "ACTIONS_GROUP_TITLE": "Eylemler",
+
+    "VISIBLE_GROUP_TITLE": "Göster",
+
+    "ICON_CHOOSER_ROW_TITLE": "Simge",
+
+    "NAME_ENTRY_ROW_TITLE": "Ad",
+
+    "COMMENT_ENTRY_ROW_TITLE": "Yorum",
+
+    "COMMAND_CHOOSER_ROW_TITLE": "Komut",
+
+    "DIRECTORY_CHOOSER_ROW_TITLE": "Dizin",
+
+    "VISIBLE_SWITCH_ROW_TITLE": "Bu uygulamayı ana menüde göster",
+
+    "NOTIFY_SWITCH_ROW_TITLE": "Uygulama görününceye kadar canlandırma göster",
+
+    "TERMINAL_SWITCH_ROW_TITLE": "Yürütme sırasında uçbirim penceresi göster",
+
+    "LOAD_MULTIPLE_ERROR_TEXT": "%s dosyaları yüklenemedi",
+
+    "LOAD_SINGLE_ERROR_TEXT": "'%s' dosyası yüklenemedi",
+
+    "OPEN_FILE_ERROR_TEXT": "Yapılandırmalar açılamadı",
+
+    "STARTER_SAVE_MESSAGE_TEXT": "'%s' yapılandırması kaydedildi",
+
+    "STARTER_SAVE_ERROR_TEXT": "Yapılandırmalar kaydedilemedi",
+
+    "STARTER_CREATE_MESSAGE_TEXT": "'%s' başlatıcısı oluşturuldu",
+
+    "STARTER_CREATE_ERROR_TEXT": "Başlatıcı oluşturulamadı",
+
+    "STARTER_RESET_MESSAGE_TEXT": "'%s' başlatıcısı sıfırlandı",
+
+    "STARTER_RESET_ERROR_TEXT": "Başlatıcı sıfırlanamadı",
+
+    "STARTER_DELETE_MESSAGE_TEXT": "'%s' başlatıcısı silindi",
+
+    "STARTER_DELETE_ERROR_TEXT": "Başlatıcı silinemedi",
+
+    "STARTER_REMOVE_MESSAGE_TEXT": "'%s' başlatıcısı kaldırıldı"
+
+}
