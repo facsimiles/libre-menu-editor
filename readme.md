@@ -27,7 +27,7 @@ cd libre-menu-editor
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 ```
-flatpak install org.gnome.Platform/x86_64/44
+flatpak install org.gnome.Platform/x86_64/46
 ```
 ```
 flatpak-builder --user --install --force-clean .build-dir flatpak.yml
