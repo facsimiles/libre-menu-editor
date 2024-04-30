@@ -269,6 +269,16 @@ class DesktopParser():
 
         self._set("Terminal", value, section=section)
 
+    def get_mimetypes(self):
+
+        if self._config_parser.has_option("Desktop Entry", "MimeType"):
+
+            return filter(None, self._config_parser.get("Desktop Entry", "MimeType").split(";"))
+
+        else:
+
+            return []
+
     def get_load_path(self):
 
         return self._load_path
@@ -343,7 +353,7 @@ class DesktopParser():
 
             path = self._save_path
 
-        self._set("Actions", ";".join(self.get_actions()))
+        self._set("Actions", f"{';'.join(self.get_actions())};")
 
         if not os.path.exists(path):
 
@@ -1788,6 +1798,14 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
+        self._mimeinfo_override_path = os.path.join(self._desktop_starter_override_dir, "mimeinfo.cache")
+
+        self._mimeinfo_parser = ConfigParser(interpolation=None, strict=False)
+
+        self._mimeinfo_parser.optionxform = str
+
+        ###############################################################################################################
+
         self._greeter_button = Gtk.Button()
 
         self._greeter_button.add_css_class("pill")
@@ -2985,6 +3003,36 @@ class Application(gui.Application):
         else:
 
             try:
+
+                self._mimeinfo_parser.clear()
+
+                self._mimeinfo_parser.read(self._mimeinfo_override_path)
+
+                if not self._mimeinfo_parser.has_section("MIME Cache"):
+
+                    self._mimeinfo_parser.add_section("MIME Cache")
+
+                if not parser in self._unsaved_custom_starters:
+
+                    mimeinfo_changed = False
+
+                    for mimetype in parser.get_mimetypes():
+
+                        mime_cache_key = f"{self._current_desktop_starter_name}.desktop"
+
+                        if not self._mimeinfo_parser.has_option("MIME Cache", mimetype) or not self._mimeinfo_parser.get("MIME Cache", mimetype) == mime_cache_key:
+
+                            self._mimeinfo_parser.set("MIME Cache", mimetype, mime_cache_key)
+
+                            mimeinfo_changed = True
+
+                    else:
+
+                        if mimeinfo_changed:
+
+                            with open(self._mimeinfo_override_path, "w") as file:
+
+                                self._mimeinfo_parser.write(file, space_around_delimiters=False)
 
                 self._settings_page.save_desktop_starter()
 
