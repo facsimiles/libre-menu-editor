@@ -273,7 +273,7 @@ class DesktopParser():
 
         if self._config_parser.has_option("Desktop Entry", "MimeType"):
 
-            return filter(None, self._config_parser.get("Desktop Entry", "MimeType").split(";"))
+            return list(filter(None, self._config_parser.get("Desktop Entry", "MimeType").split(";")))
 
         else:
 
@@ -353,7 +353,9 @@ class DesktopParser():
 
             path = self._save_path
 
-        self._set("Actions", f"{';'.join(self.get_actions())};")
+        actions = self.get_actions()
+
+        self._set("Actions", f"{';'.join(actions)}{bool(len(actions))*';'}")
 
         if not os.path.exists(path):
 
@@ -464,35 +466,9 @@ class DefaultTextEditor():
 
         edit_path = self._parsers[name]["edit-path"]
 
-        save_path = parser.get_save_path()
+        if not self._get_files_identical(parser.get_save_path(), edit_path):
 
-        if not self._get_files_identical(save_path, edit_path):
-
-            try:
-
-                parser.load(path=edit_path)
-
-                parser.save()
-
-                parser.save(path=edit_path)
-
-            except Exception as error:
-
-                self._application.log(error, error=error)
-
-                self._application.notify(self._locale_manager.get("STARTER_SAVE_ERROR_TEXT"), error=True)
-
-            else:
-
-                self._events.trigger("update", name)
-
-                text = parser.get_name()
-
-                if not len(text):
-
-                    text = self._locale_manager.get("UNNAMED_APPLICATION_PLACEHOLDER_TEXT")
-
-                self._application.notify(self._locale_manager.get("STARTER_SAVE_MESSAGE_TEXT") % text)
+            self._events.trigger("update", name)
 
     def get_path(self, name):
 
@@ -501,6 +477,10 @@ class DefaultTextEditor():
     def get_names(self):
 
         return list(self._parsers.keys())
+
+    def get_parser(self, name):
+
+        return self._parsers[name]["parser"]
 
     def launch(self, name, parser):
 
@@ -549,6 +529,18 @@ class DefaultTextEditor():
         else:
 
             subprocess.run(["xdg-open", edit_path], check=True)
+
+    def save(self, name):
+
+        parser = self._parsers[name]["parser"]
+
+        edit_path = self._parsers[name]["edit-path"]
+
+        parser.load(path=edit_path)
+
+        parser.save()
+
+        parser.save(path=edit_path)
 
     def exit(self):
 
@@ -2346,15 +2338,41 @@ class Application(gui.Application):
 
     def _on_text_editor_update(self, event, name):
 
+        try:
+
+            parser = self._text_editor.get_parser(name)
+
+            if not name in self._unsaved_custom_starters or not self._unsaved_custom_starters[name]["external"]:
+
+                self._update_mime_cache(parser)
+
+            self._text_editor.save(name)
+
+        except Exception as error:
+
+            self.log(error, error=error)
+
+            self.notify(self._locale_manager.get("STARTER_SAVE_ERROR_TEXT"), error=True)
+
+        else:
+
+            text = parser.get_name()
+
+            if not len(text):
+
+                text = self._locale_manager.get("UNNAMED_APPLICATION_PLACEHOLDER_TEXT")
+
+            self.notify(self._locale_manager.get("STARTER_SAVE_MESSAGE_TEXT") % text)
+
         if name in self._desktop_starter_parsers:
-
-            parser = self._desktop_starter_parsers[name]
-
-            self._update_search_list_item(name)
 
             if name in self._unsaved_custom_starters and not self._unsaved_custom_starters[name]["external"]:
 
                 del self._unsaved_custom_starters[name]
+
+            parser = self._desktop_starter_parsers[name]
+
+            self._update_search_list_item(name)
 
             if name == self._current_desktop_starter_name:
 
@@ -2517,6 +2535,8 @@ class Application(gui.Application):
             self._save_settings_page(skip_dialog=True)
 
         elif response == "install":
+
+            self._unsaved_custom_starters[self._current_desktop_starter_name]["external"] = False
 
             message_dialog.callback(*message_dialog.callback_args, **message_dialog.callback_kwargs)
 
@@ -2962,6 +2982,68 @@ class Application(gui.Application):
 
                 self._reset_menu_section.set_enabled("reset", False)
 
+    def _update_mime_cache(self, parser, delete=False):
+
+        self._mimeinfo_parser.clear()
+
+        self._mimeinfo_parser.read(self._mimeinfo_override_path)
+
+        if not self._mimeinfo_parser.has_section("MIME Cache"):
+
+            self._mimeinfo_parser.add_section("MIME Cache")
+
+        mimeinfo_changed = False
+
+        app_name = os.path.basename(parser.get_save_path())
+
+        app_mimetypes = parser.get_mimetypes()
+
+        cache_dict = dict(self._mimeinfo_parser.items("MIME Cache"))
+
+        for cache_mimetype in cache_dict:
+
+            cache_names = list(filter(None, cache_dict[cache_mimetype].split(";")))
+
+            if app_name in cache_names and (not cache_mimetype in app_mimetypes or delete):
+
+                cache_names.remove(app_name)
+
+                if len(cache_names):
+
+                    self._mimeinfo_parser.set("MIME Cache", cache_mimetype, f"{';'.join(cache_names)};")
+
+                else:
+
+                    self._mimeinfo_parser.remove_option("MIME Cache", cache_mimetype)
+
+                mimeinfo_changed = True
+
+        if not delete:
+
+            for app_mimetype in app_mimetypes:
+
+                if not app_mimetype in cache_dict:
+
+                    self._mimeinfo_parser.set("MIME Cache", app_mimetype, f"{app_name};")
+
+                    mimeinfo_changed = True
+
+                elif not app_name in cache_dict[app_mimetype]:
+
+                    cache_names = list(filter(None, cache_dict[app_mimetype].split(";")))
+
+                    cache_names.append(app_name)
+
+                    self._mimeinfo_parser.set("MIME Cache", app_mimetype, f"{';'.join(cache_names)};")
+
+                    mimeinfo_changed = True
+
+        if mimeinfo_changed:
+
+            with open(self._mimeinfo_override_path, "w") as file:
+
+                self._mimeinfo_parser.write(file, space_around_delimiters=False)
+
     def _load_settings_page(self, name):
 
         if name in self._unsaved_custom_starters and self._unsaved_custom_starters[name]["external"]:
@@ -3004,35 +3086,9 @@ class Application(gui.Application):
 
             try:
 
-                self._mimeinfo_parser.clear()
+                if not self._current_desktop_starter_name in self._unsaved_custom_starters or not self._unsaved_custom_starters[self._current_desktop_starter_name]["external"]:
 
-                self._mimeinfo_parser.read(self._mimeinfo_override_path)
-
-                if not self._mimeinfo_parser.has_section("MIME Cache"):
-
-                    self._mimeinfo_parser.add_section("MIME Cache")
-
-                if not parser in self._unsaved_custom_starters:
-
-                    mimeinfo_changed = False
-
-                    for mimetype in parser.get_mimetypes():
-
-                        mime_cache_key = f"{self._current_desktop_starter_name}.desktop"
-
-                        if not self._mimeinfo_parser.has_option("MIME Cache", mimetype) or not self._mimeinfo_parser.get("MIME Cache", mimetype) == mime_cache_key:
-
-                            self._mimeinfo_parser.set("MIME Cache", mimetype, mime_cache_key)
-
-                            mimeinfo_changed = True
-
-                    else:
-
-                        if mimeinfo_changed:
-
-                            with open(self._mimeinfo_override_path, "w") as file:
-
-                                self._mimeinfo_parser.write(file, space_around_delimiters=False)
+                    self._update_mime_cache(parser)
 
                 self._settings_page.save_desktop_starter()
 
@@ -3052,7 +3108,7 @@ class Application(gui.Application):
 
             else:
 
-                if self._current_desktop_starter_name in self._unsaved_custom_starters:
+                if self._current_desktop_starter_name in self._unsaved_custom_starters and not self._unsaved_custom_starters[self._current_desktop_starter_name]["external"]:
 
                     del self._unsaved_custom_starters[self._current_desktop_starter_name]
 
@@ -3258,7 +3314,11 @@ class Application(gui.Application):
 
         path = self._get_desktop_starter_override_path(name)
 
+        parser = self._desktop_starter_parsers[name]
+
         try:
+
+            self._update_mime_cache(parser, delete=True)
 
             os.remove(path)
 
@@ -3269,8 +3329,6 @@ class Application(gui.Application):
             self.notify(self._locale_manager.get("STARTER_RESET_ERROR_TEXT"), error=True)
 
             return True
-
-        parser = self._desktop_starter_parsers[name]
 
         text = parser.get_name()
 
@@ -3292,7 +3350,11 @@ class Application(gui.Application):
 
         path = self._desktop_starter_parsers[name].get_save_path()
 
+        parser = self._desktop_starter_parsers[name]
+
         try:
+
+            self._update_mime_cache(parser, delete=True)
 
             os.remove(path)
 
@@ -3303,8 +3365,6 @@ class Application(gui.Application):
             self.notify(self._locale_manager.get("STARTER_DELETE_ERROR_TEXT"), error=True)
 
             return True
-
-        parser = self._desktop_starter_parsers[name]
 
         text = parser.get_name()
 
