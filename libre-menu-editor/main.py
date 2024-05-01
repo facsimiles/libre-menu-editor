@@ -2364,11 +2364,11 @@ class Application(gui.Application):
 
             self.notify(self._locale_manager.get("STARTER_SAVE_MESSAGE_TEXT") % text)
 
-        if name in self._desktop_starter_parsers:
-
             if name in self._unsaved_custom_starters and not self._unsaved_custom_starters[name]["external"]:
 
                 del self._unsaved_custom_starters[name]
+
+        if name in self._desktop_starter_parsers:
 
             parser = self._desktop_starter_parsers[name]
 
