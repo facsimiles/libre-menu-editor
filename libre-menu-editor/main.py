@@ -2112,7 +2112,7 @@ class Application(gui.Application):
 
             self._left_area_box.append(self._search_list)
 
-        self._left_area_box.set_size_request(240, 200)
+        self._left_area_box.set_size_request(180, 200)
 
         ###############################################################################################################
 
@@ -2157,6 +2157,12 @@ class Application(gui.Application):
             self._split_view_content.set_child(self._right_area_box)
 
             self._main_split_layout = Adw.NavigationSplitView()
+
+            self._main_split_layout.set_sidebar_width_fraction(0.3)
+
+            self._main_split_layout.set_min_sidebar_width(self._left_area_box.get_property("width-request"))
+
+            self._main_split_layout.set_max_sidebar_width(self._left_area_box.get_property("width-request") * 1.7)
 
             self._main_split_layout.set_sidebar(self._split_view_sidebar)
 
