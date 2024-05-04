@@ -837,7 +837,7 @@ class SettingsPage(Gtk.Box):
 
         self._save_button = Gtk.Button()
 
-        self._discard_button = Gtk.Button()
+        self._reload_button = Gtk.Button()
 
         self._top_event_controller_key = Gtk.EventControllerKey()
 
@@ -1499,7 +1499,7 @@ class SettingsPage(Gtk.Box):
 
             self._save_button.remove_css_class("suggested-action")
 
-        self._discard_button.set_visible(value)
+        self._reload_button.set_visible(value)
 
     def get_delete_mode_enabled(self):
 
@@ -1627,9 +1627,9 @@ class SettingsPage(Gtk.Box):
 
         return self._save_button
 
-    def get_discard_button(self):
+    def get_reload_button(self):
 
-        return self._discard_button
+        return self._reload_button
 
     def get_changed(self):
 
@@ -1846,91 +1846,91 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
-        self._save_button = self._settings_page.get_save_button()
+        self._save_settings_button = self._settings_page.get_save_button()
 
-        self._save_button.set_label(self._locale_manager.get("SAVE_BUTTON_LABEL"))
+        self._save_settings_button.set_label(self._locale_manager.get("SAVE_SETTINGS_BUTTON_LABEL"))
 
-        self._save_button.connect("clicked", self._on_save_button_clicked)
+        self._save_settings_button.connect("clicked", self._on_save_settings_button_clicked)
 
-        self._discard_button = self._settings_page.get_discard_button()
+        self._reload_settings_button = self._settings_page.get_reload_button()
 
-        self._discard_button.add_css_class("flat")
+        self._reload_settings_button.add_css_class("flat")
 
-        self._discard_button.set_icon_name(self._icon_finder.get_name("view-refresh-symbolic"))
+        self._reload_settings_button.set_icon_name(self._icon_finder.get_name("view-refresh-symbolic"))
 
-        self._discard_button.connect("clicked", self._on_discard_button_clicked)
+        self._reload_settings_button.connect("clicked", self._on_reload_settings_button_clicked)
 
         self._search_button = self._search_list.get_search_button()
 
         ###############################################################################################################
 
-        self._add_menu_section = gui.Menu(self)
-
-        self._add_menu_section.add_button("create", self._locale_manager.get("CREATE_MENU_BUTTON_LABEL"))
-
-        self._add_menu_section.hook("create", self._on_create_button_clicked)
-
-        self._add_menu_section.add_button("open", self._locale_manager.get("OPEN_MENU_BUTTON_LABEL"))
-
-        self._add_menu_section.hook("open", self._on_open_button_clicked)
-
-        ###############################################################################################################
-
-        self._reset_menu_section = gui.Menu(self)
-
-        self._delete_menu_section = gui.Menu(self)
-
-        self._remove_menu_section = gui.Menu(self)
-
-        for section in (self._reset_menu_section, self._delete_menu_section, self._remove_menu_section):
-
-            section.add_button("file", self._locale_manager.get("FILE_MENU_BUTTON_LABEL"))
-
-            section.hook("file", self._on_file_button_clicked)
-
-        self._reset_menu_section.add_button("reset", self._locale_manager.get("RESET_MENU_BUTTON_LABEL"))
-
-        self._reset_menu_section.hook("reset", self._on_reset_button_clicked)
-
-        self._delete_menu_section.add_button("delete", self._locale_manager.get("DELETE_MENU_BUTTON_LABEL"))
-
-        self._delete_menu_section.hook("delete", self._on_delete_button_clicked)
-
-        self._remove_menu_section.add_button("remove", self._locale_manager.get("REMOVE_MENU_BUTTON_LABEL"))
-
-        self._remove_menu_section.hook("remove", self._on_remove_button_clicked)
-
-        ###############################################################################################################
-
         self._view_menu_section = gui.Menu(self)
 
-        self._view_menu_section.add_switch("visible", self._locale_manager.get("VISIBLE_SWITCH_LABEL"))
+        self._view_menu_section.add_switch("show_hidden", self._locale_manager.get("SHOW_HIDDEN_SWITCH_LABEL"))
 
-        self._view_menu_section.set_switch_state("visible", self._config_manager.get("show.hidden"))
+        self._view_menu_section.set_switch_state("show_hidden", self._config_manager.get("show.hidden"))
 
-        self._view_menu_section.hook("visible", self._on_visible_switch_changed)
+        self._view_menu_section.hook("show_hidden", self._on_show_hidden_switch_changed)
+
+        ###############################################################################################################
+
+        self._add_menu_section = gui.Menu(self)
+
+        self._add_menu_section.add_button("new_starter", self._locale_manager.get("NEW_STARTER_MENU_BUTTON_LABEL"))
+
+        self._add_menu_section.hook("new_starter", self._on_new_starter_button_clicked)
+
+        self._add_menu_section.add_button("open_file", self._locale_manager.get("OPEN_FILE_MENU_BUTTON_LABEL"))
+
+        self._add_menu_section.hook("open_file", self._on_open_file_button_clicked)
+
+        ###############################################################################################################
+
+        self._reset_starter_menu_section = gui.Menu(self)
+
+        self._delete_starter_menu_section = gui.Menu(self)
+
+        self._discard_starter_menu_section = gui.Menu(self)
+
+        for section in (self._reset_starter_menu_section, self._delete_starter_menu_section, self._discard_starter_menu_section):
+
+            section.add_button("edit_file", self._locale_manager.get("EDIT_FILE_MENU_BUTTON_LABEL"))
+
+            section.hook("edit_file", self._on_edit_file_button_clicked)
+
+        self._reset_starter_menu_section.add_button("reset_starter", self._locale_manager.get("RESET_STARTER_MENU_BUTTON_LABEL"))
+
+        self._reset_starter_menu_section.hook("reset_starter", self._on_reset_starter_button_clicked)
+
+        self._delete_starter_menu_section.add_button("delete_starter", self._locale_manager.get("DELETE_STARTER_MENU_BUTTON_LABEL"))
+
+        self._delete_starter_menu_section.hook("delete_starter", self._on_delete_starter_button_clicked)
+
+        self._discard_starter_menu_section.add_button("discard_starter", self._locale_manager.get("DISCARD_STARTER_MENU_BUTTON_LABEL"))
+
+        self._discard_starter_menu_section.hook("discard_starter", self._on_discard_starter_button_clicked)
 
         ###############################################################################################################
 
         self._help_menu_section = gui.Menu(self)
 
-        self._help_menu_section.add_button("shortcuts", self._locale_manager.get("SHORTCUTS_MENU_BUTTON_LABEL"))
+        self._help_menu_section.add_button("show_shortcuts", self._locale_manager.get("SHOW_SHORTCUTS_MENU_BUTTON_LABEL"))
 
-        self._help_menu_section.hook("shortcuts", self._on_shortcuts_button_clicked)
+        self._help_menu_section.hook("show_shortcuts", self._on_show_shortcuts_button_clicked)
 
-        self._help_menu_section.add_button("about", self._locale_manager.get("ABOUT_MENU_BUTTON_LABEL"))
+        self._help_menu_section.add_button("show_about", self._locale_manager.get("SHOW_ABOUT_MENU_BUTTON_LABEL"))
 
-        self._help_menu_section.hook("about", self._on_about_button_clicked)
+        self._help_menu_section.hook("show_about", self._on_show_about_button_clicked)
 
         ###############################################################################################################
 
-        for name in ["big_start", "small_start", "big_reset", "small_reset", "big_delete", "small_delete", "big_remove", "small_remove"]:
+        for name in ["big_start", "small_start", "big_reset_starter", "small_reset_starter", "big_delete_starter", "small_delete_starter", "big_discard_starter", "small_discard_starter"]:
 
             setattr(self, f"_{name}_menu", gui.Menu(self))
 
         ###############################################################################################################
 
-        for name in ["big_start", "big_reset", "big_delete", "big_remove"]:
+        for name in ["big_start", "big_reset_starter", "big_delete_starter", "big_discard_starter"]:
 
             getattr(self, f"_{name}_menu").append_section(None, self._view_menu_section)
 
@@ -1938,21 +1938,21 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
-        for name in ["big_reset", "small_reset"]:
+        for name in ["big_reset_starter", "small_reset_starter"]:
 
-            getattr(self, f"_{name}_menu").append_section(None, self._reset_menu_section)
+            getattr(self, f"_{name}_menu").append_section(None, self._reset_starter_menu_section)
 
-        for name in ["big_delete", "small_delete"]:
+        for name in ["big_delete_starter", "small_delete_starter"]:
 
-            getattr(self, f"_{name}_menu").append_section(None, self._delete_menu_section)
+            getattr(self, f"_{name}_menu").append_section(None, self._delete_starter_menu_section)
 
-        for name in ["big_remove", "small_remove"]:
+        for name in ["big_discard_starter", "small_discard_starter"]:
 
-            getattr(self, f"_{name}_menu").append_section(None, self._remove_menu_section)
+            getattr(self, f"_{name}_menu").append_section(None, self._discard_starter_menu_section)
 
         ###############################################################################################################
 
-        for name in ["big_start", "small_start", "big_reset", "small_reset", "big_delete", "small_delete", "big_remove", "small_remove"]:
+        for name in ["big_start", "small_start", "big_reset_starter", "small_reset_starter", "big_delete_starter", "small_delete_starter", "big_discard_starter", "small_discard_starter"]:
 
             getattr(self, f"_{name}_menu").append_section(None, self._help_menu_section)
 
@@ -2424,9 +2424,9 @@ class Application(gui.Application):
 
                 not self._greeter_stack.get_visible_child() == self._greeter_page):
 
-                state = self._view_menu_section.get_switch_state("visible")
+                state = self._view_menu_section.get_switch_state("show_hidden")
 
-                self._view_menu_section.set_switch_state("visible", state == False)
+                self._view_menu_section.set_switch_state("show_hidden", state == False)
 
                 return True
 
@@ -2436,9 +2436,9 @@ class Application(gui.Application):
 
             not self._greeter_stack.get_visible_child() == self._greeter_page and
 
-            self._add_menu_section.get_enabled("create")):
+            self._add_menu_section.get_enabled("new_starter")):
 
-            self._on_create_button_clicked(None)
+            self._on_new_starter_button_clicked(None)
 
             return True
 
@@ -2446,7 +2446,7 @@ class Application(gui.Application):
 
              not self._greeter_stack.get_visible_child() == self._greeter_page):
 
-            self._on_open_button_clicked(None)
+            self._on_open_file_button_clicked(None)
 
             # self._open_file_chooser_dialog.show()
 
@@ -2460,7 +2460,7 @@ class Application(gui.Application):
 
                 self._main_stack.get_visible_child() == self._settings_page and
 
-                self._save_button.get_sensitive()):
+                self._save_settings_button.get_sensitive()):
 
                 self._save_settings_page()
 
@@ -2470,7 +2470,7 @@ class Application(gui.Application):
 
                 self._main_stack.get_visible_child() == self._settings_page and
 
-                self._discard_button.get_sensitive()):
+                self._reload_settings_button.get_sensitive()):
 
                 self._load_settings_page(self._current_desktop_starter_name)
 
@@ -2480,29 +2480,29 @@ class Application(gui.Application):
 
                 self._main_stack.get_visible_child() == self._settings_page):
 
-                self._on_file_button_clicked(None)
+                self._on_edit_file_button_clicked(None)
 
             elif (control_modifier_pressed and keyval == 100 and # D
 
                 self._main_stack.get_visible_child() == self._settings_page):
 
-                if (self._current_menu_button.get_menu_model() == self._current_reset_menu and
+                if (self._current_menu_button.get_menu_model() == self._current_reset_starter_menu and
 
-                    self._reset_menu_section.get_enabled("reset")):
+                    self._reset_starter_menu_section.get_enabled("reset_starter")):
 
-                    self._on_reset_button_clicked(None)
+                    self._on_reset_starter_button_clicked(None)
 
-                elif (self._current_menu_button.get_menu_model() == self._current_delete_menu and
+                elif (self._current_menu_button.get_menu_model() == self._current_delete_starter_menu and
 
-                    self._delete_menu_section.get_enabled("delete")):
+                    self._delete_starter_menu_section.get_enabled("delete_starter")):
 
-                    self._on_delete_button_clicked(None)
+                    self._on_delete_starter_button_clicked(None)
 
-                elif (self._current_menu_button.get_menu_model() == self._current_remove_menu and
+                elif (self._current_menu_button.get_menu_model() == self._current_discard_starter_menu and
 
-                    self._remove_menu_section.get_enabled("remove")):
+                    self._discard_starter_menu_section.get_enabled("discard_starter")):
 
-                    self._on_remove_button_clicked(None)
+                    self._on_discard_starter_button_clicked(None)
 
                 return True
 
@@ -2510,7 +2510,7 @@ class Application(gui.Application):
 
         if control_modifier_pressed and keyval == 223: # ?
 
-            self._on_shortcuts_button_clicked(None)
+            self._on_show_shortcuts_button_clicked(None)
 
         elif control_modifier_pressed and keyval == 113: # Q
 
@@ -2590,13 +2590,13 @@ class Application(gui.Application):
 
             self._current_desktop_starter_name = None
 
-            if not self._save_button.get_parent() == None:
+            if not self._save_settings_button.get_parent() == None:
 
-                self._save_button.unparent()
+                self._save_settings_button.unparent()
 
-            if not self._discard_button.get_parent() == None:
+            if not self._reload_settings_button.get_parent() == None:
 
-                self._discard_button.unparent()
+                self._reload_settings_button.unparent()
 
             if self._settings_page.get_changed():
 
@@ -2604,13 +2604,13 @@ class Application(gui.Application):
 
         else:
 
-            if self._discard_button.get_parent() == None:
+            if self._reload_settings_button.get_parent() == None:
 
-                self._right_header_bar.pack_start(self._discard_button)
+                self._right_header_bar.pack_start(self._reload_settings_button)
 
-            if self._save_button.get_parent() == None:
+            if self._save_settings_button.get_parent() == None:
 
-                self._right_header_bar.pack_end(self._save_button)
+                self._right_header_bar.pack_end(self._save_settings_button)
 
         self._update_menu_button_menu_model()
 
@@ -2630,7 +2630,7 @@ class Application(gui.Application):
 
             return True
 
-    def _on_visible_switch_changed(self, name):
+    def _on_show_hidden_switch_changed(self, name):
 
         state = self._view_menu_section.get_switch_state(name)
 
@@ -2640,23 +2640,23 @@ class Application(gui.Application):
 
             self._reload_search_list_items()
 
-    def _on_reset_button_clicked(self, event):
+    def _on_reset_starter_button_clicked(self, event):
 
         self._show_reset_dialog(self._reset_desktop_starter, self._current_desktop_starter_name)
 
-    def _on_delete_button_clicked(self, event):
+    def _on_delete_starter_button_clicked(self, event):
 
         self._show_delete_dialog(self._delete_desktop_starter, self._current_desktop_starter_name)
 
-    def _on_remove_button_clicked(self, event):
+    def _on_discard_starter_button_clicked(self, event):
 
         self._remove_desktop_starter(self._current_desktop_starter_name, notify_user=True)
 
-    def _on_file_button_clicked(self, event):
+    def _on_edit_file_button_clicked(self, event):
 
-        self._check_unsaved_data(self._after_file_button_clicked)
+        self._check_unsaved_data(self._after_edit_file_button_clicked)
 
-    def _after_file_button_clicked(self):
+    def _after_edit_file_button_clicked(self):
 
         name = self._current_desktop_starter_name
 
@@ -2664,21 +2664,21 @@ class Application(gui.Application):
 
         self._edit_desktop_starter(name)
 
-    def _on_open_button_clicked(self, event):
+    def _on_open_file_button_clicked(self, event):
 
         self._check_unsaved_data(self._open_file_chooser_dialog.show)
 
-    def _on_shortcuts_button_clicked(self, event):
+    def _on_show_shortcuts_button_clicked(self, event):
 
         self._show_shortcuts_dialog()
 
-    def _on_about_button_clicked(self, event):
+    def _on_show_about_button_clicked(self, event):
 
         self._about_window.set_debug_info(self._debug_log.get())
 
         self._about_window.set_visible(True)
 
-    def _on_create_button_clicked(self, button):
+    def _on_new_starter_button_clicked(self, button):
 
         if (not self._current_desktop_starter_name in self._unsaved_custom_starters or
 
@@ -2690,11 +2690,11 @@ class Application(gui.Application):
 
             self._create_desktop_starter()
 
-    def _on_save_button_clicked(self, button):
+    def _on_save_settings_button_clicked(self, button):
 
         self._save_settings_page()
 
-    def _on_discard_button_clicked(self, button):
+    def _on_reload_settings_button_clicked(self, button):
 
         self._load_settings_page(self._current_desktop_starter_name)
 
@@ -2912,31 +2912,31 @@ class Application(gui.Application):
 
                 self._locale_manager.get("FIND_SHORTCUT_GROUP_TITLE"),
 
-                "&lt;ctrl&gt;f", self._locale_manager.get("SEARCH_SHORTCUT_TEXT"),
+                "&lt;ctrl&gt;f", self._locale_manager.get("TOGGLE_SEARCH_SHORTCUT_TEXT"),
 
-                "&lt;ctrl&gt;h", self._locale_manager.get("VISIBLE_SHORTCUT_TEXT"),
+                "&lt;ctrl&gt;h", self._locale_manager.get("SHOW_HIDDEN_SHORTCUT_TEXT"),
 
                 self._locale_manager.get("GENERAL_SHORTCUT_GROUP_TITLE"),
 
-                "&lt;ctrl&gt;q", self._locale_manager.get("QUIT_SHORTCUT_TEXT"),
+                "&lt;ctrl&gt;q", self._locale_manager.get("QUIT_APPLICATION_SHORTCUT_TEXT"),
 
-                "&lt;ctrl&gt;question", self._locale_manager.get("SHORTCUTS_SHORTCUT_TEXT"),
+                "&lt;ctrl&gt;question", self._locale_manager.get("SHOW_SHORTCUTS_SHORTCUT_TEXT"),
 
-                "F10", self._locale_manager.get("MENU_SHORTCUT_TEXT"),
+                "F10", self._locale_manager.get("SHOW_MENU_SHORTCUT_TEXT"),
 
                 self._locale_manager.get("EDIT_SHORTCUT_GROUP_TITLE"),
 
-                "&lt;ctrl&gt;s", self._locale_manager.get("SAVE_SHORTCUT_TEXT"),
+                "&lt;ctrl&gt;s", self._locale_manager.get("SAVE_SETTINGS_SHORTCUT_TEXT"),
 
-                "&lt;ctrl&gt;r", self._locale_manager.get("DISCARD_SHORTCUT_TEXT"),
+                "&lt;ctrl&gt;r", self._locale_manager.get("RELOAD_SETTINGS_SHORTCUT_TEXT"),
 
-                "&lt;ctrl&gt;d", self._locale_manager.get("REMOVE_SHORTCUT_TEXT"),
+                "&lt;ctrl&gt;d", self._locale_manager.get("REVERT_CHANGES_SHORTCUT_TEXT"),
 
-                "&lt;ctrl&gt;n", self._locale_manager.get("CREATE_SHORTCUT_TEXT"),
+                "&lt;ctrl&gt;n", self._locale_manager.get("NEW_STARTER_SHORTCUT_TEXT"),
 
-                "&lt;ctrl&gt;e", self._locale_manager.get("FILE_SHORTCUT_TEXT"),
+                "&lt;ctrl&gt;e", self._locale_manager.get("EDIT_FILE_SHORTCUT_TEXT"),
 
-                "&lt;ctrl&gt;o", self._locale_manager.get("OPEN_SHORTCUT_TEXT")
+                "&lt;ctrl&gt;o", self._locale_manager.get("OPEN_FILE_SHORTCUT_TEXT")
 
             ), -1)
 
@@ -3126,6 +3126,8 @@ class Application(gui.Application):
 
             else:
 
+                self._left_menu_button.set_primary(True)
+
                 self._current_menu_button = self._left_menu_button
 
                 self._right_menu_button.set_visible(False)
@@ -3134,7 +3136,7 @@ class Application(gui.Application):
 
                 sub_menu_name = "big"
 
-            for menu_name in ["_{}_start_menu", "_{}_reset_menu", "_{}_delete_menu", "_{}_remove_menu"]:
+            for menu_name in ["_{}_start_menu", "_{}_reset_starter_menu", "_{}_delete_starter_menu", "_{}_discard_starter_menu"]:
 
                 setattr(self, menu_name.format("current"), getattr(self, menu_name.format(sub_menu_name)))
 
@@ -3166,29 +3168,29 @@ class Application(gui.Application):
 
                     if self._current_desktop_starter_name in self._unsaved_custom_starters:
 
-                        self._current_menu_button.set_menu_model(self._current_remove_menu)
+                        self._current_menu_button.set_menu_model(self._current_discard_starter_menu)
 
                     elif self._get_desktop_starter_has_default(self._current_desktop_starter_name):
 
-                        self._current_menu_button.set_menu_model(self._current_reset_menu)
+                        self._current_menu_button.set_menu_model(self._current_reset_starter_menu)
 
                         if self._get_desktop_starter_has_override(self._current_desktop_starter_name):
 
-                            self._reset_menu_section.set_enabled("reset", True)
+                            self._reset_starter_menu_section.set_enabled("reset_starter", True)
 
                         else:
 
-                            self._reset_menu_section.set_enabled("reset", False)
+                            self._reset_starter_menu_section.set_enabled("reset_starter", False)
 
                     else:
 
-                        self._current_menu_button.set_menu_model(self._current_delete_menu)
+                        self._current_menu_button.set_menu_model(self._current_delete_starter_menu)
 
                 else:
 
-                    self._current_menu_button.set_menu_model(self._current_reset_menu)
+                    self._current_menu_button.set_menu_model(self._current_reset_starter_menu)
 
-                    self._reset_menu_section.set_enabled("reset", False)
+                    self._reset_starter_menu_section.set_enabled("reset_starter", False)
 
         except AttributeError as error:
 

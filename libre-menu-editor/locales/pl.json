@@ -56,45 +56,45 @@
 
     "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Nieznana Akcja",
 
-    "VISIBLE_SWITCH_LABEL": "Pokaż schowane",
+    "SHOW_HIDDEN_SWITCH_LABEL": "Pokaż schowane",
 
-    "RESET_MENU_BUTTON_LABEL": "Zresetuj launcher",
+    "RESET_STARTER_MENU_BUTTON_LABEL": "Zresetuj launcher",
 
-    "DELETE_MENU_BUTTON_LABEL": "Usuń launcher",
+    "DELETE_STARTER_MENU_BUTTON_LABEL": "Usuń launcher",
 
-    "REMOVE_MENU_BUTTON_LABEL": "Usuń launcher",
+    "DISCARD_STARTER_MENU_BUTTON_LABEL": "Usuń launcher",
 
-    "FILE_MENU_BUTTON_LABEL": "Edytować dokument",
+    "EDIT_FILE_MENU_BUTTON_LABEL": "Edytować dokument",
 
-    "CREATE_MENU_BUTTON_LABEL": "Utwórz launcher",
+    "NEW_STARTER_MENU_BUTTON_LABEL": "Nowy launcher",
 
-    "OPEN_MENU_BUTTON_LABEL": "Otwórz launcher",
+    "OPEN_FILE_MENU_BUTTON_LABEL": "Otwórz launcher",
 
-    "SHORTCUTS_MENU_BUTTON_LABEL": "Skróty klawiszowe",
+    "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Skróty klawiszowe",
 
-    "ABOUT_MENU_BUTTON_LABEL": "O tej aplikacji",
+    "SHOW_ABOUT_MENU_BUTTON_LABEL": "O tej aplikacji",
 
-    "SEARCH_SHORTCUT_TEXT": "Wyszukaj launcher",
+    "TOGGLE_SEARCH_SHORTCUT_TEXT": "Wyszukaj launcher",
 
-    "VISIBLE_SHORTCUT_TEXT": "Pokaż schowane",
+    "SHOW_HIDDEN_SHORTCUT_TEXT": "Pokaż schowane",
 
-    "SAVE_SHORTCUT_TEXT": "Zapisz zmiany",
+    "SAVE_SETTINGS_SHORTCUT_TEXT": "Zapisz zmiany",
 
-    "DISCARD_SHORTCUT_TEXT": "Odrzucać zmiany",
+    "RELOAD_SETTINGS_SHORTCUT_TEXT": "Odrzucać zmiany",
 
-    "REMOVE_SHORTCUT_TEXT": "Usuń zmiany",
+    "REVERT_CHANGES_SHORTCUT_TEXT": "Usuń zmiany",
 
-    "CREATE_SHORTCUT_TEXT": "Utwórz launcher",
+    "NEW_STARTER_SHORTCUT_TEXT": "Nowy launcher",
 
-    "FILE_SHORTCUT_TEXT": "Edytować dokument",
+    "EDIT_FILE_SHORTCUT_TEXT": "Edytować dokument",
 
-    "OPEN_SHORTCUT_TEXT": "Otwórz launcher",
+    "OPEN_FILE_SHORTCUT_TEXT": "Otwórz launcher",
 
-    "MENU_SHORTCUT_TEXT": "Otwórz menu",
+    "SHOW_MENU_SHORTCUT_TEXT": "Otwórz menu",
 
-    "QUIT_SHORTCUT_TEXT": "Zamknij aplikację",
+    "QUIT_APPLICATION_SHORTCUT_TEXT": "Zamknij aplikację",
 
-    "SHORTCUTS_SHORTCUT_TEXT": "Pokaż skróty",
+    "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Pokaż skróty",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Edytować",
 
@@ -110,7 +110,7 @@
 
     "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Wybierz launcher",
 
-    "SAVE_BUTTON_LABEL": "Zapisz",
+    "SAVE_SETTINGS_BUTTON_LABEL": "Zapisz",
 
     "BANNER_LABEL_TEXT": "Wybierz akcje, które chcesz usunąć",
 

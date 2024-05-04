@@ -56,45 +56,45 @@
 
     "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Adsız Eylem",
 
-    "VISIBLE_SWITCH_LABEL": "Gizlileri Göster",
+    "SHOW_HIDDEN_SWITCH_LABEL": "Gizlileri Göster",
 
-    "RESET_MENU_BUTTON_LABEL": "Başlatıcıyı Sıfırla",
+    "RESET_STARTER_MENU_BUTTON_LABEL": "Başlatıcıyı Sıfırla",
 
-    "DELETE_MENU_BUTTON_LABEL": "Başlatıcıyı Sil",
+    "DELETE_STARTER_MENU_BUTTON_LABEL": "Başlatıcıyı Sil",
 
-    "REMOVE_MENU_BUTTON_LABEL": "Başlatıcıyı Kaldır",
+    "DISCARD_STARTER_MENU_BUTTON_LABEL": "Başlatıcıyı Kaldır",
 
-    "FILE_MENU_BUTTON_LABEL": "Belgeyi Düzenle",
+    "EDIT_FILE_MENU_BUTTON_LABEL": "Belgeyi Düzenle",
 
-    "CREATE_MENU_BUTTON_LABEL": "Başlatıcı oluştur",
+    "NEW_STARTER_MENU_BUTTON_LABEL": "Yeni Başlatıcı",
 
-    "OPEN_MENU_BUTTON_LABEL": "Başlatıcıyı Aç",
+    "OPEN_FILE_MENU_BUTTON_LABEL": "Başlatıcıyı Aç",
 
-    "SHORTCUTS_MENU_BUTTON_LABEL": "Klavye Kısayolları",
+    "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Klavye Kısayolları",
 
-    "ABOUT_MENU_BUTTON_LABEL": "Bu Uygulama Hakkında",
+    "SHOW_ABOUT_MENU_BUTTON_LABEL": "Bu Uygulama Hakkında",
 
-    "SEARCH_SHORTCUT_TEXT": "Başlatıcıları ara",
+    "TOGGLE_SEARCH_SHORTCUT_TEXT": "Başlatıcıları ara",
 
-    "VISIBLE_SHORTCUT_TEXT": "Gizlileri Göster",
+    "SHOW_HIDDEN_SHORTCUT_TEXT": "Gizlileri Göster",
 
-    "SAVE_SHORTCUT_TEXT": "Değişiklikleri kaydet",
+    "SAVE_SETTINGS_SHORTCUT_TEXT": "Değişiklikleri kaydet",
 
-    "DISCARD_SHORTCUT_TEXT": "Değişiklikleri gözden çıkar",
+    "RELOAD_SETTINGS_SHORTCUT_TEXT": "Değişiklikleri gözden çıkar",
 
-    "REMOVE_SHORTCUT_TEXT": "Değişiklikleri kaldır",
+    "REVERT_CHANGES_SHORTCUT_TEXT": "Değişiklikleri kaldır",
 
-    "CREATE_SHORTCUT_TEXT": "Başlatıcı oluştur",
+    "NEW_STARTER_SHORTCUT_TEXT": "Yeni Başlatıcı",
 
-    "FILE_SHORTCUT_TEXT": "Belgeyi düzenle",
+    "EDIT_FILE_SHORTCUT_TEXT": "Belgeyi düzenle",
 
-    "OPEN_SHORTCUT_TEXT": "Başlatıcıyı aç",
+    "OPEN_FILE_SHORTCUT_TEXT": "Başlatıcıyı aç",
 
-    "MENU_SHORTCUT_TEXT": "Menüyü aç",
+    "SHOW_MENU_SHORTCUT_TEXT": "Menüyü aç",
 
-    "QUIT_SHORTCUT_TEXT": "Uygulamadan çık",
+    "QUIT_APPLICATION_SHORTCUT_TEXT": "Uygulamadan çık",
 
-    "SHORTCUTS_SHORTCUT_TEXT": "Kısayolları göster",
+    "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Kısayolları göster",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Düzenle",
 
@@ -110,7 +110,7 @@
 
     "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Başlatıcıyı Seç",
 
-    "SAVE_BUTTON_LABEL": "Kaydet",
+    "SAVE_SETTINGS_BUTTON_LABEL": "Kaydet",
 
     "BANNER_LABEL_TEXT": "Silmek istediğiniz eylemi seçin",
 

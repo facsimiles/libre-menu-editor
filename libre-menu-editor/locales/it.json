@@ -56,45 +56,45 @@
 
     "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Azione senza nome",
 
-    "VISIBLE_SWITCH_LABEL": "Mostra nascosto",
+    "SHOW_HIDDEN_SWITCH_LABEL": "Mostra nascosto",
 
-    "RESET_MENU_BUTTON_LABEL": "Resetta lanciatore",
+    "RESET_STARTER_MENU_BUTTON_LABEL": "Resetta lanciatore",
 
-    "DELETE_MENU_BUTTON_LABEL": "Cancella lanciatore",
+    "DELETE_STARTER_MENU_BUTTON_LABEL": "Cancella lanciatore",
 
-    "REMOVE_MENU_BUTTON_LABEL": "Rimuovere lanciatore",
+    "DISCARD_STARTER_MENU_BUTTON_LABEL": "Rimuovere lanciatore",
 
-    "FILE_MENU_BUTTON_LABEL": "Modifica documento",
+    "EDIT_FILE_MENU_BUTTON_LABEL": "Modifica documento",
 
-    "CREATE_MENU_BUTTON_LABEL": "Creare lanciatore",
+    "NEW_STARTER_MENU_BUTTON_LABEL": "Nuovo lanciatore",
 
-    "OPEN_MENU_BUTTON_LABEL": "Aprire lanciatore",
+    "OPEN_FILE_MENU_BUTTON_LABEL": "Aprire lanciatore",
 
-    "SHORTCUTS_MENU_BUTTON_LABEL": "Scorciatoie da tastiera",
+    "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Scorciatoie da tastiera",
 
-    "ABOUT_MENU_BUTTON_LABEL": "Su questa app",
+    "SHOW_ABOUT_MENU_BUTTON_LABEL": "Su questa app",
 
-    "SEARCH_SHORTCUT_TEXT": "Cerca lanciatori",
+    "TOGGLE_SEARCH_SHORTCUT_TEXT": "Cerca lanciatori",
 
-    "VISIBLE_SHORTCUT_TEXT": "Mostra nascosto",
+    "SHOW_HIDDEN_SHORTCUT_TEXT": "Mostra nascosto",
 
-    "SAVE_SHORTCUT_TEXT": "Salvare modifiche",
+    "SAVE_SETTINGS_SHORTCUT_TEXT": "Salvare modifiche",
 
-    "DISCARD_SHORTCUT_TEXT": "Scartare modifiche",
+    "RELOAD_SETTINGS_SHORTCUT_TEXT": "Scartare modifiche",
 
-    "REMOVE_SHORTCUT_TEXT": "Rimuovere modifiche",
+    "REVERT_CHANGES_SHORTCUT_TEXT": "Rimuovere modifiche",
 
-    "CREATE_SHORTCUT_TEXT": "Creare lanciatore",
+    "NEW_STARTER_SHORTCUT_TEXT": "Nuovo lanciatore",
 
-    "FILE_SHORTCUT_TEXT": "Modifica documento",
+    "EDIT_FILE_SHORTCUT_TEXT": "Modifica documento",
 
-    "OPEN_SHORTCUT_TEXT": "Aprire lanciatore",
+    "OPEN_FILE_SHORTCUT_TEXT": "Aprire lanciatore",
 
-    "MENU_SHORTCUT_TEXT": "Menu aperto",
+    "SHOW_MENU_SHORTCUT_TEXT": "Menu aperto",
 
-    "QUIT_SHORTCUT_TEXT": "Smettere applicazione",
+    "QUIT_APPLICATION_SHORTCUT_TEXT": "Smettere applicazione",
 
-    "SHORTCUTS_SHORTCUT_TEXT": "Mostra scorciatoie",
+    "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Mostra scorciatoie",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Modificare",
 
@@ -110,7 +110,7 @@
 
     "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Scegliere lanciatore",
 
-    "SAVE_BUTTON_LABEL": "Salva",
+    "SAVE_SETTINGS_BUTTON_LABEL": "Salva",
 
     "BANNER_LABEL_TEXT": "Seleziona le azioni che desideri eliminare",
 

@@ -56,45 +56,45 @@
 
     "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Action sans nom",
 
-    "VISIBLE_SWITCH_LABEL": "Afficher les éléments cachés",
+    "SHOW_HIDDEN_SWITCH_LABEL": "Afficher les éléments cachés",
 
-    "RESET_MENU_BUTTON_LABEL": "Réinitialiser le lanceur",
+    "RESET_STARTER_MENU_BUTTON_LABEL": "Réinitialiser le lanceur",
 
-    "DELETE_MENU_BUTTON_LABEL": "Supprimer le lanceur",
+    "DELETE_STARTER_MENU_BUTTON_LABEL": "Supprimer le lanceur",
 
-    "REMOVE_MENU_BUTTON_LABEL": "Jeter le lanceur",
+    "DISCARD_STARTER_MENU_BUTTON_LABEL": "Jeter le lanceur",
 
-    "FILE_MENU_BUTTON_LABEL": "Modifier le document",
+    "EDIT_FILE_MENU_BUTTON_LABEL": "Modifier le document",
 
-    "CREATE_MENU_BUTTON_LABEL": "Créer un lanceur",
+    "NEW_STARTER_MENU_BUTTON_LABEL": "Nouveau lanceur",
 
-    "OPEN_MENU_BUTTON_LABEL": "Ouvrir le lanceur",
+    "OPEN_FILE_MENU_BUTTON_LABEL": "Ouvrir un lanceur",
 
-    "SHORTCUTS_MENU_BUTTON_LABEL": "Raccourcis clavier",
+    "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Raccourcis clavier",
 
-    "ABOUT_MENU_BUTTON_LABEL": "À propos de cette app",
+    "SHOW_ABOUT_MENU_BUTTON_LABEL": "À propos de cette app",
 
-    "SEARCH_SHORTCUT_TEXT": "Rechercher des lanceurs",
+    "TOGGLE_SEARCH_SHORTCUT_TEXT": "Rechercher des lanceurs",
 
-    "VISIBLE_SHORTCUT_TEXT": "Montrer les éléments cachés",
+    "SHOW_HIDDEN_SHORTCUT_TEXT": "Montrer les éléments cachés",
 
-    "SAVE_SHORTCUT_TEXT": "Sauvegarder les modifications",
+    "SAVE_SETTINGS_SHORTCUT_TEXT": "Sauvegarder les modifications",
 
-    "DISCARD_SHORTCUT_TEXT": "Annuler les modifications",
+    "RELOAD_SETTINGS_SHORTCUT_TEXT": "Annuler les modifications",
 
-    "REMOVE_SHORTCUT_TEXT": "Supprimer modifications",
+    "REVERT_CHANGES_SHORTCUT_TEXT": "Supprimer modifications",
 
-    "CREATE_SHORTCUT_TEXT": "Créer un lanceur",
+    "NEW_STARTER_SHORTCUT_TEXT": "Nouveau lanceur",
 
-    "FILE_SHORTCUT_TEXT": "Modifier le document",
+    "EDIT_FILE_SHORTCUT_TEXT": "Modifier le document",
 
-    "OPEN_SHORTCUT_TEXT": "Ouvrir le lanceur",
+    "OPEN_FILE_SHORTCUT_TEXT": "Ouvrir un lanceur",
 
-    "MENU_SHORTCUT_TEXT": "Ouvrir le menu",
+    "SHOW_MENU_SHORTCUT_TEXT": "Ouvrir le menu",
 
-    "QUIT_SHORTCUT_TEXT": "Quitter l'application",
+    "QUIT_APPLICATION_SHORTCUT_TEXT": "Quitter l'application",
 
-    "SHORTCUTS_SHORTCUT_TEXT": "Afficher les raccourcis",
+    "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Afficher les raccourcis",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Modifier",
 
@@ -110,7 +110,7 @@
 
     "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Choisir un lanceur",
 
-    "SAVE_BUTTON_LABEL": "Enregistrer",
+    "SAVE_SETTINGS_BUTTON_LABEL": "Enregistrer",
 
     "BANNER_LABEL_TEXT": "Veuillez sélectionner les actions que vous souhaitez supprimer",
 

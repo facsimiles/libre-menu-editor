@@ -56,45 +56,45 @@
 
     "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Acción sin nombre",
 
-    "VISIBLE_SWITCH_LABEL": "Mostrar ocultos",
+    "SHOW_HIDDEN_SWITCH_LABEL": "Mostrar ocultos",
 
-    "RESET_MENU_BUTTON_LABEL": "Restablecer lanzador",
+    "RESET_STARTER_MENU_BUTTON_LABEL": "Restablecer lanzador",
 
-    "DELETE_MENU_BUTTON_LABEL": "Eliminar lanzador",
+    "DELETE_STARTER_MENU_BUTTON_LABEL": "Eliminar lanzador",
 
-    "REMOVE_MENU_BUTTON_LABEL": "Descartar lanzador",
+    "DISCARD_STARTER_MENU_BUTTON_LABEL": "Descartar lanzador",
 
-    "FILE_MENU_BUTTON_LABEL": "Editar documento",
+    "EDIT_FILE_MENU_BUTTON_LABEL": "Editar documento",
 
-    "CREATE_MENU_BUTTON_LABEL": "Crear lanzador",
+    "NEW_STARTER_MENU_BUTTON_LABEL": "Nuevo lanzador",
 
-    "OPEN_MENU_BUTTON_LABEL": "Lanzador abierto",
+    "OPEN_FILE_MENU_BUTTON_LABEL": "Lanzador abierto",
 
-    "SHORTCUTS_MENU_BUTTON_LABEL": "Atajos de teclado",
+    "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Atajos de teclado",
 
-    "ABOUT_MENU_BUTTON_LABEL": "Acerca esta app",
+    "SHOW_ABOUT_MENU_BUTTON_LABEL": "Acerca esta app",
 
-    "SEARCH_SHORTCUT_TEXT": "Lanzadores de búsqueda",
+    "TOGGLE_SEARCH_SHORTCUT_TEXT": "Lanzadores de búsqueda",
 
-    "VISIBLE_SHORTCUT_TEXT": "Mostrar escondido",
+    "SHOW_HIDDEN_SHORTCUT_TEXT": "Mostrar escondido",
 
-    "SAVE_SHORTCUT_TEXT": "Guardar cambios",
+    "SAVE_SETTINGS_SHORTCUT_TEXT": "Guardar cambios",
 
-    "DISCARD_SHORTCUT_TEXT": "Descartar cambios",
+    "RELOAD_SETTINGS_SHORTCUT_TEXT": "Descartar cambios",
 
-    "REMOVE_SHORTCUT_TEXT": "Eliminar cambios",
+    "REVERT_CHANGES_SHORTCUT_TEXT": "Eliminar cambios",
 
-    "CREATE_SHORTCUT_TEXT": "Crear lanzador",
+    "NEW_STARTER_SHORTCUT_TEXT": "Nuevo lanzador",
 
-    "FILE_SHORTCUT_TEXT": "Editar documento",
+    "EDIT_FILE_SHORTCUT_TEXT": "Editar documento",
 
-    "OPEN_SHORTCUT_TEXT": "Lanzador abierto",
+    "OPEN_FILE_SHORTCUT_TEXT": "Lanzador abierto",
 
-    "MENU_SHORTCUT_TEXT": "Menú abierto",
+    "SHOW_MENU_SHORTCUT_TEXT": "Menú abierto",
 
-    "QUIT_SHORTCUT_TEXT": "Dejar la aplicación",
+    "QUIT_APPLICATION_SHORTCUT_TEXT": "Dejar la aplicación",
 
-    "SHORTCUTS_SHORTCUT_TEXT": "Mostrar atajos",
+    "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Mostrar atajos",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Editar",
 
@@ -110,7 +110,7 @@
 
     "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Elegir lanzador",
 
-    "SAVE_BUTTON_LABEL": "Guardar",
+    "SAVE_SETTINGS_BUTTON_LABEL": "Guardar",
 
     "BANNER_LABEL_TEXT": "Seleccione las acciones que desea eliminar",
 

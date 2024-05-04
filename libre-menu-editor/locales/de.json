@@ -56,45 +56,45 @@
 
     "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Unbenannte Aktion",
 
-    "VISIBLE_SWITCH_LABEL": "Versteckte zeigen",
+    "SHOW_HIDDEN_SWITCH_LABEL": "Versteckte zeigen",
 
-    "RESET_MENU_BUTTON_LABEL": "Zurücksetzen",
+    "RESET_STARTER_MENU_BUTTON_LABEL": "Zurücksetzen",
 
-    "DELETE_MENU_BUTTON_LABEL": "Starter löschen",
+    "DELETE_STARTER_MENU_BUTTON_LABEL": "Starter löschen",
 
-    "REMOVE_MENU_BUTTON_LABEL": "Starter entfernen",
+    "DISCARD_STARTER_MENU_BUTTON_LABEL": "Starter verwerfen",
 
-    "FILE_MENU_BUTTON_LABEL": "Text bearbeiten",
+    "EDIT_FILE_MENU_BUTTON_LABEL": "Text bearbeiten",
 
-    "CREATE_MENU_BUTTON_LABEL": "Starter erstellen",
+    "NEW_STARTER_MENU_BUTTON_LABEL": "Neuer Starter",
 
-    "OPEN_MENU_BUTTON_LABEL": "Datei öffnen",
+    "OPEN_FILE_MENU_BUTTON_LABEL": "Datei öffnen",
 
-    "SHORTCUTS_MENU_BUTTON_LABEL": "Tastenkürzel",
+    "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Tastenkürzel",
 
-    "ABOUT_MENU_BUTTON_LABEL": "Über Hauptmenü",
+    "SHOW_ABOUT_MENU_BUTTON_LABEL": "Über Hauptmenü",
 
-    "SEARCH_SHORTCUT_TEXT": "Starter durchsuchen",
+    "TOGGLE_SEARCH_SHORTCUT_TEXT": "Starter durchsuchen",
 
-    "VISIBLE_SHORTCUT_TEXT": "Versteckte zeigen",
+    "SHOW_HIDDEN_SHORTCUT_TEXT": "Versteckte zeigen",
 
-    "SAVE_SHORTCUT_TEXT": "Änderungen speichern",
+    "SAVE_SETTINGS_SHORTCUT_TEXT": "Änderungen speichern",
 
-    "DISCARD_SHORTCUT_TEXT": "Änderungen verwerfen",
+    "RELOAD_SETTINGS_SHORTCUT_TEXT": "Änderungen verwerfen",
 
-    "REMOVE_SHORTCUT_TEXT": "Änderungen entfernen",
+    "REVERT_CHANGES_SHORTCUT_TEXT": "Änderungen entfernen",
 
-    "CREATE_SHORTCUT_TEXT": "Starter erstellen",
+    "NEW_STARTER_SHORTCUT_TEXT": "Neuer Starter",
 
-    "FILE_SHORTCUT_TEXT": "Text bearbeiten",
+    "EDIT_FILE_SHORTCUT_TEXT": "Text bearbeiten",
 
-    "OPEN_SHORTCUT_TEXT": "Datei öffnen",
+    "OPEN_FILE_SHORTCUT_TEXT": "Datei öffnen",
 
-    "MENU_SHORTCUT_TEXT": "Menü anzeigen",
+    "SHOW_MENU_SHORTCUT_TEXT": "Menü anzeigen",
 
-    "QUIT_SHORTCUT_TEXT": "Anwendung beenden",
+    "QUIT_APPLICATION_SHORTCUT_TEXT": "Anwendung beenden",
 
-    "SHORTCUTS_SHORTCUT_TEXT": "Tastenkürzel anzeigen",
+    "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Tastenkürzel anzeigen",
 
     "EDIT_SHORTCUT_GROUP_TITLE": "Bearbeiten",
 
@@ -110,7 +110,7 @@
 
     "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Anwendungsstarter auswählen",
 
-    "SAVE_BUTTON_LABEL": "Speichern",
+    "SAVE_SETTINGS_BUTTON_LABEL": "Speichern",
 
     "BANNER_LABEL_TEXT": "Bitte wählen Sie die Aktionen aus die Sie löschen wollen",
 
