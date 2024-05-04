@@ -56,10 +56,12 @@
       <li xml:lang="de">Starter auf System-Standard zurücksetzen</li>
       <li>open launcher configuration-files in your default text-editor</li>
       <li xml:lang="de">Konfigurationsdateien von Startern im Standard-Textbearbeitungsprogramm öffnen</li>
-      <li>find launchers by typing or by pulling out the sidebar</li>
-      <li xml:lang="de">Starter durch Eingabe oder durch Ausziehen der Seitenleiste finden</li>
+      <li>find launchers in the searchable sidebar</li>
+      <li xml:lang="de">Starter durch Texteingabe in der durchsuchbaren Seitenleiste finden</li>
       <li>navigate the interface with your keyboard</li>
       <li xml:lang="de">die Benutzeroberfläche mit der Tastatur navigieren</li>
+      <li>use the application on small-screen devices</li>
+      <li xml:lang="de">Die Anwendung auf Geräten mit kleinen Bildschirmen verwenden</li>
     </ul>
   </description>
   <url type="homepage">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
@@ -85,4 +87,16 @@
   <releases>
     <release version="1.3" date="2024-05-01"/>
   </releases>
+  <recommends>
+    <control>touch</control>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <requires>
+    <display_length compare="ge">300</display_length>
+  </requires>
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+    <value key="Purism::form_factor">mobile</value>
+  </custom>
 </component>

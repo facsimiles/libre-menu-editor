@@ -24,8 +24,9 @@ Categories=GNOME;GTK;Utility
 StartupNotify=true
 StartupWMClass=libre-menu-editor
 X-GNOME-SingleWindow=true
-
+X-Purism-FormFactor=Workstation;Mobile;
 X-Flatpak=page.codeberg.libre_menu_editor.LibreMenuEditor
+
 Actions=new-launcher
 
 [Desktop Action new-launcher]

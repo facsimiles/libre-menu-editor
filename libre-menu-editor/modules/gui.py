@@ -745,15 +745,7 @@ class EntryRow(Adw.EntryRow):
 
         self._editable = self.get_delegate()
 
-        self._editable.set_valign(Gtk.Align.CENTER)
-
         self._editable.add_controller(self._event_controller_focus)
-
-        self._label = Gtk.Label()
-
-        self._label.add_css_class("dim-label")
-
-        self.add_prefix(self._label)
 
         self.set_enable_undo(True)
 
@@ -768,14 +760,6 @@ class EntryRow(Adw.EntryRow):
         text = editable.get_text()
 
         self._events.trigger("text-changed", self, text)
-
-    def set_title(self, string):
-
-        self._label.set_text(string)
-
-    def get_title(self):
-
-        return self._label.get_text()
 
     def hook(self, event, callback, *args):
 
@@ -909,6 +893,10 @@ class PathChooserRow(EntryRow):
     def get_dialog_title(self):
 
         return self._file_chooser_dialog.get_title()
+
+    def get_chooser_button(self):
+
+        return self._chooser_button
 
 
 class FileChooserRow(PathChooserRow):
@@ -1080,16 +1068,6 @@ class DeleteRow(Adw.ActionRow):
 
         self._icon_finder = app.get_icon_finder()
 
-        self._title_label = Gtk.Label()
-
-        self._title_label.set_margin_end(Margin.DEFAULT)
-
-        self._text_label = Gtk.Label()
-
-        self._text_label.add_css_class("dim-label")
-
-        self._text_label.set_ellipsize(Pango.EllipsizeMode.END)
-
         self._delete_button = Gtk.Button()
 
         self._delete_button.set_icon_name(self._icon_finder.get_name("edit-delete-symbolic"))
@@ -1102,29 +1080,27 @@ class DeleteRow(Adw.ActionRow):
 
         self._delete_button.set_valign(Gtk.Align.CENTER)
 
+        self.add_css_class("warning")
+
         self.set_activatable(True)
-
-        self.add_prefix(self._text_label)
-
-        self.add_prefix(self._title_label)
 
         self.add_suffix(self._delete_button)
 
-    def get_title(self, text):
-
-        self._title_label.get_text(text)
-
-    def set_title(self, text):
-
-        self._title_label.set_text(text)
-
     def get_text(self, text):
 
-        self._text_label.get_text(text)
+        return self.get_subtitle()
 
     def set_text(self, text):
 
-        self._text_label.set_text(text)
+        if len(text):
+
+            self.add_css_class("property")
+
+        else:
+
+            self.remove_css_class("property")
+
+        self.set_subtitle(text)
 
 
 class SwitchRow(Adw.ActionRow):
@@ -1224,15 +1200,13 @@ class SearchList(Gtk.Box):
 
         self._children = {}
 
-        self._min_row_width = 0
+        self._active_row = None
+
+        self._reset_by_unfocus = False
 
         self._icon_finder = app.get_icon_finder()
 
         self._application_window = app.get_application_window()
-
-        self._focus_chain_widget = None
-
-        self._reset_by_unfocus = False
 
         self._toggle_button = Gtk.ToggleButton()
 
@@ -1276,33 +1250,21 @@ class SearchList(Gtk.Box):
 
         self._search_bar.connect_entry(self._search_entry)
 
-        self._flow_box_event_controller_key = Gtk.EventControllerKey()
+        self._list_box_event_controller_key = Gtk.EventControllerKey()
 
-        self._flow_box_event_controller_key.connect("key-pressed", self._on_flow_box_controller_key_pressed)
+        self._list_box_event_controller_key.connect("key-pressed", self._on_list_box_controller_key_pressed)
 
-        self._flow_box = Gtk.FlowBox()
+        self._list_box = Gtk.ListBox()
 
-        self._flow_box.set_homogeneous(True)
+        self._list_box.add_css_class("navigation-sidebar")
 
-        self._flow_box.set_valign(Gtk.Align.START)
+        self._list_box.set_selection_mode(Gtk.SelectionMode.BROWSE)
 
-        self._flow_box.set_margin_top(Margin.DEFAULT)
+        self._list_box.connect("selected-rows-changed", self._on_list_box_selected_rows_changed)
 
-        self._flow_box.set_margin_bottom(Margin.DEFAULT)
+        self._list_box.add_controller(self._list_box_event_controller_key)
 
-        self._flow_box.set_margin_start(Margin.DEFAULT)
-
-        self._flow_box.set_margin_end(Margin.DEFAULT)
-
-        self._flow_box.set_row_spacing(Spacing.DEFAULT)
-
-        self._flow_box.set_column_spacing(Spacing.DEFAULT)
-
-        self._flow_box.set_selection_mode(Gtk.SelectionMode.NONE)
-
-        self._flow_box.add_controller(self._flow_box_event_controller_key)
-
-        self._flow_box.connect("child-activated", self._on_flow_box_child_activated)
+        self._list_box.connect("row-activated", self._on_list_box_child_activated)
 
         self._scrolled_window = Gtk.ScrolledWindow()
 
@@ -1312,15 +1274,19 @@ class SearchList(Gtk.Box):
 
         self._scrolled_window.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
-        self._scrolled_window.set_child(self._flow_box)
-
-        self._flow_box.set_vadjustment(self._scrolled_window.get_vadjustment())
+        self._scrolled_window.set_child(self._list_box)
 
         self.set_orientation(Gtk.Orientation.VERTICAL)
 
         self.append(self._search_bar)
 
         self.append(self._scrolled_window)
+
+    def _on_list_box_selected_rows_changed(self, listbox):
+
+        self._list_box.unselect_all()
+
+        self._list_box.select_row(self._active_row)
 
     def _on_toggle_button_toggled(self, button):
 
@@ -1348,7 +1314,7 @@ class SearchList(Gtk.Box):
 
         if not value and self._search_bar.get_focus_child():
 
-            self._flow_box.child_focus(Gtk.DirectionType.DOWN)
+            self._list_box.child_focus(Gtk.DirectionType.DOWN)
 
     def _on_search_entry_event_controller_focus_leave(self, controller):
 
@@ -1384,29 +1350,25 @@ class SearchList(Gtk.Box):
 
             else:
 
-                self._flow_box.child_focus(Gtk.DirectionType.DOWN)
+                self._list_box.child_focus(Gtk.DirectionType.DOWN)
 
             return True
 
-    def _on_flow_box_controller_key_pressed(self, controller, keyval, keycode, state):
+    def _on_list_box_controller_key_pressed(self, controller, keyval, keycode, state):
 
         if keyval == Keyval.ESCAPE and self._search_bar.get_search_mode():
 
-            self._search_entry.grab_focus()
+            self._search_bar.grab_focus()
 
             self._search_bar.set_search_mode(False)
 
             return True
 
-        elif keyval == Keyval.TAB:
-
-            return self._focus_chain_widget_grab_focus()
-
         elif (
 
         (keyval == Keyval.UP or keyval == Keyval.PAGEUP)
 
-        and self._flow_box.get_focus_child() in self._get_top_children()
+        and self._list_box.get_focus_child() == self._list_box.get_first_child()
 
         ):
 
@@ -1418,19 +1380,11 @@ class SearchList(Gtk.Box):
 
             return True
 
-        elif keyval == Keyval.RIGHT:
+    def _on_list_box_child_activated(self, list_box, child):
 
-            visible_children = self._get_visible_children()
+        self._active_row = child
 
-            focused_child_index = visible_children.index(self._flow_box.get_focus_child())
-
-            division_result = (focused_child_index + 1) / len(self._get_top_children())
-
-            if division_result == int(division_result):
-
-                return self._focus_chain_widget_grab_focus()
-
-    def _on_flow_box_child_activated(self, flow_box, child):
+        self._list_box.select_row(child)
 
         self._events.trigger("item-activated", self._names[child])
 
@@ -1445,34 +1399,6 @@ class SearchList(Gtk.Box):
                 children.append(child["widget"])
 
         return children
-
-    def _get_children_at_row(self, value):
-
-        children = []
-
-        visible_children = self._get_visible_children()
-
-        child_width = visible_children[0].get_width()
-
-        child_height = visible_children[0].get_height()
-
-        vertical_position = value * (child_height + self._flow_box.get_row_spacing())
-
-        step_width = child_width + self._flow_box.get_column_spacing()
-
-        for n in range(int(self._flow_box.get_width() / step_width)):
-
-            child = self._flow_box.get_child_at_pos((child_width / 2) + (n * step_width), vertical_position)
-
-            if not child == None:
-
-                children.append(child)
-
-        return children
-
-    def _get_top_children(self):
-
-        return self._get_children_at_row(0)
 
     def _update_search_results(self):
 
@@ -1492,35 +1418,17 @@ class SearchList(Gtk.Box):
 
                 self._children[name]["widget"].set_visible(False)
 
-    def _focus_chain_widget_grab_focus(self):
+    def get_active_item(self):
 
-        if not self._focus_chain_widget == None and self._focus_chain_widget.get_mapped():
+        return self._active_row
 
-            self._focus_chain_widget.grab_focus()
+    def set_active_item(self, name):
 
-            return True
+        item = self._children[name]["widget"]
 
-    def get_min_row_width(self):
+        if not item == self._active_row:
 
-        return self._min_row_width
-
-    def set_min_row_width(self, value):
-
-        if not value == self._min_row_width:
-
-            for child in self._children:
-
-                child.set_size_request(value, -1)
-
-            self._min_row_width = value
-
-    def get_focus_chain_widget(self, widget):
-
-        return self._focus_chain_widget
-
-    def set_focus_chain_widget(self, widget):
-
-        self._focus_chain_widget = widget
+            item.activate()
 
     def get_search_mode(self):
 
@@ -1529,6 +1437,10 @@ class SearchList(Gtk.Box):
     def set_search_mode(self, value):
 
         self._search_bar.set_search_mode(value)
+
+    def get_search_bar(self):
+
+        return self._search_bar
 
     def get_search_button(self):
 
@@ -1616,21 +1528,11 @@ class SearchList(Gtk.Box):
 
             box.append(label)
 
-            child = Gtk.FlowBoxChild()
-
-            child.add_css_class("activatable")
-
-            child.add_css_class("card")
-
-            child.add_css_class("view")
-
-            child.add_css_class("frame")
+            child = Gtk.ListBoxRow()
 
             child.set_child(box)
 
-            child.set_size_request(self._min_row_width, 0)
-
-            self._flow_box.prepend(child)
+            self._list_box.prepend(child)
 
             self._names[child] = name
 
@@ -1660,7 +1562,7 @@ class SearchList(Gtk.Box):
 
             child = self._children[name]["widget"]
 
-            self._flow_box.remove(child)
+            self._list_box.remove(child)
 
             del self._names[child]
 
