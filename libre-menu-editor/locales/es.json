@@ -1,167 +1,110 @@
 {
 
-    "APPLICATION_NAME": "Menú Principal",
+  "APPLICATION_NAME": "Menú Principal",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Aplicación sin nombre",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Acción sin nombre",
+
+  "GREETER_PAGE_HEAD": "Información",
+  "GREETER_PAGE_BODY": "Este programa cambia los archivos de configuración que no están destinados a cambios posteriores. Por lo tanto, en algunos sistemas, puede suceder que algunos cambios solo se hagan visibles después de mucho tiempo o después de que el usuario vuelva a iniciar sesión",
+  "GREETER_PAGE_BUTTON_LABEL": "Entendido",
+
+  "START_PAGE_HEAD": "Modificar el menú",
+  "START_PAGE_BODY": "Cree un nuevo lanzador de aplicaciones o seleccione uno existente en la barra lateral",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Abrir",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Cancelar",
+
+  "INSTALL_DIALOG_HEAD": "Instalación",
+  "INSTALL_DIALOG_BODY": "¿Quieres agregar esta aplicación al menú principal?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Regresar",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Guardar",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Instale",
+
+  "DISCARD_DIALOG_HEAD": "Cambios no guardados",
+  "DISCARD_DIALOG_BODY": "¿Quieres desechar los cambios?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Regresar",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Guardar",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Desechar",
+
+  "RESET_DIALOG_HEAD": "Reinicio",
+  "RESET_DIALOG_BODY": "¿Quieres restablecer esta aplicación? Esta acción no se puede deshacer",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Regresar",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Continuar",
+
+  "DELETE_DIALOG_HEAD": "Eliminación",
+  "DELETE_DIALOG_BODY": "¿Quieres eliminar esta aplicación? Esta acción no se puede deshacer",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Regresar",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Continuar",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Mostrar ocultos",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Nuevo lanzador",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Lanzador abierto",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Editar documento",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Restablecer lanzador",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Eliminar lanzador",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Descartar lanzador",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Atajos de teclado",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Acerca esta app",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Lanzadores de búsqueda",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Mostrar escondido",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Dejar la aplicación",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Mostrar atajos",
+  "SHOW_MENU_SHORTCUT_TEXT": "Menú abierto",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Guardar cambios",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Descartar cambios",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Eliminar cambios",
+  "NEW_STARTER_SHORTCUT_TEXT": "Nuevo lanzador",
+  "EDIT_FILE_SHORTCUT_TEXT": "Editar documento",
+  "OPEN_FILE_SHORTCUT_TEXT": "Lanzador abierto",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Editar",
+  "FIND_SHORTCUT_GROUP_TITLE": "Encontrar",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "General",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Elegir icono",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Elegir archivo ejecutable",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Elegir directorio",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Elegir lanzador",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Guardar",
+
+  "BANNER_LABEL_TEXT": "Seleccione las acciones que desea eliminar",
+  "BANNER_CANCEL_BUTTON_LABEL": "Terminado",
+
+  "DESCRIPTION_GROUP_TITLE": "Descripción",
+  "EXECUTION_GROUP_TITLE": "Ejecución",
+  "ACTIONS_GROUP_TITLE": "Acciones",
+  "VISIBLE_GROUP_TITLE": "Visibilidad",
+
+  "ICON_CHOOSER_ROW_TITLE": "Icono",
+  "NAME_ENTRY_ROW_TITLE": "Nombre",
+  "COMMENT_ENTRY_ROW_TITLE": "Comentario",
+  "COMMAND_CHOOSER_ROW_TITLE": "Comando",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Directorio",
+  "VISIBLE_SWITCH_ROW_TITLE": "Mostrar esta aplicación en menú principal",
+  "NOTIFY_SWITCH_ROW_TITLE": "Mostrar una animación hasta que la aplicación sea visible",
+  "TERMINAL_SWITCH_ROW_TITLE": "Mostrar una ventana de terminal durante la ejecución",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "No se pudo cargar %s archivos",
+  "LOAD_SINGLE_ERROR_TEXT": "No se pudo cargar el archivo '%s'",
+  "OPEN_FILE_ERROR_TEXT": "No se pudo abrir las configuraciones",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Se han guardado configuraciones para '%s'",
+  "STARTER_SAVE_ERROR_TEXT": "No se pudo guardar las configuraciones",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Se ha creado el lanzador de '%s'",
+  "STARTER_CREATE_ERROR_TEXT": "No se pudo crear el lanzador",
+
+  "STARTER_RESET_MESSAGE_TEXT": "El lanzador de '%s' ha sido reiniciado",
+  "STARTER_RESET_ERROR_TEXT": "No se pudo reiniciar el lanzador",
 
-    "GREETER_PAGE_HEAD": "Información",
+  "STARTER_DELETE_MESSAGE_TEXT": "El lanzador de '%s' ha sido eliminado",
+  "STARTER_DELETE_ERROR_TEXT": "No se pudo eliminar el lanzador",
 
-    "GREETER_PAGE_BODY": "Este programa cambia los archivos de configuración que no están destinados a cambios posteriores. Por lo tanto, en algunos sistemas, puede suceder que algunos cambios solo se hagan visibles después de mucho tiempo o después de que el usuario vuelva a iniciar sesión",
-
-    "GREETER_PAGE_BUTTON_LABEL": "Entendido",
-
-    "START_PAGE_HEAD": "Modificar el menú",
-
-    "START_PAGE_BODY": "Cree un nuevo lanzador de aplicaciones o seleccione uno existente en la barra lateral",
-
-    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Abrir",
-
-    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Cancelar",
-
-    "INSTALL_DIALOG_HEAD": "Instalación",
-
-    "INSTALL_DIALOG_BODY": "¿Quieres agregar esta aplicación al menú principal?",
-
-    "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Regresar",
-
-    "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Guardar",
-
-    "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Instale",
-
-    "DISCARD_DIALOG_HEAD": "Cambios no guardados",
-
-    "DISCARD_DIALOG_BODY": "¿Quieres desechar los cambios?",
-
-    "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Regresar",
-
-    "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Guardar",
-
-    "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Desechar",
-
-    "RESET_DIALOG_HEAD": "Reinicio",
-
-    "RESET_DIALOG_BODY": "¿Quieres restablecer esta aplicación? Esta acción no se puede deshacer",
-
-    "RESET_DIALOG_BACK_BUTTON_LABEL": "Regresar",
-
-    "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Continuar",
-
-    "DELETE_DIALOG_HEAD": "Eliminación",
-
-    "DELETE_DIALOG_BODY": "¿Quieres eliminar esta aplicación? Esta acción no se puede deshacer",
-
-    "DELETE_DIALOG_BACK_BUTTON_LABEL": "Regresar",
-
-    "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Continuar",
-
-    "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Aplicación sin nombre",
-
-    "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Acción sin nombre",
-
-    "SHOW_HIDDEN_SWITCH_LABEL": "Mostrar ocultos",
-
-    "RESET_STARTER_MENU_BUTTON_LABEL": "Restablecer lanzador",
-
-    "DELETE_STARTER_MENU_BUTTON_LABEL": "Eliminar lanzador",
-
-    "DISCARD_STARTER_MENU_BUTTON_LABEL": "Descartar lanzador",
-
-    "EDIT_FILE_MENU_BUTTON_LABEL": "Editar documento",
-
-    "NEW_STARTER_MENU_BUTTON_LABEL": "Nuevo lanzador",
-
-    "OPEN_FILE_MENU_BUTTON_LABEL": "Lanzador abierto",
-
-    "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Atajos de teclado",
-
-    "SHOW_ABOUT_MENU_BUTTON_LABEL": "Acerca esta app",
-
-    "TOGGLE_SEARCH_SHORTCUT_TEXT": "Lanzadores de búsqueda",
-
-    "SHOW_HIDDEN_SHORTCUT_TEXT": "Mostrar escondido",
-
-    "SAVE_SETTINGS_SHORTCUT_TEXT": "Guardar cambios",
-
-    "RELOAD_SETTINGS_SHORTCUT_TEXT": "Descartar cambios",
-
-    "REVERT_CHANGES_SHORTCUT_TEXT": "Eliminar cambios",
-
-    "NEW_STARTER_SHORTCUT_TEXT": "Nuevo lanzador",
-
-    "EDIT_FILE_SHORTCUT_TEXT": "Editar documento",
-
-    "OPEN_FILE_SHORTCUT_TEXT": "Lanzador abierto",
-
-    "SHOW_MENU_SHORTCUT_TEXT": "Menú abierto",
-
-    "QUIT_APPLICATION_SHORTCUT_TEXT": "Dejar la aplicación",
-
-    "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Mostrar atajos",
-
-    "EDIT_SHORTCUT_GROUP_TITLE": "Editar",
-
-    "FIND_SHORTCUT_GROUP_TITLE": "Encontrar",
-
-    "GENERAL_SHORTCUT_GROUP_TITLE": "General",
-
-    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Elegir icono",
-
-    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Elegir archivo ejecutable",
-
-    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Elegir directorio",
-
-    "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Elegir lanzador",
-
-    "SAVE_SETTINGS_BUTTON_LABEL": "Guardar",
-
-    "BANNER_LABEL_TEXT": "Seleccione las acciones que desea eliminar",
-
-    "BANNER_CANCEL_BUTTON_LABEL": "Terminado",
-
-    "DESCRIPTION_GROUP_TITLE": "Descripción",
-
-    "EXECUTION_GROUP_TITLE": "Ejecución",
-
-    "ACTIONS_GROUP_TITLE": "Acciones",
-
-    "VISIBLE_GROUP_TITLE": "Visibilidad",
-
-    "ICON_CHOOSER_ROW_TITLE": "Icono",
-
-    "NAME_ENTRY_ROW_TITLE": "Nombre",
-
-    "COMMENT_ENTRY_ROW_TITLE": "Comentario",
-
-    "COMMAND_CHOOSER_ROW_TITLE": "Comando",
-
-    "DIRECTORY_CHOOSER_ROW_TITLE": "Directorio",
-
-    "VISIBLE_SWITCH_ROW_TITLE": "Mostrar esta aplicación en menú principal",
-
-    "NOTIFY_SWITCH_ROW_TITLE": "Mostrar una animación hasta que la aplicación sea visible",
-
-    "TERMINAL_SWITCH_ROW_TITLE": "Mostrar una ventana de terminal durante la ejecución",
-
-    "LOAD_MULTIPLE_ERROR_TEXT": "No se pudo cargar %s archivos",
-
-    "LOAD_SINGLE_ERROR_TEXT": "No se pudo cargar el archivo '%s'",
-
-    "OPEN_FILE_ERROR_TEXT": "No se pudo abrir las configuraciones",
-
-    "STARTER_SAVE_MESSAGE_TEXT": "Se han guardado configuraciones para '%s'",
-
-    "STARTER_SAVE_ERROR_TEXT": "No se pudo guardar las configuraciones",
-
-    "STARTER_CREATE_MESSAGE_TEXT": "Se ha creado el lanzador de '%s'",
-
-    "STARTER_CREATE_ERROR_TEXT": "No se pudo crear el lanzador",
-
-    "STARTER_RESET_MESSAGE_TEXT": "El lanzador de '%s' ha sido reiniciado",
-
-    "STARTER_RESET_ERROR_TEXT": "No se pudo reiniciar el lanzador",
-
-    "STARTER_DELETE_MESSAGE_TEXT": "El lanzador de '%s' ha sido eliminado",
-
-    "STARTER_DELETE_ERROR_TEXT": "No se pudo eliminar el lanzador",
-
-    "STARTER_REMOVE_MESSAGE_TEXT": "El lanzador de '%s' ha sido descartado"
+  "STARTER_REMOVE_MESSAGE_TEXT": "El lanzador de '%s' ha sido descartado"
 
 }

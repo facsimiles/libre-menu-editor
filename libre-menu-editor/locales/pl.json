@@ -1,167 +1,110 @@
 {
 
-    "APPLICATION_NAME": "Menu Główne",
+  "APPLICATION_NAME": "Menu Główne",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Nieznana Aplikacja",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Nieznana Akcja",
+
+  "GREETER_PAGE_HEAD": "Informacja",
+  "GREETER_PAGE_BODY": "Ten program zmienia pliki konfiguracyjne, które nie są przeznaczone do późniejszych zmian. W niektórych systemach może się zatem zdarzyć, że niektóre zmiany staną się widoczne dopiero po długim czasie lub po ponownym zalogowaniu się użytkownika",
+  "GREETER_PAGE_BUTTON_LABEL": "Kontynuuj",
+
+  "START_PAGE_HEAD": "Edycja menu",
+  "START_PAGE_BODY": "Utwórz nowy program uruchamiający aplikacje lub wybierz istniejący z paska bocznego",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Otwarty",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Anuluj",
+
+  "INSTALL_DIALOG_HEAD": "Instalacja",
+  "INSTALL_DIALOG_BODY": "Czy chcesz dodać tę aplikację do menu głównego?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Powrót",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Zapisz",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Zainstaluj",
+
+  "DISCARD_DIALOG_HEAD": "Niezapisane zmiany",
+  "DISCARD_DIALOG_BODY": "Czy na pewno chcesz odrzucić zmiany?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Powrót",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Zapisz",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Odrzuć",
+
+  "RESET_DIALOG_HEAD": "Resetowanie",
+  "RESET_DIALOG_BODY": "Czy chcesz zresetować tę aplikację? Tej czynności nie można cofnąć",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Powrót",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Kontynuuj",
+
+  "DELETE_DIALOG_HEAD": "Usuń",
+  "DELETE_DIALOG_BODY": "Czy chcesz usunąć tę aplikację? Tej czynności nie można cofnąć",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Powrót",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Kontynuuj",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Pokaż schowane",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Nowy launcher",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Otwórz launcher",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Edytować dokument",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Zresetuj launcher",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Usuń launcher",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Usuń launcher",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Skróty klawiszowe",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "O tej aplikacji",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Wyszukaj launcher",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Pokaż schowane",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Zamknij aplikację",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Pokaż skróty",
+  "SHOW_MENU_SHORTCUT_TEXT": "Otwórz menu",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Zapisz zmiany",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Odrzucać zmiany",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Usuń zmiany",
+  "NEW_STARTER_SHORTCUT_TEXT": "Nowy launcher",
+  "EDIT_FILE_SHORTCUT_TEXT": "Edytować dokument",
+  "OPEN_FILE_SHORTCUT_TEXT": "Otwórz launcher",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Edytować",
+  "FIND_SHORTCUT_GROUP_TITLE": "Znajdować",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Ogólny",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Wybierz ikonę",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Wybierz plik wykonywalny",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Wybierz folder",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Wybierz launcher",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Zapisz",
+
+  "BANNER_LABEL_TEXT": "Wybierz akcje, które chcesz usunąć",
+  "BANNER_CANCEL_BUTTON_LABEL": "Gotowe",
+
+  "DESCRIPTION_GROUP_TITLE": "Opis",
+  "EXECUTION_GROUP_TITLE": "Wykonanie",
+  "ACTIONS_GROUP_TITLE": "Akcje",
+  "VISIBLE_GROUP_TITLE": "Wyświetlanie",
+
+  "ICON_CHOOSER_ROW_TITLE": "Ikona",
+  "NAME_ENTRY_ROW_TITLE": "Nazwa",
+  "COMMENT_ENTRY_ROW_TITLE": "Komentarz",
+  "COMMAND_CHOOSER_ROW_TITLE": "Komenda",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Folder",
+  "VISIBLE_SWITCH_ROW_TITLE": "Pokaż tę aplikację w menu głównym",
+  "NOTIFY_SWITCH_ROW_TITLE": "Pokaż animację, dopóki aplikacja będzie widoczna",
+  "TERMINAL_SWITCH_ROW_TITLE": "Pokaż okno terminala podczas wykonywania",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Ładowanie %s plików nie powiodło się",
+  "LOAD_SINGLE_ERROR_TEXT": "Ładowanie pliku nie powiodło się: '%s'",
+  "OPEN_FILE_ERROR_TEXT": "Nie udało się otworzyć konfiguracji",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Konfiguracja dla '%s' została zapisana",
+  "STARTER_SAVE_ERROR_TEXT": "Zapisywanie konfiguracji nie powiodło się",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Launcher dla '%s' został stworzony",
+  "STARTER_CREATE_ERROR_TEXT": "Tworzenie launchera nie powiodło się",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Launcher dla '%s' został zresetowany",
+  "STARTER_RESET_ERROR_TEXT": "Resetowanie launchera nie powiodło się",
 
-    "GREETER_PAGE_HEAD": "Informacja",
+  "STARTER_DELETE_MESSAGE_TEXT": "Launcher dla '%s' został usunięty",
+  "STARTER_DELETE_ERROR_TEXT": "Usuwanie launchera nie powiodło się",
 
-    "GREETER_PAGE_BODY": "Ten program zmienia pliki konfiguracyjne, które nie są przeznaczone do późniejszych zmian. W niektórych systemach może się zatem zdarzyć, że niektóre zmiany staną się widoczne dopiero po długim czasie lub po ponownym zalogowaniu się użytkownika",
-
-    "GREETER_PAGE_BUTTON_LABEL": "Kontynuuj",
-
-    "START_PAGE_HEAD": "Edycja menu",
-
-    "START_PAGE_BODY": "Utwórz nowy program uruchamiający aplikacje lub wybierz istniejący z paska bocznego",
-
-    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Otwarty",
-
-    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Anuluj",
-
-    "INSTALL_DIALOG_HEAD": "Instalacja",
-
-    "INSTALL_DIALOG_BODY": "Czy chcesz dodać tę aplikację do menu głównego?",
-
-    "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Powrót",
-
-    "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Zapisz",
-
-    "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Zainstaluj",
-
-    "DISCARD_DIALOG_HEAD": "Niezapisane zmiany",
-
-    "DISCARD_DIALOG_BODY": "Czy na pewno chcesz odrzucić zmiany?",
-
-    "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Powrót",
-
-    "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Zapisz",
-
-    "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Odrzuć",
-
-    "RESET_DIALOG_HEAD": "Resetowanie",
-
-    "RESET_DIALOG_BODY": "Czy chcesz zresetować tę aplikację? Tej czynności nie można cofnąć",
-
-    "RESET_DIALOG_BACK_BUTTON_LABEL": "Powrót",
-
-    "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Kontynuuj",
-
-    "DELETE_DIALOG_HEAD": "Usuń",
-
-    "DELETE_DIALOG_BODY": "Czy chcesz usunąć tę aplikację? Tej czynności nie można cofnąć",
-
-    "DELETE_DIALOG_BACK_BUTTON_LABEL": "Powrót",
-
-    "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Kontynuuj",
-
-    "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Nieznana Aplikacja",
-
-    "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Nieznana Akcja",
-
-    "SHOW_HIDDEN_SWITCH_LABEL": "Pokaż schowane",
-
-    "RESET_STARTER_MENU_BUTTON_LABEL": "Zresetuj launcher",
-
-    "DELETE_STARTER_MENU_BUTTON_LABEL": "Usuń launcher",
-
-    "DISCARD_STARTER_MENU_BUTTON_LABEL": "Usuń launcher",
-
-    "EDIT_FILE_MENU_BUTTON_LABEL": "Edytować dokument",
-
-    "NEW_STARTER_MENU_BUTTON_LABEL": "Nowy launcher",
-
-    "OPEN_FILE_MENU_BUTTON_LABEL": "Otwórz launcher",
-
-    "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Skróty klawiszowe",
-
-    "SHOW_ABOUT_MENU_BUTTON_LABEL": "O tej aplikacji",
-
-    "TOGGLE_SEARCH_SHORTCUT_TEXT": "Wyszukaj launcher",
-
-    "SHOW_HIDDEN_SHORTCUT_TEXT": "Pokaż schowane",
-
-    "SAVE_SETTINGS_SHORTCUT_TEXT": "Zapisz zmiany",
-
-    "RELOAD_SETTINGS_SHORTCUT_TEXT": "Odrzucać zmiany",
-
-    "REVERT_CHANGES_SHORTCUT_TEXT": "Usuń zmiany",
-
-    "NEW_STARTER_SHORTCUT_TEXT": "Nowy launcher",
-
-    "EDIT_FILE_SHORTCUT_TEXT": "Edytować dokument",
-
-    "OPEN_FILE_SHORTCUT_TEXT": "Otwórz launcher",
-
-    "SHOW_MENU_SHORTCUT_TEXT": "Otwórz menu",
-
-    "QUIT_APPLICATION_SHORTCUT_TEXT": "Zamknij aplikację",
-
-    "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Pokaż skróty",
-
-    "EDIT_SHORTCUT_GROUP_TITLE": "Edytować",
-
-    "FIND_SHORTCUT_GROUP_TITLE": "Znajdować",
-
-    "GENERAL_SHORTCUT_GROUP_TITLE": "Ogólny",
-
-    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Wybierz ikonę",
-
-    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Wybierz plik wykonywalny",
-
-    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Wybierz folder",
-
-    "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Wybierz launcher",
-
-    "SAVE_SETTINGS_BUTTON_LABEL": "Zapisz",
-
-    "BANNER_LABEL_TEXT": "Wybierz akcje, które chcesz usunąć",
-
-    "BANNER_CANCEL_BUTTON_LABEL": "Gotowe",
-
-    "DESCRIPTION_GROUP_TITLE": "Opis",
-
-    "EXECUTION_GROUP_TITLE": "Wykonanie",
-
-    "ACTIONS_GROUP_TITLE": "Akcje",
-
-    "VISIBLE_GROUP_TITLE": "Wyświetlanie",
-
-    "ICON_CHOOSER_ROW_TITLE": "Ikona",
-
-    "NAME_ENTRY_ROW_TITLE": "Nazwa",
-
-    "COMMENT_ENTRY_ROW_TITLE": "Komentarz",
-
-    "COMMAND_CHOOSER_ROW_TITLE": "Komenda",
-
-    "DIRECTORY_CHOOSER_ROW_TITLE": "Folder",
-
-    "VISIBLE_SWITCH_ROW_TITLE": "Pokaż tę aplikację w menu głównym",
-
-    "NOTIFY_SWITCH_ROW_TITLE": "Pokaż animację, dopóki aplikacja będzie widoczna",
-
-    "TERMINAL_SWITCH_ROW_TITLE": "Pokaż okno terminala podczas wykonywania",
-
-    "LOAD_MULTIPLE_ERROR_TEXT": "Ładowanie %s plików nie powiodło się",
-
-    "LOAD_SINGLE_ERROR_TEXT": "Ładowanie pliku nie powiodło się: '%s'",
-
-    "OPEN_FILE_ERROR_TEXT": "Nie udało się otworzyć konfiguracji",
-
-    "STARTER_SAVE_MESSAGE_TEXT": "Konfiguracja dla '%s' została zapisana",
-
-    "STARTER_SAVE_ERROR_TEXT": "Zapisywanie konfiguracji nie powiodło się",
-
-    "STARTER_CREATE_MESSAGE_TEXT": "Launcher dla '%s' został stworzony",
-
-    "STARTER_CREATE_ERROR_TEXT": "Tworzenie launchera nie powiodło się",
-
-    "STARTER_RESET_MESSAGE_TEXT": "Launcher dla '%s' został zresetowany",
-
-    "STARTER_RESET_ERROR_TEXT": "Resetowanie launchera nie powiodło się",
-
-    "STARTER_DELETE_MESSAGE_TEXT": "Launcher dla '%s' został usunięty",
-
-    "STARTER_DELETE_ERROR_TEXT": "Usuwanie launchera nie powiodło się",
-
-    "STARTER_REMOVE_MESSAGE_TEXT": "Launcher dla '%s' został usunięty"
+  "STARTER_REMOVE_MESSAGE_TEXT": "Launcher dla '%s' został usunięty"
 
 }

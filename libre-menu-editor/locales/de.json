@@ -1,167 +1,110 @@
 {
 
-    "APPLICATION_NAME": "Hauptmenü",
+  "APPLICATION_NAME": "Hauptmenü",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Unbenannte Anwendung",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Unbenannte Aktion",
+
+  "GREETER_PAGE_HEAD": "Information",
+  "GREETER_PAGE_BODY": "Dieses Programm verändert Konfigurationsdateien die nicht zur nachträglichen Änderung vorgesehen sind. Auf manchen Systemen kann es daher vorkommen, dass einige Änderungen erst nach langer Zeit oder nach erneuter Benutzeranmeldung sichtbar werden",
+  "GREETER_PAGE_BUTTON_LABEL": "Verstanden",
+
+  "START_PAGE_HEAD": "Das Menü bearbeiten",
+  "START_PAGE_BODY": "Erstellen Sie einen neuen Anwendungsstarter oder wählen Sie einen vorhandenen aus der Seitenleiste aus",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Öffnen",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Abbrechen",
+
+  "INSTALL_DIALOG_HEAD": "Installation",
+  "INSTALL_DIALOG_BODY": "Soll der Anwendungsstarter in das Hauptmenü eingefügt werden?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Zurück",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Speichern",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Einfügen",
+
+  "DISCARD_DIALOG_HEAD": "Änderungen",
+  "DISCARD_DIALOG_BODY": "Sollen die vorgenommenen Änderungen verworfen werden?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Zurück",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Speichern",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Verwerfen",
+
+  "RESET_DIALOG_HEAD": "Zurücksetzen",
+  "RESET_DIALOG_BODY": "Sind Sie sicher, dass der Anwendungsstarter zurückgesetzt werden soll? Diese Änderung kann nicht rückgängig gemacht werden",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Zurück",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Weiter",
+
+  "DELETE_DIALOG_HEAD": "Löschen",
+  "DELETE_DIALOG_BODY": "Sind Sie sicher, dass der Anwendungsstarter gelöscht werden soll? Diese Änderung kann nicht rückgängig gemacht werden",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Zurück",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Weiter",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Versteckte zeigen",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Neuer Starter",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Datei öffnen",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Text bearbeiten",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Zurücksetzen",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Starter löschen",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Starter verwerfen",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Tastenkürzel",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Über Hauptmenü",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Starter durchsuchen",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Versteckte zeigen",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Anwendung beenden",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Tastenkürzel anzeigen",
+  "SHOW_MENU_SHORTCUT_TEXT": "Menü anzeigen",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Änderungen speichern",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Änderungen verwerfen",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Änderungen entfernen",
+  "NEW_STARTER_SHORTCUT_TEXT": "Neuer Starter",
+  "EDIT_FILE_SHORTCUT_TEXT": "Text bearbeiten",
+  "OPEN_FILE_SHORTCUT_TEXT": "Datei öffnen",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Bearbeiten",
+  "FIND_SHORTCUT_GROUP_TITLE": "Suchen",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Allgemein",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Symboldatei auswählen",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Ausführbare Datei auswählen",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Ordner auswählen",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Anwendungsstarter auswählen",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Speichern",
+
+  "BANNER_LABEL_TEXT": "Bitte wählen Sie die Aktionen aus die Sie löschen wollen",
+  "BANNER_CANCEL_BUTTON_LABEL": "Fertig",
+
+  "DESCRIPTION_GROUP_TITLE": "Beschreibung",
+  "EXECUTION_GROUP_TITLE": "Ausführung",
+  "ACTIONS_GROUP_TITLE": "Aktionen",
+  "VISIBLE_GROUP_TITLE": "Sichtbarkeit",
+
+  "ICON_CHOOSER_ROW_TITLE": "Symbol",
+  "NAME_ENTRY_ROW_TITLE": "Name",
+  "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
+  "COMMAND_CHOOSER_ROW_TITLE": "Befehl",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Verzeichnis",
+  "VISIBLE_SWITCH_ROW_TITLE": "Anwendung im Hauptmenü anzeigen",
+  "NOTIFY_SWITCH_ROW_TITLE": "Startanimation abspielen bis die Anwendung sichtbar ist",
+  "TERMINAL_SWITCH_ROW_TITLE": "Konsolenfenster während der Ausführung anzeigen",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "%s Starter konnten nicht geladen werden",
+  "LOAD_SINGLE_ERROR_TEXT": "Starter '%s' konnte nicht geladen werden",
+  "OPEN_FILE_ERROR_TEXT": "Konfigurationsdatei konnte nicht geöffnet werden",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Einstellungen für '%s' wurden gespeichert",
+  "STARTER_SAVE_ERROR_TEXT": "Einstellungen konnten nicht gespeichert werden",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Starter für '%s' wurde erstellt",
+  "STARTER_CREATE_ERROR_TEXT": "Starter konnte nicht erstellt werden",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Starter für '%s' wurde zurückgesetzt",
+  "STARTER_RESET_ERROR_TEXT": "Starter konnte nicht zurückgesetzt werden",
 
-    "GREETER_PAGE_HEAD": "Information",
+  "STARTER_DELETE_MESSAGE_TEXT": "Starter für '%s' wurde gelöscht",
+  "STARTER_DELETE_ERROR_TEXT": "Starter konnte nicht gelöscht werden",
 
-    "GREETER_PAGE_BODY": "Dieses Programm verändert Konfigurationsdateien die nicht zur nachträglichen Änderung vorgesehen sind. Auf manchen Systemen kann es daher vorkommen, dass einige Änderungen erst nach langer Zeit oder nach erneuter Benutzeranmeldung sichtbar werden",
-
-    "GREETER_PAGE_BUTTON_LABEL": "Verstanden",
-
-    "START_PAGE_HEAD": "Das Menü bearbeiten",
-
-    "START_PAGE_BODY": "Erstellen Sie einen neuen Anwendungsstarter oder wählen Sie einen vorhandenen aus der Seitenleiste aus",
-
-    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Öffnen",
-
-    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Abbrechen",
-
-    "INSTALL_DIALOG_HEAD": "Installation",
-
-    "INSTALL_DIALOG_BODY": "Soll der Anwendungsstarter in das Hauptmenü eingefügt werden?",
-
-    "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Zurück",
-
-    "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Speichern",
-
-    "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Einfügen",
-
-    "DISCARD_DIALOG_HEAD": "Änderungen",
-
-    "DISCARD_DIALOG_BODY": "Sollen die vorgenommenen Änderungen verworfen werden?",
-
-    "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Zurück",
-
-    "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Speichern",
-
-    "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Verwerfen",
-
-    "RESET_DIALOG_HEAD": "Zurücksetzen",
-
-    "RESET_DIALOG_BODY": "Sind Sie sicher, dass der Anwendungsstarter zurückgesetzt werden soll? Diese Änderung kann nicht rückgängig gemacht werden",
-
-    "RESET_DIALOG_BACK_BUTTON_LABEL": "Zurück",
-
-    "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Weiter",
-
-    "DELETE_DIALOG_HEAD": "Löschen",
-
-    "DELETE_DIALOG_BODY": "Sind Sie sicher, dass der Anwendungsstarter gelöscht werden soll? Diese Änderung kann nicht rückgängig gemacht werden",
-
-    "DELETE_DIALOG_BACK_BUTTON_LABEL": "Zurück",
-
-    "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Weiter",
-
-    "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Unbenannte Anwendung",
-
-    "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Unbenannte Aktion",
-
-    "SHOW_HIDDEN_SWITCH_LABEL": "Versteckte zeigen",
-
-    "RESET_STARTER_MENU_BUTTON_LABEL": "Zurücksetzen",
-
-    "DELETE_STARTER_MENU_BUTTON_LABEL": "Starter löschen",
-
-    "DISCARD_STARTER_MENU_BUTTON_LABEL": "Starter verwerfen",
-
-    "EDIT_FILE_MENU_BUTTON_LABEL": "Text bearbeiten",
-
-    "NEW_STARTER_MENU_BUTTON_LABEL": "Neuer Starter",
-
-    "OPEN_FILE_MENU_BUTTON_LABEL": "Datei öffnen",
-
-    "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Tastenkürzel",
-
-    "SHOW_ABOUT_MENU_BUTTON_LABEL": "Über Hauptmenü",
-
-    "TOGGLE_SEARCH_SHORTCUT_TEXT": "Starter durchsuchen",
-
-    "SHOW_HIDDEN_SHORTCUT_TEXT": "Versteckte zeigen",
-
-    "SAVE_SETTINGS_SHORTCUT_TEXT": "Änderungen speichern",
-
-    "RELOAD_SETTINGS_SHORTCUT_TEXT": "Änderungen verwerfen",
-
-    "REVERT_CHANGES_SHORTCUT_TEXT": "Änderungen entfernen",
-
-    "NEW_STARTER_SHORTCUT_TEXT": "Neuer Starter",
-
-    "EDIT_FILE_SHORTCUT_TEXT": "Text bearbeiten",
-
-    "OPEN_FILE_SHORTCUT_TEXT": "Datei öffnen",
-
-    "SHOW_MENU_SHORTCUT_TEXT": "Menü anzeigen",
-
-    "QUIT_APPLICATION_SHORTCUT_TEXT": "Anwendung beenden",
-
-    "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Tastenkürzel anzeigen",
-
-    "EDIT_SHORTCUT_GROUP_TITLE": "Bearbeiten",
-
-    "FIND_SHORTCUT_GROUP_TITLE": "Suchen",
-
-    "GENERAL_SHORTCUT_GROUP_TITLE": "Allgemein",
-
-    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Symboldatei auswählen",
-
-    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Ausführbare Datei auswählen",
-
-    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Ordner auswählen",
-
-    "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Anwendungsstarter auswählen",
-
-    "SAVE_SETTINGS_BUTTON_LABEL": "Speichern",
-
-    "BANNER_LABEL_TEXT": "Bitte wählen Sie die Aktionen aus die Sie löschen wollen",
-
-    "BANNER_CANCEL_BUTTON_LABEL": "Fertig",
-
-    "DESCRIPTION_GROUP_TITLE": "Beschreibung",
-
-    "EXECUTION_GROUP_TITLE": "Ausführung",
-
-    "ACTIONS_GROUP_TITLE": "Aktionen",
-
-    "VISIBLE_GROUP_TITLE": "Sichtbarkeit",
-
-    "ICON_CHOOSER_ROW_TITLE": "Symbol",
-
-    "NAME_ENTRY_ROW_TITLE": "Name",
-
-    "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
-
-    "COMMAND_CHOOSER_ROW_TITLE": "Befehl",
-
-    "DIRECTORY_CHOOSER_ROW_TITLE": "Verzeichnis",
-
-    "VISIBLE_SWITCH_ROW_TITLE": "Anwendung im Hauptmenü anzeigen",
-
-    "NOTIFY_SWITCH_ROW_TITLE": "Startanimation abspielen bis die Anwendung sichtbar ist",
-
-    "TERMINAL_SWITCH_ROW_TITLE": "Konsolenfenster während der Ausführung anzeigen",
-
-    "LOAD_MULTIPLE_ERROR_TEXT": "%s Starter konnten nicht geladen werden",
-
-    "LOAD_SINGLE_ERROR_TEXT": "Starter '%s' konnte nicht geladen werden",
-
-    "OPEN_FILE_ERROR_TEXT": "Konfigurationsdatei konnte nicht geöffnet werden",
-
-    "STARTER_SAVE_MESSAGE_TEXT": "Einstellungen für '%s' wurden gespeichert",
-
-    "STARTER_SAVE_ERROR_TEXT": "Einstellungen konnten nicht gespeichert werden",
-
-    "STARTER_CREATE_MESSAGE_TEXT": "Starter für '%s' wurde erstellt",
-
-    "STARTER_CREATE_ERROR_TEXT": "Starter konnte nicht erstellt werden",
-
-    "STARTER_RESET_MESSAGE_TEXT": "Starter für '%s' wurde zurückgesetzt",
-
-    "STARTER_RESET_ERROR_TEXT": "Starter konnte nicht zurückgesetzt werden",
-
-    "STARTER_DELETE_MESSAGE_TEXT": "Starter für '%s' wurde gelöscht",
-
-    "STARTER_DELETE_ERROR_TEXT": "Starter konnte nicht gelöscht werden",
-
-    "STARTER_REMOVE_MESSAGE_TEXT": "Starter für '%s' wurde entfernt"
+  "STARTER_REMOVE_MESSAGE_TEXT": "Starter für '%s' wurde entfernt"
 
 }

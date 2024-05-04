@@ -1,167 +1,110 @@
 {
 
-    "APPLICATION_NAME": "Menu Principal",
+  "APPLICATION_NAME": "Menu Principal",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Application sans nom",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Action sans nom",
+
+  "GREETER_PAGE_HEAD": "Information",
+  "GREETER_PAGE_BODY": "Ce programme modifie des fichiers de configuration qui ne sont pas destinés à une modification ultérieure. Sur certains systèmes, il peut donc arriver que certaines modifications ne deviennent visibles qu'après une longue période ou après que l'utilisateur se soit reconnecté",
+  "GREETER_PAGE_BUTTON_LABEL": "Continuer",
+
+  "START_PAGE_HEAD": "Modifier le menu",
+  "START_PAGE_BODY": "Créez un nouveau lanceur d'applications ou sélectionnez un existant dans la barre latérale",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Ouvrir",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Annuler",
+
+  "INSTALL_DIALOG_HEAD": "Installation",
+  "INSTALL_DIALOG_BODY": "Voulez-vous ajouter cette application au menu principal?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Retour",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Enregistrer",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Installer",
+
+  "DISCARD_DIALOG_HEAD": "Changements non sauvés",
+  "DISCARD_DIALOG_BODY": "Voulez-vous rejeter les changements?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Retour",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Enregistrer",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Rejeter",
+
+  "RESET_DIALOG_HEAD": "Réinitialiser",
+  "RESET_DIALOG_BODY": "Voulez-vous réinitialiser cette application? Cette action ne peut pas être annulée.",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Retour",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Continuer",
+
+  "DELETE_DIALOG_HEAD": "Supprimer",
+  "DELETE_DIALOG_BODY": "Voulez-vous supprimer cette application? Cette action ne peut pas être annulée.",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Retour",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Continuer",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Afficher les éléments cachés",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Nouveau lanceur",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Ouvrir un lanceur",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Modifier le document",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Réinitialiser le lanceur",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Supprimer le lanceur",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Jeter le lanceur",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Raccourcis clavier",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "À propos de cette app",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Rechercher des lanceurs",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Montrer les éléments cachés",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Quitter l'application",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Afficher les raccourcis",
+  "SHOW_MENU_SHORTCUT_TEXT": "Ouvrir le menu",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Sauvegarder les modifications",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Annuler les modifications",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Supprimer modifications",
+  "NEW_STARTER_SHORTCUT_TEXT": "Nouveau lanceur",
+  "EDIT_FILE_SHORTCUT_TEXT": "Modifier le document",
+  "OPEN_FILE_SHORTCUT_TEXT": "Ouvrir un lanceur",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Modifier",
+  "FIND_SHORTCUT_GROUP_TITLE": "Trouver",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Général",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Choisir une icône",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Choisir un fichier exécutable",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Choisir un répertoire",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Choisir un lanceur",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Enregistrer",
+
+  "BANNER_LABEL_TEXT": "Veuillez sélectionner les actions que vous souhaitez supprimer",
+  "BANNER_CANCEL_BUTTON_LABEL": "Terminé",
+
+  "DESCRIPTION_GROUP_TITLE": "Description",
+  "EXECUTION_GROUP_TITLE": "Exécution",
+  "ACTIONS_GROUP_TITLE": "Actions",
+  "VISIBLE_GROUP_TITLE": "Visibilité",
+
+  "ICON_CHOOSER_ROW_TITLE": "Icône",
+  "NAME_ENTRY_ROW_TITLE": "Nom",
+  "COMMENT_ENTRY_ROW_TITLE": "Commentaire",
+  "COMMAND_CHOOSER_ROW_TITLE": "Commande",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Répertoire",
+  "VISIBLE_SWITCH_ROW_TITLE": "Afficher cette application dans le menu principal",
+  "NOTIFY_SWITCH_ROW_TITLE": "Afficher une animation jusqu'à ce que l'application soit visible",
+  "TERMINAL_SWITCH_ROW_TITLE": "Afficher une fenêtre de terminal pendant l'exécution",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Échec du chargement de %s fichiers",
+  "LOAD_SINGLE_ERROR_TEXT": "Échec du chargement du fichier '%s'",
+  "OPEN_FILE_ERROR_TEXT": "Échec de l'ouverture des configurations",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Les configurations pour '%s' ont été sauvegardées",
+  "STARTER_SAVE_ERROR_TEXT": "Échec de l'enregistrement des configurations",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Le lanceur de '%s' a été créé",
+  "STARTER_CREATE_ERROR_TEXT": "Échec de la création du lanceur",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Le lanceur de '%s' a été réinitialisé",
+  "STARTER_RESET_ERROR_TEXT": "Échec de la réinitialisation du lanceur",
 
-    "GREETER_PAGE_HEAD": "Information",
+  "STARTER_DELETE_MESSAGE_TEXT": "Le lanceur de '%s' a été supprimé",
+  "STARTER_DELETE_ERROR_TEXT": "Échec de la suppression du lanceur",
 
-    "GREETER_PAGE_BODY": "Ce programme modifie des fichiers de configuration qui ne sont pas destinés à une modification ultérieure. Sur certains systèmes, il peut donc arriver que certaines modifications ne deviennent visibles qu'après une longue période ou après que l'utilisateur se soit reconnecté",
-
-    "GREETER_PAGE_BUTTON_LABEL": "Continuer",
-
-    "START_PAGE_HEAD": "Modifier le menu",
-
-    "START_PAGE_BODY": "Créez un nouveau lanceur d'applications ou sélectionnez un existant dans la barre latérale",
-
-    "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Ouvrir",
-
-    "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Annuler",
-
-    "INSTALL_DIALOG_HEAD": "Installation",
-
-    "INSTALL_DIALOG_BODY": "Voulez-vous ajouter cette application au menu principal?",
-
-    "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Retour",
-
-    "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Enregistrer",
-
-    "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Installer",
-
-    "DISCARD_DIALOG_HEAD": "Changements non sauvés",
-
-    "DISCARD_DIALOG_BODY": "Voulez-vous rejeter les changements?",
-
-    "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Retour",
-
-    "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Enregistrer",
-
-    "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Rejeter",
-
-    "RESET_DIALOG_HEAD": "Réinitialiser",
-
-    "RESET_DIALOG_BODY": "Voulez-vous réinitialiser cette application? Cette action ne peut pas être annulée.",
-
-    "RESET_DIALOG_BACK_BUTTON_LABEL": "Retour",
-
-    "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Continuer",
-
-    "DELETE_DIALOG_HEAD": "Supprimer",
-
-    "DELETE_DIALOG_BODY": "Voulez-vous supprimer cette application? Cette action ne peut pas être annulée.",
-
-    "DELETE_DIALOG_BACK_BUTTON_LABEL": "Retour",
-
-    "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Continuer",
-
-    "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Application sans nom",
-
-    "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Action sans nom",
-
-    "SHOW_HIDDEN_SWITCH_LABEL": "Afficher les éléments cachés",
-
-    "RESET_STARTER_MENU_BUTTON_LABEL": "Réinitialiser le lanceur",
-
-    "DELETE_STARTER_MENU_BUTTON_LABEL": "Supprimer le lanceur",
-
-    "DISCARD_STARTER_MENU_BUTTON_LABEL": "Jeter le lanceur",
-
-    "EDIT_FILE_MENU_BUTTON_LABEL": "Modifier le document",
-
-    "NEW_STARTER_MENU_BUTTON_LABEL": "Nouveau lanceur",
-
-    "OPEN_FILE_MENU_BUTTON_LABEL": "Ouvrir un lanceur",
-
-    "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Raccourcis clavier",
-
-    "SHOW_ABOUT_MENU_BUTTON_LABEL": "À propos de cette app",
-
-    "TOGGLE_SEARCH_SHORTCUT_TEXT": "Rechercher des lanceurs",
-
-    "SHOW_HIDDEN_SHORTCUT_TEXT": "Montrer les éléments cachés",
-
-    "SAVE_SETTINGS_SHORTCUT_TEXT": "Sauvegarder les modifications",
-
-    "RELOAD_SETTINGS_SHORTCUT_TEXT": "Annuler les modifications",
-
-    "REVERT_CHANGES_SHORTCUT_TEXT": "Supprimer modifications",
-
-    "NEW_STARTER_SHORTCUT_TEXT": "Nouveau lanceur",
-
-    "EDIT_FILE_SHORTCUT_TEXT": "Modifier le document",
-
-    "OPEN_FILE_SHORTCUT_TEXT": "Ouvrir un lanceur",
-
-    "SHOW_MENU_SHORTCUT_TEXT": "Ouvrir le menu",
-
-    "QUIT_APPLICATION_SHORTCUT_TEXT": "Quitter l'application",
-
-    "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Afficher les raccourcis",
-
-    "EDIT_SHORTCUT_GROUP_TITLE": "Modifier",
-
-    "FIND_SHORTCUT_GROUP_TITLE": "Trouver",
-
-    "GENERAL_SHORTCUT_GROUP_TITLE": "Général",
-
-    "ICON_CHOOSER_ROW_DIALOG_TITLE": "Choisir une icône",
-
-    "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Choisir un fichier exécutable",
-
-    "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Choisir un répertoire",
-
-    "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Choisir un lanceur",
-
-    "SAVE_SETTINGS_BUTTON_LABEL": "Enregistrer",
-
-    "BANNER_LABEL_TEXT": "Veuillez sélectionner les actions que vous souhaitez supprimer",
-
-    "BANNER_CANCEL_BUTTON_LABEL": "Terminé",
-
-    "DESCRIPTION_GROUP_TITLE": "Description",
-
-    "EXECUTION_GROUP_TITLE": "Exécution",
-
-    "ACTIONS_GROUP_TITLE": "Actions",
-
-    "VISIBLE_GROUP_TITLE": "Visibilité",
-
-    "ICON_CHOOSER_ROW_TITLE": "Icône",
-
-    "NAME_ENTRY_ROW_TITLE": "Nom",
-
-    "COMMENT_ENTRY_ROW_TITLE": "Commentaire",
-
-    "COMMAND_CHOOSER_ROW_TITLE": "Commande",
-
-    "DIRECTORY_CHOOSER_ROW_TITLE": "Répertoire",
-
-    "VISIBLE_SWITCH_ROW_TITLE": "Afficher cette application dans le menu principal",
-
-    "NOTIFY_SWITCH_ROW_TITLE": "Afficher une animation jusqu'à ce que l'application soit visible",
-
-    "TERMINAL_SWITCH_ROW_TITLE": "Afficher une fenêtre de terminal pendant l'exécution",
-
-    "LOAD_MULTIPLE_ERROR_TEXT": "Échec du chargement de %s fichiers",
-
-    "LOAD_SINGLE_ERROR_TEXT": "Échec du chargement du fichier '%s'",
-
-    "OPEN_FILE_ERROR_TEXT": "Échec de l'ouverture des configurations",
-
-    "STARTER_SAVE_MESSAGE_TEXT": "Les configurations pour '%s' ont été sauvegardées",
-
-    "STARTER_SAVE_ERROR_TEXT": "Échec de l'enregistrement des configurations",
-
-    "STARTER_CREATE_MESSAGE_TEXT": "Le lanceur de '%s' a été créé",
-
-    "STARTER_CREATE_ERROR_TEXT": "Échec de la création du lanceur",
-
-    "STARTER_RESET_MESSAGE_TEXT": "Le lanceur de '%s' a été réinitialisé",
-
-    "STARTER_RESET_ERROR_TEXT": "Échec de la réinitialisation du lanceur",
-
-    "STARTER_DELETE_MESSAGE_TEXT": "Le lanceur de '%s' a été supprimé",
-
-    "STARTER_DELETE_ERROR_TEXT": "Échec de la suppression du lanceur",
-
-    "STARTER_REMOVE_MESSAGE_TEXT": "Le lanceur de '%s' a été jeté"
+  "STARTER_REMOVE_MESSAGE_TEXT": "Le lanceur de '%s' a été jeté"
 
 }
