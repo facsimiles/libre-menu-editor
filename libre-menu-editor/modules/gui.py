@@ -1204,6 +1204,8 @@ class SearchList(Gtk.Box):
 
         self._active_row = None
 
+        self._ignore_selection = False
+
         self._reset_by_unfocus = False
 
         self._icon_finder = app.get_icon_finder()
@@ -1266,7 +1268,7 @@ class SearchList(Gtk.Box):
 
         self._list_box.add_controller(self._list_box_event_controller_key)
 
-        self._list_box.connect("row-activated", self._on_list_box_child_activated)
+        self._list_box.connect("row-activated", self._on_list_box_row_activated)
 
         self._scrolled_window = Gtk.ScrolledWindow()
 
@@ -1283,12 +1285,6 @@ class SearchList(Gtk.Box):
         self.append(self._search_bar)
 
         self.append(self._scrolled_window)
-
-    def _on_list_box_selected_rows_changed(self, listbox):
-
-        self._list_box.unselect_all()
-
-        self._list_box.select_row(self._active_row)
 
     def _on_toggle_button_toggled(self, button):
 
@@ -1382,13 +1378,25 @@ class SearchList(Gtk.Box):
 
             return True
 
-    def _on_list_box_child_activated(self, list_box, child):
+    def _on_list_box_selected_rows_changed(self, listbox):
 
-        self._active_row = child
+        if not self._ignore_selection:
 
-        self._list_box.select_row(child)
+            self._list_box.unselect_all()
 
-        self._events.trigger("item-activated", self._names[child])
+            self._list_box.select_row(self._active_row)
+
+    def _on_list_box_row_activated(self, list_box, row):
+
+        self._ignore_selection = True
+
+        if not self._events.trigger("item-activated", self._names[row]):
+
+            self._active_row = row
+
+        self._list_box.select_row(self._active_row)
+
+        self._ignore_selection = False
 
     def _get_visible_children(self):
 
@@ -1426,11 +1434,19 @@ class SearchList(Gtk.Box):
 
     def set_active_item(self, name):
 
-        item = self._children[name]["widget"]
+        if name is None:
 
-        if not item == self._active_row:
+            self._list_box.unselect_all()
 
-            item.activate()
+            self._active_row = None
+
+        else:
+
+            item = self._children[name]["widget"]
+
+            if not item == self._active_row:
+
+                item.activate()
 
     def get_search_mode(self):
 

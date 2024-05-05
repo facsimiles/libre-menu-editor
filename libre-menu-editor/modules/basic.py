@@ -390,6 +390,8 @@ class EventManager():
 
     def trigger(self, event, *args):
 
+        responses = []
+
         if event in self._events:
 
             if len(self._events[event]["argtypes"]) == len(args):
@@ -408,7 +410,7 @@ class EventManager():
 
                         args += self._hooks[id]["args"]
 
-                        callback(event, *args)
+                        responses.append(bool(callback(event, *args)))
 
             elif len(self._events[event]["argtypes"]) > len(args):
 
@@ -418,13 +420,15 @@ class EventManager():
 
             elif len(args) > len(self._events[event]["argtypes"]):
 
-                value =  len(args) - len(self._events[event]["argtypes"])
+                value = len(args) - len(self._events[event]["argtypes"])
 
                 raise EventUnexpectedArgumentsError(value)
 
         else:
 
             raise EventNotFoundError(event)
+
+        return True in responses
 
 
 class SettingNotFoundError(Exception):

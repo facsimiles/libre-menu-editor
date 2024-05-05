@@ -2586,6 +2586,10 @@ class Application(gui.Application):
 
             message_dialog.callback(*message_dialog.callback_args, **message_dialog.callback_kwargs)
 
+        else:
+
+            self._update_search_list_selection()
+
     def _on_reset_dialog_response(self, message_dialog, response):
 
         if response == "continue":
@@ -2734,7 +2738,7 @@ class Application(gui.Application):
 
     def _on_search_list_item_activated(self, event, name):
 
-        self._check_unsaved_data(self._load_settings_page, name, ignore_name=name)
+        return self._check_unsaved_data(self._load_settings_page, name, ignore_name=name)
 
     def _get_desktop_starter_has_default(self, name):
 
@@ -2847,6 +2851,8 @@ class Application(gui.Application):
             if self._settings_page.get_changed():
 
                 self._show_discard_dialog(*callback_args, **callback_kwargs)
+
+                return True
 
             else:
 
@@ -3194,6 +3200,16 @@ class Application(gui.Application):
 
                 raise error
 
+    def _update_search_list_selection(self, name=None):
+
+        if name is None:
+
+            name = self._current_desktop_starter_name
+
+        if not self._search_list.get_active_item() == name:
+
+            self._search_list.set_active_item(name)
+
     def _update_menu_button_menu_model(self):
 
         try:
@@ -3344,9 +3360,7 @@ class Application(gui.Application):
 
             self._update_menu_button_menu_model()
 
-        if not self._search_list.get_active_item() == name:
-
-            self._search_list.set_active_item(name)
+        self._update_search_list_selection()
 
     def _save_settings_page(self, skip_dialog=False):
 
