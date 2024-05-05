@@ -2072,6 +2072,16 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
+        self._header_bar_size_group = Gtk.SizeGroup()
+
+        self._header_bar_size_group.add_widget(self._left_header_bar)
+
+        self._header_bar_size_group.add_widget(self._right_header_bar)
+
+        self._header_bar_size_group.set_mode(Gtk.SizeGroupMode.VERTICAL)
+
+        ###############################################################################################################
+
         self._start_page.set_margin_bottom(self._right_header_bar.get_preferred_size()[1].height)
 
         ###############################################################################################################
@@ -2086,7 +2096,7 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
-        if hasattr(Adw, "ToolbarView"):
+        if hasattr(Adw, "NavigationSplitView") and hasattr(Adw, "ToolbarView"):
 
             self._search_bar = self._search_list.get_search_bar()
 
@@ -2102,55 +2112,19 @@ class Application(gui.Application):
 
             self._left_area_box = Adw.ToolbarView()
 
+            self._left_area_box.set_size_request(180, 200)
+
             self._left_area_box.add_top_bar(toolbar_view_top_box)
 
             self._left_area_box.set_content(self._search_list)
 
-        else:
-
-            self._left_area_box = Gtk.Box()
-
-            self._left_area_box.set_orientation(Gtk.Orientation.VERTICAL)
-
-            self._left_area_box.append(self._left_header_bar)
-
-            self._left_area_box.append(self._search_list)
-
-        self._left_area_box.set_size_request(180, 200)
-
-        ###############################################################################################################
-
-        if hasattr(Adw, "ToolbarView"):
-
             self._right_area_box = Adw.ToolbarView()
+
+            self._right_area_box.set_size_request(300, 200)
 
             self._right_area_box.add_top_bar(self._right_header_bar)
 
             self._right_area_box.set_content(self._main_stack)
-
-        else:
-
-            self._right_area_box = Gtk.Box()
-
-            self._right_area_box.set_orientation(Gtk.Orientation.VERTICAL)
-
-            self._right_area_box.append(self._right_header_bar)
-
-            self._right_area_box.append(self._main_stack)
-
-        self._right_area_box.set_size_request(300, 200)
-
-        ###############################################################################################################
-
-        self._header_bar_size_group = Gtk.SizeGroup()
-
-        self._header_bar_size_group.add_widget(self._left_header_bar)
-
-        self._header_bar_size_group.add_widget(self._right_header_bar)
-
-        self._header_bar_size_group.set_mode(Gtk.SizeGroupMode.VERTICAL)
-
-        if hasattr(Adw, "NavigationSplitView"):
 
             self._split_view_sidebar = Adw.NavigationPage()
 
@@ -2166,7 +2140,7 @@ class Application(gui.Application):
 
             self._main_split_layout.set_min_sidebar_width(self._left_area_box.get_property("width-request"))
 
-            self._main_split_layout.set_max_sidebar_width(self._left_area_box.get_property("width-request") * 1.7)
+            self._main_split_layout.set_max_sidebar_width(self._left_area_box.get_property("width-request") * 5 / 3)
 
             self._main_split_layout.set_sidebar(self._split_view_sidebar)
 
@@ -2196,7 +2170,27 @@ class Application(gui.Application):
 
             self._right_header_bar.set_show_end_title_buttons(True)
 
+            self._left_area_box = Gtk.Box()
+
+            self._left_area_box.set_size_request(240, 200)
+
+            self._left_area_box.set_orientation(Gtk.Orientation.VERTICAL)
+
+            self._left_area_box.append(self._left_header_bar)
+
+            self._left_area_box.append(self._search_list)
+
             self._left_area_box.set_hexpand(False)
+
+            self._right_area_box = Gtk.Box()
+
+            self._right_area_box.set_size_request(300, 200)
+
+            self._right_area_box.set_orientation(Gtk.Orientation.VERTICAL)
+
+            self._right_area_box.append(self._right_header_bar)
+
+            self._right_area_box.append(self._main_stack)
 
             self._main_separator = Gtk.Separator()
 
@@ -2207,6 +2201,8 @@ class Application(gui.Application):
             self._main_split_layout.append(self._main_separator)
 
             self._main_split_layout.append(self._right_area_box)
+
+        ###############################################################################################################
 
         self._greeter_stack = Gtk.Stack()
 
@@ -3842,7 +3838,9 @@ class Application(gui.Application):
 
         toast = Adw.Toast.new(text)
 
-        toast.set_use_markup(False)
+        if hasattr(toast, "set_use_markup"):
+
+            toast.set_use_markup(False)
 
         if not error:
 
