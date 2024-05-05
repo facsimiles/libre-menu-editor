@@ -337,7 +337,39 @@ class DesktopParser():
 
         self._config_parser.remove_section(self._get_section_from_action(action))
 
+    def check_read(self, path=None):
+
+        if path is None:
+
+            path = self._load_path
+
+        if not os.access(path, os.R_OK):
+
+            raise OSError(f"no access: {path}")
+
+    def check_write(self, path=None):
+
+        if path is None:
+
+            path = self._save_path
+
+        while not path == os.path.abspath(os.sep):
+
+            if not os.path.exists(path):
+
+                path = os.path.dirname(path)
+
+            elif not os.access(path, os.W_OK):
+
+                raise OSError(f"no access: {path}")
+
+            else:
+
+                break
+
     def load(self, path=None):
+
+        self.check_read(path=path)
 
         if path is None:
 
@@ -348,6 +380,8 @@ class DesktopParser():
         self._config_parser.read(path)
 
     def save(self, path=None):
+
+        self.check_write(path=path)
 
         if path is None:
 
@@ -2536,7 +2570,9 @@ class Application(gui.Application):
 
             message_dialog.callback(*message_dialog.callback_args, **message_dialog.callback_kwargs)
 
-            self._save_settings_page(skip_dialog=True)
+            if self._save_settings_page(skip_dialog=True):
+
+                self._unsaved_custom_starters[self._current_desktop_starter_name]["external"] = True
 
     def _on_discard_dialog_response(self, message_dialog, response):
 
@@ -2824,9 +2860,7 @@ class Application(gui.Application):
 
         else:
 
-            if hasattr(self._main_split_layout, "set_show_content"):
-
-                self._main_split_layout.set_show_content(True)
+            self._focus_settings_page()
 
     def _show_shortcuts_dialog(self):
 
@@ -3331,6 +3365,8 @@ class Application(gui.Application):
         else:
 
             try:
+
+                parser.check_write()
 
                 if not self._current_desktop_starter_name in self._unsaved_custom_starters or not self._unsaved_custom_starters[self._current_desktop_starter_name]["external"]:
 
