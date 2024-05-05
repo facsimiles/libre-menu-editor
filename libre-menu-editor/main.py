@@ -570,6 +570,8 @@ class DefaultTextEditor():
 
         edit_path = self._parsers[name]["edit-path"]
 
+        parser.check_write()
+
         parser.load(path=edit_path)
 
         parser.save()
