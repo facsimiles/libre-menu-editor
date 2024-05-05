@@ -540,7 +540,7 @@ class DefaultTextEditor():
 
         parser.save()
 
-        parser.save(path=edit_path)
+        #TODO: parser.save(path=edit_path)
 
     def exit(self):
 
@@ -2348,7 +2348,7 @@ class Application(gui.Application):
 
                 self._update_mime_data(parser)
 
-            self._text_editor.save(name)
+            self._check_unsaved_data(self._text_editor.save, name)
 
         except Exception as error:
 
@@ -2448,8 +2448,6 @@ class Application(gui.Application):
 
             self._on_open_file_button_clicked(None)
 
-            # self._open_file_chooser_dialog.show()
-
             return True
 
         ###############################################################################################################
@@ -2472,7 +2470,7 @@ class Application(gui.Application):
 
                 self._reload_settings_button.get_sensitive()):
 
-                self._load_settings_page(self._current_desktop_starter_name)
+                self._on_reload_settings_button_clicked()
 
                 return True
 
@@ -2524,7 +2522,7 @@ class Application(gui.Application):
 
             paths = [file.get_path() for file in self._open_file_chooser_dialog.get_files()]
 
-            self._load_external_starters(*paths)
+            self._load_external_starters(*paths, skip_discard_dialog=True)
 
     def _on_install_dialog_response(self, message_dialog, response):
 
@@ -2798,23 +2796,31 @@ class Application(gui.Application):
 
             self._main_split_layout.set_show_content(True)
 
-    def _check_unsaved_data(self, *callback_args, ignore_name=None):
+    def _check_unsaved_data(self, *callback_args, **callback_kwargs):
+
+        if "ignore_name" in callback_kwargs:
+
+            ignore_name = callback_kwargs.pop("ignore_name")
+
+        else:
+
+            ignore_name = None
 
         if (ignore_name and not ignore_name == self._current_desktop_starter_name) or not ignore_name:
 
             if self._settings_page.get_changed():
 
-                self._show_discard_dialog(*callback_args)
+                self._show_discard_dialog(*callback_args, **callback_kwargs)
 
             else:
 
                 if len(callback_args) > 1:
 
-                    callback_args[0](*callback_args[1:])
+                    callback_args[0](*callback_args[1:], **callback_kwargs)
 
                 else:
 
-                    callback_args[0]()
+                    callback_args[0](**callback_kwargs)
 
         else:
 
@@ -3280,9 +3286,7 @@ class Application(gui.Application):
 
     def _load_settings_page(self, name):
 
-        if hasattr(self._main_split_layout, "set_show_content"):
-
-            self._main_split_layout.set_show_content(True)
+        self._focus_settings_page()
 
         if name in self._unsaved_custom_starters and self._unsaved_custom_starters[name]["external"]:
 
@@ -3386,11 +3390,15 @@ class Application(gui.Application):
 
         parser.set_save_path(save_path)
 
-    def _load_external_starters(self, *paths):
+    def _load_external_starters(self, *paths, skip_discard_dialog=False):
 
         exceptions = {}
 
         filtered_paths = []
+
+        duplicate_names = []
+
+        accepted_names = []
 
         for path in paths:
 
@@ -3410,21 +3418,23 @@ class Application(gui.Application):
 
                 paths.remove(data["load-path"])
 
+                duplicate_names.append(name)
+
         else:
 
             if not len(paths):
 
-                try:
+                if len(duplicate_names):
 
-                    self._check_unsaved_data(self._load_settings_page, name, ignore_name=name)
+                    name = duplicate_names[0]
 
-                except UnboundLocalError:
+                    if not skip_discard_dialog:
 
-                    return True
+                        self._check_unsaved_data(self._load_settings_page, name, ignore_name=name)
 
-                else:
+                    else:
 
-                    self._focus_settings_page()
+                        self._load_settings_page(name)
 
             else:
 
@@ -3447,6 +3457,8 @@ class Application(gui.Application):
                         try:
 
                             self._add_desktop_starter(name)
+
+                            accepted_names.append(name)
 
                         except Exception as error:
 
@@ -3488,19 +3500,17 @@ class Application(gui.Application):
 
                                 )
 
+                if len(accepted_names):
+
+                    name = accepted_names[0]
+
+                    if not skip_discard_dialog:
+
+                        self._check_unsaved_data(self._load_settings_page, name, ignore_name=name)
+
                     else:
 
-                        try:
-
-                            self._check_unsaved_data(self._load_settings_page, name, ignore_name=name)
-
-                        except UnboundLocalError:
-
-                            return True
-
-                        else:
-
-                            self._focus_settings_page()
+                        self._load_settings_page(name)
 
     def _create_desktop_starter(self):
 
@@ -3517,8 +3527,6 @@ class Application(gui.Application):
                 if not self._unsaved_custom_starters[name]["external"]:
 
                     self._load_settings_page(name)
-
-                    self._focus_settings_page()
 
                     break
 
@@ -3549,8 +3557,6 @@ class Application(gui.Application):
                 self.notify(self._locale_manager.get("STARTER_CREATE_MESSAGE_TEXT") % text)
 
                 self._load_settings_page(name)
-
-                self._focus_settings_page()
 
     def _reset_desktop_starter(self, name):
 

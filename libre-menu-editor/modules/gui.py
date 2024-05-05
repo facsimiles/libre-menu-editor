@@ -300,6 +300,8 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         self._can_set_active = False
 
+        self._default_text = ""
+
         self._entry = {}
 
         self._entry_timeout_id = None
