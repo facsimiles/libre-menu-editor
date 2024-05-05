@@ -1810,17 +1810,21 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
-        self._mimeinfo_override_paths = [
+        self._mimeinfo_override_paths = {
 
-            ("MIME Cache", os.path.join(self._desktop_starter_override_dir, "mimeinfo.cache")),
+            "MIME Cache": [
 
-            ("Default Applications", os.path.join(self._desktop_starter_override_dir, "defaults.list"))
+                os.path.join(self._desktop_starter_override_dir, "mimeinfo.cache")
 
-            ]
+                ],
 
-        self._mimeinfo_parser = ConfigParser(interpolation=None, strict=False)
+            "Added Associations": [
 
-        self._mimeinfo_parser.optionxform = str
+                os.path.join(GLib.get_user_config_dir(), "mimeapps.list")
+
+                ]
+
+            }
 
         ###############################################################################################################
 
@@ -2346,7 +2350,7 @@ class Application(gui.Application):
 
             if not name in self._unsaved_custom_starters or not self._unsaved_custom_starters[name]["external"]:
 
-                self._update_mime_cache(parser)
+                self._update_mime_data(parser)
 
             self._text_editor.save(name)
 
@@ -3206,41 +3210,47 @@ class Application(gui.Application):
 
                 raise error
 
-    def _update_mime_cache(self, parser, delete=False):
+    def _update_mime_data(self, parser, delete=False):
 
-        self._mimeinfo_parser.clear()
+        for section in self._mimeinfo_override_paths:
 
-        for section, path in self._mimeinfo_override_paths:
+            paths = self._mimeinfo_override_paths[section]
 
-            self._mimeinfo_parser.read(path)
+            mime_parser = ConfigParser(interpolation=None, strict=False)
 
-            if not self._mimeinfo_parser.has_section(section):
+            mime_parser.optionxform = str
 
-                self._mimeinfo_parser.add_section(section)
+            if not mime_parser.has_section(section):
+
+                mime_parser.add_section(section)
 
             mimeinfo_changed = False
+
+            for path in paths:
+
+                mime_parser.read(path)
 
             app_name = os.path.basename(parser.get_save_path())
 
             app_mimetypes = parser.get_mimetypes()
 
-            cache_dict = dict(self._mimeinfo_parser.items(section))
+            mime_data_dict = dict(mime_parser.items(section))
 
-            for cache_mimetype in cache_dict:
+            for mime_data_mimetype in mime_data_dict:
 
-                cache_names = list(filter(None, cache_dict[cache_mimetype].split(";")))
+                mime_data_names = list(filter(None, mime_data_dict[mime_data_mimetype].split(";")))
 
-                if app_name in cache_names and (not cache_mimetype in app_mimetypes or delete):
+                if app_name in mime_data_names and (not mime_data_mimetype in app_mimetypes or delete):
 
-                    cache_names.remove(app_name)
+                    mime_data_names.remove(app_name)
 
-                    if len(cache_names):
+                    if len(mime_data_names):
 
-                        self._mimeinfo_parser.set(section, cache_mimetype, f"{';'.join(cache_names)};")
+                        mime_parser.set(section, mime_data_mimetype, f"{';'.join(mime_data_names)};")
 
                     else:
 
-                        self._mimeinfo_parser.remove_option(section, cache_mimetype)
+                        mime_parser.remove_option(section, mime_data_mimetype)
 
                     mimeinfo_changed = True
 
@@ -3248,29 +3258,29 @@ class Application(gui.Application):
 
                 for app_mimetype in app_mimetypes:
 
-                    if not app_mimetype in cache_dict:
+                    if not app_mimetype in mime_data_dict:
 
-                        self._mimeinfo_parser.set(section, app_mimetype, f"{app_name};")
-
-                        mimeinfo_changed = True
-
-                    elif not app_name in cache_dict[app_mimetype]:
-
-                        cache_names = list(filter(None, cache_dict[app_mimetype].split(";")))
-
-                        cache_names.append(app_name)
-
-                        self._mimeinfo_parser.set(section, app_mimetype, f"{';'.join(cache_names)};")
+                        mime_parser.set(section, app_mimetype, f"{app_name};")
 
                         mimeinfo_changed = True
 
-        if mimeinfo_changed:
+                    elif not app_name in mime_data_dict[app_mimetype]:
 
-            for section, path in self._mimeinfo_override_paths:
+                        mime_data_names = list(filter(None, mime_data_dict[app_mimetype].split(";")))
 
-                with open(path, "w") as file:
+                        mime_data_names.append(app_name)
 
-                    self._mimeinfo_parser.write(file, space_around_delimiters=False)
+                        mime_parser.set(section, app_mimetype, f"{';'.join(mime_data_names)};")
+
+                        mimeinfo_changed = True
+
+            if mimeinfo_changed:
+
+                for path in paths:
+
+                    with open(path, "w") as file:
+
+                        mime_parser.write(file, space_around_delimiters=False)
 
     def _load_settings_page(self, name):
 
@@ -3324,7 +3334,7 @@ class Application(gui.Application):
 
                 if not self._current_desktop_starter_name in self._unsaved_custom_starters or not self._unsaved_custom_starters[self._current_desktop_starter_name]["external"]:
 
-                    self._update_mime_cache(parser)
+                    self._update_mime_data(parser)
 
                 self._settings_page.save_desktop_starter()
 
@@ -3554,7 +3564,7 @@ class Application(gui.Application):
 
         try:
 
-            self._update_mime_cache(parser, delete=True)
+            self._update_mime_data(parser, delete=True)
 
             os.remove(path)
 
@@ -3590,7 +3600,7 @@ class Application(gui.Application):
 
         try:
 
-            self._update_mime_cache(parser, delete=True)
+            self._update_mime_data(parser, delete=True)
 
             os.remove(path)
 
@@ -3831,6 +3841,8 @@ class Application(gui.Application):
     def notify(self, text, error=False):
 
         toast = Adw.Toast.new(text)
+
+        toast.set_use_markup(False)
 
         if not error:
 
