@@ -16,7 +16,6 @@
  - libadwaita >= 1.4 *(for adaptive interface)*
  - libadwaita >= 1.2 *(for static interface)*
  - xdg-utils
- - gtk4
 
 ## First: Download the code
 ```
