@@ -3294,7 +3294,9 @@ class Application(gui.Application):
 
             for path in paths:
 
-                mime_parser.read(path)
+                if os.access(path, os.R_OK):
+
+                    mime_parser.read(path)
 
             app_name = os.path.basename(parser.get_save_path())
 
