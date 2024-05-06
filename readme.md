@@ -1,4 +1,4 @@
-<img src="https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/9.png" height=540/>
+<img src="https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/9.png"/>
 
 # One-Click installation
 
