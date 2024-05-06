@@ -607,7 +607,7 @@ class DebugLog():
 
     def __init__(self, app):
 
-        self._app_name = app.get_app_name()
+        self._application = app
 
         self._raise_errors = False
 
@@ -617,9 +617,9 @@ class DebugLog():
 
         self._messages.append("")
 
-        self._messages.append("LANG={}".format(str(os.getenv("LANG"))))
+        self._messages.append(str(subprocess.getstatusoutput("uname -a")[-1]))
 
-        self._messages.append("APP_RUNNING_AS_FLATPAK={}".format(str(os.getenv("APP_RUNNING_AS_FLATPAK"))))
+        self._messages.append("")
 
         self._messages.append("XDG_SESSION_DESKTOP={}".format(str(os.getenv("XDG_SESSION_DESKTOP"))))
 
@@ -627,7 +627,13 @@ class DebugLog():
 
         self._messages.append("")
 
+        self._messages.append("LANG={}".format(str(os.getenv("LANG"))))
+
         self._messages.append("XDG_DATA_DIRS={}".format(str(os.getenv("XDG_DATA_DIRS"))))
+
+        self._messages.append("")
+
+        self._messages.append("APP_RUNNING_AS_FLATPAK={}".format(str(os.getenv("APP_RUNNING_AS_FLATPAK"))))
 
         self._messages.append("")
 
@@ -651,7 +657,7 @@ class DebugLog():
 
         message = "[{}][{}:{}:{}] {}".format(
 
-            self._app_name,
+            self._application.get_app_name(),
 
             now.strftime("%H"),
 
@@ -1736,6 +1742,16 @@ class Application(gui.Application):
 
     def __init__(self, *args, **kwargs):
 
+        ###############################################################################################################
+
+        self._debug_log = DebugLog(self)
+
+        if "--debug" in sys.argv:
+
+            sys.stdout.write(self._debug_log.get())
+
+        ###############################################################################################################
+
         super().__init__(*args, **kwargs)
 
         self._current_desktop_starter_name = None
@@ -2337,10 +2353,6 @@ class Application(gui.Application):
         self._open_file_chooser_dialog.set_transient_for(self._application_window)
 
         self._open_file_chooser_dialog.set_modal(True)
-
-        ###############################################################################################################
-
-        self._debug_log = DebugLog(self)
 
         ###############################################################################################################
 
