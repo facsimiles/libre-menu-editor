@@ -1,4 +1,4 @@
-<img src="https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/1.png" height=480/>
+<img src="https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/9.png" height=540/>
 
 # One-Click installation
 
@@ -55,10 +55,10 @@ sudo gtk-update-icon-cache -f /usr/share/icons/hicolor
 # Contributions
 
 **2023-07-01 13:05:23**: albano.battistella <albano.battistella@noreply.codeberg.org>
- - added italian translations [it.json](libre-menu-editor/locales/it.json)
+ - added italian translations: [it.json](libre-menu-editor/locales/it.json)
 
 **2024-01-07 19:32:30**: locness3 <locness3@e.email>
- - improved french translations [fr.json](libre-menu-editor/locales/fr.json)
+ - improved french translations: [fr.json](libre-menu-editor/locales/fr.json)
 
 **2024-04-28 04:59:14**: Sabri Ünal <yakushabb@gmail.com>
- - added turkish translations [tr.json](libre-menu-editor/locales/tr.json)
+ - added turkish translations: [tr.json](libre-menu-editor/locales/tr.json)
