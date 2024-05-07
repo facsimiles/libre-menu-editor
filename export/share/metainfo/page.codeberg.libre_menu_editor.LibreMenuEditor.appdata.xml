@@ -93,9 +93,6 @@
   <releases>
     <release version="1.4" date="2024-05-08"/>
   </releases>
-  <mimetypes>
-    <mimetype>application/x-desktop</mimetype>
-  </mimetypes>
   <recommends>
     <control>touch</control>
     <control>keyboard</control>
