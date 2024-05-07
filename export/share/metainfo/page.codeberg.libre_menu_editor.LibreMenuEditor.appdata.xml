@@ -19,7 +19,6 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <developer_name>libre-menu-editor</developer_name>
-  <content_rating type="oars-1.0"/>
   <description>
     <p>This program lists all application launchers that are installed on your system. You can then use a clean, modern, and intuitive interface to customize the main menu to your liking.</p>
     <p xml:lang="de">Dieses Programm führt alle auf Ihrem System installierten Anwendungsstarter auf. Anschließend können Sie eine saubere, moderne und intuitive Benutzeroberfläche verwenden, um das Hauptmenü nach Ihren Wünschen anzupassen.</p>
@@ -106,7 +105,6 @@
     <display_length compare="ge">300</display_length>
   </requires>
   <custom>
-    <value key="Purism::form_factor">workstation</value>
     <value key="Purism::form_factor">mobile</value>
   </custom>
   <content_rating type="oars-1.1">
