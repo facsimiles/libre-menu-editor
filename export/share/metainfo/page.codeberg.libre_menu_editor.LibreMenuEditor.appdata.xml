@@ -46,20 +46,20 @@
       <li xml:lang="de">während der Ausführung eine Konsole anzeigen</li>
       <li>open .desktop files via the application-menu or the file-manager</li>
       <li xml:lang="de">eigene .desktop Dateien über das Anwendungsmenü oder den Dateimanager öffnen</li>
-      <li>manually install .desktop files to the main menu</li>
+      <li>edit launcher configuration-files in your default text-editor</li>
+      <li xml:lang="de">Konfigurationsdateien von Startern mit dem Standard-Textbearbeitungsprogramm bearbeiten</li>
+      <li>install .desktop files to the main menu</li>
       <li xml:lang="de">eigene .desktop Dateien ins Hauptmenü einfügen</li>
-      <li>show hidden launchers in the sidebar</li>
-      <li xml:lang="de">versteckte Starter in der Seitenleiste anzeigen</li>
       <li>reset launchers back to their default states</li>
       <li xml:lang="de">Starter auf System-Standard zurücksetzen</li>
-      <li>open launcher configuration-files in your default text-editor</li>
-      <li xml:lang="de">Konfigurationsdateien von Startern im Standard-Textbearbeitungsprogramm öffnen</li>
-      <li>find launchers in the searchable sidebar</li>
-      <li xml:lang="de">Starter durch Texteingabe in der durchsuchbaren Seitenleiste finden</li>
+      <li>show hidden launchers in the sidebar</li>
+      <li xml:lang="de">versteckte Starter in der Seitenleiste anzeigen</li>
+      <li>use search to find your launchers in the sidebar</li>
+      <li xml:lang="de">eine Suchfunktion verwenden um Starter in der Seitenleiste zu finden</li>
       <li>navigate the interface with your keyboard</li>
       <li xml:lang="de">die Benutzeroberfläche mit der Tastatur navigieren</li>
       <li>use the application on small-screen devices</li>
-      <li xml:lang="de">Die Anwendung auf Geräten mit kleinen Bildschirmen verwenden</li>
+      <li xml:lang="de">die Anwendung auf Geräten mit kleinen Bildschirmen verwenden</li>
     </ul>
   </description>
   <url type="homepage">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
@@ -92,7 +92,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.4" date="2024-05-06"/>
+    <release version="1.4" date="2024-05-08"/>
   </releases>
   <mimetypes>
     <mimetype>application/x-desktop</mimetype>
