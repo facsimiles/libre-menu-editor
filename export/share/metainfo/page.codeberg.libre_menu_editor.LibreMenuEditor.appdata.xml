@@ -91,7 +91,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.4" date="2024-05-08"/>
+    <release version="1.4" date="2024-05-10"/>
   </releases>
   <recommends>
     <control>touch</control>
