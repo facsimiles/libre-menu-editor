@@ -2468,13 +2468,13 @@ class Application(gui.Application):
 
                 return True
 
+        ###############################################################################################################
+
             elif (control_modifier_pressed and keyval == 104 and # H
 
                 not self._greeter_stack.get_visible_child() == self._greeter_page):
 
-                state = self._view_menu_section.get_switch_state("show_hidden")
-
-                self._view_menu_section.set_switch_state("show_hidden", state == False)
+                self._on_show_hidden_switch_changed(None)
 
                 return True
 
@@ -2492,7 +2492,7 @@ class Application(gui.Application):
 
         elif (control_modifier_pressed and keyval == 111 and # O
 
-             not self._greeter_stack.get_visible_child() == self._greeter_page):
+            not self._greeter_stack.get_visible_child() == self._greeter_page):
 
             self._on_open_file_button_clicked(None)
 
@@ -2506,9 +2506,9 @@ class Application(gui.Application):
 
                 self._main_stack.get_visible_child() == self._settings_page and
 
-                self._save_settings_button.get_sensitive()):
+                self._save_settings_button.get_sensitive() and self._save_settings_button.get_visible()):
 
-                self._save_settings_page()
+                self._on_save_settings_button_clicked(None)
 
                 return True
 
@@ -2516,9 +2516,9 @@ class Application(gui.Application):
 
                 self._main_stack.get_visible_child() == self._settings_page and
 
-                self._reload_settings_button.get_sensitive()):
+                self._reload_settings_button.get_sensitive() and self._reload_settings_button.get_visible()):
 
-                self._on_reload_settings_button_clicked()
+                self._on_reload_settings_button_clicked(None)
 
                 return True
 
