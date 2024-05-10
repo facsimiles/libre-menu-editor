@@ -2474,7 +2474,9 @@ class Application(gui.Application):
 
                 not self._greeter_stack.get_visible_child() == self._greeter_page):
 
-                self._on_show_hidden_switch_changed(None)
+                state = self._view_menu_section.get_switch_state("show_hidden")
+
+                self._view_menu_section.set_switch_state("show_hidden", state == False)
 
                 return True
 
