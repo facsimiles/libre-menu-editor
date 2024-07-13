@@ -58,8 +58,6 @@ class Spacing():
 
     DEFAULT = 6
 
-    MEDIUM = 9
-
     LARGE = 11
 
     LARGER = 24
@@ -70,8 +68,6 @@ class Spacing():
 class Margin():
 
     DEFAULT = 6
-
-    MEDIUM = 9
 
     LARGE = 11
 
@@ -1071,6 +1067,8 @@ class LinkConverterRow(Adw.ActionRow):
 
         self._icon_finder = app.get_icon_finder()
 
+        self._revealer_top_margin = 1
+
         self._entry_connection_id = None
 
         self._entry = None
@@ -1137,13 +1135,13 @@ class LinkConverterRow(Adw.ActionRow):
 
         self._button.add_css_class("suggested-action")
 
-        self._button.set_margin_top(Margin.MEDIUM)
+        self._button.set_margin_top(Margin.LARGE - self._revealer_top_margin)
 
-        self._button.set_margin_bottom(Margin.MEDIUM)
+        self._button.set_margin_bottom(Margin.LARGE)
 
-        self._button.set_margin_start(Margin.MEDIUM)
+        self._button.set_margin_start(Margin.LARGE)
 
-        self._button.set_margin_end(Margin.MEDIUM)
+        self._button.set_margin_end(Margin.LARGE)
 
         self._button.set_valign(Gtk.Align.CENTER)
 
@@ -1161,7 +1159,7 @@ class LinkConverterRow(Adw.ActionRow):
 
         self._revealer.connect("notify::child-revealed", self._on_revealer_child_revealed_changed)
 
-        self.set_margin_top(1)
+        self.set_margin_top(self._revealer_top_margin)
 
         self.set_visible(False)
 
@@ -2211,6 +2209,16 @@ class Application(Adw.Application):
 
             self._command_dirs = [
 
+                os.path.join(GLib.get_user_data_dir(), "flatpak", "exports", "bin"),
+
+                os.path.join(os.path.sep, "var", "lib", "flatpak", "exports", "bin"),
+
+                os.path.join(self._flatpak_filesystem_prefix, "snapd", "bin"),
+
+                os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".local", "bin"),
+
+                os.path.join(self._flatpak_filesystem_prefix, "usr", "local", "bin"),
+
                 os.path.join(self._flatpak_filesystem_prefix, "usr", "bin"),
 
                 os.path.join(self._flatpak_filesystem_prefix, "bin")
@@ -2221,6 +2229,16 @@ class Application(Adw.Application):
 
             self._command_dirs = [
 
+                os.path.join(GLib.get_user_data_dir(), "flatpak", "exports", "bin"),
+
+                os.path.join(os.path.sep, "var", "lib", "flatpak", "exports", "bin"),
+
+                os.path.join(os.path.sep, "snapd", "bin"),
+
+                os.path.join(os.path.sep, "home", os.getenv("USER"), ".local", "bin"),
+
+                os.path.join(os.path.sep, "usr", "local", "bin"),
+
                 os.path.join(os.path.sep, "usr", "bin"),
 
                 os.path.join(os.path.sep, "bin")
@@ -2229,7 +2247,9 @@ class Application(Adw.Application):
 
             for path in os.getenv("PATH").split(":"):
 
-                self._command_dirs.append(path)
+                if not path in self._command_dirs:
+
+                    self._command_dirs.append(path)
 
         ###############################################################################################################
 
