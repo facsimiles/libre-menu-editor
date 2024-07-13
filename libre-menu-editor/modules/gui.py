@@ -16,7 +16,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-import os, subprocess, threading, gi
+import os, threading, gi, re
 
 gi.require_version("Adw", "1")
 
@@ -58,6 +58,8 @@ class Spacing():
 
     DEFAULT = 6
 
+    MEDIUM = 9
+
     LARGE = 11
 
     LARGER = 24
@@ -68,6 +70,8 @@ class Spacing():
 class Margin():
 
     DEFAULT = 6
+
+    MEDIUM = 9
 
     LARGE = 11
 
@@ -290,17 +294,33 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         self._events = basic.EventManager()
 
+        self._events.add("search-completed", object)
+
+        self._events.add("active-changed", bool)
+
         self._icon_names = []
 
         self._string_separator = ";"
 
+        self._keyword_separator = " "
+
         self._search_string = ""
+
+        self._results_cache = {}
+
+        self._max_cached_results = 10
+
+        self._results_key = None
+
+        self._min_keywords_length = 0
 
         self._lower_string = ""
 
         self._can_set_active = False
 
-        self._default_text = ""
+        self._default_text = None
+
+        self._default_text_changed = False
 
         self._entry = {}
 
@@ -404,9 +424,17 @@ class IconBrowserRow(Adw.PreferencesRow):
 
     def _on_event_controller_focus_enter(self, controller):
 
-        if not self._entry["widget"].get_text() == self._default_text:
+        GLib.idle_add(self._after_event_controller_focus_enter)
 
-            self.set_active(True)
+    def _after_event_controller_focus_enter(self):
+
+        text = self._entry["widget"].get_text()
+
+        if not text in self._icon_names:
+
+            if self.get_parent().get_focus_child():
+
+                self.set_active(True)
 
     def _on_event_controller_focus_leave(self, controller):
 
@@ -414,13 +442,17 @@ class IconBrowserRow(Adw.PreferencesRow):
 
     def _after_event_controller_focus_leave(self):
 
-        if not self.get_parent().get_focus_child():
+        text = self._entry["widget"].get_text()
 
-            self.set_active(False)
+        if text in self._icon_names:
+
+            if not self.get_parent().get_focus_child():
+
+                self.set_active(False)
 
     def _on_event_controller_key_pressed(self, controller, keyval, keycode, state):
 
-        if keyval == 65307:
+        if keyval == Keyval.ESCAPE:
 
             if self.get_active():
 
@@ -430,7 +462,7 @@ class IconBrowserRow(Adw.PreferencesRow):
 
     def _on_entry_activated(self, entry):
 
-        self._toggle_set_active()
+        pass #TODO: self._toggle_set_active()
 
     def _on_revealer_reveal_child_changed(self, revealer, gparam):
 
@@ -458,11 +490,11 @@ class IconBrowserRow(Adw.PreferencesRow):
 
     def _on_grid_view_activate(self, grid_view, position):
 
+        self.set_active(False)
+
         self.set_default_text(self._list_store[position].name)
 
         self._entry["widget"].grab_focus()
-
-        self.set_active(False)
 
     def _on_entry_changed(self, entry):
 
@@ -502,13 +534,27 @@ class IconBrowserRow(Adw.PreferencesRow):
 
     def _start_search_thread(self):
 
-        self._stop_search_thread()
+        text = self._entry["widget"].get_text()
 
-        self._list_store.remove_all()
+        keywords = set(filter(None, text.lower().split(self._keyword_separator)))
 
-        self._search_thread = threading.Thread(target=self._search_thread_target)
+        results_key = self._keyword_separator.join(keywords)
 
-        self._search_thread.start()
+        if not results_key == self._results_key:
+
+            self._results_key = results_key
+
+            self._stop_search_thread()
+
+            self._list_store.remove_all()
+
+            self._search_thread = threading.Thread(target=self._search_thread_target, args=[text, keywords, results_key])
+
+            self._search_thread.start()
+
+        else:
+
+            self._after_search_thread_finished()
 
     def _stop_search_thread(self):
 
@@ -536,11 +582,37 @@ class IconBrowserRow(Adw.PreferencesRow):
 
             return True
 
-    def _search_thread_target(self):
+    def _search_thread_target(self, text, keywords, results_key):
 
-        text = self._entry["widget"].get_text()
+        try:
 
-        names = self._get_names(text, exclude=[text])
+            names = self._results_cache[results_key]
+
+        except KeyError:
+
+            if not len(keywords) >= self._min_keywords_length:
+
+                names = []
+
+            else:
+
+                if not len(keywords):
+
+                    names = [IconName(name) for name in self._icon_names]
+
+                else:
+
+                    names = self._get_names(keywords, exclude=[text])
+
+                try:
+
+                    del self._results_cache[list(self._results_cache.keys())[-self._max_cached_results]]
+
+                except IndexError:
+
+                    pass
+
+                self._results_cache[results_key] = names
 
         if len(names):
 
@@ -550,21 +622,45 @@ class IconBrowserRow(Adw.PreferencesRow):
 
             self._can_set_active = True
 
-            if not text == self._default_text:
-
-                GLib.idle_add(self.set_active, True)
-
-            else:
-
-                GLib.idle_add(self.set_active, False)
+            GLib.idle_add(self._after_search_thread_finished)
 
         else:
 
             self._can_set_active = False
 
-            GLib.idle_add(self.set_active, False)
+            GLib.idle_add(self._after_search_thread_finished)
 
         self._search_thread = None
+
+    def _after_search_thread_finished(self):
+
+        text = self._entry["widget"].get_text()
+
+        if not text in self._icon_names:
+
+            self._default_text_changed = False
+
+            self.set_active(True)
+
+        elif self._default_text_changed:
+
+            self._default_text_changed = False
+
+            self.set_active(False)
+
+        elif len(self._list_store):
+
+            self._default_text_changed = False
+
+            self.set_active(True)
+
+        else:
+
+            self._default_text_changed = False
+
+            self.set_active(True)
+
+        self._events.trigger("search-completed", self._list_store)
 
     def _add_next_slice(self):
 
@@ -584,79 +680,93 @@ class IconBrowserRow(Adw.PreferencesRow):
 
             return GLib.SOURCE_REMOVE
 
-    def _get_names(self, text, exclude=[]):
+    def _get_names(self, keywords, exclude=[]):
 
         names = []
 
-        for string in text.lower().split(self._string_separator):
+        for string in keywords:
 
-            if len(string):
+            names.append([])
 
-                start_pos = 0
+            start_pos = 0
 
-                while not self._search_interrupted:
+            while not self._search_interrupted:
+
+                try:
+
+                    start_pos = self._lower_string.index(string, start_pos)
+
+                except ValueError:
+
+                    break
+
+                else:
+
+                    start_pos -= 1
+
+                    while not self._search_string[start_pos:start_pos + len(self._string_separator)] == self._string_separator:
+
+                        start_pos -= 1
+
+                        if start_pos < 1:
+
+                            start_pos = 0
+
+                            break
+
+                    else:
+
+                        start_pos += 1
 
                     try:
 
-                        start_pos = self._lower_string.index(string, start_pos)
+                        end_pos = self._search_string.index(self._string_separator, start_pos)
 
                     except ValueError:
+
+                        name = self._search_string[start_pos:]
+
+                        if not name in exclude:
+
+                            names[-1].append(name)
 
                         break
 
                     else:
 
-                        start_pos -= 1
+                        name = self._search_string[start_pos:end_pos]
 
-                        while not self._search_string[start_pos:start_pos + len(self._string_separator)] == self._string_separator:
+                        if not name in exclude:
 
-                            start_pos -= 1
+                            names[-1].append(name)
 
-                            if start_pos < 1:
+                        start_pos = end_pos + len(self._string_separator)
 
-                                start_pos = 0
-
-                                break
-
-                        else:
-
-                            start_pos += 1
-
-                        try:
-
-                            end_pos = self._search_string.index(self._string_separator, start_pos)
-
-                        except ValueError:
-
-                            name = self._search_string[start_pos:]
-
-                            if not name in exclude:
-
-                                names.append(IconName(name))
+                        if not len(self._search_string) > start_pos:
 
                             break
 
-                        else:
+            else:
 
-                            name = self._search_string[start_pos:end_pos]
-
-                            if not name in exclude:
-
-                                names.append(IconName(name))
-
-                            start_pos = end_pos + len(self._string_separator)
-
-                            if not len(self._search_string) > start_pos:
-
-                                break
-
-                else:
-
-                    return []
+                return []
 
         else:
 
-            return names
+            return [IconName(name) for name in self._get_matching_names(names)]
+
+    def _get_matching_names(self, lists):
+
+        first_list = lists.pop(0)
+
+        first_list = set(first_list)
+
+        for remaining_list in lists:
+
+            first_list = first_list.intersection(remaining_list)
+
+        else:
+
+            return first_list
 
     def get_search_entry(self):
 
@@ -696,9 +806,15 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         self._default_text = text
 
+        self._default_text_changed = True
+
         if not text == self._entry["widget"].get_text():
 
             self._entry["widget"].set_text(text)
+
+        elif not self._default_text and not len(text):
+
+            self._start_search_thread()
 
     def get_active(self):
 
@@ -706,15 +822,27 @@ class IconBrowserRow(Adw.PreferencesRow):
 
     def set_active(self, value, check=True):
 
-        if check and not self._can_set_active:
+        if not self._default_text_changed:
 
-            value = False
+            if check and not self._can_set_active:
 
-        elif not self.get_parent().get_focus_child():
+                value = False
 
-            value = False
+            elif not self.get_parent().get_focus_child():
 
-        self._revealer.set_reveal_child(value)
+                value = False
+
+            self._revealer.set_reveal_child(value)
+
+            self._events.trigger("active-changed", value)
+
+    def hook(self, event, callback, *args):
+
+        self._events.hook(event, callback, *args)
+
+    def release(self, id):
+
+        self._events.release(id)
 
 
 class EntryRow(Adw.EntryRow):
@@ -781,8 +909,6 @@ class PathChooserRow(EntryRow):
         self._icon_finder = app.get_icon_finder()
 
         self._application_window = app.get_application_window()
-
-        self._error_image = self._icon_finder.get_image("action-unavailable-symbolic")
 
         self._default_image = self._icon_finder.get_image("document-open-symbolic")
 
@@ -935,6 +1061,197 @@ class DirectoryChooserRow(PathChooserRow):
             self.remove_css_class("error")
 
 
+class LinkConverterRow(Adw.ActionRow):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        self._application = app
+
+        self._icon_finder = app.get_icon_finder()
+
+        self._entry_connection_id = None
+
+        self._entry = None
+
+        self._url_regex_patterns = [
+
+            r"(www\.|(http|ftp|https)://)([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?",
+
+            r"[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z()]{2,6}\b([-a-zA-Z0-9()@%_\+.~#?&//=]*)"
+
+            ]
+
+        self._url_open_commands = [
+
+            "xdg-open",
+
+            "open",
+
+            "x-www-browser",
+
+            "gnome-open",
+
+            "kde-open"
+
+            ]
+
+        for command in self._url_open_commands:
+
+            if app.get_command_exists(command):
+
+                self._url_open_command = command
+
+                break
+
+        else:
+
+            self._url_open_command = None
+
+        self._button_label = Gtk.Label()
+
+        self._button_label.set_ellipsize(Pango.EllipsizeMode.END)
+
+        self._button_label.set_valign(Gtk.Align.CENTER)
+
+        self._button_label.set_hexpand(True)
+
+        self._button_image = self._icon_finder.get_image("system-run-symbolic")
+
+        self._button_image.set_margin_end(Margin.DEFAULT)
+
+        self._center_box = Gtk.CenterBox()
+
+        self._center_box.set_margin_start(Margin.LARGE)
+
+        self._center_box.set_margin_end(Margin.LARGE)
+
+        self._center_box.set_start_widget(self._button_image)
+
+        self._center_box.set_center_widget(self._button_label)
+
+        self._button = Gtk.Button()
+
+        self._button.set_can_focus(False)
+
+        self._button.add_css_class("suggested-action")
+
+        self._button.set_margin_top(Margin.MEDIUM)
+
+        self._button.set_margin_bottom(Margin.MEDIUM)
+
+        self._button.set_margin_start(Margin.MEDIUM)
+
+        self._button.set_margin_end(Margin.MEDIUM)
+
+        self._button.set_valign(Gtk.Align.CENTER)
+
+        self._button.add_css_class("circular")
+
+        self._button.set_child(self._center_box)
+
+        self._button.connect("clicked", self._on_button_clicked)
+
+        self._revealer = Gtk.Revealer()
+
+        self._revealer.set_child(self._button)
+
+        self._revealer.connect("notify::reveal-child", self._on_revealer_reveal_child_changed)
+
+        self._revealer.connect("notify::child-revealed", self._on_revealer_child_revealed_changed)
+
+        self.set_margin_top(1)
+
+        self.set_visible(False)
+
+        self.set_activatable(True)
+
+        self.connect("activated", self._on_activated)
+
+        self.set_child(self._revealer)
+
+    def _on_activated(self, action_row):
+
+        self._convert_url_to_command()
+
+    def _on_button_clicked(self, button):
+
+        self._convert_url_to_command()
+
+    def _on_entry_changed(self, entry):
+
+        if self._url_open_command and self._get_string_is_valid_url(entry.get_text().strip()):
+
+            entry.add_css_class("warning")
+
+            self._revealer.set_reveal_child(True)
+
+        else:
+
+            entry.remove_css_class("warning")
+
+            self._revealer.set_reveal_child(False)
+
+    def _on_revealer_reveal_child_changed(self, revealer, gparam):
+
+        if self._revealer.get_reveal_child():
+
+            self.show()
+
+    def _on_revealer_child_revealed_changed(self, revealer, gparam):
+
+        if not self._revealer.get_child_revealed():
+
+            self.hide()
+
+    def _convert_url_to_command(self):
+
+        text = self._entry.get_text().strip()
+
+        if text.startswith("http://"):
+
+            text = text.replace("http://", "https://")
+
+        elif not text.startswith("https://"):
+
+            text = f"https://{text}"
+
+        self._entry.set_text(f"{self._url_open_command} {text}")
+
+    def _get_string_is_valid_url(self, text):
+
+        if not " " in text and not self._application.get_command_exists(text):
+
+            for pattern in self._url_regex_patterns:
+
+                if re.match(pattern, text):
+
+                    return True
+
+    def get_entry(self, entry):
+
+        return self._entry
+
+    def set_entry(self, entry):
+
+        if not self._entry == None:
+
+            self._entry.dicsonnect(self._entry_connection_id)
+
+        self._entry = entry
+
+        self._entry_connection_id = self._entry.connect("changed", self._on_entry_changed)
+
+    def get_label(self):
+
+        return self._button_label.get_text()
+
+    def set_label(self, text):
+
+        self._button_label.set_text(text)
+
+
 class CommandChooserRow(FileChooserRow):
 
     def __init__(self, app, *args, **kwargs):
@@ -974,7 +1291,23 @@ class IconChooserRow(FileChooserRow):
 
         super().__init__(app, *args, **kwargs)
 
-        self._icon_image = Gtk.Image()
+        self.add_css_class("warning")
+
+        self._default_icon_image = self.get_chooser_button().get_child()
+
+        self._default_icon_image.get_parent().set_child(None)
+
+        self._search_icon_image = self._icon_finder.get_image("system-search-symbolic")
+
+        self._icon_image_stack = Gtk.Stack()
+
+        self._icon_image_stack.set_transition_type(Gtk.StackTransitionType.CROSSFADE)
+
+        self._icon_image_stack.add_child(self._search_icon_image)
+
+        self._icon_image_stack.add_child(self._default_icon_image)
+
+        self.get_chooser_button().set_child(self._icon_image_stack)
 
     def _on_changed(self, editable):
 
@@ -982,27 +1315,33 @@ class IconChooserRow(FileChooserRow):
 
         self._events.trigger("text-changed", self, text)
 
-        if len(text):
+        try:
 
-            try:
+            self._icon_finder.set_image(self._icon_image, text, missing_ok=False)
 
-                self._icon_finder.set_image(self._icon_image, text, missing_ok=False)
+        except IconNotFoundError:
 
-            except IconNotFoundError:
+            self.add_css_class("warning")
 
-                self.add_css_class("error")
-
-                self._icon_image.set_from_file(None)
-
-            else:
-
-                self.remove_css_class("error")
+            self._icon_image.set_from_file(None)
 
         else:
 
-            self.remove_css_class("error")
+            self.remove_css_class("warning")
 
-            self._icon_image.set_from_file(None)
+    def get_show_search_icon(self):
+
+        return self._icon_image_stack.get_visible_child() == self._search_icon_image
+
+    def set_show_search_icon(self, value):
+
+        if value:
+
+            self._icon_image_stack.set_visible_child(self._search_icon_image)
+
+        else:
+
+            self._icon_image_stack.set_visible_child(self._default_icon_image)
 
     def get_image(self):
 
@@ -1868,6 +2207,32 @@ class Application(Adw.Application):
 
         ###############################################################################################################
 
+        if os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
+
+            self._command_dirs = [
+
+                os.path.join(self._flatpak_filesystem_prefix, "usr", "bin"),
+
+                os.path.join(self._flatpak_filesystem_prefix, "bin")
+
+                ]
+
+        else:
+
+            self._command_dirs = [
+
+                os.path.join(os.path.sep, "usr", "bin"),
+
+                os.path.join(os.path.sep, "bin")
+
+                ]
+
+            for path in os.getenv("PATH").split(":"):
+
+                self._command_dirs.append(path)
+
+        ###############################################################################################################
+
         self.connect("activate", self._on_activate)
 
         self.connect("shutdown", self._on_shutdown)
@@ -1983,3 +2348,13 @@ class Application(Adw.Application):
         else:
 
             return path
+
+    def get_command_exists(self, command):
+
+        for command_dir in self._command_dirs:
+
+            command_path = os.path.join(command_dir, command)
+
+            if os.path.exists(command_path):
+
+                return command_path

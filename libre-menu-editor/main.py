@@ -718,6 +718,12 @@ class DesktopActionGroup(Adw.PreferencesGroup):
 
         self._command_chooser_row.hook("text-changed", self._on_child_row_text_changed)
 
+        self._link_converter_row = gui.LinkConverterRow(app)
+
+        self._link_converter_row.set_entry(self._command_chooser_row)
+
+        self._link_converter_row.set_label(self._locale_manager.get("LINK_CONVERTER_ROW_LABEL"))
+
         self._delete_row = gui.DeleteRow(app)
 
         self._delete_row.connect("activated", self._on_delete_row_activated)
@@ -725,6 +731,8 @@ class DesktopActionGroup(Adw.PreferencesGroup):
         self.add(self._entry_row)
 
         self.add(self._command_chooser_row)
+
+        self.add(self._link_converter_row)
 
     def _on_delete_row_activated(self, action_row):
 
@@ -937,6 +945,10 @@ class SettingsPage(Gtk.Box):
 
         self._icon_browser_row.set_search_entry(self._icon_chooser_row)
 
+        self._icon_browser_row.hook("search-completed", self._on_icon_browser_row_search_completed)
+
+        self._icon_browser_row.hook("active-changed", self._on_icon_browser_row_active_changed)
+
         self._icon_chooser_preferences_group = Adw.PreferencesGroup()
 
         self._icon_chooser_preferences_group.add(self._icon_chooser_row)
@@ -977,6 +989,12 @@ class SettingsPage(Gtk.Box):
 
         self._command_chooser_row.hook("text-changed", self._on_input_child_data_changed)
 
+        self._link_converter_row = gui.LinkConverterRow(self._application)
+
+        self._link_converter_row.set_entry(self._command_chooser_row)
+
+        self._link_converter_row.set_label(self._locale_manager.get("LINK_CONVERTER_ROW_LABEL"))
+
         self._directory_chooser_row = gui.DirectoryChooserRow(self._application)
 
         self._directory_chooser_row.set_title(self._locale_manager.get("DIRECTORY_CHOOSER_ROW_TITLE"))
@@ -994,6 +1012,8 @@ class SettingsPage(Gtk.Box):
         self._execution_preferences_group.set_title(self._locale_manager.get("EXECUTION_GROUP_TITLE"))
 
         self._execution_preferences_group.add(self._command_chooser_row)
+
+        self._execution_preferences_group.add(self._link_converter_row)
 
         #TODO: self._execution_preferences_group.add(self._directory_chooser_row)
 
@@ -1164,6 +1184,16 @@ class SettingsPage(Gtk.Box):
         ###############################################################################################################
 
         self._update_action_children_sensitive(False)
+
+    def _on_icon_browser_row_active_changed(self, event, revealed):
+
+        self._icon_chooser_row.set_show_search_icon(not revealed)
+
+    def _on_icon_browser_row_search_completed(self, event, model):
+
+        if self._icon_browser_row.get_active():
+
+            self._icon_chooser_row.set_show_search_icon(not len(model))
 
     def _on_page_controller_key_pressed(self, controller, keyval, keycode, state):
 
@@ -1846,6 +1876,14 @@ class Application(gui.Application):
 
         self._icon_finder.add_alternatives(
 
+            "system-run-symbolic",
+
+            "system-run-fallback-symbolic"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
             "page.codeberg.libre_menu_editor.LibreMenuEditor",
 
             "libre-menu-editor-fallback"
@@ -2368,11 +2406,25 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
+        self._application_window_drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
+
+        self._application_window_drop_target.set_gtypes([Gdk.FileList])
+
+        self._application_window_drop_target.connect("drop", self._on_application_window_drop_target_drop)
+
+        self._application_window.add_controller(self._application_window_drop_target)
+
+        ###############################################################################################################
+
         self.connect("shutdown", self._on_application_shutdown)
 
         self._update_menu_button()
 
         self._load_desktop_starter_dirs()
+
+    def _on_application_window_drop_target_drop(self, drop_target, value, x, y):
+
+        self._load_external_starters(*[file.get_path() for file in value.get_files()])
 
     def _on_process_manager_activate(self, event, args):
 

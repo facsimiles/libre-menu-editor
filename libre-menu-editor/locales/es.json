@@ -89,6 +89,8 @@
   "NOTIFY_SWITCH_ROW_TITLE": "Mostrar una animación hasta que la aplicación sea visible",
   "TERMINAL_SWITCH_ROW_TITLE": "Mostrar una ventana de terminal durante la ejecución",
 
+  "LINK_CONVERTER_ROW_LABEL": "Convertir enlace en comando",
+
   "LOAD_MULTIPLE_ERROR_TEXT": "No se pudo cargar %s archivos",
   "LOAD_SINGLE_ERROR_TEXT": "No se pudo cargar el archivo '%s'",
   "OPEN_FILE_ERROR_TEXT": "No se pudo abrir las configuraciones",

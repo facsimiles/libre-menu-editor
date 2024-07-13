@@ -25,40 +25,44 @@
     <p>The following features are included:</p>
     <p xml:lang="de">Folgende Funktionen sind beinhaltet:</p>
     <ul>
-      <li>create and delete custom launchers</li>
-      <li xml:lang="de">benutzerdefinierte Starter erstellen und entfernen</li>
       <li>set launcher-icons to a specific file or icon-name</li>
       <li xml:lang="de">bestimmte Dateien oder Symbolnamen als Anwendungssymbole verwenden</li>
       <li>search through icons of your installed icon-theme</li>
       <li xml:lang="de">Symbole des installierten Symbolthemas durchsuchen</li>
       <li>make launchers execute a specific file or command</li>
       <li xml:lang="de">bestimmte Dateien oder Befehle zur Ausführung verwenden</li>
+      <li>convert entered weblinks into valid commands</li>
+      <li xml:lang="de">eingegebene Verweisadressen zu gültigen Befehlen umwandeln</li>
       <li>change launcher names and comments</li>
       <li xml:lang="de">Namen und Kommentare von Startern ändern</li>
-      <li>create, edit and remove launcher-actions</li>
+      <li>create, edit, and remove launcher-actions</li>
       <li xml:lang="de">Starter-Aktionen erstellen, bearbeiten und löschen</li>
       <li>show or hide launchers in the main menu</li>
       <li xml:lang="de">Starter im Hauptmenü anzeigen oder verstecken</li>
-      <li>enable or disable the startup-animation</li>
-      <li xml:lang="de">Startanimation einschalten oder abschalten</li>
-      <li>show a terminal-window during execution</li>
-      <li xml:lang="de">während der Ausführung eine Konsole anzeigen</li>
-      <li>open .desktop files via the application-menu or the file-manager</li>
-      <li xml:lang="de">eigene .desktop Dateien über das Anwendungsmenü oder den Dateimanager öffnen</li>
+      <li>enable or disable launcher's startup-animations</li>
+      <li xml:lang="de">Startanimation von Anwendungsstartern einschalten oder abschalten</li>
+      <li>show a terminal-window when executing launchers</li>
+      <li xml:lang="de">während der Ausführung von Startern eine Konsole anzeigen</li>
       <li>edit launcher configuration-files in your default text-editor</li>
       <li xml:lang="de">Konfigurationsdateien von Startern mit dem Standard-Textbearbeitungsprogramm bearbeiten</li>
-      <li>install .desktop files to the main menu</li>
-      <li xml:lang="de">eigene .desktop Dateien ins Hauptmenü einfügen</li>
       <li>reset launchers back to their default states</li>
       <li xml:lang="de">Starter auf System-Standard zurücksetzen</li>
-      <li>show hidden launchers in the sidebar</li>
-      <li xml:lang="de">versteckte Starter in der Seitenleiste anzeigen</li>
+      <li>create and delete custom launchers</li>
+      <li xml:lang="de">benutzerdefinierte Starter erstellen und entfernen</li>
       <li>use search to find your launchers in the sidebar</li>
       <li xml:lang="de">eine Suchfunktion verwenden um Starter in der Seitenleiste zu finden</li>
+      <li>show hidden launchers in the sidebar</li>
+      <li xml:lang="de">versteckte Starter in der Seitenleiste anzeigen</li>
       <li>navigate the interface with your keyboard</li>
       <li xml:lang="de">die Benutzeroberfläche mit der Tastatur navigieren</li>
       <li>use the application on small-screen devices</li>
       <li xml:lang="de">die Anwendung auf Geräten mit kleinen Bildschirmen verwenden</li>
+      <li>open .desktop files through the app-menu, the file-manager, or via drag-and-drop</li>
+      <li xml:lang="de">.desktop Dateien über das Menü, den Dateimanager oder durch Ablegen im Anwendungsfenster öffnen</li>
+      <li>install .desktop files to the desktop-environment's application menu</li>
+      <li xml:lang="de">.desktop Dateien ins Hauptmenü der Desktopumgebung installieren</li>
+      <li>use the application on any freedesktop.org compliant desktop-environment</li>
+      <li xml:lang="de">die Anwendung unter jeder freedesktop.org konformen Desktopumgebung verwenden</li>
     </ul>
   </description>
   <url type="homepage">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
@@ -91,7 +95,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.4" date="2024-05-10"/>
+    <release version="1.4" date="2024-07-13"/>
   </releases>
   <recommends>
     <control>touch</control>
