@@ -772,6 +772,8 @@ class DesktopActionGroup(Adw.PreferencesGroup):
 
             self.remove(self._command_chooser_row)
 
+            self.remove(self._link_converter_row)
+
             name_text = self._entry_row.get_text()
 
             if not len(name_text):
@@ -791,6 +793,8 @@ class DesktopActionGroup(Adw.PreferencesGroup):
             self.add(self._entry_row)
 
             self.add(self._command_chooser_row)
+
+            self.add(self._link_converter_row)
 
         self._delete_mode_enabled = value
 
