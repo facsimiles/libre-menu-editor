@@ -1057,7 +1057,7 @@ class DirectoryChooserRow(PathChooserRow):
             self.remove_css_class("error")
 
 
-class LinkConverterRow(Adw.ActionRow):
+class LinkConverterRow(Gtk.Box):
 
     def __init__(self, app, *args, **kwargs):
 
@@ -1066,8 +1066,6 @@ class LinkConverterRow(Adw.ActionRow):
         self._application = app
 
         self._icon_finder = app.get_icon_finder()
-
-        self._revealer_top_margin = 1
 
         self._entry_connection_id = None
 
@@ -1111,10 +1109,6 @@ class LinkConverterRow(Adw.ActionRow):
 
         self._button_label.set_ellipsize(Pango.EllipsizeMode.END)
 
-        self._button_label.set_valign(Gtk.Align.CENTER)
-
-        self._button_label.set_hexpand(True)
-
         self._button_image = self._icon_finder.get_image("system-run-symbolic")
 
         self._button_image.set_margin_end(Margin.DEFAULT)
@@ -1131,47 +1125,35 @@ class LinkConverterRow(Adw.ActionRow):
 
         self._button = Gtk.Button()
 
-        self._button.set_can_focus(False)
-
-        self._button.add_css_class("suggested-action")
-
-        self._button.set_margin_top(Margin.LARGE - self._revealer_top_margin)
-
-        self._button.set_margin_bottom(Margin.LARGE)
-
-        self._button.set_margin_start(Margin.LARGE)
-
-        self._button.set_margin_end(Margin.LARGE)
-
-        self._button.set_valign(Gtk.Align.CENTER)
+        self._button.add_css_class("accent")
 
         self._button.add_css_class("circular")
 
+        self._button.connect("clicked", self._on_button_clicked)
+
         self._button.set_child(self._center_box)
 
-        self._button.connect("clicked", self._on_button_clicked)
+        self._clamp = Adw.Clamp(maximum_size=480, tightening_threshold=360)
+
+        self._clamp.set_margin_top(Margin.LARGE)
+
+        self._clamp.set_margin_bottom(Margin.LARGE)
+
+        self._clamp.set_child(self._button)
 
         self._revealer = Gtk.Revealer()
 
-        self._revealer.set_child(self._button)
+        self._revealer.set_child(self._clamp)
 
         self._revealer.connect("notify::reveal-child", self._on_revealer_reveal_child_changed)
 
         self._revealer.connect("notify::child-revealed", self._on_revealer_child_revealed_changed)
 
-        self.set_margin_top(self._revealer_top_margin)
-
         self.set_visible(False)
 
-        self.set_activatable(True)
+        self.set_orientation(Gtk.Orientation.VERTICAL)
 
-        self.connect("activated", self._on_activated)
-
-        self.set_child(self._revealer)
-
-    def _on_activated(self, action_row):
-
-        self._convert_url_to_command()
+        self.append(self._revealer)
 
     def _on_button_clicked(self, button):
 
@@ -1300,6 +1282,8 @@ class IconChooserRow(FileChooserRow):
         self._icon_image_stack = Gtk.Stack()
 
         self._icon_image_stack.set_transition_type(Gtk.StackTransitionType.CROSSFADE)
+
+        self._icon_image_stack.set_transition_duration(int(self._icon_image_stack.get_transition_duration() / 2))
 
         self._icon_image_stack.add_child(self._search_icon_image)
 
