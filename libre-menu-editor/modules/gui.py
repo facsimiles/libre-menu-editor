@@ -1689,6 +1689,12 @@ class SearchList(Gtk.Box):
 
             return True
 
+        elif keyval == Keyval.TAB:
+
+            self._list_box.set_selection_mode(Gtk.SelectionMode.NONE)
+
+            self._list_box.set_selection_mode(Gtk.SelectionMode.BROWSE)
+
     def _on_list_box_controller_key_pressed(self, controller, keyval, keycode, state):
 
         if keyval == Keyval.ESCAPE and self._search_bar.get_search_mode():
