@@ -532,7 +532,7 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         text = self._entry["widget"].get_text()
 
-        keywords = set(filter(None, text.lower().split(self._keyword_separator)))
+        keywords = set(filter(None, text.lower().replace(self._string_separator, self._keyword_separator).split(self._keyword_separator)))
 
         results_key = self._keyword_separator.join(keywords)
 
