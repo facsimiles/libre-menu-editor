@@ -2232,9 +2232,9 @@ class Application(gui.Application):
 
             self._main_split_layout = Adw.NavigationSplitView()
 
-            self._main_split_layout.set_sidebar_width_fraction(0.3)
+            self._main_split_layout.set_sidebar_width_fraction(1 / 4)
 
-            self._main_split_layout.set_min_sidebar_width(self._left_area_box.get_property("width-request"))
+            self._main_split_layout.set_min_sidebar_width(self._left_area_box.get_property("width-request") * 9 / 8)
 
             self._main_split_layout.set_max_sidebar_width(self._left_area_box.get_property("width-request") * 5 / 3)
 
@@ -2244,7 +2244,7 @@ class Application(gui.Application):
 
             self._main_split_layout.connect("notify::collapsed", self._on_main_split_layout_collapsed_changed)
 
-            window_breakpoint_limit = self._left_area_box.get_property("width-request") + self._right_area_box.get_property("width-request")
+            window_breakpoint_limit = self._left_area_box.get_property("width-request") + self._right_area_box.get_property("width-request") * 4 / 3
 
             self._window_breakpoint = Adw.Breakpoint()
 
