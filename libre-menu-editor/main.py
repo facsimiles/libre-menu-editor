@@ -3872,9 +3872,9 @@ class Application(gui.Application):
 
             self._settings_page.reset()
 
-            if hasattr(self, "_split_view_content"):
+            if hasattr(self, "_main_split_layout"):
 
-                self._split_view_content.set_can_pop(True)
+                self._main_split_layout.set_show_content(False)
 
         if name in self._unsaved_custom_starters:
 
