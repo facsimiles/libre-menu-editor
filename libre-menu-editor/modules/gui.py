@@ -1195,7 +1195,7 @@ class LinkConverterRow(Gtk.Box):
 
     def _get_string_is_valid_url(self, text):
 
-        if not " " in text and not self._application.get_command_exists(text):
+        if not " " in text and not self._application.get_command_exists(text, include_lookup_cwd=True):
 
             for pattern in self._url_regex_patterns:
 
@@ -1256,7 +1256,7 @@ class CommandChooserRow(FileChooserRow):
 
             self.add_css_class("error")
 
-        elif not self._application.get_command_exists(text):
+        elif not self._application.get_command_exists(text, skip_empty_path=True, include_lookup_cwd=True):
 
             self.add_css_class("error")
 
@@ -2211,6 +2211,8 @@ class Application(Adw.Application):
 
         if os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
 
+            self._command_lookup_cwd = os.path.join(os.path.sep, "home", os.getenv("USER"))
+
             try:
 
                 for path in self.get_flatpak_host_environment_variable("PATH").split(":"):
@@ -2236,6 +2238,8 @@ class Application(Adw.Application):
                     raise e
 
         else:
+
+            self._command_lookup_cwd = GLib.get_home_dir()
 
             try:
 
@@ -2375,21 +2379,29 @@ class Application(Adw.Application):
 
     def get_flatpak_host_environment_variable(self, variable):
 
-        process = subprocess.Popen(
+        printenv_commands = [
 
-            ["flatpak-spawn", "--host", "sh", "-c", f"echo ${variable}"],
+            ["flatpak-spawn", "--host", "printenv", variable],
 
-            stdout=subprocess.PIPE
+            ["flatpak-spawn", "--host", "sh", "-c", f"echo ${variable}"]
 
-            )
+            ]
 
-        stdout, stderr = process.communicate()
+        for command in printenv_commands:
 
-        if not process.returncode:
+            process = subprocess.Popen(command, stdout=subprocess.PIPE)
 
-            return stdout.decode().split("\n")[0]
+            stdout, stderr = process.communicate()
 
-    def get_command_exists(self, text):
+            if not process.returncode:
+
+                decoded_stdout = stdout.decode().split("\n")[0]
+
+                if len(decoded_stdout):
+
+                    return decoded_stdout
+
+    def get_command_exists(self, text, skip_empty_path=False, include_lookup_cwd=False):
 
         filtered_pieces = []
 
@@ -2409,24 +2421,40 @@ class Application(Adw.Application):
 
         command = "\ ".join(filtered_pieces)
 
-        if command.startswith(os.path.sep):
+        if os.path.sep in command:
 
             path = command.replace("\ ", " ")
 
-            if os.getenv("APP_RUNNING_AS_FLATPAK") == "true" and not path.startswith(os.path.join(os.path.sep, "home")):
+            if command.startswith(os.path.sep):
 
-                path = self._join_path_prefix(self._flatpak_filesystem_prefix, path)
+                if os.getenv("APP_RUNNING_AS_FLATPAK") == "true" and not path.startswith(os.path.join(os.path.sep, "home")):
 
-            if os.access(path, os.X_OK):
+                    path = self._join_path_prefix(self._flatpak_filesystem_prefix, path)
+
+            elif include_lookup_cwd:
+
+                path = os.path.join(self._command_lookup_cwd, path)
+
+            if os.access(path, os.X_OK) and os.path.isfile(path):
 
                 return path
 
+        elif skip_empty_path and not len(self._command_dirs):
+
+            return True
+
         elif len(command):
 
-            for command_dir in self._command_dirs:
+            command_dirs = self._command_dirs
+
+            if include_lookup_cwd:
+
+                command_dirs.append(self._command_lookup_cwd)
+
+            for command_dir in command_dirs:
 
                 path = self._join_path_prefix(command_dir, command)
 
-                if os.access(path, os.X_OK):
+                if os.access(path, os.X_OK) and os.path.isfile(path):
 
                     return path
