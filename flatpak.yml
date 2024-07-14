@@ -37,6 +37,9 @@ finish-args:
     # for reading .desktop files in /usr/local/share/applications
     # for reading .desktop files in /usr/share/applications
     # to avoid unreachable symlink targets
+    # for checking if commands are available on host system
+  - --talk-name=org.freedesktop.Flatpak
+    # for checking if commands are available on host system
 modules:
   - name: libre-menu-editor
     buildsystem: simple

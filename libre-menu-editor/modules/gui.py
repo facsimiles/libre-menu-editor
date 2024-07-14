@@ -16,7 +16,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-import os, threading, gi, re
+import os, threading, subprocess, gi, re
 
 gi.require_version("Adw", "1")
 
@@ -456,10 +456,6 @@ class IconBrowserRow(Adw.PreferencesRow):
 
             self._toggle_set_active()
 
-    def _on_entry_activated(self, entry):
-
-        pass #TODO: self._toggle_set_active()
-
     def _on_revealer_reveal_child_changed(self, revealer, gparam):
 
         if self._revealer.get_reveal_child():
@@ -776,8 +772,6 @@ class IconBrowserRow(Adw.PreferencesRow):
 
             self._entry["widget"].remove_controller(self._entry_event_controller_key)
 
-            self._entry["widget"].disconnect(self._entry["entry-activated-event-id"])
-
             self._entry["widget"].disconnect(self._entry["changed-event-id"])
 
         except KeyError:
@@ -787,8 +781,6 @@ class IconBrowserRow(Adw.PreferencesRow):
         entry.add_controller(self._entry_event_controller_focus)
 
         entry.add_controller(self._entry_event_controller_key)
-
-        self._entry["entry-activated-event-id"] = entry.connect("entry-activated", self._on_entry_activated)
 
         self._entry["changed-event-id"] = entry.connect("changed", self._on_entry_changed)
 
@@ -1073,9 +1065,9 @@ class LinkConverterRow(Gtk.Box):
 
         self._url_regex_patterns = [
 
-            r"(www\.|(http|ftp|https)://)([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?",
+            r"((http|ftp|https)://)?(([a-zA-Z0-9]{1,}[_-]{1})*[a-zA-Z0-9]{1,}\.)+([a-zA-Z0-9]{2,}){1}" +
 
-            r"[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z()]{2,6}\b([-a-zA-Z0-9()@%_\+.~#?&//=]*)"
+            r"(/[a-zA-Z0-9\@\%\&\#\=\~\+\-\_\.\,\;\:\?\!\'\*\$()\[\]\/]+)?$",
 
             ]
 
@@ -1133,7 +1125,7 @@ class LinkConverterRow(Gtk.Box):
 
         self._button.set_child(self._center_box)
 
-        self._clamp = Adw.Clamp(maximum_size=480, tightening_threshold=360)
+        self._clamp = Adw.Clamp(maximum_size=480, tightening_threshold=380)
 
         self._clamp.set_margin_top(Margin.LARGE)
 
@@ -1164,6 +1156,8 @@ class LinkConverterRow(Gtk.Box):
         if self._url_open_command and self._get_string_is_valid_url(entry.get_text().strip()):
 
             entry.add_css_class("warning")
+
+            entry.remove_css_class("error")
 
             self._revealer.set_reveal_child(True)
 
@@ -1238,6 +1232,8 @@ class CommandChooserRow(FileChooserRow):
 
         super().__init__(app, *args, **kwargs)
 
+        self._application = app
+
         self.add_css_class("error")
 
     def _on_file_chooser_dialog_response(self, dialog, response):
@@ -1256,7 +1252,11 @@ class CommandChooserRow(FileChooserRow):
 
         self._events.trigger("text-changed", self, text)
 
-        if not len(text.replace(" ", "")):
+        if not len(text.strip()):
+
+            self.add_css_class("error")
+
+        elif not self._application.get_command_exists(text):
 
             self.add_css_class("error")
 
@@ -1673,7 +1673,7 @@ class SearchList(Gtk.Box):
 
             return True
 
-        elif keyval == Keyval.TAB:
+        elif keyval == Keyval.TAB and self._active_row and not self._active_row.get_visible():
 
             self._list_box.set_selection_mode(Gtk.SelectionMode.NONE)
 
@@ -2087,14 +2087,6 @@ class Application(Adw.Application):
 
         ###############################################################################################################
 
-        self._common_user_data_dirs = [
-
-            os.path.join(os.path.sep, "home", os.getenv("USER"), ".local", "share")
-
-            ]
-
-        ###############################################################################################################
-
         if os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
 
             self._system_data_dirs = [
@@ -2111,7 +2103,35 @@ class Application(Adw.Application):
 
                 ]
 
+            try:
+
+                for path in self.get_flatpak_host_environment_variable("XDG_DATA_DIRS").split(":"):
+
+                    if path.startswith("~"):
+
+                        path = self._join_path_prefix("home", os.getenv("USER"), path[1:])
+
+                    if path.startswith(os.path.join(os.path.sep, "home")) and not path in self._system_data_dirs:
+
+                        self._system_data_dirs.append(path)
+
+                    path = self._join_path_prefix(self._flatpak_filesystem_prefix, path)
+
+                    if not path in self._system_data_dirs:
+
+                        self._system_data_dirs.append(path)
+
+            except AttributeError as e:
+
+                if self.get_flatpak_host_environment_variable("XDG_DATA_DIRS"):
+
+                    raise e
+
             self._icon_search_dirs = [
+
+                os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".local", "share", "icons"),
+
+                os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".local", "share", "pixmaps"),
 
                 os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".icons"),
 
@@ -2119,33 +2139,11 @@ class Application(Adw.Application):
 
                 ]
 
-            for path in self._common_user_data_dirs:
-
-                self._icon_search_dirs.append(self._join_path_prefix(
-
-                    self._flatpak_filesystem_prefix,
-
-                    os.path.join(path, "icons")
-
-                    ))
-
-                self._icon_search_dirs.append(self._join_path_prefix(
-
-                    self._flatpak_filesystem_prefix,
-
-                    os.path.join(path, "pixmaps")
-
-                    ))
-
             for path in self._system_data_dirs:
 
                 self._icon_search_dirs.append(os.path.join(path, "icons"))
 
                 self._icon_search_dirs.append(os.path.join(path, "pixmaps"))
-
-            self._icon_search_dirs.append(os.path.join(self.get_project_dir(), "icons"))
-
-            self._icon_finder.add_search_paths(*self._icon_search_dirs)
 
         else:
 
@@ -2163,13 +2161,23 @@ class Application(Adw.Application):
 
                 ]
 
-            if not os.getenv("XDG_DATA_DIRS") is None:
+            try:
 
                 for path in os.getenv("XDG_DATA_DIRS").split(":"):
+
+                    if path.startswith("~"):
+
+                        path = self._join_path_prefix(GLib.get_home_dir(), path[1:])
 
                     if not path in self._system_data_dirs:
 
                         self._system_data_dirs.append(path)
+
+            except AttributeError as e:
+
+                if os.getenv("XDG_DATA_DIRS"):
+
+                    raise e
 
             self._icon_search_dirs = [
 
@@ -2189,57 +2197,63 @@ class Application(Adw.Application):
 
                 self._icon_search_dirs.append(os.path.join(path, "pixmaps"))
 
-            self._icon_search_dirs.append(os.path.join(self.get_project_dir(), "icons"))
+        ###############################################################################################################
 
-            self._icon_finder.add_search_paths(*self._icon_search_dirs)
+        self._icon_search_dirs.append(os.path.join(self.get_project_dir(), "icons"))
+
+        self._icon_finder.add_search_paths(*self._icon_search_dirs)
+
+        ###############################################################################################################
+
+        self._command_dirs = []
 
         ###############################################################################################################
 
         if os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
 
-            self._command_dirs = [
+            try:
 
-                os.path.join(GLib.get_user_data_dir(), "flatpak", "exports", "bin"),
+                for path in self.get_flatpak_host_environment_variable("PATH").split(":"):
 
-                os.path.join(os.path.sep, "var", "lib", "flatpak", "exports", "bin"),
+                    if path.startswith("~"):
 
-                os.path.join(self._flatpak_filesystem_prefix, "snapd", "bin"),
+                        path = self._join_path_prefix("home", os.getenv("USER"), path[1:])
 
-                os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".local", "bin"),
+                    if path.startswith(os.path.join(os.path.sep, "home")) and not path in self._command_dirs:
 
-                os.path.join(self._flatpak_filesystem_prefix, "usr", "local", "bin"),
+                        self._command_dirs.append(path)
 
-                os.path.join(self._flatpak_filesystem_prefix, "usr", "bin"),
+                    path = self._join_path_prefix(self._flatpak_filesystem_prefix, path)
 
-                os.path.join(self._flatpak_filesystem_prefix, "bin")
+                    if not path in self._command_dirs:
 
-                ]
+                        self._command_dirs.append(path)
+
+            except AttributeError as e:
+
+                if self.get_flatpak_host_environment_variable("PATH"):
+
+                    raise e
 
         else:
 
-            self._command_dirs = [
+            try:
 
-                os.path.join(GLib.get_user_data_dir(), "flatpak", "exports", "bin"),
+                for path in os.getenv("PATH").split(":"):
 
-                os.path.join(os.path.sep, "var", "lib", "flatpak", "exports", "bin"),
+                    if path.startswith("~"):
 
-                os.path.join(os.path.sep, "snapd", "bin"),
+                        path = self._join_path_prefix(GLib.get_home_dir(), path[1:])
 
-                os.path.join(os.path.sep, "home", os.getenv("USER"), ".local", "bin"),
+                    if not path in self._command_dirs:
 
-                os.path.join(os.path.sep, "usr", "local", "bin"),
+                        self._command_dirs.append(path)
 
-                os.path.join(os.path.sep, "usr", "bin"),
+            except AttributeError as e:
 
-                os.path.join(os.path.sep, "bin")
+                if os.getenv("PATH"):
 
-                ]
-
-            for path in os.getenv("PATH").split(":"):
-
-                if not path in self._command_dirs:
-
-                    self._command_dirs.append(path)
+                    raise e
 
         ###############################################################################################################
 
@@ -2359,12 +2373,60 @@ class Application(Adw.Application):
 
             return path
 
-    def get_command_exists(self, command):
+    def get_flatpak_host_environment_variable(self, variable):
 
-        for command_dir in self._command_dirs:
+        process = subprocess.Popen(
 
-            command_path = os.path.join(command_dir, command)
+            ["flatpak-spawn", "--host", "sh", "-c", f"echo ${variable}"],
 
-            if os.path.exists(command_path):
+            stdout=subprocess.PIPE
 
-                return command_path
+            )
+
+        stdout, stderr = process.communicate()
+
+        if not process.returncode:
+
+            return stdout.decode().split("\n")[0]
+
+    def get_command_exists(self, text):
+
+        filtered_pieces = []
+
+        escaped_pieces = text.strip().split("\ ")
+
+        for escaped_piece in escaped_pieces:
+
+            if not " " in escaped_piece:
+
+                filtered_pieces.append(escaped_piece)
+
+            else:
+
+                filtered_pieces.append(escaped_piece.split(" ")[0])
+
+                break
+
+        command = "\ ".join(filtered_pieces)
+
+        if command.startswith(os.path.sep):
+
+            path = command.replace("\ ", " ")
+
+            if os.getenv("APP_RUNNING_AS_FLATPAK") == "true" and not path.startswith(os.path.join(os.path.sep, "home")):
+
+                path = self._join_path_prefix(self._flatpak_filesystem_prefix, path)
+
+            if os.access(path, os.X_OK):
+
+                return path
+
+        elif len(command):
+
+            for command_dir in self._command_dirs:
+
+                path = self._join_path_prefix(command_dir, command)
+
+                if os.access(path, os.X_OK):
+
+                    return path

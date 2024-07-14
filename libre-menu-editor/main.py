@@ -1743,6 +1743,8 @@ class SettingsPage(Gtk.Box):
 
         self.set_delete_mode_enabled(False)
 
+        self._changed = False
+
     def hook(self, event, callback):
 
         return self._events.hook(event, callback)
@@ -2760,7 +2762,15 @@ class Application(gui.Application):
 
     def _on_discard_starter_button_clicked(self, event):
 
-        self._remove_desktop_starter(self._current_desktop_starter_name, notify_user=True)
+        if self._settings_page.get_changed():
+
+            self._show_discard_dialog(self._remove_desktop_starter, self._current_desktop_starter_name, notify_user=True)
+
+        else:
+
+            self._remove_desktop_starter(self._current_desktop_starter_name, notify_user=True)
+
+            self._settings_page.reset()
 
     def _on_edit_file_button_clicked(self, event):
 
