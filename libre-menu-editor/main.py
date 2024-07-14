@@ -3870,11 +3870,11 @@ class Application(gui.Application):
 
         if name is self._current_desktop_starter_name:
 
+            self._settings_page.reset()
+
             if hasattr(self, "_split_view_content"):
 
                 self._split_view_content.set_can_pop(True)
-
-            self._settings_page.reset()
 
         if name in self._unsaved_custom_starters:
 
