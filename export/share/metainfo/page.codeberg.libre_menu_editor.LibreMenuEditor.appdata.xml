@@ -60,7 +60,7 @@
       <li>open .desktop files through the app-menu, the file-manager, or via drag-and-drop</li>
       <li xml:lang="de">.desktop Dateien über das Menü, den Dateimanager oder durch Ablegen im Anwendungsfenster öffnen</li>
       <li>install .desktop files to the desktop-environment's application menu</li>
-      <li xml:lang="de">.desktop Dateien ins Hauptmenü der Desktopumgebung installieren</li>
+      <li xml:lang="de">.desktop Dateien ins Anwendungsmenü der Desktopumgebung installieren</li>
       <li>use the application on any freedesktop.org compliant desktop-environment</li>
       <li xml:lang="de">die Anwendung unter jeder freedesktop.org konformen Desktopumgebung verwenden</li>
     </ul>
@@ -95,7 +95,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.4" date="2024-07-13"/>
+    <release version="1.4" date="2024-07-14"/>
   </releases>
   <recommends>
     <control>touch</control>
