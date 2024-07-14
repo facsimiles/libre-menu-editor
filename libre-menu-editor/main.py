@@ -2770,8 +2770,6 @@ class Application(gui.Application):
 
             self._remove_desktop_starter(self._current_desktop_starter_name, notify_user=True)
 
-            self._settings_page.reset()
-
     def _on_edit_file_button_clicked(self, event):
 
         self._check_unsaved_data(self._after_edit_file_button_clicked)
@@ -3870,9 +3868,15 @@ class Application(gui.Application):
 
         text = self._desktop_starter_parsers[name].get_name()
 
-        if self._current_desktop_starter_name in self._unsaved_custom_starters:
+        if name is self._current_desktop_starter_name:
 
-            del self._unsaved_custom_starters[self._current_desktop_starter_name]
+            self._settings_page.reset()
+
+            self._split_view_content.set_can_pop(True)
+
+        if name in self._unsaved_custom_starters:
+
+            del self._unsaved_custom_starters[name]
 
         if name in self._desktop_starter_parsers:
 
