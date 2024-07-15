@@ -19,7 +19,7 @@ finish-args:
     # for using program as a .desktop file editor
   - --filesystem=xdg-data/applications:create
     # for reading and writing .desktop files in .local/share/applications
-  - --filesystem=xdg-config/mimeapps.list:create
+  - --filesystem=xdg-config/mimeapps.list
     # for updating list of associated mimetypes
   - --filesystem=xdg-data/flatpak:ro
     # for reading .desktop files in .local/share/flatpak/exports/share/applications
