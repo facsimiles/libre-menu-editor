@@ -2063,6 +2063,24 @@ class Application(Adw.Application):
 
         ###############################################################################################################
 
+        if os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
+
+            home_var = self.get_flatpak_host_environment_variable("HOME")
+
+            if home_var:
+
+                self._flatpak_real_home = os.path.abspath(home_var)
+
+            else:
+
+                self._flatpak_real_home = os.path.join(os.path.sep, "home", os.getenv("USER"))
+
+        else:
+
+            self._flatpak_real_home = None
+
+        ###############################################################################################################
+
         self._config_manager = basic.ConfigManager(
 
             os.path.join(self._project_dir, "default.json"),
@@ -2109,9 +2127,9 @@ class Application(Adw.Application):
 
                     if path.startswith("~"):
 
-                        path = self._join_path_prefix("home", os.getenv("USER"), path[1:])
+                        path = self._join_path_prefix(self._flatpak_real_home, path[1:])
 
-                    if path.startswith(os.path.join(os.path.sep, "home")) and not path in self._system_data_dirs:
+                    if path.startswith(self._flatpak_real_home) and not path in self._system_data_dirs:
 
                         self._system_data_dirs.append(path)
 
@@ -2129,13 +2147,13 @@ class Application(Adw.Application):
 
             self._icon_search_dirs = [
 
-                os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".local", "share", "icons"),
+                self._join_path_prefix(self._flatpak_filesystem_prefix, self._flatpak_real_home, ".local", "share", "icons"),
 
-                os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".local", "share", "pixmaps"),
+                self._join_path_prefix(self._flatpak_filesystem_prefix, self._flatpak_real_home, ".local", "share", "pixmaps"),
 
-                os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".icons"),
+                self._join_path_prefix(self._flatpak_filesystem_prefix, self._flatpak_real_home, ".icons"),
 
-                os.path.join(self._flatpak_filesystem_prefix, "home", os.getenv("USER"), ".pixmaps")
+                self._join_path_prefix(self._flatpak_filesystem_prefix, self._flatpak_real_home, ".pixmaps")
 
                 ]
 
@@ -2211,7 +2229,7 @@ class Application(Adw.Application):
 
         if os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
 
-            self._command_lookup_cwd = os.path.join(os.path.sep, "home", os.getenv("USER"))
+            self._command_lookup_cwd = self._flatpak_real_home
 
             try:
 
@@ -2219,9 +2237,9 @@ class Application(Adw.Application):
 
                     if path.startswith("~"):
 
-                        path = self._join_path_prefix("home", os.getenv("USER"), path[1:])
+                        path = self._join_path_prefix(self._flatpak_real_home, path[1:])
 
-                    if path.startswith(os.path.join(os.path.sep, "home")) and not path in self._command_dirs:
+                    if path.startswith(self._flatpak_real_home) and not path in self._command_dirs:
 
                         self._command_dirs.append(path)
 
@@ -2427,7 +2445,7 @@ class Application(Adw.Application):
 
             if command.startswith(os.path.sep):
 
-                if os.getenv("APP_RUNNING_AS_FLATPAK") == "true" and not path.startswith(os.path.join(os.path.sep, "home")):
+                if os.getenv("APP_RUNNING_AS_FLATPAK") == "true" and not path.startswith(self._flatpak_real_home):
 
                     path = self._join_path_prefix(self._flatpak_filesystem_prefix, path)
 
@@ -2458,3 +2476,7 @@ class Application(Adw.Application):
                 if os.access(path, os.X_OK) and os.path.isfile(path):
 
                     return path
+
+    def get_flatpak_real_home(self):
+
+        return self._flatpak_real_home

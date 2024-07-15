@@ -1906,6 +1906,16 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
+        if os.getenv("APP_RUNNING_AS_FLATPAK") == "true":
+
+            subprocess.Popen([
+
+                "flatpak-spawn", "--host", "touch",
+
+                os.path.join(self.get_flatpak_real_home(), ".config", "mimeapps.list")
+
+                ])
+
         self._mimeinfo_override_paths = {
 
             "MIME Cache": [
@@ -3411,6 +3421,8 @@ class Application(gui.Application):
             if mimeinfo_changed:
 
                 for path in paths:
+
+                    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
 
                     with open(path, "w") as file:
 
