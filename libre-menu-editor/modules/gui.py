@@ -1759,7 +1759,7 @@ class SearchList(Gtk.Box):
 
         return self._active_row
 
-    def set_active_item(self, name):
+    def set_active_item(self, name, activate=True):
 
         if name is None:
 
@@ -1771,9 +1771,13 @@ class SearchList(Gtk.Box):
 
             item = self._children[name]["widget"]
 
-            if not item == self._active_row:
+            if not item == self._active_row and activate:
 
                 item.activate()
+
+            else:
+
+                self._list_box.select_row(item)
 
     def get_search_mode(self):
 

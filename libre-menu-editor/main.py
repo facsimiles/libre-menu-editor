@@ -3860,6 +3860,10 @@ class Application(gui.Application):
 
             self._main_stack.set_visible_child(self._start_page)
 
+        else:
+
+            self._search_list.set_active_item(self._current_desktop_starter_name, activate=False)
+
     def _add_desktop_starter(self, name, skip_search_list=False, exist_ok=False):
 
         if not name in self._desktop_starter_parsers or exist_ok:
