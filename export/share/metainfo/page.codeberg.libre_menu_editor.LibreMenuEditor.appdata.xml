@@ -53,16 +53,16 @@
       <li xml:lang="de">eine Suchfunktion verwenden um Starter in der Seitenleiste zu finden</li>
       <li>show hidden launchers in the sidebar</li>
       <li xml:lang="de">versteckte Starter in der Seitenleiste anzeigen</li>
-      <li>navigate the interface with your keyboard</li>
-      <li xml:lang="de">die Benutzeroberfläche mit der Tastatur navigieren</li>
-      <li>use the application on small-screen devices</li>
-      <li xml:lang="de">die Anwendung auf Geräten mit kleinen Bildschirmen verwenden</li>
       <li>open .desktop files through the app-menu, the file-manager, or via drag-and-drop</li>
-      <li xml:lang="de">.desktop Dateien über das Menü, den Dateimanager oder durch Ablegen im Anwendungsfenster öffnen</li>
+      <li xml:lang="de">.desktop Dateien über das Menü, den Dateimanager oder durch Ziehen und Ablegen öffnen</li>
       <li>install .desktop files to the desktop-environment's application menu</li>
       <li xml:lang="de">.desktop Dateien ins Anwendungsmenü der Desktopumgebung installieren</li>
       <li>use the application on any freedesktop.org compliant desktop-environment</li>
       <li xml:lang="de">die Anwendung unter jeder freedesktop.org konformen Desktopumgebung verwenden</li>
+      <li>use the application on small-screen devices</li>
+      <li xml:lang="de">die Anwendung auf Geräten mit kleinen Bildschirmen verwenden</li>
+      <li>navigate the interface with your keyboard</li>
+      <li xml:lang="de">die Benutzeroberfläche mit der Tastatur navigieren</li>
     </ul>
   </description>
   <url type="homepage">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
