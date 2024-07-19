@@ -1691,6 +1691,20 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
         self.set_child(self._revealer)
 
+    def _on_tag_event_controller_key_pressed(self, controller, keyval, keycode, state):
+
+        if (
+
+        (keyval == Keyval.LEFT or keyval == Keyval.UP or keyval == Keyval.PAGEUP)
+
+        and self._flow_box.get_focus_child() == self._flow_box.get_first_child()
+
+        ):
+
+            self.grab_focus()
+
+            return True
+
     def _on_revealer_reveal_child_changed(self, revealer, gparam):
 
         if self._revealer.get_reveal_child():
@@ -1918,6 +1932,13 @@ class TaggedFlowRow(Adw.PreferencesRow):
             tag = TaggedRowTag(self._application)
 
             tag.set_text(text)
+
+
+        event_controller_key = Gtk.EventControllerKey()
+
+        event_controller_key.connect("key-pressed", self._on_tag_event_controller_key_pressed)
+
+        tag.add_controller(event_controller_key)
 
         tag.set_flow_row(self)
 
