@@ -1499,6 +1499,479 @@ class SwitchRow(Adw.ActionRow):
         self._events.release(id)
 
 
+class TaggedRowTag(Gtk.FlowBoxChild):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        self._application = app
+
+        self._icon_finder = app.get_icon_finder()
+
+        self._flow_row = None
+
+        self._show_warning = False
+
+        self._tag_dark_css_class = "background" #FIXME
+
+        self._button_label = Gtk.Label()
+
+        self._button_label.set_ellipsize(Pango.EllipsizeMode.END)
+
+        self._button_image = self._icon_finder.get_image("window-close-symbolic")
+
+        self._button_image.set_margin_start(Margin.DEFAULT)
+
+        self._center_box = Gtk.CenterBox()
+
+        self._center_box.set_margin_start(Margin.LARGE)
+
+        self._center_box.set_margin_end(Margin.LARGE)
+
+        self._center_box.set_center_widget(self._button_label)
+
+        self._center_box.set_end_widget(self._button_image)
+
+        self._tag_button = Gtk.Button()
+
+        self._tag_button.add_css_class("circular")
+
+        self._tag_button.add_css_class(self._tag_dark_css_class)
+
+        self._tag_button.connect("clicked", self._on_tag_button_clicked)
+
+        self._tag_button.set_child(self._center_box)
+
+        self._event_controller_focus = Gtk.EventControllerFocus()
+
+        self._event_controller_focus.connect("enter", self._on_event_controller_focus_enter)
+
+        self.add_controller(self._event_controller_focus)
+
+        self.set_child(self._tag_button)
+
+        self._style_manager = Adw.StyleManager.get_default()
+
+        self._style_manager.connect("notify::dark", self._on_style_manager_dark_changed)
+
+        self._update_tag_button_style()
+
+    def _on_tag_button_clicked(self, button):
+
+        if self._flow_row:
+
+            self._flow_row.remove(self)
+
+        else:
+
+            self.get_parent().remove(self)
+
+    def _on_event_controller_focus_enter(self, controller):
+
+        self.set_can_focus(False)
+
+        self.set_can_focus(True)
+
+        GLib.idle_add(self._after_event_controller_focus_enter)
+
+    def _after_event_controller_focus_enter(self):
+
+        self._tag_button.grab_focus()
+
+    def _on_style_manager_dark_changed(self, style_manager, gparam):
+
+        self._update_tag_button_style()
+
+    def _update_tag_button_style(self):
+
+        if self._show_warning:
+
+            self._tag_button.add_css_class("warning")
+
+            self._tag_button.remove_css_class(self._tag_dark_css_class)
+
+        else:
+
+            self._tag_button.remove_css_class("warning")
+
+            if self._style_manager.get_dark():
+
+                self._tag_button.add_css_class(self._tag_dark_css_class)
+
+            else:
+
+                self._tag_button.remove_css_class(self._tag_dark_css_class)
+
+    def get_text(self):
+
+        return self._button_label.get_text()
+
+    def set_text(self, text):
+
+        self._button_label.set_text(text)
+
+    def get_flow_row(self):
+
+        return self._flow_row
+
+    def set_flow_row(self, flow_row):
+
+        self._flow_row = flow_row
+
+    def get_show_warning(self):
+
+        return self._show_warning
+
+    def set_show_warning(self, value):
+
+        self._show_warning = value
+
+        self._update_tag_button_style()
+
+
+class TagNotFoundError(Exception):
+
+    pass
+
+
+class TaggedFlowRow(Adw.PreferencesRow):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        self._events = basic.EventManager()
+
+        self._events.add("text-changed", object, str)
+
+        self._application = app
+
+        self._icon_finder = app.get_icon_finder()
+
+        self._ends_with_delimiter = None
+
+        self._duplicate_tag_warnings = []
+
+        self._delimiters = [";"]
+
+        self._entry_row = None
+
+        self._entry_row_default_values = {}
+
+        self._entry_row_connection_ids = []
+
+        self._flow_box_extra_margin = 1
+
+        self._flow_box = Gtk.FlowBox()
+
+        self._flow_box.set_margin_top(Margin.DEFAULT) #FIXME: + self._flow_box_extra_margin)
+
+        self._flow_box.set_margin_bottom(Margin.DEFAULT) #FIXME: + self._flow_box_extra_margin)
+
+        self._flow_box.set_margin_start(Margin.DEFAULT + self._flow_box_extra_margin)
+
+        self._flow_box.set_margin_end(Margin.DEFAULT + self._flow_box_extra_margin)
+
+        self._flow_box.set_selection_mode(Gtk.SelectionMode.NONE)
+
+        self._revealer = Gtk.Revealer()
+
+        # FIXME: self._revealer.set_transition_duration(self._revealer.get_transition_duration() / 2)
+
+        self._revealer.connect("notify::reveal-child", self._on_revealer_reveal_child_changed)
+
+        self._revealer.connect("notify::child-revealed", self._on_revealer_child_revealed_changed)
+
+        self._revealer.set_child(self._flow_box)
+
+        self.set_activatable(False)
+
+        self.set_visible(False)
+
+        self.set_child(self._revealer)
+
+    def _on_revealer_reveal_child_changed(self, revealer, gparam):
+
+        if self._revealer.get_reveal_child():
+
+            self.show()
+
+    def _on_revealer_child_revealed_changed(self, revealer, gparam):
+
+        if not self._revealer.get_child_revealed():
+
+            self.hide()
+
+    def _on_entry_row_apply(self, entry_row):
+
+        self.add_tags(entry_row.get_text(), allow_duplicates=False)
+
+        self._entry_row.set_text("")
+
+    def _on_entry_row_changed(self, editable):
+
+        self._update_entry_row()
+
+    def _do_flow_box_children_changed(self):
+
+        self._events.trigger("text-changed", self, self.get_text())
+
+        self._update_reveal_child()
+
+        self._update_entry_row()
+
+    def _update_reveal_child(self):
+
+        self._revealer.set_reveal_child(self._flow_box.get_first_child())
+
+    def _update_entry_row(self):
+
+        text = self._entry_row.get_text()
+
+        strings = self._split_text(text)
+
+        duplicate_strings, duplicate_tags = self._get_duplicates(*strings, mark_duplicates=True)
+
+        #FIXME: strings = [string for string in strings if not string in duplicate_strings]
+
+        if not len(strings):
+
+            self._entry_row.set_show_apply_button(False)
+
+            self._entry_row.set_show_apply_button(True)
+
+    def _split_text(self, *strings):
+
+        for string in strings:
+
+            for delimiter in self._delimiters:
+
+                pieces = []
+
+                for string in strings:
+
+                    pieces += string.split(delimiter)
+
+                strings = pieces
+
+        else:
+
+            return list(filter(None, strings))
+
+    def _get_duplicates(self, *strings, mark_duplicates=False):
+
+        duplicate_strings, duplicate_tags = [], []
+
+        for string in strings:
+
+            if not string in duplicate_strings:
+
+                for tag in self.get_tags():
+
+                    if string == tag.get_text():
+
+                        duplicate_tags.append(tag)
+
+                        if not string in duplicate_strings:
+
+                            duplicate_strings.append(string)
+
+        else:
+
+            if mark_duplicates:
+
+                for tag in self._duplicate_tag_warnings:
+
+                    tag.set_show_warning(False)
+
+                self._duplicate_tag_warnings = duplicate_tags
+
+                for tag in duplicate_tags:
+
+                    tag.set_show_warning(True)
+
+            return duplicate_strings, duplicate_tags
+
+    def get_entry_row(self):
+
+        return self._entry_row
+
+    def set_entry_row(self, entry_row):
+
+        if self._entry_row:
+
+            try:
+
+                edit_gizmo = self._entry_row.get_child().get_first_child().get_next_sibling()
+
+                edit_image = edit_gizmo.get_next_sibling().get_next_sibling().get_next_sibling()
+
+                edit_image.set_from_icon_name(self._entry_row_default_values["icon-name"])
+
+            except AttributeError:
+
+                pass
+
+            for connection_id in self._entry_row_connection_ids:
+
+                self._entry_row.disconnect(connection_id)
+
+            self._entry_row.set_show_apply_button(self._entry_row_default_values["show-apply-button"])
+
+        self._entry_row = entry_row
+
+        self._entry_row_default_values["show-apply-button"] = entry_row.get_show_apply_button()
+
+        entry_row.set_show_apply_button(True)
+
+        try:
+
+            edit_gizmo = entry_row.get_child().get_first_child().get_next_sibling()
+
+            edit_image = edit_gizmo.get_next_sibling().get_next_sibling().get_next_sibling()
+
+            self._entry_row_default_values["icon-name"] = edit_image.get_icon_name()
+
+            edit_image.set_from_icon_name(self._icon_finder.get_name("list-add-symbolic"))
+
+        except AttributeError:
+
+            pass
+
+        self._entry_row_connection_ids.append(entry_row.connect("apply", self._on_entry_row_apply))
+
+        self._entry_row_connection_ids.append(entry_row.connect("changed", self._on_entry_row_changed))
+
+    def get_delimiters(self):
+
+        return self._delimiters
+
+    def set_delimiters(self, *strings):
+
+        self._delimiters = list(*strings)
+
+    def get_text(self):
+
+        return self._delimiters[0].join([tag.get_text() for tag in self.get_tags()]) + int(bool(self._ends_with_delimiter))*";"
+
+    def set_text(self, *strings):
+
+        self._ends_with_delimiter = strings[-1].endswith(self._delimiters[0])
+
+        self._flow_box.remove_all()
+
+        self._update_reveal_child()
+
+        self._update_entry_row()
+
+        self.add_tags(*strings)
+
+    def get_tags(self):
+
+        tags = [self._flow_box.get_first_child()]
+
+        if tags[0]:
+
+            while True:
+
+                next_sibling = tags[-1].get_next_sibling()
+
+                if next_sibling:
+
+                    tags.append(next_sibling)
+
+                else:
+
+                    return tags
+
+        else:
+
+            return []
+
+    def add_tags(self, *strings, allow_duplicates=True):
+
+        strings = self._split_text(*strings)
+
+        if not allow_duplicates:
+
+            duplicate_strings, duplicate_tags = self._get_duplicates(*strings)
+
+            strings = [string for string in strings if not string in duplicate_strings]
+
+        for string in strings:
+
+            self.add(string, send_signals=False)
+
+        if len(strings):
+
+            self._do_flow_box_children_changed()
+
+    def add(self, text, send_signals=True):
+
+        if isinstance(text, TaggedRowTag):
+
+            tag = text
+
+        else:
+
+            tag = TaggedRowTag(self._application)
+
+            tag.set_text(text)
+
+        tag.set_flow_row(self)
+
+        self._flow_box.insert(tag, -1)
+
+        if send_signals:
+
+            self._do_flow_box_children_changed()
+
+    def remove(self, text):
+
+        if isinstance(text, TaggedRowTag):
+
+            self._flow_box.remove(text)
+
+            self._do_flow_box_children_changed()
+
+        else:
+
+            for tag in self.get_tags():
+
+                if tag.get_text() == text:
+
+                    self._flow_box.remove(tag)
+
+                    self._do_flow_box_children_changed()
+
+                    break
+
+            else:
+
+                raise TagNotFoundError(text)
+
+    def reset(self):
+
+        self._entry_row.set_text("")
+
+        if self._flow_box.get_first_child():
+
+            self._flow_box.remove_all()
+
+            self._do_flow_box_children_changed()
+
+        self._update_reveal_child()
+
+    def hook(self, event, callback):
+
+        return self._events.hook(event, callback)
+
+    def release(self, id):
+
+        self._events.release(id)
+
+
 class ItemAlreadyExistingError(Exception):
 
     pass

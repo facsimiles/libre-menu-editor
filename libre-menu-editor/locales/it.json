@@ -75,6 +75,7 @@
   "BANNER_LABEL_TEXT": "Seleziona le azioni che desideri eliminare",
   "BANNER_CANCEL_BUTTON_LABEL": "Fatto",
 
+  "APPEARANCE_GROUP_TITLE": "Apparenza",
   "DESCRIPTION_GROUP_TITLE": "Descrizione",
   "EXECUTION_GROUP_TITLE": "Esecuzione",
   "ACTIONS_GROUP_TITLE": "Azioni",
@@ -83,6 +84,7 @@
   "ICON_CHOOSER_ROW_TITLE": "Icona",
   "NAME_ENTRY_ROW_TITLE": "Nome",
   "COMMENT_ENTRY_ROW_TITLE": "Commento",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Parole chiave",
   "COMMAND_CHOOSER_ROW_TITLE": "Comando",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Directory",
   "VISIBLE_SWITCH_ROW_TITLE": "Mostra questa applicazione nel menu principale",

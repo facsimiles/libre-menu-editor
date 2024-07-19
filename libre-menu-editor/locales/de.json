@@ -75,6 +75,7 @@
   "BANNER_LABEL_TEXT": "Bitte wählen Sie die Aktionen aus die Sie löschen wollen",
   "BANNER_CANCEL_BUTTON_LABEL": "Fertig",
 
+  "APPEARANCE_GROUP_TITLE": "Aussehen",
   "DESCRIPTION_GROUP_TITLE": "Beschreibung",
   "EXECUTION_GROUP_TITLE": "Ausführung",
   "ACTIONS_GROUP_TITLE": "Aktionen",
@@ -83,8 +84,9 @@
   "ICON_CHOOSER_ROW_TITLE": "Symbol",
   "NAME_ENTRY_ROW_TITLE": "Name",
   "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Suchbegriffe",
   "COMMAND_CHOOSER_ROW_TITLE": "Befehl",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Verzeichnis",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Arbeitsverzeichnis",
   "VISIBLE_SWITCH_ROW_TITLE": "Anwendung im Hauptmenü anzeigen",
   "NOTIFY_SWITCH_ROW_TITLE": "Startanimation abspielen bis die Anwendung sichtbar ist",
   "TERMINAL_SWITCH_ROW_TITLE": "Konsolenfenster während der Ausführung anzeigen",

@@ -197,6 +197,14 @@ class DesktopParser():
 
         self._set("Comment", comment, section=section, localized=True)
 
+    def get_keywords(self, section="Desktop Entry"):
+
+        return self._get_str("Keywords", section=section, localized=True)
+
+    def set_keywords(self, comment, section="Desktop Entry"):
+
+        self._set("Keywords", comment, section=section, localized=True)
+
     def get_icon(self, section="Desktop Entry"):
 
         return self._get_str("Icon", section=section)
@@ -305,9 +313,9 @@ class DesktopParser():
 
         data.append(self.get_command())
 
-        data.append(self._get_str("MimeType"))
+        data.append(self.get_keywords())
 
-        data.append(self._get_str("Keywords", localized=True))
+        data.append(self._get_str("MimeType"))
 
         data.append(os.path.basename(self._load_path))
 
@@ -923,7 +931,7 @@ class SettingsPage(Gtk.Box):
 
         self._icon_view_preferences_group = Adw.PreferencesGroup()
 
-        self._icon_view_preferences_group.set_title(self._locale_manager.get("DESCRIPTION_GROUP_TITLE"))
+        self._icon_view_preferences_group.set_title(self._locale_manager.get("APPEARANCE_GROUP_TITLE"))
 
         self._icon_view_preferences_group.add(self._icon_view_row)
 
@@ -975,9 +983,29 @@ class SettingsPage(Gtk.Box):
 
         self._description_preferences_group = Adw.PreferencesGroup()
 
+        self._description_preferences_group.set_title(self._locale_manager.get("DESCRIPTION_GROUP_TITLE"))
+
         self._description_preferences_group.add(self._name_entry_row)
 
         self._description_preferences_group.add(self._comment_entry_row)
+
+        ###############################################################################################################
+
+        self._keywords_entry_row = Adw.EntryRow()
+
+        self._keywords_entry_row.set_title(self._locale_manager.get("KEYWORDS_ENTRY_ROW_TITLE"))
+
+        self._keywords_flow_row = gui.TaggedFlowRow(app)
+
+        self._keywords_flow_row.hook("text-changed", self._on_input_child_data_changed)
+
+        self._keywords_flow_row.set_entry_row(self._keywords_entry_row)
+
+        self._keyword_preferences_group = Adw.PreferencesGroup()
+
+        self._keyword_preferences_group.add(self._keywords_entry_row)
+
+        self._keyword_preferences_group.add(self._keywords_flow_row)
 
         ###############################################################################################################
 
@@ -1019,7 +1047,7 @@ class SettingsPage(Gtk.Box):
 
         self._execution_preferences_group.add(self._link_converter_row)
 
-        #TODO: self._execution_preferences_group.add(self._directory_chooser_row)
+        self._execution_preferences_group.add(self._directory_chooser_row)
 
         ###############################################################################################################
 
@@ -1128,6 +1156,8 @@ class SettingsPage(Gtk.Box):
         self._top_box.append(self._icon_chooser_preferences_group)
 
         self._top_box.append(self._description_preferences_group)
+
+        self._top_box.append(self._keyword_preferences_group)
 
         self._top_box.append(self._execution_preferences_group)
 
@@ -1326,6 +1356,10 @@ class SettingsPage(Gtk.Box):
             elif child == self._comment_entry_row:
 
                 self._input_children_changes[child] = data == self._current_parser.get_comment()
+
+            elif child == self._keywords_flow_row:
+
+                self._input_children_changes[child] = data == self._current_parser.get_keywords()
 
             elif child == self._command_chooser_row:
 
@@ -1625,6 +1659,8 @@ class SettingsPage(Gtk.Box):
 
         self._comment_entry_row.set_text(self._current_parser.get_comment())
 
+        self._keywords_flow_row.set_text(self._current_parser.get_keywords())
+
         self._command_chooser_row.set_text(self._current_parser.get_command())
 
         self._directory_chooser_row.set_text(self._current_parser.get_directory())
@@ -1672,6 +1708,8 @@ class SettingsPage(Gtk.Box):
         self._current_parser.set_name(self._name_entry_row.get_text())
 
         self._current_parser.set_comment(self._comment_entry_row.get_text())
+
+        self._current_parser.set_keywords(self._keywords_flow_row.get_text())
 
         self._current_parser.set_command(self._command_chooser_row.get_text())
 
@@ -1725,6 +1763,8 @@ class SettingsPage(Gtk.Box):
 
             self._comment_entry_row.set_text("")
 
+            self._keywords_entry_row.set_text("")
+
             self._command_chooser_row.set_text("")
 
             self._directory_chooser_row.set_text("")
@@ -1736,6 +1776,8 @@ class SettingsPage(Gtk.Box):
             self._terminal_switch_row.set_active(False)
 
             self._icon_browser_row.set_default_text("")
+
+            self._keywords_flow_row.reset()
 
         self._update_action_children_sensitive(False)
 
@@ -1885,6 +1927,14 @@ class Application(gui.Application):
             "system-run-symbolic",
 
             "system-run-fallback-symbolic"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "window-close-symbolic",
+
+            "window-close-fallback-symbolic"
 
             )
 

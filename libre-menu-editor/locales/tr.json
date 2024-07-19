@@ -75,6 +75,7 @@
   "BANNER_LABEL_TEXT": "Silmek istediğiniz eylemi seçin",
   "BANNER_CANCEL_BUTTON_LABEL": "Bitti",
 
+  "APPEARANCE_GROUP_TITLE": "Görünüş",
   "DESCRIPTION_GROUP_TITLE": "Açıklama",
   "EXECUTION_GROUP_TITLE": "Yürütme",
   "ACTIONS_GROUP_TITLE": "Eylemler",
@@ -83,6 +84,7 @@
   "ICON_CHOOSER_ROW_TITLE": "Simge",
   "NAME_ENTRY_ROW_TITLE": "Ad",
   "COMMENT_ENTRY_ROW_TITLE": "Yorum",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Anahtar Kelimeler",
   "COMMAND_CHOOSER_ROW_TITLE": "Komut",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Dizin",
   "VISIBLE_SWITCH_ROW_TITLE": "Bu uygulamayı ana menüde göster",
