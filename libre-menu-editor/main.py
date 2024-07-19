@@ -3712,6 +3712,8 @@ class Application(gui.Application):
 
             not self._unsaved_custom_starters[self._current_desktop_starter_name]["external"]):
 
+            self._search_list.set_active_item(self._current_desktop_starter_name, activate=False)
+
             self._focus_settings_page()
 
         else:
@@ -3719,6 +3721,8 @@ class Application(gui.Application):
             for name in self._unsaved_custom_starters:
 
                 if not self._unsaved_custom_starters[name]["external"]:
+
+                    self._search_list.set_active_item(name, activate=False)
 
                     self._load_settings_page(name)
 
@@ -3750,9 +3754,9 @@ class Application(gui.Application):
 
                 self.notify(self._locale_manager.get("STARTER_CREATE_MESSAGE_TEXT") % text)
 
-                self._search_list.grab_focus()
+                self._search_list.set_active_item(self._current_desktop_starter_name, activate=False)
 
-                GLib.idle_add(self._load_settings_page, name)
+                self._load_settings_page(name)
 
     def _reset_desktop_starter(self, name):
 
@@ -3870,6 +3874,8 @@ class Application(gui.Application):
 
             self._main_stack.set_visible_child(self._start_page)
 
+            self._search_list.set_active_item(self._current_desktop_starter_name, activate=False)
+
     def _update_search_list_item(self, name):
 
         parser = self._desktop_starter_parsers[name]
@@ -3911,6 +3917,8 @@ class Application(gui.Application):
         if not self._current_desktop_starter_name in self._search_list.list():
 
             self._main_stack.set_visible_child(self._start_page)
+
+            self._search_list.set_active_item(self._current_desktop_starter_name, activate=False)
 
         else:
 

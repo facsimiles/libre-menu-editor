@@ -2017,7 +2017,7 @@ class SearchList(Gtk.Box):
 
         self._children = {}
 
-        self._active_row = None
+        self._last_activated = None
 
         self._ignore_selection = False
 
@@ -2169,7 +2169,7 @@ class SearchList(Gtk.Box):
 
             return True
 
-        elif keyval == Keyval.TAB and self._active_row and not self._active_row.get_visible():
+        elif keyval == Keyval.TAB and self._last_activated and not self._children[self._last_activated]["widget"].get_visible():
 
             self._list_box.set_selection_mode(Gtk.SelectionMode.NONE)
 
@@ -2207,9 +2207,9 @@ class SearchList(Gtk.Box):
 
             self._list_box.unselect_all()
 
-            if self._active_row in self._names:
+            if self._last_activated in self._children:
 
-                self._list_box.select_row(self._active_row)
+                self._list_box.select_row(self._children[self._last_activated]["widget"])
 
             else:
 
@@ -2221,9 +2221,9 @@ class SearchList(Gtk.Box):
 
         if not self._events.trigger("item-activated", self._names[row]):
 
-            self._active_row = row
+            self._last_activated = self._names[row]
 
-        self._list_box.select_row(self._active_row)
+        self._list_box.select_row(row)
 
         self._ignore_selection = False
 
@@ -2283,7 +2283,7 @@ class SearchList(Gtk.Box):
 
     def get_active_item(self):
 
-        return self._active_row
+        return self._last_activated
 
     def set_active_item(self, name, activate=True):
 
@@ -2291,19 +2291,19 @@ class SearchList(Gtk.Box):
 
             self._list_box.unselect_all()
 
-            self._active_row = None
+            self._last_activated = None
 
         else:
 
             item = self._children[name]["widget"]
 
-            if not item == self._active_row and activate:
-
-                item.activate()
-
-            else:
+            if not item in self._list_box.get_selected_rows():
 
                 self._list_box.select_row(item)
+
+                if activate:
+
+                    item.activate()
 
     def get_search_mode(self):
 
