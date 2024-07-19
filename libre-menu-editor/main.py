@@ -3750,7 +3750,9 @@ class Application(gui.Application):
 
                 self.notify(self._locale_manager.get("STARTER_CREATE_MESSAGE_TEXT") % text)
 
-                self._load_settings_page(name)
+                self._search_list.grab_focus()
+
+                GLib.idle_add(self._load_settings_page, name)
 
     def _reset_desktop_starter(self, name):
 

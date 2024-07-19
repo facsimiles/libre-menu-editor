@@ -2054,6 +2054,8 @@ class SearchList(Gtk.Box):
 
         self._list_box = Gtk.ListBox()
 
+        self._list_box.set_sort_func(self._do_list_box_sort)
+
         self._list_box.add_css_class("navigation-sidebar")
 
         self._list_box.set_selection_mode(Gtk.SelectionMode.BROWSE)
@@ -2184,7 +2186,13 @@ class SearchList(Gtk.Box):
 
             self._list_box.unselect_all()
 
-            self._list_box.select_row(self._active_row)
+            if self._active_row in self._names:
+
+                self._list_box.select_row(self._active_row)
+
+            else:
+
+                self._list_box.select_row(None)
 
     def _on_list_box_row_activated(self, list_box, row):
 
@@ -2197,6 +2205,30 @@ class SearchList(Gtk.Box):
         self._list_box.select_row(self._active_row)
 
         self._ignore_selection = False
+
+    def _do_list_box_sort(self, row_1, row_2):
+
+        labels = [
+
+            self._children[self._names[row_1]]["label"].get_text(),
+
+            self._children[self._names[row_2]]["label"].get_text()
+
+            ]
+
+        if labels[0] == labels[1]:
+
+            return 0
+
+        else:
+
+            if sorted(labels, key=str.lower)[0] == labels[0]:
+
+                return -1
+
+            else:
+
+                return 1
 
     def _get_visible_children(self):
 
@@ -2296,7 +2328,7 @@ class SearchList(Gtk.Box):
 
             self.remove(name)
 
-    def update(self, name, text, icon, keywords):
+    def update(self, name, text, icon, keywords, invalidate_sort=True):
 
         if name in self._children:
 
@@ -2315,6 +2347,10 @@ class SearchList(Gtk.Box):
             label.set_text(text)
 
             self._children[name]["keywords"] = [keyword.lower() for keyword in keywords]
+
+            if invalidate_sort:
+
+                self._list_box.invalidate_sort()
 
             self._update_search_results()
 
@@ -2354,8 +2390,6 @@ class SearchList(Gtk.Box):
 
             child.set_child(box)
 
-            self._list_box.prepend(child)
-
             self._names[child] = name
 
             self._children[name] = {}
@@ -2370,7 +2404,9 @@ class SearchList(Gtk.Box):
 
                 keywords = [text]
 
-            self.update(name, text, icon, keywords)
+            self.update(name, text, icon, keywords, invalidate_sort=False)
+
+            self._list_box.prepend(child)
 
             self._update_search_results()
 
