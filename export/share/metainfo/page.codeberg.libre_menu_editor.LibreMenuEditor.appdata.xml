@@ -29,6 +29,10 @@
       <li xml:lang="de">bestimmte Dateien oder Symbolnamen als Anwendungssymbole verwenden</li>
       <li>search through icons of your installed icon-theme</li>
       <li xml:lang="de">Symbole des installierten Symbolthemas durchsuchen</li>
+      <li>add and remove search-keywords</li>
+      <li xml:lang="de">Suchbegriffe hinzufügen und entfernen</li>
+      <li>change the launcher's menu-categories</li>
+      <li xml:lang="de">Menükategorien von Anwendungsstartern bearbeiten</li>
       <li>make launchers execute a specific file or command</li>
       <li xml:lang="de">bestimmte Dateien oder Befehle zur Ausführung verwenden</li>
       <li>convert entered weblinks into valid commands</li>
@@ -95,7 +99,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.5.0" date="2024-07-16"/>
+    <release version="1.6.0" date="2024-07-20"/>
   </releases>
   <recommends>
     <control>touch</control>

@@ -77,6 +77,7 @@
 
   "APPEARANCE_GROUP_TITLE": "Görünüş",
   "DESCRIPTION_GROUP_TITLE": "Açıklama",
+  "DISCOVERY_GROUP_TITLE": "Araştırıcı",
   "EXECUTION_GROUP_TITLE": "Yürütme",
   "ACTIONS_GROUP_TITLE": "Eylemler",
   "VISIBLE_GROUP_TITLE": "Göster",
@@ -85,6 +86,7 @@
   "NAME_ENTRY_ROW_TITLE": "Ad",
   "COMMENT_ENTRY_ROW_TITLE": "Yorum",
   "KEYWORDS_ENTRY_ROW_TITLE": "Anahtar Kelimeler",
+  "CATEGORIES_COMBO_ROW_TITLE": "Kategori",
   "COMMAND_CHOOSER_ROW_TITLE": "Komut",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Dizin",
   "VISIBLE_SWITCH_ROW_TITLE": "Bu uygulamayı ana menüde göster",
@@ -92,6 +94,18 @@
   "TERMINAL_SWITCH_ROW_TITLE": "Yürütme sırasında uçbirim penceresi göster",
 
   "LINK_CONVERTER_ROW_LABEL": "Bağlantıyı bir komuta dönüştürün",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimedia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Geliştirme",
+  "EDUCATION_CATEGORY_LABEL": "Eğitim",
+  "GAME_CATEGORY_LABEL": "Oyunlar",
+  "GRAPHICS_CATEGORY_LABEL": "Grafik",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Ofis",
+  "SCIENCE_CATEGORY_LABEL": "Bilim ve Matematik",
+  "SETTINGS_CATEGORY_LABEL": "Ayarlar",
+  "SYSTEM_CATEGORY_LABEL": "Sistem",
+  "UTILITY_CATEGORY_LABEL": "İzlenceler",
 
   "LOAD_MULTIPLE_ERROR_TEXT": "%s dosyaları yüklenemedi",
   "LOAD_SINGLE_ERROR_TEXT": "'%s' dosyası yüklenemedi",

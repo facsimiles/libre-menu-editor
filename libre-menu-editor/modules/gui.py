@@ -1499,6 +1499,191 @@ class SwitchRow(Adw.ActionRow):
         self._events.release(id)
 
 
+class ComboRow(Adw.ActionRow):
+
+    def __init__(self, app, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        self._events = basic.EventManager()
+
+        self._events.add("item-selected", object, str)
+
+        self._icon_finder = app.get_icon_finder()
+
+        self._buttons = {}
+
+        try:
+
+            self._edit_gizmo = self.get_child().get_first_child().get_next_sibling()
+
+            self._edit_image = self._edit_gizmo.get_next_sibling().get_next_sibling().get_next_sibling()
+
+            self._edit_image.unparent()
+
+        except AttributeError:
+
+            pass
+
+        self._title_label = Gtk.Label()
+
+        #FIXME: self._title_label.add_css_class("dim-label")
+
+        self._list_box = Gtk.ListBox()
+
+        self._list_box.set_sort_func(self._do_list_box_sort)
+
+        self._list_box.connect("row-activated", self._on_row_activated)
+
+        self._popover = Gtk.Popover()
+
+        self._popover.set_valign(Gtk.Align.END)
+
+        self._popover.add_css_class("menu")
+
+        self._popover.set_child(self._list_box)
+
+        self._menu_button = Gtk.MenuButton()
+
+        self._menu_button.add_css_class("flat")
+
+        self._menu_button.set_icon_name(self._icon_finder.get_name("list-add-symbolic"))
+
+        self._menu_button.set_direction(Gtk.ArrowType.LEFT)
+
+        self._menu_button.set_valign(Gtk.Align.CENTER)
+
+        self._menu_button.set_popover(self._popover)
+
+        self.add_prefix(self._title_label)
+
+        self.add_suffix(self._menu_button)
+
+        self.connect("activated", self._on_activate)
+
+        self.set_activatable(True)
+
+    def _on_activate(self, *args):
+
+        self._menu_button.set_active(self._menu_button.get_active() == False)
+
+    def _on_row_activated(self, list_box, row):
+
+        self._events.trigger("item-selected", row.name, row.label)
+
+    def _on_flow_row_text_changed(self, event, child, data):
+
+        self._update_buttons_sensitive()
+
+    def _do_list_box_sort(self, row_1, row_2):
+
+        labels = [
+
+            row_1.label,
+
+            row_2.label
+
+            ]
+
+        if labels[0] == labels[1]:
+
+            return 0
+
+        else:
+
+            if sorted(labels, key=str.lower)[0] == labels[0]:
+
+                return -1
+
+            else:
+
+                return 1
+
+    def _update_buttons_sensitive(self):
+
+        flow_row_labels = self._flow_row.get_text().split(self._flow_row.get_delimiters()[0])
+
+        buttons_added = []
+
+        for name in self._buttons:
+
+            buttons_added.append(self._buttons[name].label in flow_row_labels)
+
+            self._buttons[name].set_visible(not buttons_added[-1])
+
+        else:
+
+            buttons_remaining = False in buttons_added
+
+            self._menu_button.set_sensitive(buttons_remaining)
+
+            if not buttons_remaining:
+
+                self._menu_button.set_active(False)
+
+    def add_button(self, name, text, icon_name=None):
+
+        image = self._icon_finder.get_image(icon_name)
+
+        image.set_margin_end(Margin.DEFAULT)
+
+        label = Gtk.Label()
+
+        label.set_text(text)
+
+        box = Gtk.Box()
+
+        box.append(image)
+
+        box.append(label)
+
+        row = Gtk.ListBoxRow()
+
+        row.set_child(box)
+
+        row.set_activatable(True)
+
+        row.label = label.get_text()
+
+        row.name = name
+
+        self._buttons[name] = row
+
+        self._list_box.append(row)
+
+    def remove_button(self, name):
+
+        row = self._buttons.pop(name)
+
+        self._list_box.remove(row)
+
+    def get_title(self):
+
+        return self._title_label.get_text()
+
+    def set_title(self, text):
+
+        self._title_label.set_text(text)
+
+    def get_flow_row(self):
+
+        return self._flow_row
+
+    def set_flow_row(self, flow_row):
+
+        self._flow_row = flow_row
+
+        self._flow_row.hook("text-changed", self._on_flow_row_text_changed)
+
+    def hook(self, event, callback, *args):
+
+        self._events.hook(event, callback, *args)
+
+    def release(self, id):
+
+        self._events.release(id)
+
+
 class TaggedRowTag(Gtk.FlowBoxChild):
 
     def __init__(self, app, *args, **kwargs):
@@ -1508,6 +1693,8 @@ class TaggedRowTag(Gtk.FlowBoxChild):
         self._application = app
 
         self._icon_finder = app.get_icon_finder()
+
+        self._timeout_id = None
 
         self._flow_row = None
 
@@ -1603,6 +1790,16 @@ class TaggedRowTag(Gtk.FlowBoxChild):
 
                 self._tag_button.remove_css_class(self._tag_dark_css_class)
 
+    def _stop_warning(self):
+
+        self._show_warning = False
+
+        self._update_tag_button_style()
+
+        self._timeout_id = None
+
+        return GLib.SOURCE_REMOVE
+
     def get_text(self):
 
         return self._button_label.get_text()
@@ -1623,7 +1820,17 @@ class TaggedRowTag(Gtk.FlowBoxChild):
 
         return self._show_warning
 
-    def set_show_warning(self, value):
+    def set_show_warning(self, value, timeout=None):
+
+        if value and timeout:
+
+            if self._timeout_id:
+
+                GLib.source_remove(self._timeout_id)
+
+                self._timeout_id = None
+
+            self._timeout_id = GLib.timeout_add_seconds(timeout, self._stop_warning)
 
         self._show_warning = value
 
@@ -1665,9 +1872,9 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
         self._flow_box = Gtk.FlowBox()
 
-        self._flow_box.set_margin_top(Margin.DEFAULT) #FIXME: + self._flow_box_extra_margin)
+        self._flow_box.set_margin_top(Margin.DEFAULT)
 
-        self._flow_box.set_margin_bottom(Margin.DEFAULT) #FIXME: + self._flow_box_extra_margin)
+        self._flow_box.set_margin_bottom(Margin.DEFAULT)
 
         self._flow_box.set_margin_start(Margin.DEFAULT + self._flow_box_extra_margin)
 
@@ -1741,19 +1948,19 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
     def _update_entry_row(self):
 
-        text = self._entry_row.get_text()
+        if self._entry_row:
 
-        strings = self._split_text(text)
+            text = self._entry_row.get_text()
 
-        duplicate_strings, duplicate_tags = self._get_duplicates(*strings, mark_duplicates=True)
+            strings = self._split_text(text)
 
-        #FIXME: strings = [string for string in strings if not string in duplicate_strings]
+            duplicate_strings, duplicate_tags = self._get_duplicates(*strings, mark_duplicates=True)
 
-        if not len(strings):
+            if not len(strings):
 
-            self._entry_row.set_show_apply_button(False)
+                self._entry_row.set_show_apply_button(False)
 
-            self._entry_row.set_show_apply_button(True)
+                self._entry_row.set_show_apply_button(True)
 
     def _split_text(self, *strings):
 
@@ -1773,7 +1980,7 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
             return list(filter(None, strings))
 
-    def _get_duplicates(self, *strings, mark_duplicates=False):
+    def _get_duplicates(self, *strings, mark_duplicates=False, warning_timeout=None):
 
         duplicate_strings, duplicate_tags = [], []
 
@@ -1795,15 +2002,17 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
             if mark_duplicates:
 
-                for tag in self._duplicate_tag_warnings:
+                if not warning_timeout:
 
-                    tag.set_show_warning(False)
+                    for tag in self._duplicate_tag_warnings:
 
-                self._duplicate_tag_warnings = duplicate_tags
+                        tag.set_show_warning(False)
+
+                    self._duplicate_tag_warnings = duplicate_tags
 
                 for tag in duplicate_tags:
 
-                    tag.set_show_warning(True)
+                    tag.set_show_warning(True, timeout=warning_timeout)
 
             return duplicate_strings, duplicate_tags
 
@@ -1814,6 +2023,8 @@ class TaggedFlowRow(Adw.PreferencesRow):
     def set_entry_row(self, entry_row):
 
         if self._entry_row:
+
+            """
 
             try:
 
@@ -1827,6 +2038,8 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
                 pass
 
+            """
+
             for connection_id in self._entry_row_connection_ids:
 
                 self._entry_row.disconnect(connection_id)
@@ -1838,6 +2051,8 @@ class TaggedFlowRow(Adw.PreferencesRow):
         self._entry_row_default_values["show-apply-button"] = entry_row.get_show_apply_button()
 
         entry_row.set_show_apply_button(True)
+
+        """
 
         try:
 
@@ -1853,6 +2068,8 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
             pass
 
+        """
+
         self._entry_row_connection_ids.append(entry_row.connect("apply", self._on_entry_row_apply))
 
         self._entry_row_connection_ids.append(entry_row.connect("changed", self._on_entry_row_changed))
@@ -1867,7 +2084,7 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
     def get_text(self):
 
-        return self._delimiters[0].join([tag.get_text() for tag in self.get_tags()]) + int(bool(self._ends_with_delimiter))*";"
+        return self._delimiters[0].join([tag.get_text() for tag in self.get_tags()]) + int(bool(self._ends_with_delimiter)) * ";"
 
     def set_text(self, *strings):
 
@@ -1903,13 +2120,13 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
             return []
 
-    def add_tags(self, *strings, allow_duplicates=True):
+    def add_tags(self, *strings, allow_duplicates=True, warning_timeout=None):
 
         strings = self._split_text(*strings)
 
         if not allow_duplicates:
 
-            duplicate_strings, duplicate_tags = self._get_duplicates(*strings)
+            duplicate_strings, duplicate_tags = self._get_duplicates(*strings, mark_duplicates=True, warning_timeout=warning_timeout)
 
             strings = [string for string in strings if not string in duplicate_strings]
 
@@ -1932,7 +2149,6 @@ class TaggedFlowRow(Adw.PreferencesRow):
             tag = TaggedRowTag(self._application)
 
             tag.set_text(text)
-
 
         event_controller_key = Gtk.EventControllerKey()
 
@@ -1974,7 +2190,9 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
     def reset(self):
 
-        self._entry_row.set_text("")
+        if self._entry_row:
+
+            self._entry_row.set_text("")
 
         if self._flow_box.get_first_child():
 

@@ -77,6 +77,7 @@
 
   "APPEARANCE_GROUP_TITLE": "Aussehen",
   "DESCRIPTION_GROUP_TITLE": "Beschreibung",
+  "DISCOVERY_GROUP_TITLE": "Suchen",
   "EXECUTION_GROUP_TITLE": "Ausführung",
   "ACTIONS_GROUP_TITLE": "Aktionen",
   "VISIBLE_GROUP_TITLE": "Sichtbarkeit",
@@ -85,6 +86,7 @@
   "NAME_ENTRY_ROW_TITLE": "Name",
   "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
   "KEYWORDS_ENTRY_ROW_TITLE": "Suchbegriffe",
+  "CATEGORIES_COMBO_ROW_TITLE": "Kategorien",
   "COMMAND_CHOOSER_ROW_TITLE": "Befehl",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Arbeitsverzeichnis",
   "VISIBLE_SWITCH_ROW_TITLE": "Anwendung im Hauptmenü anzeigen",
@@ -92,6 +94,18 @@
   "TERMINAL_SWITCH_ROW_TITLE": "Konsolenfenster während der Ausführung anzeigen",
 
   "LINK_CONVERTER_ROW_LABEL": "Verweis in Befehl umwandeln",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimedia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Entwicklung",
+  "EDUCATION_CATEGORY_LABEL": "Bildung",
+  "GAME_CATEGORY_LABEL": "Spiele",
+  "GRAPHICS_CATEGORY_LABEL": "Grafik",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Büro",
+  "SCIENCE_CATEGORY_LABEL": "Wissenschaft",
+  "SETTINGS_CATEGORY_LABEL": "Einstellungen",
+  "SYSTEM_CATEGORY_LABEL": "System",
+  "UTILITY_CATEGORY_LABEL": "Zubehör",
 
   "LOAD_MULTIPLE_ERROR_TEXT": "%s Starter konnten nicht geladen werden",
   "LOAD_SINGLE_ERROR_TEXT": "Starter '%s' konnte nicht geladen werden",

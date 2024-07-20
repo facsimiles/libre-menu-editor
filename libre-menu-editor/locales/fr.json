@@ -77,6 +77,7 @@
 
   "APPEARANCE_GROUP_TITLE": "Apparence",
   "DESCRIPTION_GROUP_TITLE": "Description",
+  "DISCOVERY_GROUP_TITLE": "Recherche",
   "EXECUTION_GROUP_TITLE": "Exécution",
   "ACTIONS_GROUP_TITLE": "Actions",
   "VISIBLE_GROUP_TITLE": "Visibilité",
@@ -85,6 +86,7 @@
   "NAME_ENTRY_ROW_TITLE": "Nom",
   "COMMENT_ENTRY_ROW_TITLE": "Commentaire",
   "KEYWORDS_ENTRY_ROW_TITLE": "Mots clés",
+  "CATEGORIES_COMBO_ROW_TITLE": "Catégories",
   "COMMAND_CHOOSER_ROW_TITLE": "Commande",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Répertoire",
   "VISIBLE_SWITCH_ROW_TITLE": "Afficher cette application dans le menu principal",
@@ -92,6 +94,18 @@
   "TERMINAL_SWITCH_ROW_TITLE": "Afficher une fenêtre de terminal pendant l'exécution",
 
   "LINK_CONVERTER_ROW_LABEL": "Convertir le lien en commande",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimédia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Développement",
+  "EDUCATION_CATEGORY_LABEL": "Éducation",
+  "GAME_CATEGORY_LABEL": "Jeux",
+  "GRAPHICS_CATEGORY_LABEL": "Graphisme",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Bureautique",
+  "SCIENCE_CATEGORY_LABEL": "Sciences et mathématiques",
+  "SETTINGS_CATEGORY_LABEL": "Configuration",
+  "SYSTEM_CATEGORY_LABEL": "Système",
+  "UTILITY_CATEGORY_LABEL": "Utilitaires",
 
   "LOAD_MULTIPLE_ERROR_TEXT": "Échec du chargement de %s fichiers",
   "LOAD_SINGLE_ERROR_TEXT": "Échec du chargement du fichier '%s'",

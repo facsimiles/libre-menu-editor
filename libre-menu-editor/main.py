@@ -205,6 +205,14 @@ class DesktopParser():
 
         self._set("Keywords", comment, section=section, localized=True)
 
+    def get_categories(self, section="Desktop Entry"):
+
+        return self._get_str("Categories", section=section)
+
+    def set_categories(self, comment, section="Desktop Entry"):
+
+        self._set("Categories", comment, section=section)
+
     def get_icon(self, section="Desktop Entry"):
 
         return self._get_str("Icon", section=section)
@@ -314,6 +322,8 @@ class DesktopParser():
         data.append(self.get_command())
 
         data.append(self.get_keywords())
+
+        data.append(self.get_categories())
 
         data.append(self._get_str("MimeType"))
 
@@ -855,6 +865,455 @@ class DesktopActionGroup(Adw.PreferencesGroup):
         self.set_title("")
 
 
+class CategoriesFilter():
+
+    def __init__(self, app):
+
+        self._events = basic.EventManager()
+
+        self._events.add("text-changed", object, str)
+
+        self._locale_manager = app.get_locale_manager()
+
+        self._icon_finder = app.get_icon_finder()
+
+        self._ends_with_delimiter = None
+
+        self._combo_row = None
+
+        self._flow_row = None
+
+        self._combo_row_connection_id = None
+
+        self._flow_row_connection_id = None
+
+        self._current_default_text = ""
+
+        self._delimiter = ";"
+
+        self._main_categories = {
+
+            "AudioVideo": {
+
+                "label": self._locale_manager.get("MULTIMEDIA_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-multimedia"),
+
+                "sub-categories": [
+
+                    "Audio",
+                    "Video"
+                    "Midi",
+                    "Mixer",
+                    "Sequencer",
+                    "Tuner",
+                    "TV",
+                    "AudioVideoEditing",
+                    "Player",
+                    "Recorder",
+                    "DiscBurning",
+                    "Music",
+                    "Database",
+                    "HamRadio"
+                    ]
+
+                },
+
+            "Development": {
+
+                "label": self._locale_manager.get("DEVELOPMENT_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-development"),
+
+                "sub-categories": [
+
+                    "Building",
+                    "Debugger",
+                    "IDE",
+                    "GUIDesigner",
+                    "Profiling",
+                    "RevisionControl",
+                    "Translation",
+                    "Database",
+                    "ProjectManagement",
+                    "WebDevelopment"
+                    ]
+
+                },
+
+            "Education":  {
+
+                "label": self._locale_manager.get("EDUCATION_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-education"),
+
+                "sub-categories": [
+
+                    "Art",
+                    "Construction",
+                    "Languages",
+                    "ArtificialIntelligence",
+                    "Astronomy",
+                    "Biology",
+                    "Chemistry",
+                    "ComputerScience",
+                    "DataVisualization",
+                    "Economy",
+                    "Electricity",
+                    "Geography",
+                    "Geology",
+                    "Geoscience",
+                    "History",
+                    "Humanities",
+                    "ImageProcessing",
+                    "Literature",
+                    "Maps",
+                    "Math",
+                    "NumericalAnalysis",
+                    "MedicalSoftware",
+                    "Physics",
+                    "Robotics",
+                    "Spirituality",
+                    "Sports",
+                    "ParallelComputing",
+                    "Music"
+                    ]
+
+                },
+
+            "Game": {
+
+                "label": self._locale_manager.get("GAME_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-games"),
+
+                "sub-categories": [
+
+                    "ActionGame",
+                    "AdventureGame",
+                    "ArcadeGame",
+                    "BoardGame",
+                    "BlocksGame",
+                    "CardGame",
+                    "KidsGame",
+                    "LogicGame",
+                    "RolePlaying",
+                    "Shooter",
+                    "Simulation",
+                    "SportsGame",
+                    "StrategyGame",
+                    "Emulator"
+                    ]
+
+                },
+
+            "Graphics": {
+
+                "label": self._locale_manager.get("GRAPHICS_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-graphics"),
+
+                "sub-categories": [
+
+                    "2DGraphics",
+                    "VectorGraphics",
+                    "RasterGraphics",
+                    "3DGraphics",
+                    "Scanning",
+                    "OCR",
+                    "Photography",
+                    "Publishing",
+                    "Viewer"
+                    ]
+
+                },
+
+            "Network": {
+
+                "label": self._locale_manager.get("NETWORK_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-network"),
+
+                "sub-categories": [
+
+                    "Dialup",
+                    "InstantMessaging",
+                    "Chat",
+                    "IRCClient",
+                    "Feed",
+                    "FileTransfer",
+                    "HamRadio",
+                    "News",
+                    "P2P",
+                    "RemoteAccess",
+                    "Telephony",
+                    "VideoConference",
+                    "WebBrowser",
+                    "WebDevelopment",
+                    "Email",
+                    "Monitor"
+                    ]
+
+                },
+
+            "Office": {
+
+                "label": self._locale_manager.get("OFFICE_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-office"),
+
+                "sub-categories": [
+
+                    "Calendar",
+                    "ContactManagement",
+                    "Database",
+                    "Dictionary",
+                    "Chart",
+                    "Email",
+                    "Finance",
+                    "FlowChart",
+                    "PDA",
+                    "ProjectManagement",
+                    "Presentation",
+                    "Spreadsheet",
+                    "WordProcessor",
+                    "Photography",
+                    "Publishing",
+                    "Viewer"
+                    ]
+
+                },
+
+            "Science": {
+
+                "label": self._locale_manager.get("SCIENCE_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-science"),
+
+                "sub-categories": [
+
+                    "Art",
+                    "Construction",
+                    "Languages",
+                    "ArtificialIntelligence",
+                    "Astronomy",
+                    "Biology",
+                    "Chemistry",
+                    "ComputerScience",
+                    "DataVisualization",
+                    "Economy",
+                    "Electricity",
+                    "Geography",
+                    "Geology",
+                    "Geoscience",
+                    "History",
+                    "Humanities",
+                    "ImageProcessing",
+                    "Literature",
+                    "Maps",
+                    "Math",
+                    "NumericalAnalysis",
+                    "MedicalSoftware",
+                    "Physics",
+                    "Robotics",
+                    "Spirituality",
+                    "Sports",
+                    "ParallelComputing"
+                    ]
+
+                },
+
+            "Settings": {
+
+                "label": self._locale_manager.get("SETTINGS_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-settings"),
+
+                "sub-categories": [
+
+                    "DesktopSettings",
+                    "HardwareSettings",
+                    "Printing",
+                    "PackageManager",
+                    "Security",
+                    "Accessibility"
+                    ]
+
+                },
+
+            "System": {
+
+                "label": self._locale_manager.get("SYSTEM_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-system"),
+
+                "sub-categories": [
+
+                    "Emulator",
+                    "FileManager",
+                    "TerminalEmulator",
+                    "Filesystem",
+                    "Monitor",
+                    "FileTools",
+                    "Security"
+                    ]
+
+                },
+
+            "Utility": {
+
+                "label": self._locale_manager.get("UTILITY_CATEGORY_LABEL"),
+
+                "icon-name": self._icon_finder.get_name("applications-utilities"),
+
+                "sub-categories": [
+
+                    "TextTools",
+                    "TelephonyTools",
+                    "Archiving",
+                    "Compression",
+                    "FileTools",
+                    "Calculator",
+                    "Clock",
+                    "TextEditor",
+                    "Maps",
+                    "Spirituality",
+                    "Accessibility"
+                    ]
+
+                }
+
+            }
+
+    def _on_combo_row_item_selected(self, event, name, label):
+
+        self._flow_row.add_tags(label, allow_duplicates=False, warning_timeout=1)
+
+    def _on_flow_row_text_changed(self, event, child, text):
+
+        self._events.trigger("text-changed", self, self._filtered_to_default(text))
+
+    def _join_text(self, strings):
+
+        return self._delimiter.join(strings)
+
+    def _split_text(self, text):
+
+        return list(filter(None, text.split(self._delimiter)))
+
+    def _default_to_filtered(self, text):
+
+        items = []
+
+        for item in self._split_text(text):
+
+            if item in self._main_categories:
+
+                items.append(self._main_categories[item]["label"])
+
+        return self._join_text(items) + int(bool(self._ends_with_delimiter)) * ";"
+
+    def _filtered_to_default(self, text):
+
+        missing_items = []
+
+        default_items = self._split_text(self._current_default_text)
+
+        available_labels = self._split_text(text)
+
+        for item in self._main_categories:
+
+            if not self._main_categories[item]["label"] in available_labels:
+
+                missing_items.append(item)
+
+        for missing_item in missing_items:
+
+            for count in range(default_items.count(missing_item)):
+
+                default_items.remove(missing_item)
+
+        for label in available_labels:
+
+            for item in self._main_categories:
+
+                if self._main_categories[item]["label"] == label and not item in default_items:
+
+                    default_items.append(item)
+
+        return self._join_text(default_items) + int(bool(self._ends_with_delimiter)) * ";"
+
+    def get_combo_row(self):
+
+        return self._combo_row
+
+    def set_combo_row(self, widget):
+
+        if self._combo_row_connection_id:
+
+            for name in self._main_categories:
+
+                self._combo_row.remove_button(name)
+
+            self._combo_row.disconnect(self._combo_row_connection_id)
+
+        self._combo_row = widget
+
+        for name in self._main_categories:
+
+            self._combo_row.add_button(name, self._main_categories[name]["label"], self._main_categories[name]["icon-name"])
+
+        self._combo_row_connection_id = self._combo_row.hook("item-selected", self._on_combo_row_item_selected)
+
+    def get_flow_row(self):
+
+        return self._flow_row
+
+    def set_flow_row(self, widget):
+
+        if self._flow_row_connection_id:
+
+            self._flow_row.disconnect(self._flow_row_connection_id)
+
+        self._flow_row = widget
+
+        self._flow_row_connection_id = self._flow_row.hook("text-changed", self._on_flow_row_text_changed)
+
+    def get_text(self):
+
+        return self._filtered_to_default(self._flow_row.get_text())
+
+    def set_text(self, text):
+
+        self._current_default_text = text
+
+        self._ends_with_delimiter = text.endswith(self._delimiter)
+
+        self._flow_row.set_text(self._default_to_filtered(text))
+
+    def get_translation(self, name):
+
+        return self._translations[name]
+
+    def set_translation(self, name, label):
+
+        self._translations[name] = label
+
+    def hook(self, event, callback):
+
+        return self._events.hook(event, callback)
+
+    def release(self, id):
+
+        self._events.release(id)
+
+    def reset(self):
+
+        self._current_default_text = ""
+
+        self._flow_row.reset()
+
+
 class SettingsPage(Gtk.Box):
 
     def __init__(self, app, *args, **kwargs):
@@ -1001,11 +1460,35 @@ class SettingsPage(Gtk.Box):
 
         self._keywords_flow_row.set_entry_row(self._keywords_entry_row)
 
-        self._keyword_preferences_group = Adw.PreferencesGroup()
+        self._keywords_preferences_group = Adw.PreferencesGroup()
 
-        self._keyword_preferences_group.add(self._keywords_entry_row)
+        self._keywords_preferences_group.set_title(self._locale_manager.get("DISCOVERY_GROUP_TITLE"))
 
-        self._keyword_preferences_group.add(self._keywords_flow_row)
+        self._keywords_preferences_group.add(self._keywords_entry_row)
+
+        self._keywords_preferences_group.add(self._keywords_flow_row)
+
+        self._categories_flow_row = gui.TaggedFlowRow(app)
+
+        self._categories_combo_row = gui.ComboRow(app)
+
+        self._categories_combo_row.set_title(self._locale_manager.get("CATEGORIES_COMBO_ROW_TITLE"))
+
+        self._categories_combo_row.set_flow_row(self._categories_flow_row)
+
+        self._categories_filter = CategoriesFilter(app)
+
+        self._categories_filter.set_flow_row(self._categories_flow_row)
+
+        self._categories_filter.set_combo_row(self._categories_combo_row)
+
+        self._categories_filter.hook("text-changed", self._on_input_child_data_changed)
+
+        self._categories_preferences_group = Adw.PreferencesGroup()
+
+        self._categories_preferences_group.add(self._categories_combo_row)
+
+        self._categories_preferences_group.add(self._categories_flow_row)
 
         ###############################################################################################################
 
@@ -1047,7 +1530,7 @@ class SettingsPage(Gtk.Box):
 
         self._execution_preferences_group.add(self._link_converter_row)
 
-        self._execution_preferences_group.add(self._directory_chooser_row)
+        #FIXME: self._execution_preferences_group.add(self._directory_chooser_row)
 
         ###############################################################################################################
 
@@ -1111,11 +1594,11 @@ class SettingsPage(Gtk.Box):
 
         self._visible_switch_row.hook("value-changed", self._on_input_child_data_changed)
 
-        self._visible_preferences_group = Adw.PreferencesGroup()
+        #FIXME: self._visible_preferences_group = Adw.PreferencesGroup()
 
-        self._visible_preferences_group.set_title(self._locale_manager.get("VISIBLE_GROUP_TITLE"))
+        #FIXME: self._visible_preferences_group.set_title(self._locale_manager.get("VISIBLE_GROUP_TITLE"))
 
-        self._visible_preferences_group.add(self._visible_switch_row)
+        #FIXME: self._visible_preferences_group.add(self._visible_switch_row)
 
         ###############################################################################################################
 
@@ -1132,6 +1615,10 @@ class SettingsPage(Gtk.Box):
         self._terminal_switch_row.hook("value-changed", self._on_input_child_data_changed)
 
         self._display_preferences_group = Adw.PreferencesGroup()
+
+        self._display_preferences_group.set_title(self._locale_manager.get("VISIBLE_GROUP_TITLE"))
+
+        self._display_preferences_group.add(self._visible_switch_row)
 
         self._display_preferences_group.add(self._notify_switch_row)
 
@@ -1157,7 +1644,9 @@ class SettingsPage(Gtk.Box):
 
         self._top_box.append(self._description_preferences_group)
 
-        self._top_box.append(self._keyword_preferences_group)
+        self._top_box.append(self._keywords_preferences_group)
+
+        self._top_box.append(self._categories_preferences_group)
 
         self._top_box.append(self._execution_preferences_group)
 
@@ -1175,7 +1664,7 @@ class SettingsPage(Gtk.Box):
 
         self._bottom_box.set_orientation(Gtk.Orientation.VERTICAL)
 
-        self._bottom_box.append(self._visible_preferences_group)
+        # FIXME: self._bottom_box.append(self._visible_preferences_group)
 
         self._bottom_box.append(self._display_preferences_group)
 
@@ -1360,6 +1849,10 @@ class SettingsPage(Gtk.Box):
             elif child == self._keywords_flow_row:
 
                 self._input_children_changes[child] = data == self._current_parser.get_keywords()
+
+            elif child == self._categories_filter:
+
+                self._input_children_changes[child] = data == self._current_parser.get_categories()
 
             elif child == self._command_chooser_row:
 
@@ -1661,6 +2154,8 @@ class SettingsPage(Gtk.Box):
 
         self._keywords_flow_row.set_text(self._current_parser.get_keywords())
 
+        self._categories_filter.set_text(self._current_parser.get_categories())
+
         self._command_chooser_row.set_text(self._current_parser.get_command())
 
         self._directory_chooser_row.set_text(self._current_parser.get_directory())
@@ -1710,6 +2205,8 @@ class SettingsPage(Gtk.Box):
         self._current_parser.set_comment(self._comment_entry_row.get_text())
 
         self._current_parser.set_keywords(self._keywords_flow_row.get_text())
+
+        self._current_parser.set_categories(self._categories_filter.get_text())
 
         self._current_parser.set_command(self._command_chooser_row.get_text())
 
@@ -1778,6 +2275,8 @@ class SettingsPage(Gtk.Box):
             self._icon_browser_row.set_default_text("")
 
             self._keywords_flow_row.reset()
+
+            self._categories_filter.reset()
 
         self._update_action_children_sensitive(False)
 
@@ -1943,6 +2442,100 @@ class Application(gui.Application):
             "page.codeberg.libre_menu_editor.LibreMenuEditor",
 
             "libre-menu-editor-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-multimedia",
+
+            "applications-multimedia-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-development",
+
+            "applications-development-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-education",
+
+            "applications-education-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-games",
+
+            "applications-games-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-graphics",
+
+            "applications-graphics-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-network",
+
+            "applications-internet",
+
+            "applications-network-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-office",
+
+            "applications-office-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-science",
+
+            "applications-science-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-settings",
+
+            "preferences-system",
+
+            "applications-settings-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-system",
+
+            "applications-system-fallback"
+
+            )
+
+        self._icon_finder.add_alternatives(
+
+            "applications-utilities",
+
+            "applications-accessories",
+
+            "applications-utilities-fallback"
 
             )
 

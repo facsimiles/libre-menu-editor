@@ -77,6 +77,7 @@
 
   "APPEARANCE_GROUP_TITLE": "Wygląd",
   "DESCRIPTION_GROUP_TITLE": "Opis",
+  "DISCOVERY_GROUP_TITLE": "Wyszukiwanie",
   "EXECUTION_GROUP_TITLE": "Wykonanie",
   "ACTIONS_GROUP_TITLE": "Akcje",
   "VISIBLE_GROUP_TITLE": "Wyświetlanie",
@@ -85,6 +86,7 @@
   "NAME_ENTRY_ROW_TITLE": "Nazwa",
   "COMMENT_ENTRY_ROW_TITLE": "Komentarz",
   "KEYWORDS_ENTRY_ROW_TITLE": "Słowa kluczowe",
+  "CATEGORIES_COMBO_ROW_TITLE": "Kategorie",
   "COMMAND_CHOOSER_ROW_TITLE": "Komenda",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Folder",
   "VISIBLE_SWITCH_ROW_TITLE": "Pokaż tę aplikację w menu głównym",
@@ -92,6 +94,18 @@
   "TERMINAL_SWITCH_ROW_TITLE": "Pokaż okno terminala podczas wykonywania",
 
   "LINK_CONVERTER_ROW_LABEL": "Zamień łącze na polecenie",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimedia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Narzędzia programistów",
+  "EDUCATION_CATEGORY_LABEL": "Edukacja",
+  "GAME_CATEGORY_LABEL": "Gry",
+  "GRAPHICS_CATEGORY_LABEL": "Grafika",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Biuro",
+  "SCIENCE_CATEGORY_LABEL": "Naukowe",
+  "SETTINGS_CATEGORY_LABEL": "Ustawienia",
+  "SYSTEM_CATEGORY_LABEL": "System",
+  "UTILITY_CATEGORY_LABEL": "Narzędzia",
 
   "LOAD_MULTIPLE_ERROR_TEXT": "Ładowanie %s plików nie powiodło się",
   "LOAD_SINGLE_ERROR_TEXT": "Ładowanie pliku nie powiodło się: '%s'",

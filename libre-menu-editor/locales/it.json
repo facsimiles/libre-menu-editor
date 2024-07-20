@@ -77,6 +77,7 @@
 
   "APPEARANCE_GROUP_TITLE": "Apparenza",
   "DESCRIPTION_GROUP_TITLE": "Descrizione",
+  "DISCOVERY_GROUP_TITLE": "Indagatore",
   "EXECUTION_GROUP_TITLE": "Esecuzione",
   "ACTIONS_GROUP_TITLE": "Azioni",
   "VISIBLE_GROUP_TITLE": "Mostra",
@@ -85,6 +86,7 @@
   "NAME_ENTRY_ROW_TITLE": "Nome",
   "COMMENT_ENTRY_ROW_TITLE": "Commento",
   "KEYWORDS_ENTRY_ROW_TITLE": "Parole chiave",
+  "CATEGORIES_COMBO_ROW_TITLE": "Categories",
   "COMMAND_CHOOSER_ROW_TITLE": "Comando",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Directory",
   "VISIBLE_SWITCH_ROW_TITLE": "Mostra questa applicazione nel menu principale",
@@ -92,6 +94,18 @@
   "TERMINAL_SWITCH_ROW_TITLE": "Mostra una finestra terminale durante l'esecuzione",
 
   "LINK_CONVERTER_ROW_LABEL": "Converti collegamento in comando",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimedia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Sviluppo",
+  "EDUCATION_CATEGORY_LABEL": "Didattica",
+  "GAME_CATEGORY_LABEL": "Giochi",
+  "GRAPHICS_CATEGORY_LABEL": "Grafica",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Ufficio",
+  "SCIENCE_CATEGORY_LABEL": "Scienza e matematica",
+  "SETTINGS_CATEGORY_LABEL": "Impostazioni",
+  "SYSTEM_CATEGORY_LABEL": "Sistema",
+  "UTILITY_CATEGORY_LABEL": "Accessori",
 
   "LOAD_MULTIPLE_ERROR_TEXT": "Impossibile caricare %s file",
   "LOAD_SINGLE_ERROR_TEXT": "Impossibile caricare il file '%s'",
