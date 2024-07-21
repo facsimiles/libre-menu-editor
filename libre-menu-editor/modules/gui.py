@@ -1971,6 +1971,8 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
         self._flow_box = Gtk.FlowBox()
 
+        self._flow_box.set_sort_func(self._do_flow_box_sort)
+
         self._flow_box.set_margin_top(Margin.DEFAULT)
 
         self._flow_box.set_margin_bottom(Margin.DEFAULT)
@@ -2000,6 +2002,30 @@ class TaggedFlowRow(Adw.PreferencesRow):
         self.set_visible(False)
 
         self.set_child(self._revealer)
+
+    def _do_flow_box_sort(self, tag_1, tag_2):
+
+        labels = [
+
+            tag_1.get_text(),
+
+            tag_2.get_text()
+
+            ]
+
+        if labels[0] == labels[1]:
+
+            return 0
+
+        else:
+
+            if sorted(labels, key=str.lower)[0] == labels[0]:
+
+                return -1
+
+            else:
+
+                return 1
 
     def _on_tag_event_controller_key_pressed(self, controller, keyval, keycode, state):
 

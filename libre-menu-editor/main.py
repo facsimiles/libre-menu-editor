@@ -865,6 +865,75 @@ class DesktopActionGroup(Adw.PreferencesGroup):
         self.set_title("")
 
 
+class KeywordsFilter():
+
+    def __init__(self, app):
+
+        self._events = basic.EventManager()
+
+        self._events.add("text-changed", object, str)
+
+        self._flow_row = None
+
+        self._flow_row_connection_id = None
+
+        self._current_default_text = ""
+
+        self._delimiter = ";"
+
+    def _on_flow_row_text_changed(self, event, child, text):
+
+        self._events.trigger("text-changed", self, self._get_unfiltered_text(text))
+
+    def _get_unfiltered_text(self, text):
+
+        if not sorted(text.split(self._delimiter)) == sorted(self._current_default_text.split(self._delimiter)):
+
+            return text
+
+        else:
+
+            return self._current_default_text
+
+    def get_flow_row(self):
+
+        return self._flow_row
+
+    def set_flow_row(self, widget):
+
+        if self._flow_row_connection_id:
+
+            self._flow_row.disconnect(self._flow_row_connection_id)
+
+        self._flow_row = widget
+
+        self._flow_row_connection_id = self._flow_row.hook("text-changed", self._on_flow_row_text_changed)
+
+    def get_text(self):
+
+        return self._get_unfiltered_text(self._flow_row.get_text())
+
+    def set_text(self, text):
+
+        self._current_default_text = text
+
+        self._flow_row.set_text(text)
+
+    def hook(self, event, callback):
+
+        return self._events.hook(event, callback)
+
+    def release(self, id):
+
+        self._events.release(id)
+
+    def reset(self):
+
+        self._current_default_text = ""
+
+        self._flow_row.reset()
+
+
 class CategoriesFilter():
 
     def __init__(self, app):
@@ -1291,14 +1360,6 @@ class CategoriesFilter():
 
         self._flow_row.set_text(self._default_to_filtered(text))
 
-    def get_translation(self, name):
-
-        return self._translations[name]
-
-    def set_translation(self, name, label):
-
-        self._translations[name] = label
-
     def hook(self, event, callback):
 
         return self._events.hook(event, callback)
@@ -1459,6 +1520,12 @@ class SettingsPage(Gtk.Box):
         self._keywords_flow_row.hook("text-changed", self._on_input_child_data_changed)
 
         self._keywords_flow_row.set_entry_row(self._keywords_entry_row)
+
+        self._keywords_filter = KeywordsFilter(app)
+
+        self._keywords_filter.set_flow_row(self._keywords_flow_row)
+
+        self._keywords_filter.hook("text-changed", self._on_input_child_data_changed)
 
         self._keywords_preferences_group = Adw.PreferencesGroup()
 
@@ -1846,7 +1913,7 @@ class SettingsPage(Gtk.Box):
 
                 self._input_children_changes[child] = data == self._current_parser.get_comment()
 
-            elif child == self._keywords_flow_row:
+            elif child == self._keywords_filter:
 
                 self._input_children_changes[child] = data == self._current_parser.get_keywords()
 
@@ -2152,7 +2219,7 @@ class SettingsPage(Gtk.Box):
 
         self._comment_entry_row.set_text(self._current_parser.get_comment())
 
-        self._keywords_flow_row.set_text(self._current_parser.get_keywords())
+        self._keywords_filter.set_text(self._current_parser.get_keywords())
 
         self._categories_filter.set_text(self._current_parser.get_categories())
 
@@ -2204,7 +2271,7 @@ class SettingsPage(Gtk.Box):
 
         self._current_parser.set_comment(self._comment_entry_row.get_text())
 
-        self._current_parser.set_keywords(self._keywords_flow_row.get_text())
+        self._current_parser.set_keywords(self._keywords_filter.get_text())
 
         self._current_parser.set_categories(self._categories_filter.get_text())
 
@@ -2274,7 +2341,7 @@ class SettingsPage(Gtk.Box):
 
             self._icon_browser_row.set_default_text("")
 
-            self._keywords_flow_row.reset()
+            self._keywords_filter.reset()
 
             self._categories_filter.reset()
 
