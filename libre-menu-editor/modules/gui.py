@@ -1527,8 +1527,6 @@ class ComboRow(Adw.ActionRow):
 
         self._title_label = Gtk.Label()
 
-        #FIXME: self._title_label.add_css_class("dim-label")
-
         self._list_box = Gtk.ListBox()
 
         self._list_box.set_sort_func(self._do_list_box_sort)
@@ -1684,6 +1682,109 @@ class ComboRow(Adw.ActionRow):
         self._events.release(id)
 
 
+class ScrolledSqueezer(Gtk.Box):
+
+    def __init__(self):
+
+        super().__init__()
+
+        self._widget = None
+
+        self._max_height = 0
+
+        self._scrolled_window = Gtk.ScrolledWindow()
+
+        self._drawing_area = Gtk.DrawingArea()
+
+        self._drawing_area.connect("realize", self._on_drawing_area_realize)
+
+        self._drawing_area.connect("resize", self._on_drawing_area_resize)
+
+        self._size_group = Gtk.SizeGroup()
+
+        self._size_group.add_widget(self._drawing_area)
+
+        self._overlay = Gtk.Overlay()
+
+        self._overlay.add_overlay(self._scrolled_window)
+
+        self._overlay.set_child(self._drawing_area)
+
+        self.set_orientation(Gtk.Orientation.VERTICAL)
+
+        self.append(self._overlay)
+
+    def _on_drawing_area_realize(self, drawing_area):
+
+        self._update_conrent_height()
+
+    def _on_drawing_area_resize(self, drawing_area, width, height):
+
+        self._update_conrent_height()
+
+    def _after_update_content_height(self):
+
+        if self._widget:
+
+            additional_height = self._widget.get_margin_top() + self._widget.get_margin_bottom()
+
+            height = self._widget.get_allocated_height() + additional_height
+
+            max_height = self._max_height + additional_height
+
+            if not height > max_height:
+
+                self._scrolled_window.set_min_content_height(height)
+
+                self._overlay.set_property("height-request", height)
+
+            else:
+
+                self._scrolled_window.set_min_content_height(max_height)
+
+                self._overlay.set_property("height-request", max_height)
+
+    def _update_conrent_height(self):
+
+        self._after_update_content_height()
+
+        GLib.idle_add(self._after_update_content_height)
+
+    def get_max_height(self):
+
+        return self._max_height
+
+    def set_max_height(self, value):
+
+        self._max_height = value
+
+        self._update_conrent_height()
+
+    def get_child(self):
+
+        return self._widget
+
+    def set_child(self, widget):
+
+        if self._widget:
+
+            self._widget.unparent()
+
+            self._scrolled_window.set_child(None)
+
+            self._size_group.remove_widget(self._widget)
+
+        self._widget = widget
+
+        self._widget.set_valign(Gtk.Align.START)
+
+        self._size_group.add_widget(self._widget)
+
+        self._scrolled_window.set_child(widget)
+
+        self._update_conrent_height()
+
+
 class TaggedRowTag(Gtk.FlowBoxChild):
 
     def __init__(self, app, *args, **kwargs):
@@ -1723,8 +1824,6 @@ class TaggedRowTag(Gtk.FlowBoxChild):
         self._tag_button = Gtk.Button()
 
         self._tag_button.add_css_class("circular")
-
-        self._tag_button.add_css_class(self._tag_dark_css_class)
 
         self._tag_button.connect("clicked", self._on_tag_button_clicked)
 
@@ -1882,15 +1981,19 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
         self._flow_box.set_selection_mode(Gtk.SelectionMode.NONE)
 
-        self._revealer = Gtk.Revealer()
+        self._scrolled_squeezer = ScrolledSqueezer()
 
-        # FIXME: self._revealer.set_transition_duration(self._revealer.get_transition_duration() / 2)
+        self._scrolled_squeezer.set_child(self._flow_box)
+
+        self._scrolled_squeezer.set_max_height(480)
+
+        self._revealer = Gtk.Revealer()
 
         self._revealer.connect("notify::reveal-child", self._on_revealer_reveal_child_changed)
 
         self._revealer.connect("notify::child-revealed", self._on_revealer_child_revealed_changed)
 
-        self._revealer.set_child(self._flow_box)
+        self._revealer.set_child(self._scrolled_squeezer)
 
         self.set_activatable(False)
 
