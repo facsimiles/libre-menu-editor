@@ -1535,28 +1535,6 @@ class SettingsPage(Gtk.Box):
 
         self._keywords_preferences_group.add(self._keywords_flow_row)
 
-        self._categories_flow_row = gui.TaggedFlowRow(app)
-
-        self._categories_combo_row = gui.ComboRow(app)
-
-        self._categories_combo_row.set_title(self._locale_manager.get("CATEGORIES_COMBO_ROW_TITLE"))
-
-        self._categories_combo_row.set_flow_row(self._categories_flow_row)
-
-        self._categories_filter = CategoriesFilter(app)
-
-        self._categories_filter.set_flow_row(self._categories_flow_row)
-
-        self._categories_filter.set_combo_row(self._categories_combo_row)
-
-        self._categories_filter.hook("text-changed", self._on_input_child_data_changed)
-
-        self._categories_preferences_group = Adw.PreferencesGroup()
-
-        self._categories_preferences_group.add(self._categories_combo_row)
-
-        self._categories_preferences_group.add(self._categories_flow_row)
-
         ###############################################################################################################
 
         self._command_chooser_row = gui.CommandChooserRow(self._application)
@@ -1661,11 +1639,35 @@ class SettingsPage(Gtk.Box):
 
         self._visible_switch_row.hook("value-changed", self._on_input_child_data_changed)
 
-        #FIXME: self._visible_preferences_group = Adw.PreferencesGroup()
+        self._visible_preferences_group = Adw.PreferencesGroup()
 
-        #FIXME: self._visible_preferences_group.set_title(self._locale_manager.get("VISIBLE_GROUP_TITLE"))
+        self._visible_preferences_group.set_title(self._locale_manager.get("VISIBLE_GROUP_TITLE"))
 
-        #FIXME: self._visible_preferences_group.add(self._visible_switch_row)
+        self._visible_preferences_group.add(self._visible_switch_row)
+
+        ###############################################################################################################
+
+        self._categories_flow_row = gui.TaggedFlowRow(app)
+
+        self._categories_combo_row = gui.ComboRow(app)
+
+        self._categories_combo_row.set_title(self._locale_manager.get("CATEGORIES_COMBO_ROW_TITLE"))
+
+        self._categories_combo_row.set_flow_row(self._categories_flow_row)
+
+        self._categories_filter = CategoriesFilter(app)
+
+        self._categories_filter.set_flow_row(self._categories_flow_row)
+
+        self._categories_filter.set_combo_row(self._categories_combo_row)
+
+        self._categories_filter.hook("text-changed", self._on_input_child_data_changed)
+
+        self._categories_preferences_group = Adw.PreferencesGroup()
+
+        self._categories_preferences_group.add(self._categories_combo_row)
+
+        self._categories_preferences_group.add(self._categories_flow_row)
 
         ###############################################################################################################
 
@@ -1682,10 +1684,6 @@ class SettingsPage(Gtk.Box):
         self._terminal_switch_row.hook("value-changed", self._on_input_child_data_changed)
 
         self._display_preferences_group = Adw.PreferencesGroup()
-
-        self._display_preferences_group.set_title(self._locale_manager.get("VISIBLE_GROUP_TITLE"))
-
-        self._display_preferences_group.add(self._visible_switch_row)
 
         self._display_preferences_group.add(self._notify_switch_row)
 
@@ -1713,8 +1711,6 @@ class SettingsPage(Gtk.Box):
 
         self._top_box.append(self._keywords_preferences_group)
 
-        self._top_box.append(self._categories_preferences_group)
-
         self._top_box.append(self._execution_preferences_group)
 
         self._action_box = Gtk.Box()
@@ -1731,7 +1727,9 @@ class SettingsPage(Gtk.Box):
 
         self._bottom_box.set_orientation(Gtk.Orientation.VERTICAL)
 
-        # FIXME: self._bottom_box.append(self._visible_preferences_group)
+        self._bottom_box.append(self._visible_preferences_group)
+
+        self._bottom_box.append(self._categories_preferences_group)
 
         self._bottom_box.append(self._display_preferences_group)
 
