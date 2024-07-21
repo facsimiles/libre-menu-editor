@@ -1559,7 +1559,7 @@ class ComboRow(Adw.ActionRow):
 
     def _on_activate(self, *args):
 
-        self._menu_button.set_active(self._menu_button.get_active() == False)
+        self._menu_button.popup()
 
     def _on_row_activated(self, list_box, row):
 
@@ -1629,7 +1629,7 @@ class ComboRow(Adw.ActionRow):
 
             if not buttons_remaining:
 
-                self._menu_button.set_active(False)
+                self._menu_button.popdown()
 
     def add_button(self, name, text, icon_name=None):
 
@@ -2237,7 +2237,9 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
         self._ends_with_delimiter = strings[-1].endswith(self._delimiters[0])
 
-        self._flow_box.remove_all()
+        for tag in self.get_tags():
+
+            self._flow_box.remove(tag)
 
         self._update_reveal_child()
 
@@ -2343,7 +2345,9 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
         if self._flow_box.get_first_child():
 
-            self._flow_box.remove_all()
+            for tag in self.get_tags():
+
+                self._flow_box.remove(tag)
 
             self._do_flow_box_children_changed()
 
