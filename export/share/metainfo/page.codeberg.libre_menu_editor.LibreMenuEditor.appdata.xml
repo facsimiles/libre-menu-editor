@@ -31,8 +31,6 @@
       <li xml:lang="de">Symbole des installierten Symbolthemas durchsuchen</li>
       <li>add and remove search-keywords</li>
       <li xml:lang="de">Suchbegriffe hinzufügen und entfernen</li>
-      <li>change the launcher's menu-categories</li>
-      <li xml:lang="de">Menükategorien von Anwendungsstartern bearbeiten</li>
       <li>make launchers execute a specific file or command</li>
       <li xml:lang="de">bestimmte Dateien oder Befehle zur Ausführung verwenden</li>
       <li>convert entered weblinks into valid commands</li>
@@ -43,12 +41,14 @@
       <li xml:lang="de">Starter-Aktionen erstellen, bearbeiten und löschen</li>
       <li>show or hide launchers in the main menu</li>
       <li xml:lang="de">Starter im Hauptmenü anzeigen oder verstecken</li>
+      <li>change the launcher's menu-categories</li>
+      <li xml:lang="de">Menükategorien von Anwendungsstartern bearbeiten</li>
       <li>enable or disable launcher's startup-animations</li>
       <li xml:lang="de">Startanimation von Anwendungsstartern einschalten oder abschalten</li>
       <li>show a terminal-window when executing launchers</li>
       <li xml:lang="de">während der Ausführung von Startern eine Konsole anzeigen</li>
-      <li>edit launcher configuration-files in your default text-editor</li>
-      <li xml:lang="de">Konfigurationsdateien von Startern mit dem Standard-Textbearbeitungsprogramm bearbeiten</li>
+      <li>change advanced settings with your default text-editor</li>
+      <li xml:lang="de">erweiterte Einstellungen mit dem Standard-Textbearbeitungsprogramm bearbeiten</li>
       <li>reset launchers back to their default states</li>
       <li xml:lang="de">Starter auf System-Standard zurücksetzen</li>
       <li>create and delete custom launchers</li>
@@ -99,7 +99,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.6.0" date="2024-07-20"/>
+    <release version="1.6.0" date="2024-07-21"/>
   </releases>
   <recommends>
     <control>touch</control>

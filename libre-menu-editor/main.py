@@ -2325,8 +2325,6 @@ class SettingsPage(Gtk.Box):
 
             self._comment_entry_row.set_text("")
 
-            self._keywords_entry_row.set_text("")
-
             self._command_chooser_row.set_text("")
 
             self._directory_chooser_row.set_text("")
@@ -2342,6 +2340,8 @@ class SettingsPage(Gtk.Box):
             self._keywords_filter.reset()
 
             self._categories_filter.reset()
+
+        self._keywords_entry_row.set_text("")
 
         self._update_action_children_sensitive(False)
 
