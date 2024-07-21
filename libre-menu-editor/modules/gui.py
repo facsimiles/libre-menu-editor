@@ -1599,13 +1599,29 @@ class ComboRow(Adw.ActionRow):
 
     def _update_buttons_sensitive(self):
 
-        flow_row_labels = self._flow_row.get_text().split(self._flow_row.get_delimiters()[0])
+        tags = self._flow_row.get_tags()
+
+        button_labels = {}
+
+        for button in self._buttons.values():
+
+            button_labels[button.label] = button
+
+        tag_labels = {}
+
+        for tag in self._flow_row.get_tags():
+
+            tag_labels[tag.get_text()] = tag
+
+        for label in tag_labels:
+
+            tag_labels[label].set_icon_name(button_labels[label].icon_name)
 
         buttons_added = []
 
         for name in self._buttons:
 
-            buttons_added.append(self._buttons[name].label in flow_row_labels)
+            buttons_added.append(self._buttons[name].label in tag_labels)
 
             self._buttons[name].set_visible(not buttons_added[-1])
 
@@ -1644,6 +1660,8 @@ class ComboRow(Adw.ActionRow):
         row.label = label.get_text()
 
         row.name = name
+
+        row.icon_name = icon_name
 
         self._buttons[name] = row
 
@@ -1803,6 +1821,8 @@ class TaggedRowTag(Gtk.FlowBoxChild):
 
         self._tag_dark_css_class = "background" #FIXME
 
+        self._icon_image = Gtk.Image()
+
         self._button_label = Gtk.Label()
 
         self._button_label.set_ellipsize(Pango.EllipsizeMode.END)
@@ -1816,6 +1836,8 @@ class TaggedRowTag(Gtk.FlowBoxChild):
         self._center_box.set_margin_start(Margin.LARGE)
 
         self._center_box.set_margin_end(Margin.LARGE)
+
+        self._center_box.set_start_widget(self._icon_image)
 
         self._center_box.set_center_widget(self._button_label)
 
@@ -1898,6 +1920,14 @@ class TaggedRowTag(Gtk.FlowBoxChild):
         self._timeout_id = None
 
         return GLib.SOURCE_REMOVE
+
+    def get_icon_name(self):
+
+        return self._icon_image.get_icon_name()
+
+    def set_icon_name(self, icon_name):
+
+        self._icon_image.set_from_icon_name(icon_name)
 
     def get_text(self):
 
