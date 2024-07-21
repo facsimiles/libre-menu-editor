@@ -77,7 +77,7 @@
 
   "APPEARANCE_GROUP_TITLE": "Apariencia",
   "DESCRIPTION_GROUP_TITLE": "Descripción",
-  "DISCOVERY_GROUP_TITLE": "Búsqueda",
+  "DISCOVERY_GROUP_TITLE": "Buscar",
   "EXECUTION_GROUP_TITLE": "Ejecución",
   "ACTIONS_GROUP_TITLE": "Acciones",
   "VISIBLE_GROUP_TITLE": "Visibilidad",
@@ -86,7 +86,7 @@
   "NAME_ENTRY_ROW_TITLE": "Nombre",
   "COMMENT_ENTRY_ROW_TITLE": "Comentario",
   "KEYWORDS_ENTRY_ROW_TITLE": "Palabras clave",
-  "CATEGORIES_COMBO_ROW_TITLE": "Categorías",
+  "CATEGORIES_COMBO_ROW_TITLE": "Categorías de menú tradicionales de la aplicación",
   "COMMAND_CHOOSER_ROW_TITLE": "Comando",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Directorio",
   "VISIBLE_SWITCH_ROW_TITLE": "Mostrar esta aplicación en menú principal",

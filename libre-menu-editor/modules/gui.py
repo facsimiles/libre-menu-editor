@@ -1525,8 +1525,6 @@ class ComboRow(Adw.ActionRow):
 
             pass
 
-        self._title_label = Gtk.Label()
-
         self._list_box = Gtk.ListBox()
 
         self._list_box.set_sort_func(self._do_list_box_sort)
@@ -1552,8 +1550,6 @@ class ComboRow(Adw.ActionRow):
         self._menu_button.set_valign(Gtk.Align.CENTER)
 
         self._menu_button.set_popover(self._popover)
-
-        self.add_prefix(self._title_label)
 
         self.add_suffix(self._menu_button)
 
@@ -1672,14 +1668,6 @@ class ComboRow(Adw.ActionRow):
         row = self._buttons.pop(name)
 
         self._list_box.remove(row)
-
-    def get_title(self):
-
-        return self._title_label.get_text()
-
-    def set_title(self, text):
-
-        self._title_label.set_text(text)
 
     def get_flow_row(self):
 
