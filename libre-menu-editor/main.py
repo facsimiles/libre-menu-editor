@@ -2968,15 +2968,19 @@ class Application(gui.Application):
 
     def _on_text_editor_update(self, event, name):
 
+        self._check_unsaved_data(self._after_text_editor_update, name)
+
+    def _after_text_editor_update(self, name):
+
         try:
+
+            self._text_editor.save(name)
 
             parser = self._text_editor.get_parser(name)
 
             if not name in self._unsaved_custom_starters or not self._unsaved_custom_starters[name]["external"]:
 
                 self._update_mime_data(parser)
-
-            self._check_unsaved_data(self._text_editor.save, name)
 
         except Exception as error:
 
@@ -2998,15 +3002,15 @@ class Application(gui.Application):
 
                 del self._unsaved_custom_starters[name]
 
-        if name in self._desktop_starter_parsers:
+            if name in self._desktop_starter_parsers:
 
-            parser = self._desktop_starter_parsers[name]
+                parser = self._desktop_starter_parsers[name]
 
-            self._update_search_list_item(name)
+                self._update_search_list_item(name)
 
-            if name == self._current_desktop_starter_name:
+                if name == self._current_desktop_starter_name:
 
-                self._load_settings_page(name)
+                    self._load_settings_page(name)
 
     def _on_application_shutdown(self, app):
 
@@ -3294,7 +3298,13 @@ class Application(gui.Application):
 
     def _on_edit_file_button_clicked(self, event):
 
-        self._check_unsaved_data(self._after_edit_file_button_clicked)
+        if self._settings_page.get_changed():
+
+            self._check_unsaved_data(self._after_edit_file_button_clicked)
+
+        else:
+
+            self._edit_desktop_starter(self._current_desktop_starter_name)
 
     def _after_edit_file_button_clicked(self):
 
