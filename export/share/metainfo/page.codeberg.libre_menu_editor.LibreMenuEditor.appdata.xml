@@ -72,6 +72,7 @@
   <url type="homepage">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
   <url type="vcs-browser">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
   <url type="bugtracker">https://codeberg.org/libre-menu-editor/libre-menu-editor/issues</url>
+  <url type="translate">https://hosted.weblate.org/projects/libre-menu-editor</url>
   <screenshots>
     <screenshot type="default">
       <image>https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/1.png</image>
@@ -99,7 +100,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.6.0" date="2024-07-21"/>
+    <release version="1.6.1" date="2024-07-24"/>
   </releases>
   <recommends>
     <control>touch</control>
