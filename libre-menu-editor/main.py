@@ -594,8 +594,6 @@ class DefaultTextEditor():
 
         parser.save()
 
-        #FIXME: parser.save(path=edit_path)
-
     def exit(self):
 
         self._parsers.clear()
@@ -3058,19 +3056,19 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
-        if (control_modifier_pressed and keyval == 104 and # H
+            elif (control_modifier_pressed and keyval == 104 and # H
 
-            not self._greeter_stack.get_visible_child() == self._greeter_page):
+                not self._greeter_stack.get_visible_child() == self._greeter_page):
 
-            state = self._view_menu_section.get_switch_state("show_hidden")
+                state = self._view_menu_section.get_switch_state("show_hidden")
 
-            self._view_menu_section.set_switch_state("show_hidden", state == False)
+                self._view_menu_section.set_switch_state("show_hidden", state == False)
 
-            return True
+                return True
 
         ###############################################################################################################
 
-        elif (control_modifier_pressed and keyval == 110 and # N
+        if (control_modifier_pressed and keyval == 110 and # N
 
             not self._greeter_stack.get_visible_child() == self._greeter_page and
 
@@ -3284,9 +3282,23 @@ class Application(gui.Application):
 
             if not self._config_manager.get("show.hidden") == state:
 
-                self._set_show_hidden_switch_state_without_triggering(state == False)
+                if self._current_desktop_starter_name:
 
-                self._check_unsaved_data(self._after_show_hidden_switch_changed, state)
+                    parser = self._desktop_starter_parsers[self._current_desktop_starter_name]
+
+                    if not state and parser.get_hidden():
+
+                        self._set_show_hidden_switch_state_without_triggering(state == False)
+
+                        self._check_unsaved_data(self._after_show_hidden_switch_changed, state)
+
+                    else:
+
+                        self._after_show_hidden_switch_changed(state)
+
+                else:
+
+                    self._after_show_hidden_switch_changed(state)
 
     def _after_show_hidden_switch_changed(self, state):
 

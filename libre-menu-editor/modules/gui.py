@@ -1193,6 +1193,16 @@ class LinkConverterRow(Gtk.Box):
 
         self._entry.set_text(f"{self._url_open_command} {text}")
 
+        if hasattr(self._entry, "grab_focus_without_selecting"):
+
+            self._entry.grab_focus_without_selecting()
+
+        else:
+
+            self._entry.grab_focus()
+
+        self._entry.set_position(-1)
+
     def _get_string_is_valid_url(self, text):
 
         if not " " in text and not self._application.get_command_exists(text, include_lookup_cwd=True):
