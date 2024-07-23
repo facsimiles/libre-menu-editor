@@ -594,7 +594,7 @@ class DefaultTextEditor():
 
         parser.save()
 
-        #TODO: parser.save(path=edit_path)
+        #FIXME: parser.save(path=edit_path)
 
     def exit(self):
 
@@ -887,7 +887,7 @@ class KeywordsFilter():
 
     def _get_unfiltered_text(self, text):
 
-        if not sorted(text.split(self._delimiter)) == sorted(self._current_default_text.split(self._delimiter)):
+        if not sorted(filter(None, text.split(self._delimiter))) == sorted(filter(None, self._current_default_text.split(self._delimiter))):
 
             return text
 
@@ -966,25 +966,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("MULTIMEDIA_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-multimedia"),
-
-                "sub-categories": [
-
-                    "Audio",
-                    "Video"
-                    "Midi",
-                    "Mixer",
-                    "Sequencer",
-                    "Tuner",
-                    "TV",
-                    "AudioVideoEditing",
-                    "Player",
-                    "Recorder",
-                    "DiscBurning",
-                    "Music",
-                    "Database",
-                    "HamRadio"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-multimedia")
 
                 },
 
@@ -992,21 +974,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("DEVELOPMENT_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-development"),
-
-                "sub-categories": [
-
-                    "Building",
-                    "Debugger",
-                    "IDE",
-                    "GUIDesigner",
-                    "Profiling",
-                    "RevisionControl",
-                    "Translation",
-                    "Database",
-                    "ProjectManagement",
-                    "WebDevelopment"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-development")
 
                 },
 
@@ -1014,39 +982,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("EDUCATION_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-education"),
-
-                "sub-categories": [
-
-                    "Art",
-                    "Construction",
-                    "Languages",
-                    "ArtificialIntelligence",
-                    "Astronomy",
-                    "Biology",
-                    "Chemistry",
-                    "ComputerScience",
-                    "DataVisualization",
-                    "Economy",
-                    "Electricity",
-                    "Geography",
-                    "Geology",
-                    "Geoscience",
-                    "History",
-                    "Humanities",
-                    "ImageProcessing",
-                    "Literature",
-                    "Maps",
-                    "Math",
-                    "NumericalAnalysis",
-                    "MedicalSoftware",
-                    "Physics",
-                    "Robotics",
-                    "Spirituality",
-                    "Sports",
-                    "ParallelComputing",
-                    "Music"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-education")
 
                 },
 
@@ -1054,25 +990,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("GAME_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-games"),
-
-                "sub-categories": [
-
-                    "ActionGame",
-                    "AdventureGame",
-                    "ArcadeGame",
-                    "BoardGame",
-                    "BlocksGame",
-                    "CardGame",
-                    "KidsGame",
-                    "LogicGame",
-                    "RolePlaying",
-                    "Shooter",
-                    "Simulation",
-                    "SportsGame",
-                    "StrategyGame",
-                    "Emulator"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-games")
 
                 },
 
@@ -1080,20 +998,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("GRAPHICS_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-graphics"),
-
-                "sub-categories": [
-
-                    "2DGraphics",
-                    "VectorGraphics",
-                    "RasterGraphics",
-                    "3DGraphics",
-                    "Scanning",
-                    "OCR",
-                    "Photography",
-                    "Publishing",
-                    "Viewer"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-graphics")
 
                 },
 
@@ -1101,27 +1006,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("NETWORK_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-network"),
-
-                "sub-categories": [
-
-                    "Dialup",
-                    "InstantMessaging",
-                    "Chat",
-                    "IRCClient",
-                    "Feed",
-                    "FileTransfer",
-                    "HamRadio",
-                    "News",
-                    "P2P",
-                    "RemoteAccess",
-                    "Telephony",
-                    "VideoConference",
-                    "WebBrowser",
-                    "WebDevelopment",
-                    "Email",
-                    "Monitor"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-network")
 
                 },
 
@@ -1129,27 +1014,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("OFFICE_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-office"),
-
-                "sub-categories": [
-
-                    "Calendar",
-                    "ContactManagement",
-                    "Database",
-                    "Dictionary",
-                    "Chart",
-                    "Email",
-                    "Finance",
-                    "FlowChart",
-                    "PDA",
-                    "ProjectManagement",
-                    "Presentation",
-                    "Spreadsheet",
-                    "WordProcessor",
-                    "Photography",
-                    "Publishing",
-                    "Viewer"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-office")
 
                 },
 
@@ -1157,38 +1022,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("SCIENCE_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-science"),
-
-                "sub-categories": [
-
-                    "Art",
-                    "Construction",
-                    "Languages",
-                    "ArtificialIntelligence",
-                    "Astronomy",
-                    "Biology",
-                    "Chemistry",
-                    "ComputerScience",
-                    "DataVisualization",
-                    "Economy",
-                    "Electricity",
-                    "Geography",
-                    "Geology",
-                    "Geoscience",
-                    "History",
-                    "Humanities",
-                    "ImageProcessing",
-                    "Literature",
-                    "Maps",
-                    "Math",
-                    "NumericalAnalysis",
-                    "MedicalSoftware",
-                    "Physics",
-                    "Robotics",
-                    "Spirituality",
-                    "Sports",
-                    "ParallelComputing"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-science")
 
                 },
 
@@ -1196,17 +1030,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("SETTINGS_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-settings"),
-
-                "sub-categories": [
-
-                    "DesktopSettings",
-                    "HardwareSettings",
-                    "Printing",
-                    "PackageManager",
-                    "Security",
-                    "Accessibility"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-settings")
 
                 },
 
@@ -1214,18 +1038,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("SYSTEM_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-system"),
-
-                "sub-categories": [
-
-                    "Emulator",
-                    "FileManager",
-                    "TerminalEmulator",
-                    "Filesystem",
-                    "Monitor",
-                    "FileTools",
-                    "Security"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-system")
 
                 },
 
@@ -1233,22 +1046,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("UTILITY_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-utilities"),
-
-                "sub-categories": [
-
-                    "TextTools",
-                    "TelephonyTools",
-                    "Archiving",
-                    "Compression",
-                    "FileTools",
-                    "Calculator",
-                    "Clock",
-                    "TextEditor",
-                    "Maps",
-                    "Spirituality",
-                    "Accessibility"
-                    ]
+                "icon-name": self._icon_finder.get_name("applications-utilities")
 
                 }
 
@@ -1270,7 +1068,7 @@ class CategoriesFilter():
 
         return list(filter(None, text.split(self._delimiter)))
 
-    def _default_to_filtered(self, text):
+    def _default_to_filtered(self, text, join_text=True):
 
         items = []
 
@@ -1280,37 +1078,43 @@ class CategoriesFilter():
 
                 items.append(self._main_categories[item]["label"])
 
-        return self._join_text(items) + int(bool(self._ends_with_delimiter)) * ";"
+        if join_text:
+
+            return self._join_text(items) + int(bool(self._ends_with_delimiter)) * ";"
+
+        else:
+
+            return items
 
     def _filtered_to_default(self, text):
 
-        missing_items = []
+        old_items = self._split_text(self._current_default_text)
 
-        default_items = self._split_text(self._current_default_text)
+        old_labels = self._default_to_filtered(self._current_default_text, join_text=False)
 
-        available_labels = self._split_text(text)
+        new_labels = self._split_text(text)
 
-        for item in self._main_categories:
+        if sorted(old_labels) == sorted(new_labels):
 
-            if not self._main_categories[item]["label"] in available_labels:
+            return self._current_default_text
 
-                missing_items.append(item)
+        else:
 
-        for missing_item in missing_items:
+            old_subcategories = [item for item in old_items if not item in self._main_categories]
 
-            for count in range(default_items.count(missing_item)):
+            new_items = []
 
-                default_items.remove(missing_item)
+            for label in new_labels:
 
-        for label in available_labels:
+                for item in self._main_categories:
 
-            for item in self._main_categories:
+                    if self._main_categories[item]["label"] == label:
 
-                if self._main_categories[item]["label"] == label and not item in default_items:
+                        new_items.append(item)
 
-                    default_items.append(item)
+                        break
 
-        return self._join_text(default_items) + int(bool(self._ends_with_delimiter)) * ";"
+            return self._join_text(sorted(new_items + old_subcategories)) + int(bool(self._ends_with_delimiter)) * ";"
 
     def get_combo_row(self):
 

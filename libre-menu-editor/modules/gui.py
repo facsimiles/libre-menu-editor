@@ -1867,11 +1867,11 @@ class TaggedRowTag(Gtk.FlowBoxChild):
 
         self.set_can_focus(False)
 
-        self.set_can_focus(True)
-
         GLib.idle_add(self._after_event_controller_focus_enter)
 
     def _after_event_controller_focus_enter(self):
+
+        self.set_can_focus(True)
 
         self._tag_button.grab_focus()
 
@@ -2171,6 +2171,8 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
         if self._entry_row:
 
+            #FIXME
+
             """
 
             try:
@@ -2198,6 +2200,8 @@ class TaggedFlowRow(Adw.PreferencesRow):
         self._entry_row_default_values["show-apply-button"] = entry_row.get_show_apply_button()
 
         entry_row.set_show_apply_button(True)
+
+        #FIXME
 
         """
 
