@@ -2206,6 +2206,8 @@ class Application(gui.Application):
 
         self._unsaved_custom_starters = {}
 
+        self._ignore_show_hidden_switch_changes = False
+
         ###############################################################################################################
 
         self._icon_finder.add_alternatives(
@@ -2706,8 +2708,6 @@ class Application(gui.Application):
 
         self._main_stack = Gtk.Stack()
 
-        self._main_stack.connect("notify::visible-child", self._on_main_stack_visible_child_changed)
-
         self._main_stack.add_child(self._start_page)
 
         self._main_stack.add_child(self._settings_page)
@@ -2819,6 +2819,10 @@ class Application(gui.Application):
             self._main_split_layout.append(self._main_separator)
 
             self._main_split_layout.append(self._right_area_box)
+
+        ###############################################################################################################
+
+        self._main_stack.connect("notify::visible-child", self._on_main_stack_visible_child_changed)
 
         ###############################################################################################################
 
@@ -3054,19 +3058,19 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
-            elif (control_modifier_pressed and keyval == 104 and # H
+        if (control_modifier_pressed and keyval == 104 and # H
 
-                not self._greeter_stack.get_visible_child() == self._greeter_page):
+            not self._greeter_stack.get_visible_child() == self._greeter_page):
 
-                state = self._view_menu_section.get_switch_state("show_hidden")
+            state = self._view_menu_section.get_switch_state("show_hidden")
 
-                self._view_menu_section.set_switch_state("show_hidden", state == False)
+            self._view_menu_section.set_switch_state("show_hidden", state == False)
 
-                return True
+            return True
 
         ###############################################################################################################
 
-        if (control_modifier_pressed and keyval == 110 and # N
+        elif (control_modifier_pressed and keyval == 110 and # N
 
             not self._greeter_stack.get_visible_child() == self._greeter_page and
 
@@ -3226,6 +3230,10 @@ class Application(gui.Application):
 
         if not self._main_stack.get_visible_child() == self._settings_page:
 
+            if hasattr(self._main_split_layout, "set_show_content"):
+
+                self._main_split_layout.set_show_content(False)
+
             self._current_desktop_starter_name = None
 
             if not self._save_settings_button.get_parent() == None:
@@ -3270,13 +3278,23 @@ class Application(gui.Application):
 
     def _on_show_hidden_switch_changed(self, name):
 
-        state = self._view_menu_section.get_switch_state(name)
+        if not self._ignore_show_hidden_switch_changes:
 
-        if not self._config_manager.get("show.hidden") == state:
+            state = self._view_menu_section.get_switch_state(name)
 
-            self._config_manager.set("show.hidden", state)
+            if not self._config_manager.get("show.hidden") == state:
 
-            self._reload_search_list_items()
+                self._set_show_hidden_switch_state_without_triggering(state == False)
+
+                self._check_unsaved_data(self._after_show_hidden_switch_changed, state)
+
+    def _after_show_hidden_switch_changed(self, state):
+
+        self._set_show_hidden_switch_state_without_triggering(state)
+
+        self._config_manager.set("show.hidden", state)
+
+        self._reload_search_list_items()
 
     def _on_reset_starter_button_clicked(self, event):
 
@@ -3427,6 +3445,14 @@ class Application(gui.Application):
         else:
 
             return names
+
+    def _set_show_hidden_switch_state_without_triggering(self, state):
+
+        self._ignore_show_hidden_switch_changes = True
+
+        self._view_menu_section.set_switch_state("show_hidden", state)
+
+        self._ignore_show_hidden_switch_changes = False
 
     def _load_desktop_starter_dirs(self):
 
@@ -4419,10 +4445,6 @@ class Application(gui.Application):
         if name is self._current_desktop_starter_name:
 
             self._settings_page.reset()
-
-            if hasattr(self._main_split_layout, "set_show_content"):
-
-                self._main_split_layout.set_show_content(False)
 
         if name in self._unsaved_custom_starters:
 
