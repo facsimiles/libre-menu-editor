@@ -4420,7 +4420,7 @@ class Application(gui.Application):
 
             self._settings_page.reset()
 
-            if hasattr(self, "_main_split_layout"):
+            if hasattr(self._main_split_layout, "set_show_content"):
 
                 self._main_split_layout.set_show_content(False)
 
