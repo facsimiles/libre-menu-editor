@@ -1839,13 +1839,11 @@ class TaggedRowTag(Gtk.FlowBoxChild):
 
         self._tag_button.set_child(self._center_box)
 
-        self._event_controller_focus = Gtk.EventControllerFocus()
-
-        self._event_controller_focus.connect("enter", self._on_event_controller_focus_enter)
-
-        self.add_controller(self._event_controller_focus)
+        self.set_focusable(False)
 
         self.set_child(self._tag_button)
+
+        self.set_focus_child(self._tag_button)
 
         self._style_manager = Adw.StyleManager.get_default()
 
@@ -1862,18 +1860,6 @@ class TaggedRowTag(Gtk.FlowBoxChild):
         else:
 
             self.get_parent().remove(self)
-
-    def _on_event_controller_focus_enter(self, controller):
-
-        self.set_can_focus(False)
-
-        GLib.idle_add(self._after_event_controller_focus_enter)
-
-    def _after_event_controller_focus_enter(self):
-
-        self.set_can_focus(True)
-
-        self._tag_button.grab_focus()
 
     def _on_style_manager_dark_changed(self, style_manager, gparam):
 
