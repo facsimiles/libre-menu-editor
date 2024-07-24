@@ -1050,8 +1050,6 @@ class CategoriesFilter():
 
             }
 
-        self._prepare_matching_combo_row_icons()
-
     def _on_combo_row_item_selected(self, event, name, label):
 
         self._flow_row.add_tags(label, allow_duplicates=False, warning_timeout=1)
@@ -1059,28 +1057,6 @@ class CategoriesFilter():
     def _on_flow_row_text_changed(self, event, child, text):
 
         self._events.trigger("text-changed", self, self._filtered_to_default(text))
-
-    def _prepare_matching_combo_row_icons(self):
-
-        ignore_prefix = self._icon_finder.get_ignore_prefix()
-
-        names = [self._icon_finder.has_name(self._main_categories[category]["icon-name"], use_alternatives=True) for category in self._main_categories]
-
-        if False in names or True in [name.startswith(ignore_prefix) for name in names if name]:
-
-            for category in self._main_categories:
-
-                icon_name = self._main_categories[category]["icon-name"]
-
-                self._main_categories[category]["icon-name"] = f"{ignore_prefix}{icon_name}"
-
-        else:
-
-            for category in self._main_categories:
-
-                icon_name = self._main_categories[category]["icon-name"]
-
-                self._main_categories[category]["icon-name"] = self._icon_finder.get_name(icon_name)
 
     def _join_text(self, strings):
 

@@ -106,6 +106,10 @@ class IconFinder():
 
     def __init__(self, app):
 
+        self._events = basic.EventManager()
+
+        self._events.add("changed", object)
+
         self._ignore_prefix = None
 
         self._application = app
@@ -118,7 +122,13 @@ class IconFinder():
 
         self._icon_theme = Gtk.IconTheme.get_for_display(self._application_window.get_display())
 
+        self._icon_theme.connect("changed", self._on_icon_theme_changed)
+
         self._load_legacy_icons(*self._icon_theme.get_search_path())
+
+    def _on_icon_theme_changed(self, icon_theme):
+
+        self._events.trigger("changed", self)
 
     def _load_legacy_icons(self, *paths):
 
@@ -310,6 +320,14 @@ class IconFinder():
 
         return self._icon_theme
 
+    def hook(self, event, callback, *args):
+
+        self._events.hook(event, callback, *args)
+
+    def release(self, id):
+
+        self._events.release(id)
+
 
 class IconName(GObject.Object):
 
@@ -329,6 +347,8 @@ class IconBrowserRow(Adw.PreferencesRow):
         super().__init__(*args, **kwargs)
 
         self._icon_finder = app.get_icon_finder()
+
+        self._icon_finder.hook("changed", self._on_icon_finder_changed)
 
         self._events = basic.EventManager()
 
@@ -458,7 +478,19 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         self.set_visible(False)
 
-        GLib.idle_add(self._update_search_data)
+        #FIXME GLib.idle_add(self._update_search_data)
+
+    def _on_icon_finder_changed(self, event, icon_finder):
+
+        self._results_key = None
+
+        self._results_cache.clear()
+
+        self._update_search_data()
+
+        self._start_search_thread()
+
+        self._entry["widget"].set_text(self._entry["widget"].get_text())
 
     def _on_event_controller_focus_enter(self, controller):
 
@@ -1571,6 +1603,8 @@ class ComboRow(Adw.ActionRow):
 
         self._icon_finder = app.get_icon_finder()
 
+        self._icon_finder.hook("changed", self._on_icon_finder_changed)
+
         self._buttons = {}
 
         try:
@@ -1617,15 +1651,23 @@ class ComboRow(Adw.ActionRow):
 
         self.set_activatable(True)
 
+    def _on_icon_finder_changed(self, event, icon_finder):
+
+        GLib.idle_add(self._update_buttons_icon_names)
+
+        self._update_buttons_sensitive()
+
     def _on_activate(self, *args):
 
         self._menu_button.popup()
 
     def _on_row_activated(self, list_box, row):
 
-        self._events.trigger("item-selected", row.name, row.label)
+        self._events.trigger("item-selected", row.name, row.label.get_text())
 
     def _on_flow_row_text_changed(self, event, child, data):
+
+        GLib.idle_add(self._update_buttons_icon_names)
 
         self._update_buttons_sensitive()
 
@@ -1633,9 +1675,9 @@ class ComboRow(Adw.ActionRow):
 
         labels = [
 
-            row_1.label,
+            row_1.label.get_text(),
 
-            row_2.label
+            row_2.label.get_text()
 
             ]
 
@@ -1653,31 +1695,53 @@ class ComboRow(Adw.ActionRow):
 
                 return 1
 
-    def _update_buttons_sensitive(self):
+    def _update_buttons_icon_names(self):
 
-        tags = self._flow_row.get_tags()
+        ignore_prefix = self._icon_finder.get_ignore_prefix()
 
-        button_labels = {}
+        names = [self._icon_finder.has_name(self._buttons[name].icon_name, use_alternatives=True) for name in self._buttons]
+
+        if False in names or True in [name.startswith(ignore_prefix) for name in names]:
+
+            for name in self._buttons:
+
+                icon_name = f"{ignore_prefix}{self._buttons[name].icon_name}"
+
+                self._buttons[name].image.set_from_icon_name(icon_name)
+
+        else:
+
+            for name in self._buttons:
+
+                icon_name = self._icon_finder.get_name(self._buttons[name].icon_name)
+
+                self._buttons[name].image.set_from_icon_name(icon_name)
+
+        buttons = {}
 
         for button in self._buttons.values():
 
-            button_labels[button.label] = button
+            buttons[button.label.get_text()] = button
 
-        tag_labels = {}
+        tags = {}
 
         for tag in self._flow_row.get_tags():
 
-            tag_labels[tag.get_text()] = tag
+            tags[tag.get_text()] = tag
 
-        for label in tag_labels:
+        for text in tags:
 
-            GLib.idle_add(tag_labels[label].set_icon_name, button_labels[label].icon_name)
+            tags[text].set_icon_name(buttons[text].image.get_icon_name())
+
+    def _update_buttons_sensitive(self):
+
+        tag_texts = [tag.get_text() for tag in self._flow_row.get_tags()]
 
         buttons_added = []
 
         for name in self._buttons:
 
-            buttons_added.append(self._buttons[name].label in tag_labels)
+            buttons_added.append(self._buttons[name].label.get_text() in tag_texts)
 
             self._buttons[name].set_visible(not buttons_added[-1])
 
@@ -1693,27 +1757,25 @@ class ComboRow(Adw.ActionRow):
 
     def add_button(self, name, text, icon_name=None):
 
-        image = self._icon_finder.get_image(icon_name)
-
-        image.set_margin_end(Margin.DEFAULT)
-
-        label = Gtk.Label()
-
-        label.set_text(text)
-
-        box = Gtk.Box()
-
-        box.append(image)
-
-        box.append(label)
-
         row = Gtk.ListBoxRow()
 
-        row.set_child(box)
+        row.image = Gtk.Image()
+
+        row.image.set_margin_end(Margin.DEFAULT)
+
+        row.label = Gtk.Label()
+
+        row.label.set_text(text)
+
+        row.box = Gtk.Box()
+
+        row.box.append(row.image)
+
+        row.box.append(row.label)
+
+        row.set_child(row.box)
 
         row.set_activatable(True)
-
-        row.label = label.get_text()
 
         row.name = name
 
@@ -1722,6 +1784,8 @@ class ComboRow(Adw.ActionRow):
         self._buttons[name] = row
 
         self._list_box.append(row)
+
+        self._update_buttons_icon_names()
 
     def remove_button(self, name):
 
@@ -2444,6 +2508,8 @@ class SearchList(Gtk.Box):
 
         self._icon_finder = app.get_icon_finder()
 
+        self._icon_finder.hook("changed", self._on_icon_finder_changed)
+
         self._application_window = app.get_application_window()
 
         self._toggle_button = Gtk.ToggleButton()
@@ -2521,6 +2587,12 @@ class SearchList(Gtk.Box):
         self.append(self._search_bar)
 
         self.append(self._scrolled_window)
+
+    def _on_icon_finder_changed(self, event, icon_finder):
+
+        for name in self._children:
+
+            GLib.idle_add(self._update_item_image, self._children[name]["image"], self._children[name]["icon"])
 
     def _on_toggle_button_toggled(self, button):
 
@@ -2785,6 +2857,8 @@ class SearchList(Gtk.Box):
             image = self._children[name]["image"]
 
             label = self._children[name]["label"]
+
+            self._children[name]["icon"] = icon
 
             GLib.idle_add(self._update_item_image, image, icon)
 
