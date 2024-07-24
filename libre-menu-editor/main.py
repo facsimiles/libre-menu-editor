@@ -2876,6 +2876,8 @@ class Application(gui.Application):
 
         self._application_window.connect("map", self._on_application_window_map)
 
+        self._application_window.connect("close-request", self._on_application_window_close_request)
+
         self._application_window.set_content(self._toast_overlay)
 
         ###############################################################################################################
@@ -3017,6 +3019,14 @@ class Application(gui.Application):
     def _on_application_shutdown(self, app):
 
         self._process_manager.set_active(False)
+
+    def _on_application_window_close_request(self, window):
+
+        if self._settings_page.get_changed():
+
+            self._check_unsaved_data(GLib.idle_add, self._application_window.destroy)
+
+            return True
 
     def _on_application_window_map(self, window):
 
@@ -3380,7 +3390,9 @@ class Application(gui.Application):
 
     def _on_search_list_item_activated(self, event, name):
 
-        return self._check_unsaved_data(self._load_settings_page, name, ignore_name=name)
+        self._check_unsaved_data(self._load_settings_page, name, ignore_name=name)
+
+        return True
 
     def _get_desktop_starter_has_default(self, name):
 

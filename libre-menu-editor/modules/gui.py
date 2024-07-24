@@ -2612,7 +2612,7 @@ class SearchList(Gtk.Box):
 
         self._ignore_selection = True
 
-        if not self._events.trigger("item-activated", self._names[row]):
+        if self._events.trigger("item-activated", self._names[row]):
 
             self._last_activated = self._names[row]
 
