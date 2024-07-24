@@ -1062,13 +1062,17 @@ class CategoriesFilter():
 
     def _prepare_matching_combo_row_icons(self):
 
-        if True in [self._icon_finder.get_name(self._main_categories[category]["icon-name"]).endswith("-fallback") for category in self._main_categories]:
+        ignore_prefix = self._icon_finder.get_ignore_prefix()
+
+        names = [self._icon_finder.has_name(self._main_categories[category]["icon-name"], use_alternatives=True) for category in self._main_categories]
+
+        if False in names or True in [name.startswith(ignore_prefix) for name in names if name]:
 
             for category in self._main_categories:
 
                 icon_name = self._main_categories[category]["icon-name"]
 
-                self._main_categories[category]["icon-name"] = f"{icon_name}-fallback"
+                self._main_categories[category]["icon-name"] = f"{ignore_prefix}{icon_name}"
 
         else:
 
@@ -2228,6 +2232,10 @@ class Application(gui.Application):
 
         ###############################################################################################################
 
+        ignore_prefix = "page.codeberg.libre_menu_editor.LibreMenuEditor.fallback."
+
+        self._icon_finder.set_ignore_prefix(ignore_prefix)
+
         self._icon_finder.add_alternatives(
 
             "system-search-symbolic",
@@ -2236,7 +2244,7 @@ class Application(gui.Application):
 
             "edit-find-symbolic",
 
-            "system-search-fallback-symbolic"
+            "{ignore_prefix}system-search-symbolic"
 
             )
 
@@ -2244,7 +2252,7 @@ class Application(gui.Application):
 
             "document-open-symbolic",
 
-            "document-open-fallback-symbolic"
+            "{ignore_prefix}document-open-symbolic"
 
             )
 
@@ -2252,7 +2260,7 @@ class Application(gui.Application):
 
             "action-unavailable-symbolic",
 
-            "action-unavailable-fallback-symbolic"
+            "{ignore_prefix}action-unavailable-symbolic"
 
             )
 
@@ -2262,7 +2270,7 @@ class Application(gui.Application):
 
             "application-menu-symbolic",
 
-            "open-menu-fallback-symbolic"
+            "{ignore_prefix}open-menu-symbolic"
 
             )
 
@@ -2272,7 +2280,7 @@ class Application(gui.Application):
 
             "add-symbolic",
 
-            "list-add-fallback-symbolic"
+            "{ignore_prefix}list-add-symbolic"
 
             )
 
@@ -2282,7 +2290,7 @@ class Application(gui.Application):
 
             "remove-symbolic",
 
-            "list-remove-fallback-symbolic"
+            "{ignore_prefix}list-remove-symbolic"
 
             )
 
@@ -2290,7 +2298,7 @@ class Application(gui.Application):
 
             "view-refresh-symbolic",
 
-            "view-refresh-fallback-symbolic"
+            "{ignore_prefix}view-refresh-symbolic"
 
             )
 
@@ -2298,7 +2306,7 @@ class Application(gui.Application):
 
             "dialog-warning-symbolic",
 
-            "dialog-warning-fallback-symbolic"
+            "{ignore_prefix}dialog-warning-symbolic"
 
             )
 
@@ -2306,7 +2314,7 @@ class Application(gui.Application):
 
             "edit-find-replace-symbolic",
 
-            "edit-find-replace-fallback-symbolic"
+            "{ignore_prefix}edit-find-replace-symbolic"
 
             )
 
@@ -2314,7 +2322,7 @@ class Application(gui.Application):
 
             "system-run-symbolic",
 
-            "system-run-fallback-symbolic"
+            "{ignore_prefix}system-run-symbolic"
 
             )
 
@@ -2322,7 +2330,7 @@ class Application(gui.Application):
 
             "window-close-symbolic",
 
-            "window-close-fallback-symbolic"
+            "{ignore_prefix}window-close-symbolic"
 
             )
 
@@ -2330,7 +2338,7 @@ class Application(gui.Application):
 
             "page.codeberg.libre_menu_editor.LibreMenuEditor",
 
-            "libre-menu-editor-fallback"
+            "{ignore_prefix}libre-menu-editor"
 
             )
 
@@ -2338,7 +2346,7 @@ class Application(gui.Application):
 
             "applications-multimedia",
 
-            "applications-multimedia-fallback"
+            "{ignore_prefix}applications-multimedia"
 
             )
 
@@ -2346,7 +2354,7 @@ class Application(gui.Application):
 
             "applications-development",
 
-            "applications-development-fallback"
+            "{ignore_prefix}applications-development"
 
             )
 
@@ -2354,7 +2362,7 @@ class Application(gui.Application):
 
             "applications-education",
 
-            "applications-education-fallback"
+            "{ignore_prefix}applications-education"
 
             )
 
@@ -2362,7 +2370,7 @@ class Application(gui.Application):
 
             "applications-games",
 
-            "applications-games-fallback"
+            "{ignore_prefix}applications-games"
 
             )
 
@@ -2370,7 +2378,7 @@ class Application(gui.Application):
 
             "applications-graphics",
 
-            "applications-graphics-fallback"
+            "{ignore_prefix}applications-graphics"
 
             )
 
@@ -2380,7 +2388,7 @@ class Application(gui.Application):
 
             "applications-internet",
 
-            "applications-network-fallback"
+            "{ignore_prefix}applications-network"
 
             )
 
@@ -2388,7 +2396,7 @@ class Application(gui.Application):
 
             "applications-office",
 
-            "applications-office-fallback"
+            "{ignore_prefix}applications-office"
 
             )
 
@@ -2396,7 +2404,7 @@ class Application(gui.Application):
 
             "applications-science",
 
-            "applications-science-fallback"
+            "{ignore_prefix}applications-science"
 
             )
 
@@ -2406,7 +2414,7 @@ class Application(gui.Application):
 
             "preferences-system",
 
-            "applications-settings-fallback"
+            "{ignore_prefix}applications-settings"
 
             )
 
@@ -2414,7 +2422,7 @@ class Application(gui.Application):
 
             "applications-system",
 
-            "applications-system-fallback"
+            "{ignore_prefix}applications-system"
 
             )
 
@@ -2424,7 +2432,7 @@ class Application(gui.Application):
 
             "applications-accessories",
 
-            "applications-utilities-fallback"
+            "{ignore_prefix}applications-utilities"
 
             )
 

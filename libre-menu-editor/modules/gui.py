@@ -106,6 +106,8 @@ class IconFinder():
 
     def __init__(self, app):
 
+        self._ignore_prefix = None
+
         self._application = app
 
         self._application_window = app.get_application_window()
@@ -117,8 +119,6 @@ class IconFinder():
         self._icon_theme = Gtk.IconTheme.get_for_display(self._application_window.get_display())
 
         self._load_legacy_icons(*self._icon_theme.get_search_path())
-
-        self._icon_names = dict.fromkeys(self._icon_theme.get_icon_names())
 
     def _load_legacy_icons(self, *paths):
 
@@ -135,6 +135,14 @@ class IconFinder():
                         self._legacy_icons[".".join(name.split(".")[:-1])] = icon_path
 
                         self._legacy_icons[name] = icon_path
+
+    def get_ignore_prefix(self):
+
+        return self._ignore_prefix
+
+    def set_ignore_prefix(self, prefix):
+
+        self._ignore_prefix = prefix
 
     def get_search_paths(self):
 
@@ -238,27 +246,37 @@ class IconFinder():
 
     def get_name(self, name, missing_ok=True, use_alternatives=True):
 
-        if name in self._icon_names:
+        if not self._ignore_prefix or not name.startswith(self._ignore_prefix):
 
-            return name
+            if self._icon_theme.has_icon(name):
 
-        elif not name.endswith("-symbolic") and f"{name}-symbolic" in self._icon_names:
+                return name
 
-            return f"{name}-symbolic"
+            elif not name.endswith("-symbolic") and self._icon_theme.has_icon(f"{name}-symbolic"):
 
-        elif use_alternatives and name in self._alternatives:
+                return f"{name}-symbolic"
 
-            for alternative in self._alternatives[name]:
+            elif use_alternatives and name in self._alternatives:
 
-                if self._icon_theme.has_icon(alternative):
+                for alternative in self._alternatives[name]:
 
-                    return alternative
+                    if self._icon_theme.has_icon(alternative):
 
-                elif not alternative.endswith("-symbolic") and self._icon_theme.has_icon(f"{alternative}-symbolic"):
+                        return alternative
 
-                    return f"{alternative}-symbolic"
+                    elif not alternative.endswith("-symbolic") and self._icon_theme.has_icon(f"{alternative}-symbolic"):
 
-        if missing_ok:
+                        return f"{alternative}-symbolic"
+
+            if missing_ok:
+
+                return name
+
+            else:
+
+                raise IconNotFoundError(name)
+
+        elif missing_ok:
 
             return name
 
@@ -278,7 +296,15 @@ class IconFinder():
 
     def get_names(self):
 
-        return self._icon_names
+        names = self._icon_theme.get_icon_names()
+
+        if self._ignore_prefix:
+
+            return [name for name in names if not name.startswith(self._ignore_prefix)]
+
+        else:
+
+            return names
 
     def get_theme(self):
 
