@@ -118,6 +118,8 @@ class IconFinder():
 
         self._load_legacy_icons(*self._icon_theme.get_search_path())
 
+        self._icon_names = dict.fromkeys(self._icon_theme.get_icon_names())
+
     def _load_legacy_icons(self, *paths):
 
         for path in paths:
@@ -170,19 +172,19 @@ class IconFinder():
 
                 self._alternatives[name].append(alternative)
 
-    def get_image(self, icon, missing_ok=True):
+    def get_image(self, icon, missing_ok=True, use_alternatives=True):
 
         image = Gtk.Image()
 
-        self.set_image(image, icon, missing_ok=missing_ok)
+        self.set_image(image, icon, missing_ok=missing_ok, use_alternatives=use_alternatives)
 
         return image
 
-    def set_image(self, image, icon, missing_ok=True):
+    def set_image(self, image, icon, missing_ok=True, use_alternatives=True):
 
         try:
 
-            name = self.get_name(icon, missing_ok=False)
+            name = self.get_name(icon, missing_ok=False, use_alternatives=use_alternatives)
 
             image.set_from_icon_name(name)
 
@@ -234,17 +236,17 @@ class IconFinder():
 
                 raise IconNotFoundError(icon)
 
-    def get_name(self, name, missing_ok=True):
+    def get_name(self, name, missing_ok=True, use_alternatives=True):
 
-        if self._icon_theme.has_icon(name):
+        if name in self._icon_names:
 
             return name
 
-        elif not name.endswith("-symbolic") and self._icon_theme.has_icon(f"{name}-symbolic"):
+        elif not name.endswith("-symbolic") and f"{name}-symbolic" in self._icon_names:
 
             return f"{name}-symbolic"
 
-        elif name in self._alternatives:
+        elif use_alternatives and name in self._alternatives:
 
             for alternative in self._alternatives[name]:
 
@@ -263,6 +265,20 @@ class IconFinder():
         else:
 
             raise IconNotFoundError(name)
+
+    def has_name(self, name, use_alternatives=False):
+
+        try:
+
+            return self.get_name(name, missing_ok=False, use_alternatives=use_alternatives)
+
+        except IconNotFoundError:
+
+            return False
+
+    def get_names(self):
+
+        return self._icon_names
 
     def get_theme(self):
 
@@ -426,7 +442,7 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         text = self._entry["widget"].get_text()
 
-        if not text in self._icon_names:
+        if not self._icon_finder.has_name(text, use_alternatives=False):
 
             if self.get_parent().get_focus_child():
 
@@ -440,7 +456,7 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         text = self._entry["widget"].get_text()
 
-        if text in self._icon_names:
+        if self._icon_finder.has_name(text, use_alternatives=False):
 
             if not self.get_parent().get_focus_child():
 
@@ -478,7 +494,7 @@ class IconBrowserRow(Adw.PreferencesRow):
 
     def _on_factory_bind(self, factory, list_item):
 
-        list_item.get_child().set_from_icon_name(list_item.get_item().name)
+        GLib.idle_add(list_item.get_child().set_from_icon_name, list_item.get_item().name)
 
     def _on_grid_view_activate(self, grid_view, position):
 
@@ -518,7 +534,7 @@ class IconBrowserRow(Adw.PreferencesRow):
 
     def _update_search_data(self):
 
-        self._icon_names = self._icon_finder.get_theme().get_icon_names()
+        self._icon_names = self._icon_finder.get_names()
 
         self._search_string = self._string_separator.join(self._icon_names)
 
@@ -628,7 +644,7 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         text = self._entry["widget"].get_text()
 
-        if not text in self._icon_names:
+        if not self._icon_finder.has_name(text, use_alternatives=False):
 
             self._default_text_changed = False
 
@@ -1303,19 +1319,25 @@ class IconChooserRow(FileChooserRow):
 
     def _on_changed(self, editable):
 
-        text = editable.get_text()
+        text = self.get_text()
 
         self._events.trigger("text-changed", self, text)
 
+        GLib.idle_add(self._update_image)
+
+    def _update_image(self):
+
+        text = self.get_text()
+
         try:
 
-            self._icon_finder.set_image(self._icon_image, text, missing_ok=False)
+            self._icon_finder.set_image(self._icon_image, text, missing_ok=False, use_alternatives=False)
 
         except IconNotFoundError:
 
             self.add_css_class("warning")
 
-            self._icon_image.set_from_file(None)
+            self._icon_image.clear()
 
         else:
 
@@ -1342,6 +1364,8 @@ class IconChooserRow(FileChooserRow):
     def set_image(self, image):
 
         self._icon_image = image
+
+        self._update_image()
 
 
 class IconViewRow(Adw.PreferencesRow):
@@ -1621,7 +1645,7 @@ class ComboRow(Adw.ActionRow):
 
         for label in tag_labels:
 
-            tag_labels[label].set_icon_name(button_labels[label].icon_name)
+            GLib.idle_add(tag_labels[label].set_icon_name, button_labels[label].icon_name)
 
         buttons_added = []
 
@@ -2650,6 +2674,16 @@ class SearchList(Gtk.Box):
 
                 self._children[name]["widget"].set_visible(False)
 
+    def _update_item_image(self, image, icon):
+
+        try:
+
+            self._icon_finder.set_image(image, icon, missing_ok=False, use_alternatives=False)
+
+        except IconNotFoundError:
+
+            image.clear()
+
     def get_active_item(self):
 
         return self._last_activated
@@ -2726,13 +2760,7 @@ class SearchList(Gtk.Box):
 
             label = self._children[name]["label"]
 
-            try:
-
-                self._icon_finder.set_image(image, icon, missing_ok=False)
-
-            except IconNotFoundError:
-
-                image.clear()
+            GLib.idle_add(self._update_item_image, image, icon)
 
             label.set_text(text)
 
