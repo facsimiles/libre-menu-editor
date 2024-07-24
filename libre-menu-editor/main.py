@@ -964,7 +964,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("MULTIMEDIA_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-multimedia")
+                "icon-name": "applications-multimedia"
 
                 },
 
@@ -972,7 +972,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("DEVELOPMENT_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-development")
+                "icon-name": "applications-development"
 
                 },
 
@@ -980,7 +980,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("EDUCATION_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-education")
+                "icon-name": "applications-education"
 
                 },
 
@@ -988,7 +988,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("GAME_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-games")
+                "icon-name": "applications-games"
 
                 },
 
@@ -996,7 +996,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("GRAPHICS_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-graphics")
+                "icon-name": "applications-graphics"
 
                 },
 
@@ -1004,7 +1004,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("NETWORK_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-network")
+                "icon-name": "applications-network"
 
                 },
 
@@ -1012,7 +1012,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("OFFICE_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-office")
+                "icon-name": "applications-office"
 
                 },
 
@@ -1020,7 +1020,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("SCIENCE_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-science")
+                "icon-name": "applications-science"
 
                 },
 
@@ -1028,7 +1028,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("SETTINGS_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-settings")
+                "icon-name": "applications-settings"
 
                 },
 
@@ -1036,7 +1036,7 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("SYSTEM_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-system")
+                "icon-name": "applications-system"
 
                 },
 
@@ -1044,11 +1044,13 @@ class CategoriesFilter():
 
                 "label": self._locale_manager.get("UTILITY_CATEGORY_LABEL"),
 
-                "icon-name": self._icon_finder.get_name("applications-utilities")
+                "icon-name": "applications-utilities"
 
                 }
 
             }
+
+        self._prepare_matching_combo_row_icons()
 
     def _on_combo_row_item_selected(self, event, name, label):
 
@@ -1057,6 +1059,24 @@ class CategoriesFilter():
     def _on_flow_row_text_changed(self, event, child, text):
 
         self._events.trigger("text-changed", self, self._filtered_to_default(text))
+
+    def _prepare_matching_combo_row_icons(self):
+
+        if True in [self._icon_finder.get_name(self._main_categories[category]["icon-name"]).endswith("-fallback") for category in self._main_categories]:
+
+            for category in self._main_categories:
+
+                icon_name = self._main_categories[category]["icon-name"]
+
+                self._main_categories[category]["icon-name"] = f"{icon_name}-fallback"
+
+        else:
+
+            for category in self._main_categories:
+
+                icon_name = self._main_categories[category]["icon-name"]
+
+                self._main_categories[category]["icon-name"] = self._icon_finder.get_name(icon_name)
 
     def _join_text(self, strings):
 
