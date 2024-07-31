@@ -120,7 +120,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.7.0" date="2024-07-31"/>
+    <release version="1.7.0" date="2024-08-01"/>
   </releases>
   <recommends>
     <control>touch</control>

@@ -1621,9 +1621,7 @@ class ComboRow(Adw.ActionRow):
 
         self._icon_finder.hook("changed", self._on_icon_finder_changed)
 
-        self._popover_active = False
-
-        self._focus_button = None
+        self._flow_row = None
 
         self._buttons = {}
 
@@ -1646,6 +1644,8 @@ class ComboRow(Adw.ActionRow):
         self._list_box.connect("row-activated", self._on_row_activated)
 
         self._popover = Gtk.Popover()
+
+        self._popover.set_offset(-Margin.DEFAULT, 0)
 
         self._popover.set_valign(Gtk.Align.END)
 
@@ -1677,49 +1677,53 @@ class ComboRow(Adw.ActionRow):
 
     def _on_popover_show(self, popover):
 
+        self._popover.set_child(None)
+
+        self._popover.set_child(self._list_box)
+
+        self._update_buttons_sensitive()
+
         visible_children = self._get_visible_children()
 
-        if self._focus_button in visible_children:
+        if len(visible_children):
 
-            self._focus_button.grab_focus()
-
-        elif len(visible_children):
-
-            self._list_box.get_first_child().grab_focus()
-
-        self._popover_active = True
+            visible_children[0].grab_focus()
 
     def _on_popover_hide(self, popover):
 
-        for button in self._get_visible_children():
+        if self._menu_button.get_sensitive():
 
-            if button.has_focus():
+            self._menu_button.grab_focus()
 
-                self._focus_button = button
+        elif self._flow_row:
 
-        self._popover_active = False
+            self._flow_row.grab_focus()
+
+        else:
+
+            self.grab_focus()
 
     def _on_icon_finder_changed(self, event, icon_finder):
 
         GLib.idle_add(self._update_buttons_icon_names)
 
-        self._update_buttons_sensitive()
-
     def _on_activate(self, *args):
 
-        self._menu_button.popup()
+        self._popover.popup()
 
     def _on_row_activated(self, list_box, row):
 
+        self._update_buttons_sensitive()
+
         self._events.trigger("item-selected", row.name, row.label.get_text())
+
+        GLib.idle_add(self._popover.popdown)
 
     def _on_flow_row_text_changed(self, event, child, data):
 
-        self._focus_button = None
+        self._update_buttons_sensitive()
 
         GLib.idle_add(self._update_buttons_icon_names)
-
-        self._update_buttons_sensitive()
 
     def _do_list_box_sort(self, row_1, row_2):
 
@@ -1781,7 +1785,9 @@ class ComboRow(Adw.ActionRow):
 
         for text in tags:
 
-            tags[text].set_icon_name(buttons[text].image.get_icon_name())
+            if text in buttons:
+
+                tags[text].set_icon_name(buttons[text].image.get_icon_name())
 
     def _get_visible_children(self):
 
@@ -1809,47 +1815,9 @@ class ComboRow(Adw.ActionRow):
 
             button = self._buttons[name]
 
-            should_be_visible = not button.label.get_text() in tag_texts
+            button.set_visible(not button.label.get_text() in tag_texts)
 
-            if should_be_visible and not button.get_visible():
-
-                button.set_visible(True)
-
-            elif not should_be_visible and button.get_visible():
-
-                index = self._get_visible_children().index(button)
-
-                button.set_visible(False)
-
-                visible_children = self._get_visible_children()
-
-                if len(visible_children) and self._popover_active:
-
-                    if index == 0:
-
-                        button = visible_children[0]
-
-                    elif (index) < len(visible_children):
-
-                        button = visible_children[index]
-
-                    else:
-
-                        button = visible_children[-1]
-
-                    button.grab_focus()
-
-        visible_children = self._get_visible_children()
-
-        if len(visible_children):
-
-            self._menu_button.set_sensitive(True)
-
-        else:
-
-            self._menu_button.set_sensitive(False)
-
-            self._menu_button.popdown()
+        self._menu_button.set_sensitive(len(self._get_visible_children()))
 
     def add_button(self, name, text, icon_name=None):
 
@@ -1895,9 +1863,9 @@ class ComboRow(Adw.ActionRow):
 
     def set_flow_row(self, flow_row):
 
-        self._flow_row = flow_row
+        flow_row.hook("text-changed", self._on_flow_row_text_changed)
 
-        self._flow_row.hook("text-changed", self._on_flow_row_text_changed)
+        self._flow_row = flow_row
 
     def hook(self, event, callback, *args):
 
