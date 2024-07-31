@@ -6,7 +6,7 @@
   "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Adsız Eylem",
 
   "GREETER_PAGE_HEAD": "Bilgi",
-  "GREETER_PAGE_BODY": "Bu program, sonradan değiştirilmesi amaçlanmayan yapılandırma dosyalarını değiştirir. Bu nedenle bazı sistemlerde bazı değişiklikler ancak uzun bir süre sonra veya kullanıcı tekrar oturum açtıktan sonra görünür hale gelebilir",
+  "GREETER_PAGE_BODY": "Bu program, kullanıcı tarafından düzenlenmesi amaçlanmayan yapılandırma dosyalarını değiştirir. Bazı sistemlerde, bazı değişiklikler yalnızca uzun bir süre sonra veya kullanıcı tekrar oturum açtıktan sonra görünür hale gelebilir",
   "GREETER_PAGE_BUTTON_LABEL": "Sürdür",
 
   "START_PAGE_HEAD": "Menüyü Özelleştir",
@@ -86,10 +86,10 @@
   "NAME_ENTRY_ROW_TITLE": "Ad",
   "COMMENT_ENTRY_ROW_TITLE": "Yorum",
   "KEYWORDS_ENTRY_ROW_TITLE": "Anahtar Kelimeler",
-  "CATEGORIES_COMBO_ROW_TITLE": "Uygulamanın geleneksel menü kategorileri",
   "COMMAND_CHOOSER_ROW_TITLE": "Komut",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Dizin",
   "VISIBLE_SWITCH_ROW_TITLE": "Bu uygulamayı ana menüde göster",
+  "CATEGORIES_COMBO_ROW_TITLE": "Uygulamanın geleneksel menü kategorileri",
   "NOTIFY_SWITCH_ROW_TITLE": "Uygulama görününceye kadar canlandırma göster",
   "TERMINAL_SWITCH_ROW_TITLE": "Yürütme sırasında uçbirim penceresi göster",
 

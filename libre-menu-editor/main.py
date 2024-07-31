@@ -2167,7 +2167,7 @@ class SettingsPage(Gtk.Box):
 
             self._current_desktop_action_groups[self._current_desktop_actions[0]].grab_focus()
 
-        else:
+        elif not self.get_focus_child():
 
             self._icon_chooser_row.grab_focus()
 

@@ -1,0 +1,128 @@
+{
+
+  "APPLICATION_NAME": "Hoofmenu",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Naamlose Toepassing",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Naamlose Aksie",
+
+  "GREETER_PAGE_HEAD": "Informasie",
+  "GREETER_PAGE_BODY": "Hierdie program wysig konfigurasielêers wat nie deur die gebruiker geredigeer is nie. Op sommige stelsels kan dit gebeur dat sommige veranderinge eers na 'n lang tyd sal verskyn of nadat die gebruiker weer aangemeld het",
+  "GREETER_PAGE_BUTTON_LABEL": "Voortgaan",
+
+  "START_PAGE_HEAD": "Pas die menu aan",
+  "START_PAGE_BODY": "Skep 'n nuwe toepassing-lanseerder of kies 'n bestaande een uit die sybalk",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Oop",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Kanselleer",
+
+  "INSTALL_DIALOG_HEAD": "Installasie",
+  "INSTALL_DIALOG_BODY": "Wil jy hierdie toepassing by die hoofmenu voeg?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Terug",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Stoor",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Installeer",
+
+  "DISCARD_DIALOG_HEAD": "Ongeredde veranderinge",
+  "DISCARD_DIALOG_BODY": "Wil u die veranderinge ignoreer?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Terug",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Stoor",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Ignoreer",
+
+  "RESET_DIALOG_HEAD": "Terugstel",
+  "RESET_DIALOG_BODY": "Wil jy hierdie toepassing terugstel? Hierdie aksie kan nie ongedaan gemaak word nie",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Terug",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Voortgaan",
+
+  "DELETE_DIALOG_HEAD": "Verwyder",
+  "DELETE_DIALOG_BODY": "Wil jy hierdie toepassing verwyder? Hierdie aksie kan nie ongedaan gemaak word nie",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Terug",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Voortgaan",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Wys verborge",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Nuwe lanseerder",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Oop lanseerder",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Wysig dokument",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Stel lanseerder terug",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Verwyder lanseerder",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Verwyder lanseerder",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Sleutelbord kortpaaie",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Oor hierdie app",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Soek lanseerders",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Wys verborge",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Sluit aansoek",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Sleutelbord kortpaaie",
+  "SHOW_MENU_SHORTCUT_TEXT": "Oop menu",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Stoor veranderinge",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Ignoreer veranderinge",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Verwyder veranderinge",
+  "NEW_STARTER_SHORTCUT_TEXT": "Nuwe lanseerder",
+  "EDIT_FILE_SHORTCUT_TEXT": "Wysig dokument",
+  "OPEN_FILE_SHORTCUT_TEXT": "Oop lanseerder",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Redigeer",
+  "FIND_SHORTCUT_GROUP_TITLE": "Soek",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Algemeen",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Kies ikoon",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Kies uitvoerende lêer",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Kies directory",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Kies lanseerder",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Stoor",
+
+  "BANNER_LABEL_TEXT": "Kies die aksies wat jy wil verwyder",
+  "BANNER_CANCEL_BUTTON_LABEL": "Klaar",
+
+  "APPEARANCE_GROUP_TITLE": "Voorkoms",
+  "DESCRIPTION_GROUP_TITLE": "Beskrywing",
+  "DISCOVERY_GROUP_TITLE": "Soek",
+  "EXECUTION_GROUP_TITLE": "Uitvoering",
+  "ACTIONS_GROUP_TITLE": "Aksies",
+  "VISIBLE_GROUP_TITLE": "Sigbaarheid",
+
+  "ICON_CHOOSER_ROW_TITLE": "Ikoon",
+  "NAME_ENTRY_ROW_TITLE": "Naam",
+  "COMMENT_ENTRY_ROW_TITLE": "Kommentaar",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Sleutelwoorde",
+  "COMMAND_CHOOSER_ROW_TITLE": "Bevel",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Directory",
+  "VISIBLE_SWITCH_ROW_TITLE": "Wys hierdie toepassing in die hoofmenu",
+  "CATEGORIES_COMBO_ROW_TITLE": "Tradisionele menu-kategorieë van die toepassing",
+  "NOTIFY_SWITCH_ROW_TITLE": "Wys 'n animasie tot die toepassing sigbaar is",
+  "TERMINAL_SWITCH_ROW_TITLE": "Wys 'n terminaal-venster tydens uitvoering",
+
+  "LINK_CONVERTER_ROW_LABEL": "Verander skakel na bevel",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimedia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Ontwikkeling",
+  "EDUCATION_CATEGORY_LABEL": "Onderwys",
+  "GAME_CATEGORY_LABEL": "Speletjies",
+  "GRAPHICS_CATEGORY_LABEL": "Grafika",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Kantoor",
+  "SCIENCE_CATEGORY_LABEL": "Wetenskap",
+  "SETTINGS_CATEGORY_LABEL": "Instellings",
+  "SYSTEM_CATEGORY_LABEL": "Stelsel",
+  "UTILITY_CATEGORY_LABEL": "Bykomstighede",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Kon nie %s lêers laai nie",
+  "LOAD_SINGLE_ERROR_TEXT": "Kon nie lêer '%s' laai nie",
+  "OPEN_FILE_ERROR_TEXT": "Kon nie konfigurasies oopmaak nie",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Konfigurasies vir '%s' is gestoor",
+  "STARTER_SAVE_ERROR_TEXT": "Kon nie konfigurasies stoor nie",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Lanseerder vir '%s' is geskep",
+  "STARTER_CREATE_ERROR_TEXT": "Kon nie lanseerder skep nie",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Lanseerder vir '%s' is terugstel",
+  "STARTER_RESET_ERROR_TEXT": "Kon nie lanseerder terugstel nie",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "Lanseerder vir '%s' is verwyder",
+  "STARTER_DELETE_ERROR_TEXT": "Kon nie lanseerder verwyder nie",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "Lanseerder vir '%s' is verwyder"
+
+}

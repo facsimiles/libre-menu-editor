@@ -1,0 +1,128 @@
+{
+
+  "APPLICATION_NAME": "Menu Principal",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Aplicação sem nome",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Ação sem nome",
+
+  "GREETER_PAGE_HEAD": "Informação",
+  "GREETER_PAGE_BODY": "Este programa altera arquivos de configuração que não são projetados para serem editados pelo usuário. Em alguns sistemas, pode acontecer que algumas alterações só sejam visíveis após um longo tempo ou após o usuário fazer login novamente",
+  "GREETER_PAGE_BUTTON_LABEL": "Continuar",
+
+  "START_PAGE_HEAD": "Personalize o menu",
+  "START_PAGE_BODY": "Crie um novo lançador de aplicação ou selecione um existente na barra lateral",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Abrir",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Cancelar",
+
+  "INSTALL_DIALOG_HEAD": "Instalação",
+  "INSTALL_DIALOG_BODY": "Você deseja adicionar essa aplicação ao menu principal?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Voltar",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Salvar",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Instalar",
+
+  "DISCARD_DIALOG_HEAD": "Alterações não salvas",
+  "DISCARD_DIALOG_BODY": "Você deseja descartar as alterações?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Voltar",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Salvar",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Descartar",
+
+  "RESET_DIALOG_HEAD": "Redefinir",
+  "RESET_DIALOG_BODY": "Você deseja redefinir essa aplicação? Essa ação não pode ser desfeita",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Voltar",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Continuar",
+
+  "DELETE_DIALOG_HEAD": "Excluir",
+  "DELETE_DIALOG_BODY": "Você deseja excluir essa aplicação? Essa ação não pode ser desfeita",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Voltar",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Continuar",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Mostrar ocultos",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Novo lançador",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Abrir lançador",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Editar documento",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Redefinir lançador",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Excluir lançador",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Descartar lançador",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Atalhos de teclado",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Sobre este aplicativo",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Pesquisar lançadores",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Mostrar ocultos",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Sair do aplicativo",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Mostrar atalhos",
+  "SHOW_MENU_SHORTCUT_TEXT": "Abrir menu",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Salvar alterações",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Descartar alterações",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Remover alterações",
+  "NEW_STARTER_SHORTCUT_TEXT": "Novo lançador",
+  "EDIT_FILE_SHORTCUT_TEXT": "Editar documento",
+  "OPEN_FILE_SHORTCUT_TEXT": "Abrir lançador",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Editar",
+  "FIND_SHORTCUT_GROUP_TITLE": "Pesquisar",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Geral",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Escolher ícone",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Escolher arquivo executável",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Escolher diretório",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Escolher lançador",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Salvar",
+
+  "BANNER_LABEL_TEXT": "Selecione as ações que você deseja excluir",
+  "BANNER_CANCEL_BUTTON_LABEL": "Concluído",
+
+  "APPEARANCE_GROUP_TITLE": "Aparência",
+  "DESCRIPTION_GROUP_TITLE": "Descrição",
+  "DISCOVERY_GROUP_TITLE": "Pesquisa",
+  "EXECUTION_GROUP_TITLE": "Execução",
+  "ACTIONS_GROUP_TITLE": "Ações",
+  "VISIBLE_GROUP_TITLE": "Visibilidade",
+
+  "ICON_CHOOSER_ROW_TITLE": "Ícone",
+  "NAME_ENTRY_ROW_TITLE": "Nome",
+  "COMMENT_ENTRY_ROW_TITLE": "Comentário",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Palavras-chave",
+  "COMMAND_CHOOSER_ROW_TITLE": "Comando",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Diretório",
+  "VISIBLE_SWITCH_ROW_TITLE": "Mostrar essa aplicação no menu principal",
+  "CATEGORIES_COMBO_ROW_TITLE": "Categorias de menu tradicionais da aplicação",
+  "NOTIFY_SWITCH_ROW_TITLE": "Mostrar uma animação até que a aplicação seja visível",
+  "TERMINAL_SWITCH_ROW_TITLE": "Mostrar uma janela de terminal durante a execução",
+
+  "LINK_CONVERTER_ROW_LABEL": "Converter link para comando",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimídia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Desenvolvimento",
+  "EDUCATION_CATEGORY_LABEL": "Educação",
+  "GAME_CATEGORY_LABEL": "Jogos",
+  "GRAPHICS_CATEGORY_LABEL": "Gráficos",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Escritório",
+  "SCIENCE_CATEGORY_LABEL": "Ciência",
+  "SETTINGS_CATEGORY_LABEL": "Configurações",
+  "SYSTEM_CATEGORY_LABEL": "Sistema",
+  "UTILITY_CATEGORY_LABEL": "Acessórios",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Falha ao carregar %s Arquivos",
+  "LOAD_SINGLE_ERROR_TEXT": "Falha ao carregar Arquivo '%s'",
+  "OPEN_FILE_ERROR_TEXT": "Falha ao abrir configurações",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Configurações para '%s' foram salvas",
+  "STARTER_SAVE_ERROR_TEXT": "Falha ao salvar configurações",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Lançador para '%s' foi criado",
+  "STARTER_CREATE_ERROR_TEXT": "Falha ao criar lançador",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Lançador para '%s' foi redefinido",
+  "STARTER_RESET_ERROR_TEXT": "Falha ao redefinir lançador",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "Lançador para '%s' foi excluído",
+  "STARTER_DELETE_ERROR_TEXT": "Falha ao excluir lançador",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "Lançador para '%s' foi removido"
+
+}

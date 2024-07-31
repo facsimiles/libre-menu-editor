@@ -54,31 +54,27 @@ sudo gtk-update-icon-cache -f /usr/share/icons/hicolor
 
 # How to contribute
 
-### 1. By reporting bugs and giving feedback
+### Option 1: Improving the translation
+
+If you want to improve a translation, it is recommended to do so through the [weblate](https://translate.codeberg.org/projects/libre-menu-editor/libre-menu-editor). Alternatively, you can edit the [translation files](libre-menu-editor/locales) directly and contribute your changes in a pull request.
+
+### Option 2: Reporting bugs and giving feedback
 
 Bug reports, feedback, and feature requests can be made through the [issue tracker](https://codeberg.org/libre-menu-editor/libre-menu-editor/issues).
 
-### 2. By making improvements to the code
+### Option 3: Suggesting changes to the code
 
 If you have written bug fixes and want to merge them into the upstream project, feel free to make a [pull request](https://codeberg.org/libre-menu-editor/libre-menu-editor/pulls). If you want to contribute code that introduces new features, changes existing features or makes changes to the interface, please open an issue to first discuss your ideas with the project's maintainers.
-
-### 3. By improving the translation
-
-If you want to add or improve a translation, it is recommended to do so through the [weblate](https://hosted.weblate.org/projects/libre-menu-editor). Alternatively, you can edit the [translation files](libre-menu-editor/locales) directly and contribute your changes in a pull request.
-
-<a href="https://hosted.weblate.org/engage/libre-menu-editor/">
-<img src="https://hosted.weblate.org/widget/libre-menu-editor/horizontal-auto.svg" alt="Translation status" />
-</a>
 
 ---
 
 # Contributions
 
-**2023-07-01 13:05:23**: albano.battistella <albano.battistella@noreply.codeberg.org>
- - added italian translations: [it.json](libre-menu-editor/locales/it.json)
+**2023-07-01**: [albano.battistella](mailto:albano.battistella@noreply.codeberg.org) added italian translations: [it.json](libre-menu-editor/locales/it.json)
 
-**2024-01-07 19:32:30**: locness3 <locness3@e.email>
- - improved french translations: [fr.json](libre-menu-editor/locales/fr.json)
+**2024-01-07**: [locness3](mailto:locness3@e.email) improved french translations: [fr.json](libre-menu-editor/locales/fr.json)
 
-**2024-04-28 04:59:14**: Sabri Ünal <yakushabb@gmail.com>
- - added turkish translations: [tr.json](libre-menu-editor/locales/tr.json)
+**2024-04-28**: [Sabri Ünal](mailto:yakushabb@gmail.com) added turkish translations: [tr.json](libre-menu-editor/locales/tr.json)
+
+**2024-07-29**: [SomeTr](https://translate.codeberg.org/user/SomeTr) improved ukrainian translations: [uk.json](libre-menu-editor/locales/uk.json)
+

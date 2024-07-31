@@ -6,8 +6,8 @@
   "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Acción sin nombre",
 
   "GREETER_PAGE_HEAD": "Información",
-  "GREETER_PAGE_BODY": "Este programa cambia los archivos de configuración que no están destinados a cambios posteriores. Por lo tanto, en algunos sistemas, puede suceder que algunos cambios solo se hagan visibles después de mucho tiempo o después de que el usuario vuelva a iniciar sesión",
-  "GREETER_PAGE_BUTTON_LABEL": "Entendido",
+  "GREETER_PAGE_BODY": "Este programa modifica archivos de configuración que no están diseñados para ser editados por el usuario. En algunos sistemas, puede suceder que algunos cambios solo sean visibles después de un largo tiempo o después de que el usuario inicie sesión nuevamente",
+  "GREETER_PAGE_BUTTON_LABEL": "Continuar",
 
   "START_PAGE_HEAD": "Modificar el menú",
   "START_PAGE_BODY": "Cree un nuevo lanzador de aplicaciones o seleccione uno existente en la barra lateral",
@@ -19,7 +19,7 @@
   "INSTALL_DIALOG_BODY": "¿Quieres agregar esta aplicación al menú principal?",
   "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Regresar",
   "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Guardar",
-  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Instale",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Instalar",
 
   "DISCARD_DIALOG_HEAD": "Cambios no guardados",
   "DISCARD_DIALOG_BODY": "¿Quieres desechar los cambios?",
@@ -27,28 +27,28 @@
   "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Guardar",
   "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Desechar",
 
-  "RESET_DIALOG_HEAD": "Reinicio",
+  "RESET_DIALOG_HEAD": "Restablecer",
   "RESET_DIALOG_BODY": "¿Quieres restablecer esta aplicación? Esta acción no se puede deshacer",
   "RESET_DIALOG_BACK_BUTTON_LABEL": "Regresar",
   "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Continuar",
 
-  "DELETE_DIALOG_HEAD": "Eliminación",
+  "DELETE_DIALOG_HEAD": "Borrar",
   "DELETE_DIALOG_BODY": "¿Quieres eliminar esta aplicación? Esta acción no se puede deshacer",
   "DELETE_DIALOG_BACK_BUTTON_LABEL": "Regresar",
   "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Continuar",
 
   "SHOW_HIDDEN_SWITCH_LABEL": "Mostrar ocultos",
   "NEW_STARTER_MENU_BUTTON_LABEL": "Nuevo lanzador",
-  "OPEN_FILE_MENU_BUTTON_LABEL": "Lanzador abierto",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Abrir lanzador",
   "EDIT_FILE_MENU_BUTTON_LABEL": "Editar documento",
   "RESET_STARTER_MENU_BUTTON_LABEL": "Restablecer lanzador",
   "DELETE_STARTER_MENU_BUTTON_LABEL": "Eliminar lanzador",
   "DISCARD_STARTER_MENU_BUTTON_LABEL": "Descartar lanzador",
   "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Atajos de teclado",
-  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Acerca esta app",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Acerca de esta app",
 
   "TOGGLE_SEARCH_SHORTCUT_TEXT": "Lanzadores de búsqueda",
-  "SHOW_HIDDEN_SHORTCUT_TEXT": "Mostrar escondido",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Mostrar ocultos",
 
   "QUIT_APPLICATION_SHORTCUT_TEXT": "Dejar la aplicación",
   "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Mostrar atajos",
@@ -86,10 +86,10 @@
   "NAME_ENTRY_ROW_TITLE": "Nombre",
   "COMMENT_ENTRY_ROW_TITLE": "Comentario",
   "KEYWORDS_ENTRY_ROW_TITLE": "Palabras clave",
-  "CATEGORIES_COMBO_ROW_TITLE": "Categorías de menú tradicionales de la aplicación",
   "COMMAND_CHOOSER_ROW_TITLE": "Comando",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Directorio",
   "VISIBLE_SWITCH_ROW_TITLE": "Mostrar esta aplicación en menú principal",
+  "CATEGORIES_COMBO_ROW_TITLE": "Categorías de menú tradicionales de la aplicación",
   "NOTIFY_SWITCH_ROW_TITLE": "Mostrar una animación hasta que la aplicación sea visible",
   "TERMINAL_SWITCH_ROW_TITLE": "Mostrar una ventana de terminal durante la ejecución",
 

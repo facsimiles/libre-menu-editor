@@ -1,0 +1,128 @@
+{
+
+  "APPLICATION_NAME": "Головне меню",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Безіменне програмне забезпечення",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Безіменна дія",
+
+  "GREETER_PAGE_HEAD": "Інформація",
+  "GREETER_PAGE_BODY": "Ця програма змінює файли конфігурації, які не призначені для редагування користувачем. На деяких системах може статися так, що деякі зміни стануть видними тільки через довгий час або після повторного входу в систему",
+  "GREETER_PAGE_BUTTON_LABEL": "Продовжити",
+
+  "START_PAGE_HEAD": "Налаштування меню",
+  "START_PAGE_BODY": "Створіть новий стартер програми або виберіть існуючий з бокової панелі",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Відкрити",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Скасувати",
+
+  "INSTALL_DIALOG_HEAD": "Встановлення",
+  "INSTALL_DIALOG_BODY": "Ви хочете додати це програмне забезпечення до головного меню?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Назад",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Зберегти",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Встановити",
+
+  "DISCARD_DIALOG_HEAD": "Незбережені зміни",
+  "DISCARD_DIALOG_BODY": "Ви хочете скасувати зміни?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Назад",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Зберегти",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Скасувати",
+
+  "RESET_DIALOG_HEAD": "Скинути",
+  "RESET_DIALOG_BODY": "Ви хочете скинути це програмне забезпечення? Це дія не може бути скасована",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Назад",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Продовжити",
+
+  "DELETE_DIALOG_HEAD": "Видалити",
+  "DELETE_DIALOG_BODY": "Ви хочете видалити це програмне забезпечення? Це дія не може бути скасована",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Назад",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Продовжити",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Показати прихований",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Новий стартер",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Відкрити стартер",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Редагувати документ",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Скинути стартер",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Видалити стартер",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Скасувати стартер",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Клавіатурні скорочення",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Про програму",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Пошук стартерів",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Показати прихований",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Вихід з програми",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Показати клавіатурні скорочення",
+  "SHOW_MENU_SHORTCUT_TEXT": "Відкрити меню",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Зберегти зміни",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Скасувати зміни",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Видалити зміни",
+  "NEW_STARTER_SHORTCUT_TEXT": "Новий стартер",
+  "EDIT_FILE_SHORTCUT_TEXT": "Редагувати документ",
+  "OPEN_FILE_SHORTCUT_TEXT": "Відкрити стартер",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Редагувати",
+  "FIND_SHORTCUT_GROUP_TITLE": "Знайти",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Загальні",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Виберіть іконку",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Виберіть виконуваний файл",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Виберіть директорію",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Виберіть стартер",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Зберегти",
+
+  "BANNER_LABEL_TEXT": "Виберіть дії, які ви хочете видалити",
+  "BANNER_CANCEL_BUTTON_LABEL": "Готово",
+
+  "APPEARANCE_GROUP_TITLE": "Зовнішній вигляд",
+  "DESCRIPTION_GROUP_TITLE": "Опис",
+  "DISCOVERY_GROUP_TITLE": "Пошук",
+  "EXECUTION_GROUP_TITLE": "Виконання",
+  "ACTIONS_GROUP_TITLE": "Дії",
+  "VISIBLE_GROUP_TITLE": "Видимість",
+
+  "ICON_CHOOSER_ROW_TITLE": "Іконка",
+  "NAME_ENTRY_ROW_TITLE": "Ім'я",
+  "COMMENT_ENTRY_ROW_TITLE": "Коментар",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Ключові слова",
+  "COMMAND_CHOOSER_ROW_TITLE": "Команда",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Директорія",
+  "VISIBLE_SWITCH_ROW_TITLE": "Показати це програмне забезпечення в головному меню",
+  "CATEGORIES_COMBO_ROW_TITLE": "Традиційні категорії меню програми",
+  "NOTIFY_SWITCH_ROW_TITLE": "Показати анімацію до тих пір, поки програмне забезпечення не стане видимим",
+  "TERMINAL_SWITCH_ROW_TITLE": "Показати вікно консолі під час виконання",
+
+  "LINK_CONVERTER_ROW_LABEL": "Перетворити посилання на команду",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Мультимедіа",
+  "DEVELOPMENT_CATEGORY_LABEL": "Розробка",
+  "EDUCATION_CATEGORY_LABEL": "Освіта",
+  "GAME_CATEGORY_LABEL": "Ігри",
+  "GRAPHICS_CATEGORY_LABEL": "Графіка",
+  "NETWORK_CATEGORY_LABEL": "Інтернет",
+  "OFFICE_CATEGORY_LABEL": "Офіс",
+  "SCIENCE_CATEGORY_LABEL": "Наука",
+  "SETTINGS_CATEGORY_LABEL": "Налаштування",
+  "SYSTEM_CATEGORY_LABEL": "Система",
+  "UTILITY_CATEGORY_LABEL": "Утиліти",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Не вдалося завантажити %s файлів",
+  "LOAD_SINGLE_ERROR_TEXT": "Не вдалося завантажити файл '%s'",
+  "OPEN_FILE_ERROR_TEXT": "Не вдалося відкрити конфігурації",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Конфігурації для '%s' збережено",
+  "STARTER_SAVE_ERROR_TEXT": "Не вдалося зберегти конфігурації",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Стартер для '%s' створено",
+  "STARTER_CREATE_ERROR_TEXT": "Не вдалося створити стартер",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Стартер для '%s' скинуто",
+  "STARTER_RESET_ERROR_TEXT": "Не вдалося скинути стартер",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "Стартер для '%s' видалено",
+  "STARTER_DELETE_ERROR_TEXT": "Не вдалося видалити стартер",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "Стартер для '%s' видалено"
+
+}

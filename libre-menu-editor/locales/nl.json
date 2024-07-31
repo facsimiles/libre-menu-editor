@@ -1,0 +1,128 @@
+{
+
+  "APPLICATION_NAME": "Hoofdmenu",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Naamloze applicatie",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Naamloze actie",
+
+  "GREETER_PAGE_HEAD": "Informatie",
+  "GREETER_PAGE_BODY": "Dit programma wijzigt configuratiebestanden die niet bedoeld zijn om door de gebruiker te worden bewerkt. Op sommige systemen kan het dus gebeuren dat sommige wijzigingen pas na lange tijd of na het opnieuw inloggen zichtbaar worden",
+  "GREETER_PAGE_BUTTON_LABEL": "Doorgaan",
+
+  "START_PAGE_HEAD": "Menu aanpassen",
+  "START_PAGE_BODY": "Maak een nieuwe applicatielauncher of selecteer een bestaande uit de zijbalk",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Openen",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Annuleren",
+
+  "INSTALL_DIALOG_HEAD": "Installatie",
+  "INSTALL_DIALOG_BODY": "Wilt u deze applicatie aan het hoofdmenu toevoegen?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Terug",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Opslaan",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Installeren",
+
+  "DISCARD_DIALOG_HEAD": "Niet-opgeslagen wijzigingen",
+  "DISCARD_DIALOG_BODY": "Wilt u de wijzigingen afdanken?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Terug",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Opslaan",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Afdanken",
+
+  "RESET_DIALOG_HEAD": "Reset",
+  "RESET_DIALOG_BODY": "Wilt u deze applicatie resetten? Deze actie kan niet worden teruggedraaid",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Terug",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Doorgaan",
+
+  "DELETE_DIALOG_HEAD": "Verwijderen",
+  "DELETE_DIALOG_BODY": "Wilt u deze applicatie verwijderen? Deze actie kan niet worden teruggedraaid",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Terug",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Doorgaan",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Verborgen weergeven",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Nieuwe launcher",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Launcher openen",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Document bewerken",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Launcher resetten",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Launcher verwijderen",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Launcher afdanken",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Sneltoetsen weergeven",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Over deze app",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Launchers zoeken",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Verborgen weergeven",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Applicatie afsluiten",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Sneltoetsen weergeven",
+  "SHOW_MENU_SHORTCUT_TEXT": "Menu openen",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Wijzigingen opslaan",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Wijzigingen afdanken",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Wijzigingen verwijderen",
+  "NEW_STARTER_SHORTCUT_TEXT": "Nieuwe launcher",
+  "EDIT_FILE_SHORTCUT_TEXT": "Document bewerken",
+  "OPEN_FILE_SHORTCUT_TEXT": "Launcher openen",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Bewerken",
+  "FIND_SHORTCUT_GROUP_TITLE": "Zoeken",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Algemeen",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Icoon kiezen",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Uitvoerbaar bestand kiezen",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Map kiezen",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Launcher kiezen",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Opslaan",
+
+  "BANNER_LABEL_TEXT": "Selecteer de acties die u wilt verwijderen",
+  "BANNER_CANCEL_BUTTON_LABEL": "Klaar",
+
+  "APPEARANCE_GROUP_TITLE": "Uiterlijk",
+  "DESCRIPTION_GROUP_TITLE": "Beschrijving",
+  "DISCOVERY_GROUP_TITLE": "Zoeken",
+  "EXECUTION_GROUP_TITLE": "Executie",
+  "ACTIONS_GROUP_TITLE": "Acties",
+  "VISIBLE_GROUP_TITLE": "Zichtbaarheid",
+
+  "ICON_CHOOSER_ROW_TITLE": "Icoon",
+  "NAME_ENTRY_ROW_TITLE": "Naam",
+  "COMMENT_ENTRY_ROW_TITLE": "Opmerking",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Trefwoorden",
+  "COMMAND_CHOOSER_ROW_TITLE": "Commando",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Map",
+  "VISIBLE_SWITCH_ROW_TITLE": "Toon deze applicatie in het hoofdmenu",
+  "CATEGORIES_COMBO_ROW_TITLE": "Traditionele menucategorieën van de applicatie",
+  "NOTIFY_SWITCH_ROW_TITLE": "Toon een animatie totdat de applicatie zichtbaar is",
+  "TERMINAL_SWITCH_ROW_TITLE": "Toon een terminalvenster tijdens executie",
+
+  "LINK_CONVERTER_ROW_LABEL": "Link omzetten naar commando",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimedia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Ontwikkeling",
+  "EDUCATION_CATEGORY_LABEL": "Onderwijs",
+  "GAME_CATEGORY_LABEL": "Spellen",
+  "GRAPHICS_CATEGORY_LABEL": "Grafiek",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Kantoor",
+  "SCIENCE_CATEGORY_LABEL": "Wetenschap",
+  "SETTINGS_CATEGORY_LABEL": "Instellingen",
+  "SYSTEM_CATEGORY_LABEL": "Systeem",
+  "UTILITY_CATEGORY_LABEL": "Accessoires",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Kon %s bestanden niet laden",
+  "LOAD_SINGLE_ERROR_TEXT": "Kon bestand '%s' niet laden",
+  "OPEN_FILE_ERROR_TEXT": "Kon configuraties niet openen",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Configuraties voor '%s' zijn opgeslagen",
+  "STARTER_SAVE_ERROR_TEXT": "Kon configuraties niet opslaan",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Launcher voor '%s' is aangemaakt",
+  "STARTER_CREATE_ERROR_TEXT": "Kon launcher niet aanmaken",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Launcher voor '%s' is gereset",
+  "STARTER_RESET_ERROR_TEXT": "Kon launcher niet resetten",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "Launcher voor '%s' is verwijderd",
+  "STARTER_DELETE_ERROR_TEXT": "Kon launcher niet verwijderen",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "Launcher voor '%s' is verwijderd"
+
+}

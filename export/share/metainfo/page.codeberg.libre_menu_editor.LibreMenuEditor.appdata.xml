@@ -3,19 +3,39 @@
   <id>page.codeberg.libre_menu_editor.LibreMenuEditor</id>
   <launchable type="desktop-id">page.codeberg.libre_menu_editor.LibreMenuEditor.desktop</launchable>
   <name>Main Menu</name>
+  <name xml:lang="af">Hoofmenu</name>
+  <name xml:lang="cs">Hlavní menu</name>
+  <name xml:lang="da">Hovedmenu</name>
   <name xml:lang="de">Hauptmenü</name>
   <name xml:lang="es">Menú Principal</name>
+  <name xml:lang="fi">Päävalikko</name>
   <name xml:lang="fr">Menu Principal</name>
+  <name xml:lang="is">Aðalvalmynd</name>
   <name xml:lang="it">Menù Principale</name>
+  <name xml:lang="nl">Hoofdmenu</name>
+  <name xml:lang="no">Hovedmeny</name>
   <name xml:lang="pl">Menu Główne</name>
+  <name xml:lang="pt">Menu Principal</name>
+  <name xml:lang="sv">Huvudmeny</name>
   <name xml:lang="tr">Ana Menü</name>
+  <name xml:lang="uk">Головне меню</name>
   <summary>Customize the menu</summary>
+  <summary xml:lang="af">Pas die menu aan</summary>
+  <summary xml:lang="cs">Přizpůsobit menu</summary>
+  <summary xml:lang="da">Tilpas menuen</summary>
   <summary xml:lang="de">Das Menü bearbeiten</summary>
   <summary xml:lang="es">Modificar el menú</summary>
+  <summary xml:lang="fi">Mukauta valikkoa</summary>
   <summary xml:lang="fr">Modifier le menu</summary>
+  <summary xml:lang="is">Sérsníða valmyndina</summary>
   <summary xml:lang="it">Modifica il menù</summary>
+  <summary xml:lang="nl">Menu aanpassen</summary>
+  <summary xml:lang="no">Tilpass menyen</summary>
   <summary xml:lang="pl">Edycja menu</summary>
+  <summary xml:lang="pt">Personalize o menu</summary>
+  <summary xml:lang="sv">Anpassa menyn</summary>
   <summary xml:lang="tr">Menüyü Özelleştir</summary>
+  <summary xml:lang="uk">Налаштування меню</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <developer_name>libre-menu-editor</developer_name>
@@ -72,7 +92,7 @@
   <url type="homepage">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
   <url type="vcs-browser">https://codeberg.org/libre-menu-editor/libre-menu-editor</url>
   <url type="bugtracker">https://codeberg.org/libre-menu-editor/libre-menu-editor/issues</url>
-  <url type="translate">https://hosted.weblate.org/projects/libre-menu-editor</url>
+  <url type="translate">https://translate.codeberg.org/projects/libre-menu-editor</url>
   <screenshots>
     <screenshot type="default">
       <image>https://codeberg.org/libre-menu-editor/downloads/raw/branch/main/screenshots/1.png</image>
@@ -100,7 +120,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.6.1" date="2024-07-24"/>
+    <release version="1.7.0" date="2024-07-31"/>
   </releases>
   <recommends>
     <control>touch</control>

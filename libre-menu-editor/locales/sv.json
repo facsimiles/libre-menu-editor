@@ -1,0 +1,128 @@
+{
+
+  "APPLICATION_NAME": "Huvudmeny",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Namnlös applikation",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Namnlös åtgärd",
+
+  "GREETER_PAGE_HEAD": "Information",
+  "GREETER_PAGE_BODY": "Det här programmet ändrar konfigurationsfiler som inte är avsedda att redigeras av användaren. På vissa system kan det därför hända att vissa ändringar bara blir synliga efter en längre tid eller efter att användaren loggar in igen",
+  "GREETER_PAGE_BUTTON_LABEL": "Fortsätt",
+
+  "START_PAGE_HEAD": "Anpassa menyn",
+  "START_PAGE_BODY": "Skapa en ny applikationsstartare eller välj en befintlig från sidofältet",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Öppna",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Avbryt",
+
+  "INSTALL_DIALOG_HEAD": "Installation",
+  "INSTALL_DIALOG_BODY": "Vill du lägga till den här applikationen i huvudmenyn?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Tillbaka",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Spara",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Installera",
+
+  "DISCARD_DIALOG_HEAD": "Ändringar som inte har sparats",
+  "DISCARD_DIALOG_BODY": "Vill du kassera ändringarna?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Tillbaka",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Spara",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Kassera",
+
+  "RESET_DIALOG_HEAD": "Återställ",
+  "RESET_DIALOG_BODY": "Vill du återställa den här applikationen? Detta kan inte ångras",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Tillbaka",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Fortsätt",
+
+  "DELETE_DIALOG_HEAD": "Ta bort",
+  "DELETE_DIALOG_BODY": "Vill du ta bort den här applikationen? Detta kan inte ångras",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Tillbaka",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Fortsätt",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Visa dolda",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Ny startare",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Öppna startare",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Redigera dokument",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Återställ startare",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Ta bort startare",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Kassera startare",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Tangentbordsgenvägar",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Om den här appen",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Sök startare",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Visa dolda",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Avsluta applikation",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Visa genvägar",
+  "SHOW_MENU_SHORTCUT_TEXT": "Öppna meny",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Spara ändringar",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Kassera ändringar",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Ta bort ändringar",
+  "NEW_STARTER_SHORTCUT_TEXT": "Ny startare",
+  "EDIT_FILE_SHORTCUT_TEXT": "Redigera dokument",
+  "OPEN_FILE_SHORTCUT_TEXT": "Öppna startare",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Redigera",
+  "FIND_SHORTCUT_GROUP_TITLE": "Sök",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Allmänt",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Välj ikon",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Välj körbar fil",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Välj katalog",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Välj startare",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Spara",
+
+  "BANNER_LABEL_TEXT": "Välj de åtgärder du vill ta bort",
+  "BANNER_CANCEL_BUTTON_LABEL": "Färdig",
+
+  "APPEARANCE_GROUP_TITLE": "Utseende",
+  "DESCRIPTION_GROUP_TITLE": "Beskrivning",
+  "DISCOVERY_GROUP_TITLE": "Sök",
+  "EXECUTION_GROUP_TITLE": "Avrättning",
+  "ACTIONS_GROUP_TITLE": "Åtgärder",
+  "VISIBLE_GROUP_TITLE": "Synlighet",
+
+  "ICON_CHOOSER_ROW_TITLE": "Ikon",
+  "NAME_ENTRY_ROW_TITLE": "Namn",
+  "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Nyckelord",
+  "COMMAND_CHOOSER_ROW_TITLE": "Kommando",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Katalog",
+  "VISIBLE_SWITCH_ROW_TITLE": "Visa den här applikationen i huvudmenyn",
+  "CATEGORIES_COMBO_ROW_TITLE": "Traditionella menykategorier för applikationen",
+  "NOTIFY_SWITCH_ROW_TITLE": "Visa en animation tills applikationen är synlig",
+  "TERMINAL_SWITCH_ROW_TITLE": "Visa en terminalfönster under körning",
+
+  "LINK_CONVERTER_ROW_LABEL": "Konvertera länk till kommando",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimedia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Utveckling",
+  "EDUCATION_CATEGORY_LABEL": "Utbildning",
+  "GAME_CATEGORY_LABEL": "Spel",
+  "GRAPHICS_CATEGORY_LABEL": "Grafik",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Kontor",
+  "SCIENCE_CATEGORY_LABEL": "Vetenskap",
+  "SETTINGS_CATEGORY_LABEL": "Inställningar",
+  "SYSTEM_CATEGORY_LABEL": "System",
+  "UTILITY_CATEGORY_LABEL": "Tillbehör",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Misslyckades med att ladda %s filer",
+  "LOAD_SINGLE_ERROR_TEXT": "Misslyckades med att ladda fil '%s'",
+  "OPEN_FILE_ERROR_TEXT": "Misslyckades med att öppna konfigurationer",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Konfigurationer för '%s' har sparats",
+  "STARTER_SAVE_ERROR_TEXT": "Misslyckades med att spara konfigurationer",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Startare för '%s' har skapats",
+  "STARTER_CREATE_ERROR_TEXT": "Misslyckades med att skapa startare",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Startare för '%s' har återställts",
+  "STARTER_RESET_ERROR_TEXT": "Misslyckades med att återställa startare",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "Startare för '%s' har tagits bort",
+  "STARTER_DELETE_ERROR_TEXT": "Misslyckades med att ta bort startare",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "Startare för '%s' har tagits bort"
+
+}

@@ -348,8 +348,6 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         self._icon_finder = app.get_icon_finder()
 
-        self._icon_finder.hook("changed", self._on_icon_finder_changed)
-
         self._events = basic.EventManager()
 
         self._events.add("search-completed", object)
@@ -395,6 +393,8 @@ class IconBrowserRow(Adw.PreferencesRow):
         self._slice_length = 90
 
         self._slice_call_id = None
+
+        self._delay_entry_changed = False
 
         self._list_store = Gio.ListStore()
 
@@ -478,7 +478,9 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         self.set_visible(False)
 
-        #FIXME GLib.idle_add(self._update_search_data)
+        GLib.idle_add(self._update_search_data)
+
+        GLib.idle_add(self._connect_icon_finder_changed)
 
     def _on_icon_finder_changed(self, event, icon_finder):
 
@@ -542,6 +544,12 @@ class IconBrowserRow(Adw.PreferencesRow):
 
             self.hide()
 
+            if self._delay_entry_changed:
+
+                self._delay_entry_changed = False
+
+                self._entry["widget"].set_text(self._entry["widget"].get_text())
+
     def _on_factory_setup(self, factory, list_item):
 
         image = Gtk.Image()
@@ -558,17 +566,21 @@ class IconBrowserRow(Adw.PreferencesRow):
 
         self.set_active(False)
 
+        self._delay_entry_changed = True
+
         self.set_default_text(self._list_store[position].name)
 
         self._entry["widget"].grab_focus()
 
     def _on_entry_changed(self, entry):
 
-        if self._entry_timeout_id:
+        if not self._delay_entry_changed:
 
-            GLib.source_remove(self._entry_timeout_id)
+            if self._entry_timeout_id:
 
-        self._entry_timeout_id = GLib.timeout_add(self._search_delay, self._after_entry_changed)
+                GLib.source_remove(self._entry_timeout_id)
+
+            self._entry_timeout_id = GLib.timeout_add(self._search_delay, self._after_entry_changed)
 
     def _after_entry_changed(self):
 
@@ -589,6 +601,10 @@ class IconBrowserRow(Adw.PreferencesRow):
         else:
 
             self.set_active(False)
+
+    def _connect_icon_finder_changed(self):
+
+        self._icon_finder.hook("changed", self._on_icon_finder_changed)
 
     def _update_search_data(self):
 
@@ -1605,6 +1621,10 @@ class ComboRow(Adw.ActionRow):
 
         self._icon_finder.hook("changed", self._on_icon_finder_changed)
 
+        self._popover_active = False
+
+        self._focus_button = None
+
         self._buttons = {}
 
         try:
@@ -1631,6 +1651,10 @@ class ComboRow(Adw.ActionRow):
 
         self._popover.add_css_class("menu")
 
+        self._popover.connect("show", self._on_popover_show)
+
+        self._popover.connect("hide", self._on_popover_hide)
+
         self._popover.set_child(self._list_box)
 
         self._menu_button = Gtk.MenuButton()
@@ -1651,6 +1675,30 @@ class ComboRow(Adw.ActionRow):
 
         self.set_activatable(True)
 
+    def _on_popover_show(self, popover):
+
+        visible_children = self._get_visible_children()
+
+        if self._focus_button in visible_children:
+
+            self._focus_button.grab_focus()
+
+        elif len(visible_children):
+
+            self._list_box.get_first_child().grab_focus()
+
+        self._popover_active = True
+
+    def _on_popover_hide(self, popover):
+
+        for button in self._get_visible_children():
+
+            if button.has_focus():
+
+                self._focus_button = button
+
+        self._popover_active = False
+
     def _on_icon_finder_changed(self, event, icon_finder):
 
         GLib.idle_add(self._update_buttons_icon_names)
@@ -1666,6 +1714,8 @@ class ComboRow(Adw.ActionRow):
         self._events.trigger("item-selected", row.name, row.label.get_text())
 
     def _on_flow_row_text_changed(self, event, child, data):
+
+        self._focus_button = None
 
         GLib.idle_add(self._update_buttons_icon_names)
 
@@ -1733,27 +1783,73 @@ class ComboRow(Adw.ActionRow):
 
             tags[text].set_icon_name(buttons[text].image.get_icon_name())
 
+    def _get_visible_children(self):
+
+        children = []
+
+        child = self._list_box.get_first_child()
+
+        for name in self._buttons:
+
+            if child.get_visible():
+
+                children.append(child)
+
+            child = child.get_next_sibling()
+
+        else:
+
+            return children
+
     def _update_buttons_sensitive(self):
 
         tag_texts = [tag.get_text() for tag in self._flow_row.get_tags()]
 
-        buttons_added = []
-
         for name in self._buttons:
 
-            buttons_added.append(self._buttons[name].label.get_text() in tag_texts)
+            button = self._buttons[name]
 
-            self._buttons[name].set_visible(not buttons_added[-1])
+            should_be_visible = not button.label.get_text() in tag_texts
+
+            if should_be_visible and not button.get_visible():
+
+                button.set_visible(True)
+
+            elif not should_be_visible and button.get_visible():
+
+                index = self._get_visible_children().index(button)
+
+                button.set_visible(False)
+
+                visible_children = self._get_visible_children()
+
+                if len(visible_children) and self._popover_active:
+
+                    if index == 0:
+
+                        button = visible_children[0]
+
+                    elif (index) < len(visible_children):
+
+                        button = visible_children[index]
+
+                    else:
+
+                        button = visible_children[-1]
+
+                    button.grab_focus()
+
+        visible_children = self._get_visible_children()
+
+        if len(visible_children):
+
+            self._menu_button.set_sensitive(True)
 
         else:
 
-            buttons_remaining = False in buttons_added
+            self._menu_button.set_sensitive(False)
 
-            self._menu_button.set_sensitive(buttons_remaining)
-
-            if not buttons_remaining:
-
-                self._menu_button.popdown()
+            self._menu_button.popdown()
 
     def add_button(self, name, text, icon_name=None):
 
@@ -1931,7 +2027,7 @@ class TaggedRowTag(Gtk.FlowBoxChild):
 
         self._show_warning = False
 
-        self._tag_dark_css_class = "background" #FIXME
+        self._tag_dark_css_class = "background"
 
         self._icon_image = Gtk.Image()
 
@@ -2281,24 +2377,6 @@ class TaggedFlowRow(Adw.PreferencesRow):
 
         if self._entry_row:
 
-            #FIXME
-
-            """
-
-            try:
-
-                edit_gizmo = self._entry_row.get_child().get_first_child().get_next_sibling()
-
-                edit_image = edit_gizmo.get_next_sibling().get_next_sibling().get_next_sibling()
-
-                edit_image.set_from_icon_name(self._entry_row_default_values["icon-name"])
-
-            except AttributeError:
-
-                pass
-
-            """
-
             for connection_id in self._entry_row_connection_ids:
 
                 self._entry_row.disconnect(connection_id)
@@ -2310,26 +2388,6 @@ class TaggedFlowRow(Adw.PreferencesRow):
         self._entry_row_default_values["show-apply-button"] = entry_row.get_show_apply_button()
 
         entry_row.set_show_apply_button(True)
-
-        #FIXME
-
-        """
-
-        try:
-
-            edit_gizmo = entry_row.get_child().get_first_child().get_next_sibling()
-
-            edit_image = edit_gizmo.get_next_sibling().get_next_sibling().get_next_sibling()
-
-            self._entry_row_default_values["icon-name"] = edit_image.get_icon_name()
-
-            edit_image.set_from_icon_name(self._icon_finder.get_name("list-add-symbolic"))
-
-        except AttributeError:
-
-            pass
-
-        """
 
         self._entry_row_connection_ids.append(entry_row.connect("apply", self._on_entry_row_apply))
 

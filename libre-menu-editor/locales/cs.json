@@ -1,0 +1,128 @@
+{
+
+  "APPLICATION_NAME": "Hlavní menu",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Nepojmenovaná aplikace",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Nepojmenovaná akce",
+
+  "GREETER_PAGE_HEAD": "Informace",
+  "GREETER_PAGE_BODY": "Tento program upravuje konfigurační soubory, které nejsou určeny k úpravě uživatelem. Na některých systémech se proto může stát, že některá nastavení budou viditelná dlouho nebo až po opětovném přihlášení",
+  "GREETER_PAGE_BUTTON_LABEL": "Pokračovat",
+
+  "START_PAGE_HEAD": "Přizpůsobit menu",
+  "START_PAGE_BODY": "Vytvořte nový launcher aplikace nebo vyberte existující z bočního panelu",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Otevřít",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Zrušit",
+
+  "INSTALL_DIALOG_HEAD": "Instalace",
+  "INSTALL_DIALOG_BODY": "Chcete přidat tuto aplikaci do hlavního menu?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Vrátit",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Uložit",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Instalovat",
+
+  "DISCARD_DIALOG_HEAD": "Neuložené změny",
+  "DISCARD_DIALOG_BODY": "Chcete zahodit změny?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Vrátit",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Uložit",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Zahodit",
+
+  "RESET_DIALOG_HEAD": "Reset",
+  "RESET_DIALOG_BODY": "Chcete resetovat tuto aplikaci? Tato akce nelze vrátit zpět",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Vrátit",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Pokračovat",
+
+  "DELETE_DIALOG_HEAD": "Smazat",
+  "DELETE_DIALOG_BODY": "Chcete smazat tuto aplikaci? Tato akce nelze vrátit zpět",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Vrátit",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Pokračovat",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Zobrazit skryté",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Nový launcher",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Otevřít launcher",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Upravit dokument",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Reset launcher",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Smazat launcher",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Zahodit launcher",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Klávesové zkratky",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "O této aplikaci",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Hledat launcher",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Zobrazit skryté",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Ukončit aplikaci",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Zobrazit klávesové zkratky",
+  "SHOW_MENU_SHORTCUT_TEXT": "Otevřít menu",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Uložit změny",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Zahodit změny",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Odstranit změny",
+  "NEW_STARTER_SHORTCUT_TEXT": "Nový launcher",
+  "EDIT_FILE_SHORTCUT_TEXT": "Upravit dokument",
+  "OPEN_FILE_SHORTCUT_TEXT": "Otevřít launcher",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Upravit",
+  "FIND_SHORTCUT_GROUP_TITLE": "Hledat",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Obecné",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Vybrat ikonu",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Vybrat spustitelný soubor",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Vybrat adresář",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Vybrat launcher",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Uložit",
+
+  "BANNER_LABEL_TEXT": "Vyberte akce, které chcete smazat",
+  "BANNER_CANCEL_BUTTON_LABEL": "Hotovo",
+
+  "APPEARANCE_GROUP_TITLE": "Vzhled",
+  "DESCRIPTION_GROUP_TITLE": "Popis",
+  "DISCOVERY_GROUP_TITLE": "Hledání",
+  "EXECUTION_GROUP_TITLE": "Provedení",
+  "ACTIONS_GROUP_TITLE": "Akce",
+  "VISIBLE_GROUP_TITLE": "Viditelnost",
+
+  "ICON_CHOOSER_ROW_TITLE": "Ikona",
+  "NAME_ENTRY_ROW_TITLE": "Název",
+  "COMMENT_ENTRY_ROW_TITLE": "Komentář",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Klíčová slova",
+  "COMMAND_CHOOSER_ROW_TITLE": "Příkaz",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Prováděcí adresář",
+  "VISIBLE_SWITCH_ROW_TITLE": "Zobrazit tuto aplikaci v hlavním menu",
+  "CATEGORIES_COMBO_ROW_TITLE": "Tradiční kategorie menu aplikace",
+  "NOTIFY_SWITCH_ROW_TITLE": "Zobrazit animaci, dokud aplikace není viditelná",
+  "TERMINAL_SWITCH_ROW_TITLE": "Zobrazit terminál během provádění",
+
+  "LINK_CONVERTER_ROW_LABEL": "Převést odkaz na příkaz",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimédia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Vývoj",
+  "EDUCATION_CATEGORY_LABEL": "Vzdělávání",
+  "GAME_CATEGORY_LABEL": "Hry",
+  "GRAPHICS_CATEGORY_LABEL": "Grafika",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Kancelář",
+  "SCIENCE_CATEGORY_LABEL": "Věda",
+  "SETTINGS_CATEGORY_LABEL": "Nastavení",
+  "SYSTEM_CATEGORY_LABEL": "Systém",
+  "UTILITY_CATEGORY_LABEL": "Příslušenství",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Nepodařilo se načíst %s souborů",
+  "LOAD_SINGLE_ERROR_TEXT": "Nepodařilo se načíst soubor '%s'",
+  "OPEN_FILE_ERROR_TEXT": "Nepodařilo se otevřít konfigurace",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Konfigurace pro '%s' byly uloženy",
+  "STARTER_SAVE_ERROR_TEXT": "Nepodařilo se uložit konfigurace",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Launcher pro '%s' byl vytvořen",
+  "STARTER_CREATE_ERROR_TEXT": "Nepodařilo se vytvořit launcher",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Launcher pro '%s' byl resetován",
+  "STARTER_RESET_ERROR_TEXT": "Nepodařilo se resetovat launcher",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "Launcher pro '%s' byl smazán",
+  "STARTER_DELETE_ERROR_TEXT": "Nepodařilo se smazat launcher",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "Launcher pro '%s' byl odebrán"
+
+}

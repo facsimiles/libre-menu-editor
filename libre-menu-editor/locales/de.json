@@ -6,7 +6,7 @@
   "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Unbenannte Aktion",
 
   "GREETER_PAGE_HEAD": "Information",
-  "GREETER_PAGE_BODY": "Dieses Programm verändert Konfigurationsdateien die nicht zur nachträglichen Änderung vorgesehen sind. Auf manchen Systemen kann es daher vorkommen, dass einige Änderungen erst nach langer Zeit oder nach erneuter Benutzeranmeldung sichtbar werden",
+  "GREETER_PAGE_BODY": "Dieses Programm verändert Konfigurationsdateien die nicht für eine Änderung durch den Benutzer vorgesehen sind. Auf manchen Systemen kann es daher vorkommen, dass einige Änderungen erst nach langer Zeit oder erneuter Benutzeranmeldung sichtbar werden",
   "GREETER_PAGE_BUTTON_LABEL": "Verstanden",
 
   "START_PAGE_HEAD": "Das Menü bearbeiten",
@@ -45,7 +45,7 @@
   "DELETE_STARTER_MENU_BUTTON_LABEL": "Starter löschen",
   "DISCARD_STARTER_MENU_BUTTON_LABEL": "Starter verwerfen",
   "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Tastenkürzel",
-  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Über Hauptmenü",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Über diese App",
 
   "TOGGLE_SEARCH_SHORTCUT_TEXT": "Starter durchsuchen",
   "SHOW_HIDDEN_SHORTCUT_TEXT": "Versteckte zeigen",
@@ -86,10 +86,10 @@
   "NAME_ENTRY_ROW_TITLE": "Name",
   "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
   "KEYWORDS_ENTRY_ROW_TITLE": "Suchbegriffe",
-  "CATEGORIES_COMBO_ROW_TITLE": "Traditionelle Menükategorien der Anwendung",
   "COMMAND_CHOOSER_ROW_TITLE": "Befehl",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Arbeitsverzeichnis",
   "VISIBLE_SWITCH_ROW_TITLE": "Anwendung im Hauptmenü anzeigen",
+  "CATEGORIES_COMBO_ROW_TITLE": "Traditionelle Menükategorien der Anwendung",
   "NOTIFY_SWITCH_ROW_TITLE": "Startanimation abspielen bis die Anwendung sichtbar ist",
   "TERMINAL_SWITCH_ROW_TITLE": "Konsolenfenster während der Ausführung anzeigen",
 

@@ -6,7 +6,7 @@
   "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Azione senza nome",
 
   "GREETER_PAGE_HEAD": "Informazioni",
-  "GREETER_PAGE_BODY": "Questo programma modifica i file di configurazione che non sono destinati alle modifiche successive. Su alcuni sistemi può quindi accadere che alcune modifiche diventino visibili solo dopo molto tempo o dopo che l'utente ha effettuato nuovamente l'accesso",
+  "GREETER_PAGE_BODY": "Questo programma modifica file di configurazione che non sono progettati per essere modificati dall'utente. In alcuni sistemi, potrebbe accadere che alcuni cambiamenti siano visibili solo dopo un lungo periodo di tempo o dopo che l'utente si è riconnesso",
   "GREETER_PAGE_BUTTON_LABEL": "Continua",
 
   "START_PAGE_HEAD": "Modifica il menù",
@@ -86,10 +86,10 @@
   "NAME_ENTRY_ROW_TITLE": "Nome",
   "COMMENT_ENTRY_ROW_TITLE": "Commento",
   "KEYWORDS_ENTRY_ROW_TITLE": "Parole chiave",
-  "CATEGORIES_COMBO_ROW_TITLE": "Categorie di menu tradizionali dell'applicazione",
   "COMMAND_CHOOSER_ROW_TITLE": "Comando",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Directory",
   "VISIBLE_SWITCH_ROW_TITLE": "Mostra questa applicazione nel menu principale",
+  "CATEGORIES_COMBO_ROW_TITLE": "Categorie di menu tradizionali dell'applicazione",
   "NOTIFY_SWITCH_ROW_TITLE": "Mostra un'animazione fino a quando l'applicazione non è visibile",
   "TERMINAL_SWITCH_ROW_TITLE": "Mostra una finestra terminale durante l'esecuzione",
 

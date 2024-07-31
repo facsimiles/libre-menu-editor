@@ -1,0 +1,128 @@
+{
+
+  "APPLICATION_NAME": "Aðalvalmynd",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Ónefnt forrit",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Ónefnt aðgerð",
+
+  "GREETER_PAGE_HEAD": "Upplýsingar",
+  "GREETER_PAGE_BODY": "Þessi forrit breytir skráum sem eru ekki ætlaðar til að vera breyttar af notendum. Á sumum kerfum getur það því verið að sumar breytingar verði ekki sjáanlegar fyrr en eftir lengri tíma eða eftir að notandi hefur skráð sig inn aftur",
+  "GREETER_PAGE_BUTTON_LABEL": "Halda áfram",
+
+  "START_PAGE_HEAD": "Sérsníða valmyndina",
+  "START_PAGE_BODY": "Búðu til nýjan Launcher eða veldu einn sem er nú þegar í hliðarstiku",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Opna",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Hætta við",
+
+  "INSTALL_DIALOG_HEAD": "Uppsetning",
+  "INSTALL_DIALOG_BODY": "Viltu bæta þessu forriti við aðalvalmyndina?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Bak",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Vista",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Setja upp",
+
+  "DISCARD_DIALOG_HEAD": "Óvistaðar breytingar",
+  "DISCARD_DIALOG_BODY": "Viltu hunsa breytingarnar?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Bak",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Vista",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Hunsa",
+
+  "RESET_DIALOG_HEAD": "Endurstilla",
+  "RESET_DIALOG_BODY": "Viltu endurstilla þetta forrit? Þessi aðgerð getur ekki verið afturkölluð",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Bak",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Halda áfram",
+
+  "DELETE_DIALOG_HEAD": "Eyða",
+  "DELETE_DIALOG_BODY": "Viltu eyða þessu forriti? Þessi aðgerð getur ekki verið afturkölluð",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Bak",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Halda áfram",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Sýna falda",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Nýr Launcher",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Opna Launcher",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Breyta skjali",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Endurstilla Launcher",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Eyða Launcher",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Hunsa Launcher",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Flýtilykla",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Um þessa forrit",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Leita að Launchers",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Sýna falda",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Lokaðu forritinu",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Sýna lyklaborðsstuttir",
+  "SHOW_MENU_SHORTCUT_TEXT": "Opna valmynd",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Vista breytingar",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Hunsa breytingar",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Fjarlægja breytingar",
+  "NEW_STARTER_SHORTCUT_TEXT": "Nýr Launcher",
+  "EDIT_FILE_SHORTCUT_TEXT": "Breyta skjali",
+  "OPEN_FILE_SHORTCUT_TEXT": "Opna Launcher",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Breyta",
+  "FIND_SHORTCUT_GROUP_TITLE": "Finna",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Almennt",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Veldu tákn",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Veldu keyrslu skrána",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Veldu möppu",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Veldu Launcher",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Vista",
+
+  "BANNER_LABEL_TEXT": "Veldu aðgerðirnar sem þú vilt eyða",
+  "BANNER_CANCEL_BUTTON_LABEL": "Lokið",
+
+  "APPEARANCE_GROUP_TITLE": "Útlit",
+  "DESCRIPTION_GROUP_TITLE": "Lýsing",
+  "DISCOVERY_GROUP_TITLE": "Leit",
+  "EXECUTION_GROUP_TITLE": "Framkvæmd",
+  "ACTIONS_GROUP_TITLE": "Aðgerðir",
+  "VISIBLE_GROUP_TITLE": "Sjáanleiki",
+
+  "ICON_CHOOSER_ROW_TITLE": "Tákn",
+  "NAME_ENTRY_ROW_TITLE": "Nafn",
+  "COMMENT_ENTRY_ROW_TITLE": "Athugasemd",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Leitarorð",
+  "COMMAND_CHOOSER_ROW_TITLE": "Skipun",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Möppa",
+  "VISIBLE_SWITCH_ROW_TITLE": "Sýna þetta forrit í aðalvalmyndinni",
+  "CATEGORIES_COMBO_ROW_TITLE": "Hefðbundnar valmyndarflokkar forritsins",
+  "NOTIFY_SWITCH_ROW_TITLE": "Sýna animation þar til forritið er sjáanlegt",
+  "TERMINAL_SWITCH_ROW_TITLE": "Sýna terminalglugga á meðan keyrslu fer fram",
+
+  "LINK_CONVERTER_ROW_LABEL": "Umbreyta hlekk í skipun",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Margmiðlun",
+  "DEVELOPMENT_CATEGORY_LABEL": "Þróun",
+  "EDUCATION_CATEGORY_LABEL": "Menntun",
+  "GAME_CATEGORY_LABEL": "Leikir",
+  "GRAPHICS_CATEGORY_LABEL": "Grafík",
+  "NETWORK_CATEGORY_LABEL": "Netkerfi",
+  "OFFICE_CATEGORY_LABEL": "Skrifstofu",
+  "SCIENCE_CATEGORY_LABEL": "Vísindi",
+  "SETTINGS_CATEGORY_LABEL": "Stillingar",
+  "SYSTEM_CATEGORY_LABEL": "Kerfi",
+  "UTILITY_CATEGORY_LABEL": "Veitur",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Gat ekki hlaðið %s skrám",
+  "LOAD_SINGLE_ERROR_TEXT": "Gat ekki hlaðið skrá '%s'",
+  "OPEN_FILE_ERROR_TEXT": "Gat ekki opið stillingar",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Stillingar fyrir '%s' hafa verið vistaðar",
+  "STARTER_SAVE_ERROR_TEXT": "Gat ekki vistað stillingar",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Launcher fyrir '%s' hefur verið búinn til",
+  "STARTER_CREATE_ERROR_TEXT": "Gat ekki búið til Launcher",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Launcher fyrir '%s' hefur verið endurstilltur",
+  "STARTER_RESET_ERROR_TEXT": "Gat ekki endurstillt Launcher",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "Launcher fyrir '%s' hefur verið eytt",
+  "STARTER_DELETE_ERROR_TEXT": "Gat ekki eytt Launcher",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "Launcher fyrir '%s' hefur verið fjarlægður"
+
+}

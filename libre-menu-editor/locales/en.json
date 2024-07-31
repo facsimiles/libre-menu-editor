@@ -6,7 +6,7 @@
   "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Unnamed Action",
 
   "GREETER_PAGE_HEAD": "Information",
-  "GREETER_PAGE_BODY": "This program changes configuration files that are not intended for subsequent change. On some systems it can therefore happen that some changes will only become visible after a long time or after the user logs in again",
+  "GREETER_PAGE_BODY": "This program changes configuration files that are not designed to be edited by the user. On some systems it can therefore happen that some changes will only become visible after a long time or after the user logs in again",
   "GREETER_PAGE_BUTTON_LABEL": "Continue",
 
   "START_PAGE_HEAD": "Customize the menu",
@@ -86,10 +86,10 @@
   "NAME_ENTRY_ROW_TITLE": "Name",
   "COMMENT_ENTRY_ROW_TITLE": "Comment",
   "KEYWORDS_ENTRY_ROW_TITLE": "Keywords",
-  "CATEGORIES_COMBO_ROW_TITLE": "Traditional menu categories of the application",
   "COMMAND_CHOOSER_ROW_TITLE": "Command",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Directory",
   "VISIBLE_SWITCH_ROW_TITLE": "Show this application in the main menu",
+  "CATEGORIES_COMBO_ROW_TITLE": "Traditional menu categories of the application",
   "NOTIFY_SWITCH_ROW_TITLE": "Show an animation until the application is visible",
   "TERMINAL_SWITCH_ROW_TITLE": "Show a terminal window during execution",
 

@@ -1,0 +1,128 @@
+{
+
+  "APPLICATION_NAME": "Hovedmeny",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Ikke navngitt applikasjon",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Ikke navngitt handling",
+
+  "GREETER_PAGE_HEAD": "Informasjon",
+  "GREETER_PAGE_BODY": "Dette programmet endrer konfigurasjonsfiler som ikke er ment å redigeres av brukeren. På noen systemer kan det derfor hende at noen endringer ikke blir synlige før etter en lang tid eller etter at brukeren logger inn igjen",
+  "GREETER_PAGE_BUTTON_LABEL": "Fortsett",
+
+  "START_PAGE_HEAD": "Tilpass menyen",
+  "START_PAGE_BODY": "Opprett en ny applikasjonsstarter eller velg en eksisterende fra sidelisten",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Åpne",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Avbryt",
+
+  "INSTALL_DIALOG_HEAD": "Installasjon",
+  "INSTALL_DIALOG_BODY": "Ønsker du å legge til denne applikasjonen i hovedmenyen?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Tilbake",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Lagre",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Installer",
+
+  "DISCARD_DIALOG_HEAD": "Ulagrede endringer",
+  "DISCARD_DIALOG_BODY": "Ønsker du å forkaste endringene?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Tilbake",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Lagre",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Forkast",
+
+  "RESET_DIALOG_HEAD": "Tilbakestill",
+  "RESET_DIALOG_BODY": "Ønsker du å tilbakestille denne applikasjonen? Dette kan ikke angres",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Tilbake",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Fortsett",
+
+  "DELETE_DIALOG_HEAD": "Slett",
+  "DELETE_DIALOG_BODY": "Ønsker du å slette denne applikasjonen? Dette kan ikke angres",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Tilbake",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Fortsett",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Vis skjulte",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Ny starter",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Åpne starter",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Rediger dokument",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Tilbakestill starter",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Slett starter",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Forkast starter",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Tastatursnarveier",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Om denne appen",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Søk startere",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Vis skjulte",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Avslutt applikasjon",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Vis tastatursnarveier",
+  "SHOW_MENU_SHORTCUT_TEXT": "Åpne meny",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Lagre endringer",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Forkast endringer",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Fjern endringer",
+  "NEW_STARTER_SHORTCUT_TEXT": "Ny starter",
+  "EDIT_FILE_SHORTCUT_TEXT": "Rediger dokument",
+  "OPEN_FILE_SHORTCUT_TEXT": "Åpne starter",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Rediger",
+  "FIND_SHORTCUT_GROUP_TITLE": "Finn",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Generelt",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Velg ikon",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Velg kjørbar fil",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Velg mappe",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Velg starter",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Lagre",
+
+  "BANNER_LABEL_TEXT": "Velg handlingene du ønsker å slette",
+  "BANNER_CANCEL_BUTTON_LABEL": "Ferdig",
+
+  "APPEARANCE_GROUP_TITLE": "Utseende",
+  "DESCRIPTION_GROUP_TITLE": "Beskrivelse",
+  "DISCOVERY_GROUP_TITLE": "Søk",
+  "EXECUTION_GROUP_TITLE": "Henrettelse",
+  "ACTIONS_GROUP_TITLE": "Handlinger",
+  "VISIBLE_GROUP_TITLE": "Synlighet",
+
+  "ICON_CHOOSER_ROW_TITLE": "Ikon",
+  "NAME_ENTRY_ROW_TITLE": "Navn",
+  "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Nøkkelord",
+  "COMMAND_CHOOSER_ROW_TITLE": "Kommando",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Mappe",
+  "VISIBLE_SWITCH_ROW_TITLE": "Vis denne applikasjonen i hovedmenyen",
+  "CATEGORIES_COMBO_ROW_TITLE": "Tradisjonelle menukategorier for applikasjonen",
+  "NOTIFY_SWITCH_ROW_TITLE": "Vis en animasjon til applikasjonen er synlig",
+  "TERMINAL_SWITCH_ROW_TITLE": "Vis et terminalvindu under utførelse",
+
+  "LINK_CONVERTER_ROW_LABEL": "Konverter lenke til kommando",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimedia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Utvikling",
+  "EDUCATION_CATEGORY_LABEL": "Utdanning",
+  "GAME_CATEGORY_LABEL": "Spill",
+  "GRAPHICS_CATEGORY_LABEL": "Grafikk",
+  "NETWORK_CATEGORY_LABEL": "Internett",
+  "OFFICE_CATEGORY_LABEL": "Kontor",
+  "SCIENCE_CATEGORY_LABEL": "Vitenskap",
+  "SETTINGS_CATEGORY_LABEL": "Innstillinger",
+  "SYSTEM_CATEGORY_LABEL": "System",
+  "UTILITY_CATEGORY_LABEL": "Tilbehør",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Kunne ikke laste %s filer",
+  "LOAD_SINGLE_ERROR_TEXT": "Kunne ikke laste fil '%s'",
+  "OPEN_FILE_ERROR_TEXT": "Kunne ikke åpne konfigurasjoner",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Konfigurasjoner for '%s' er lagret",
+  "STARTER_SAVE_ERROR_TEXT": "Kunne ikke lagre konfigurasjoner",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Starter for '%s' er opprettet",
+  "STARTER_CREATE_ERROR_TEXT": "Kunne ikke opprette starter",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Starter for '%s' er tilbakestilt",
+  "STARTER_RESET_ERROR_TEXT": "Kunne ikke tilbakestille starter",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "Starter for '%s' er slettet",
+  "STARTER_DELETE_ERROR_TEXT": "Kunne ikke slette starter",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "Starter for '%s' er fjernet"
+
+}

@@ -1,0 +1,128 @@
+{
+
+  "APPLICATION_NAME": "Päävalikko",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Nimeämätön sovellus",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Nimeämätön toiminta",
+
+  "GREETER_PAGE_HEAD": "Tiedot",
+  "GREETER_PAGE_BODY": "Tämä ohjelma muokkaa asetustiedostoja, joita ei ole suunniteltu käyttäjän muokattavaksi. Tästä syystä joissakin järjestelmissä saattaa käydä niin, että jotkin muutokset näkyvät vasta pitkään aikaan tai käyttäjän uudelleen kirjautumisen jälkeen",
+  "GREETER_PAGE_BUTTON_LABEL": "Jatkaa",
+
+  "START_PAGE_HEAD": "Mukauta valikkoa",
+  "START_PAGE_BODY": "Luo uusi ohjelman launcher tai valitse olemassa oleva sivupalkista",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Avaa",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Peruuta",
+
+  "INSTALL_DIALOG_HEAD": "Asennus",
+  "INSTALL_DIALOG_BODY": "Haluatko lisätä tämän sovelluksen päävalikkoon?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Takaisin",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Tallenna",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Asenna",
+
+  "DISCARD_DIALOG_HEAD": "Tallentamattomat muutokset",
+  "DISCARD_DIALOG_BODY": "Haluatko hylätä muutokset?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Takaisin",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Tallenna",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Hylkää",
+
+  "RESET_DIALOG_HEAD": "Nollaa",
+  "RESET_DIALOG_BODY": "Haluatko nollata tämän sovelluksen? Tämä toiminta ei ole peruuttavissa",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Takaisin",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Jatkaa",
+
+  "DELETE_DIALOG_HEAD": "Poista",
+  "DELETE_DIALOG_BODY": "Haluatko poistaa tämän sovelluksen? Tämä toiminta ei ole peruuttavissa",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Takaisin",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Jatkaa",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Näytä piilotetut",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Uusi launcher",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Avaa launcher",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Muokkaa dokumenttia",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Nollaa launcher",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Poista launcher",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Hylkää launcher",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Näytä pikanäppäimet",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Tietoa tästä sovelluksesta",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Haku launchers",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Näytä piilotetut",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Lopeta sovellus",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Näytä lyhytkäskyt",
+  "SHOW_MENU_SHORTCUT_TEXT": "Avaa valikko",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Tallenna muutokset",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Hylkää muutokset",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Poista muutokset",
+  "NEW_STARTER_SHORTCUT_TEXT": "Uusi launcher",
+  "EDIT_FILE_SHORTCUT_TEXT": "Muokkaa dokumenttia",
+  "OPEN_FILE_SHORTCUT_TEXT": "Avaa launcher",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Muokkaa",
+  "FIND_SHORTCUT_GROUP_TITLE": "Etsi",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Yleinen",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Valitse kuvake",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Valitse suoritettava tiedosto",
+  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Valitse hakemisto",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Valitse launcher",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Tallenna",
+
+  "BANNER_LABEL_TEXT": "Valitse toiminnot, jotka haluat poistaa",
+  "BANNER_CANCEL_BUTTON_LABEL": "Valmis",
+
+  "APPEARANCE_GROUP_TITLE": "Ulkoasu",
+  "DESCRIPTION_GROUP_TITLE": "Kuvaus",
+  "DISCOVERY_GROUP_TITLE": "Löytö",
+  "EXECUTION_GROUP_TITLE": "Teloitus",
+  "ACTIONS_GROUP_TITLE": "Toiminnot",
+  "VISIBLE_GROUP_TITLE": "Näkyvyys",
+
+  "ICON_CHOOSER_ROW_TITLE": "Kuvake",
+  "NAME_ENTRY_ROW_TITLE": "Nimi",
+  "COMMENT_ENTRY_ROW_TITLE": "Kommentti",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Avainsanat",
+  "COMMAND_CHOOSER_ROW_TITLE": "Komento",
+  "DIRECTORY_CHOOSER_ROW_TITLE": "Teloitus hakemisto",
+  "VISIBLE_SWITCH_ROW_TITLE": "Näytä tämä sovellus päävalikossa",
+  "CATEGORIES_COMBO_ROW_TITLE": "Perinteiset valikkokategoriat sovellukselle",
+  "NOTIFY_SWITCH_ROW_TITLE": "Näytä animaatio, kunnes sovellus tulee näkyviin",
+  "TERMINAL_SWITCH_ROW_TITLE": "Näytä päätelaite, kun sovellus on käynnissä",
+
+  "LINK_CONVERTER_ROW_LABEL": "Muunna linkki komennoksi",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimedia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Kehitys",
+  "EDUCATION_CATEGORY_LABEL": "Koulutus",
+  "GAME_CATEGORY_LABEL": "Pelit",
+  "GRAPHICS_CATEGORY_LABEL": "Grafiikka",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Toimisto",
+  "SCIENCE_CATEGORY_LABEL": "Tiede",
+  "SETTINGS_CATEGORY_LABEL": "Asetukset",
+  "SYSTEM_CATEGORY_LABEL": "Järjestelmä",
+  "UTILITY_CATEGORY_LABEL": "Apuohjelmat",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Ei voitu ladata %s tiedostoja",
+  "LOAD_SINGLE_ERROR_TEXT": "Ei voitu ladata tiedostoa '%s'",
+  "OPEN_FILE_ERROR_TEXT": "Ei voitu avata asetuksia",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Asetukset '%s' tallennettiin",
+  "STARTER_SAVE_ERROR_TEXT": "Ei voitu tallentaa asetuksia",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "launcher '%s' luotiin",
+  "STARTER_CREATE_ERROR_TEXT": "Ei voitu luoda launcher",
+
+  "STARTER_RESET_MESSAGE_TEXT": "launcher '%s' palautettiin",
+  "STARTER_RESET_ERROR_TEXT": "Ei voitu palauttaa launcher",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "launcher '%s' poistettiin",
+  "STARTER_DELETE_ERROR_TEXT": "Ei voitu poistaa launcher",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "launcher '%s' poistettiin"
+
+}
