@@ -27,8 +27,8 @@
   "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Salvar",
   "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Descartar",
 
-  "RESET_DIALOG_HEAD": "Repor",
-  "RESET_DIALOG_BODY": "Você deseja repor essa aplicação? Essa ação não pode ser desfeita",
+  "RESET_DIALOG_HEAD": "Redefinir",
+  "RESET_DIALOG_BODY": "Você deseja redefinir essa aplicação? Essa ação não pode ser desfeita",
   "RESET_DIALOG_BACK_BUTTON_LABEL": "Voltar",
   "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Continuar",
 
@@ -41,7 +41,7 @@
   "NEW_STARTER_MENU_BUTTON_LABEL": "Novo lançador",
   "OPEN_FILE_MENU_BUTTON_LABEL": "Abrir lançador",
   "EDIT_FILE_MENU_BUTTON_LABEL": "Editar documento",
-  "RESET_STARTER_MENU_BUTTON_LABEL": "Repor lançador",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Redefinir lançador",
   "DELETE_STARTER_MENU_BUTTON_LABEL": "Excluir lançador",
   "DISCARD_STARTER_MENU_BUTTON_LABEL": "Descartar lançador",
   "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Atalhos de teclado",
@@ -118,7 +118,7 @@
   "STARTER_CREATE_ERROR_TEXT": "Falha ao criar lançador",
 
   "STARTER_RESET_MESSAGE_TEXT": "Lançador para '%s' foi redefinido",
-  "STARTER_RESET_ERROR_TEXT": "Falha ao repor lançador",
+  "STARTER_RESET_ERROR_TEXT": "Falha ao redefinir lançador",
 
   "STARTER_DELETE_MESSAGE_TEXT": "Lançador para '%s' foi excluído",
   "STARTER_DELETE_ERROR_TEXT": "Falha ao excluir lançador",
