@@ -21,7 +21,7 @@
   "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Spara",
   "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Installera",
 
-  "DISCARD_DIALOG_HEAD": "Ändringar som inte har sparats",
+  "DISCARD_DIALOG_HEAD": "Osparade ändringar",
   "DISCARD_DIALOG_BODY": "Vill du kassera ändringarna?",
   "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Tillbaka",
   "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Spara",

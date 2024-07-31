@@ -47,7 +47,7 @@
   "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Sneltoetsen weergeven",
   "SHOW_ABOUT_MENU_BUTTON_LABEL": "Over deze app",
 
-  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Launchers zoeken",
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Launcher zoeken",
   "SHOW_HIDDEN_SHORTCUT_TEXT": "Verborgen weergeven",
 
   "QUIT_APPLICATION_SHORTCUT_TEXT": "Applicatie afsluiten",
@@ -84,7 +84,7 @@
 
   "ICON_CHOOSER_ROW_TITLE": "Icoon",
   "NAME_ENTRY_ROW_TITLE": "Naam",
-  "COMMENT_ENTRY_ROW_TITLE": "Opmerking",
+  "COMMENT_ENTRY_ROW_TITLE": "Commentaar",
   "KEYWORDS_ENTRY_ROW_TITLE": "Trefwoorden",
   "COMMAND_CHOOSER_ROW_TITLE": "Commando",
   "DIRECTORY_CHOOSER_ROW_TITLE": "Map",

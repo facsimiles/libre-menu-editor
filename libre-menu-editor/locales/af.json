@@ -6,7 +6,7 @@
   "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Naamlose Aksie",
 
   "GREETER_PAGE_HEAD": "Informasie",
-  "GREETER_PAGE_BODY": "Hierdie program wysig konfigurasielêers wat nie deur die gebruiker geredigeer is nie. Op sommige stelsels kan dit gebeur dat sommige veranderinge eers na 'n lang tyd sal verskyn of nadat die gebruiker weer aangemeld het",
+  "GREETER_PAGE_BODY": "Hierdie program wysig konfigurasielêers wat nie ontwerp is om deur die gebruiker geredigeer te word nie. Op sommige stelsels kan dit gebeur dat sommige veranderinge eers na 'n lang tyd sal verskyn of nadat die gebruiker weer aangemeld het",
   "GREETER_PAGE_BUTTON_LABEL": "Voortgaan",
 
   "START_PAGE_HEAD": "Pas die menu aan",
@@ -66,7 +66,7 @@
   "GENERAL_SHORTCUT_GROUP_TITLE": "Algemeen",
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Kies ikoon",
-  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Kies uitvoerende lêer",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Kies uitvoerbare lêer",
   "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Kies directory",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Kies lanseerder",
 

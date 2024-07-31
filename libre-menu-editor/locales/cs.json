@@ -6,7 +6,7 @@
   "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Nepojmenovaná akce",
 
   "GREETER_PAGE_HEAD": "Informace",
-  "GREETER_PAGE_BODY": "Tento program upravuje konfigurační soubory, které nejsou určeny k úpravě uživatelem. Na některých systémech se proto může stát, že některá nastavení budou viditelná dlouho nebo až po opětovném přihlášení",
+  "GREETER_PAGE_BODY": "Tento program upravuje konfigurační soubory, které nejsou určeny k tomu, aby je uživatel upravoval. Na některých systémech se může stát, že se některé změny projeví až po delší době nebo po opětovném přihlášení",
   "GREETER_PAGE_BUTTON_LABEL": "Pokračovat",
 
   "START_PAGE_HEAD": "Přizpůsobit menu",

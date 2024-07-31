@@ -6,7 +6,7 @@
   "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Nimeämätön toiminta",
 
   "GREETER_PAGE_HEAD": "Tiedot",
-  "GREETER_PAGE_BODY": "Tämä ohjelma muokkaa asetustiedostoja, joita ei ole suunniteltu käyttäjän muokattavaksi. Tästä syystä joissakin järjestelmissä saattaa käydä niin, että jotkin muutokset näkyvät vasta pitkään aikaan tai käyttäjän uudelleen kirjautumisen jälkeen",
+  "GREETER_PAGE_BODY": "Tämä ohjelma muokkaa määritystiedostoja, joita ei ole suunniteltu käyttäjän muokkaukseen. Tästä syystä joissakin järjestelmissä jotkin muutokset voivat tulla voimaan vasta pitkän ajan kuluttua tai sen jälkeen, kun käyttäjä kirjautuu uudelleen sisään",
   "GREETER_PAGE_BUTTON_LABEL": "Jatkaa",
 
   "START_PAGE_HEAD": "Mukauta valikkoa",
