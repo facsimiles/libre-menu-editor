@@ -3328,7 +3328,15 @@ class Application(gui.Application):
 
     def _on_open_file_button_clicked(self, event):
 
-        self._check_unsaved_data(self._open_file_chooser_dialog.show)
+        self._check_unsaved_data(self._after_open_file_button_clicked)
+
+    def _after_open_file_button_clicked(self):
+
+        if self._current_desktop_starter_name:
+
+            self._load_settings_page(self._current_desktop_starter_name)
+
+        self._open_file_chooser_dialog.show()
 
     def _on_show_shortcuts_button_clicked(self, event):
 
@@ -3464,7 +3472,7 @@ class Application(gui.Application):
 
     def _focus_settings_page(self):
 
-        self._settings_page.grab_focus()
+        #FIXME: self._settings_page.grab_focus()
 
         if hasattr(self._main_split_layout, "set_show_content"):
 
