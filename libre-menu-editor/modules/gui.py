@@ -1653,7 +1653,7 @@ class ComboRow(Adw.ActionRow):
 
         self._popover.connect("show", self._on_popover_show)
 
-        self._popover.connect("hide", self._on_popover_hide)
+        self._popover.connect("closed", self._on_popover_closed)
 
         self._popover.set_child(self._list_box)
 
@@ -1689,7 +1689,7 @@ class ComboRow(Adw.ActionRow):
 
             visible_children[0].grab_focus()
 
-    def _on_popover_hide(self, popover):
+    def _on_popover_closed(self, popover):
 
         if self._menu_button.get_sensitive():
 
@@ -1717,7 +1717,7 @@ class ComboRow(Adw.ActionRow):
 
         self._events.trigger("item-selected", row.name, row.label.get_text())
 
-        GLib.idle_add(self._popover.popdown)
+        self._popover.popdown()
 
     def _on_flow_row_text_changed(self, event, child, data):
 
