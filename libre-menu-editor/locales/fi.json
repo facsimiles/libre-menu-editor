@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Valitse kuvake",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Valitse suoritettava tiedosto",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Valitse hakemisto",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Valitse launcher",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Tallenna",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Kommentti",
   "KEYWORDS_ENTRY_ROW_TITLE": "Avainsanat",
   "COMMAND_CHOOSER_ROW_TITLE": "Komento",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Teloitus hakemisto",
   "VISIBLE_SWITCH_ROW_TITLE": "Näytä tämä sovellus päävalikossa",
   "CATEGORIES_COMBO_ROW_TITLE": "Perinteiset valikkokategoriat sovellukselle",
   "NOTIFY_SWITCH_ROW_TITLE": "Näytä animaatio, kunnes sovellus tulee näkyviin",

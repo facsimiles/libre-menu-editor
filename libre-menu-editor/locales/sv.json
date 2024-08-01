@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Välj ikon",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Välj körbar fil",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Välj katalog",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Välj startare",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Spara",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
   "KEYWORDS_ENTRY_ROW_TITLE": "Nyckelord",
   "COMMAND_CHOOSER_ROW_TITLE": "Kommando",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Katalog",
   "VISIBLE_SWITCH_ROW_TITLE": "Visa den här applikationen i huvudmenyn",
   "CATEGORIES_COMBO_ROW_TITLE": "Traditionella menykategorier för applikationen",
   "NOTIFY_SWITCH_ROW_TITLE": "Visa en animation tills applikationen är synlig",

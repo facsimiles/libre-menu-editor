@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Kies ikoon",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Kies uitvoerbare lêer",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Kies directory",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Kies lanseerder",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Stoor",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Kommentaar",
   "KEYWORDS_ENTRY_ROW_TITLE": "Sleutelwoorde",
   "COMMAND_CHOOSER_ROW_TITLE": "Bevel",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Directory",
   "VISIBLE_SWITCH_ROW_TITLE": "Wys hierdie toepassing in die hoofmenu",
   "CATEGORIES_COMBO_ROW_TITLE": "Tradisionele menu-kategorieë van die toepassing",
   "NOTIFY_SWITCH_ROW_TITLE": "Wys 'n animasie tot die toepassing sigbaar is",

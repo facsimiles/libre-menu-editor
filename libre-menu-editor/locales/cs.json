@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Vybrat ikonu",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Vybrat spustitelný soubor",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Vybrat adresář",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Vybrat launcher",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Uložit",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Komentář",
   "KEYWORDS_ENTRY_ROW_TITLE": "Klíčová slova",
   "COMMAND_CHOOSER_ROW_TITLE": "Příkaz",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Prováděcí adresář",
   "VISIBLE_SWITCH_ROW_TITLE": "Zobrazit tuto aplikaci v hlavním menu",
   "CATEGORIES_COMBO_ROW_TITLE": "Tradiční kategorie menu aplikace",
   "NOTIFY_SWITCH_ROW_TITLE": "Zobrazit animaci, dokud aplikace není viditelná",

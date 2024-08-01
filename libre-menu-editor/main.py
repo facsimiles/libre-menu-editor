@@ -229,14 +229,6 @@ class DesktopParser():
 
         self._set("Exec", command, section=section)
 
-    def get_directory(self, section="Desktop Entry"):
-
-        return self._get_str("Path", section=section)
-
-    def set_directory(self, command, section="Desktop Entry"):
-
-        self._set("Path", command, section=section)
-
     def get_disabled(self, section="Desktop Entry"):
 
         return self._get_bool("Hidden", section=section)
@@ -1357,18 +1349,6 @@ class SettingsPage(Gtk.Box):
 
         self._link_converter_row.set_label(self._locale_manager.get("LINK_CONVERTER_ROW_LABEL"))
 
-        self._directory_chooser_row = gui.DirectoryChooserRow(self._application)
-
-        self._directory_chooser_row.set_title(self._locale_manager.get("DIRECTORY_CHOOSER_ROW_TITLE"))
-
-        self._directory_chooser_row.set_dialog_title(self._locale_manager.get("DIRECTORY_CHOOSER_ROW_DIALOG_TITLE"))
-
-        self._directory_chooser_row.set_dialog_accept_button_label(self._locale_manager.get("PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL"))
-
-        self._directory_chooser_row.set_dialog_cancel_button_label(self._locale_manager.get("PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL"))
-
-        self._directory_chooser_row.hook("text-changed", self._on_input_child_data_changed)
-
         self._execution_preferences_group = Adw.PreferencesGroup()
 
         self._execution_preferences_group.set_title(self._locale_manager.get("EXECUTION_GROUP_TITLE"))
@@ -1376,8 +1356,6 @@ class SettingsPage(Gtk.Box):
         self._execution_preferences_group.add(self._command_chooser_row)
 
         self._execution_preferences_group.add(self._link_converter_row)
-
-        #FIXME: self._execution_preferences_group.add(self._directory_chooser_row)
 
         ###############################################################################################################
 
@@ -1725,10 +1703,6 @@ class SettingsPage(Gtk.Box):
 
                 self._input_children_changes[child] = data == self._current_parser.get_command()
 
-            elif child == self._directory_chooser_row:
-
-                self._input_children_changes[child] = data == self._current_parser.get_directory()
-
             elif child == self._visible_switch_row:
 
                 self._input_children_changes[child] = data == self._current_parser.get_visible()
@@ -2025,8 +1999,6 @@ class SettingsPage(Gtk.Box):
 
         self._command_chooser_row.set_text(self._current_parser.get_command())
 
-        self._directory_chooser_row.set_text(self._current_parser.get_directory())
-
         self._visible_switch_row.set_active(self._current_parser.get_visible())
 
         self._notify_switch_row.set_active(self._current_parser.get_notify())
@@ -2077,8 +2049,6 @@ class SettingsPage(Gtk.Box):
 
         self._current_parser.set_command(self._command_chooser_row.get_text())
 
-        self._current_parser.set_directory(self._directory_chooser_row.get_text())
-
         self._current_parser.set_visible(self._visible_switch_row.get_active())
 
         self._current_parser.set_notify(self._notify_switch_row.get_active())
@@ -2128,8 +2098,6 @@ class SettingsPage(Gtk.Box):
             self._comment_entry_row.set_text("")
 
             self._command_chooser_row.set_text("")
-
-            self._directory_chooser_row.set_text("")
 
             self._visible_switch_row.set_active(False)
 

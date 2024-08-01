@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Velg ikon",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Velg kjørbar fil",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Velg mappe",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Velg starter",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Lagre",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
   "KEYWORDS_ENTRY_ROW_TITLE": "Nøkkelord",
   "COMMAND_CHOOSER_ROW_TITLE": "Kommando",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Mappe",
   "VISIBLE_SWITCH_ROW_TITLE": "Vis denne applikasjonen i hovedmenyen",
   "CATEGORIES_COMBO_ROW_TITLE": "Tradisjonelle menukategorier for applikasjonen",
   "NOTIFY_SWITCH_ROW_TITLE": "Vis en animasjon til applikasjonen er synlig",

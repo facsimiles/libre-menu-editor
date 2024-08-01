@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Виберіть іконку",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Виберіть виконуваний файл",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Виберіть директорію",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Виберіть стартер",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Зберегти",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Коментар",
   "KEYWORDS_ENTRY_ROW_TITLE": "Ключові слова",
   "COMMAND_CHOOSER_ROW_TITLE": "Команда",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Директорія",
   "VISIBLE_SWITCH_ROW_TITLE": "Показати це програмне забезпечення в головному меню",
   "CATEGORIES_COMBO_ROW_TITLE": "Традиційні категорії меню програми",
   "NOTIFY_SWITCH_ROW_TITLE": "Показати анімацію до тих пір, поки програмне забезпечення не стане видимим",

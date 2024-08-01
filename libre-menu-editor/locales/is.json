@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Veldu tákn",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Veldu keyrslu skrána",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Veldu möppu",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Veldu Launcher",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Vista",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Athugasemd",
   "KEYWORDS_ENTRY_ROW_TITLE": "Leitarorð",
   "COMMAND_CHOOSER_ROW_TITLE": "Skipun",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Möppa",
   "VISIBLE_SWITCH_ROW_TITLE": "Sýna þetta forrit í aðalvalmyndinni",
   "CATEGORIES_COMBO_ROW_TITLE": "Hefðbundnar valmyndarflokkar forritsins",
   "NOTIFY_SWITCH_ROW_TITLE": "Sýna animation þar til forritið er sjáanlegt",

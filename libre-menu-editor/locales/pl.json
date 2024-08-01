@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Wybierz ikonę",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Wybierz plik wykonywalny",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Wybierz folder",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Wybierz launcher",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Zapisz",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Komentarz",
   "KEYWORDS_ENTRY_ROW_TITLE": "Słowa kluczowe",
   "COMMAND_CHOOSER_ROW_TITLE": "Komenda",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Folder",
   "VISIBLE_SWITCH_ROW_TITLE": "Pokaż tę aplikację w menu głównym",
   "CATEGORIES_COMBO_ROW_TITLE": "Tradycyjne kategorie menu aplikacji",
   "NOTIFY_SWITCH_ROW_TITLE": "Pokaż animację, dopóki aplikacja będzie widoczna",

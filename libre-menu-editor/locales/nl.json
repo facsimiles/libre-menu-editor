@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Icoon kiezen",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Uitvoerbaar bestand kiezen",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Map kiezen",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Launcher kiezen",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Opslaan",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Commentaar",
   "KEYWORDS_ENTRY_ROW_TITLE": "Trefwoorden",
   "COMMAND_CHOOSER_ROW_TITLE": "Commando",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Map",
   "VISIBLE_SWITCH_ROW_TITLE": "Toon deze applicatie in het hoofdmenu",
   "CATEGORIES_COMBO_ROW_TITLE": "Traditionele menucategorieën van de applicatie",
   "NOTIFY_SWITCH_ROW_TITLE": "Toon een animatie totdat de applicatie zichtbaar is",

@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Choose icon",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Choose executable file",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Choose directory",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Choose launcher",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Save",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Comment",
   "KEYWORDS_ENTRY_ROW_TITLE": "Keywords",
   "COMMAND_CHOOSER_ROW_TITLE": "Command",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Directory",
   "VISIBLE_SWITCH_ROW_TITLE": "Show this application in the main menu",
   "CATEGORIES_COMBO_ROW_TITLE": "Traditional menu categories of the application",
   "NOTIFY_SWITCH_ROW_TITLE": "Show an animation until the application is visible",

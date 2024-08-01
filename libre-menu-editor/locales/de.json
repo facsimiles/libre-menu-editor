@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Symboldatei auswählen",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Ausführbare Datei auswählen",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Ordner auswählen",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Anwendungsstarter auswählen",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Speichern",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
   "KEYWORDS_ENTRY_ROW_TITLE": "Suchbegriffe",
   "COMMAND_CHOOSER_ROW_TITLE": "Befehl",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Arbeitsverzeichnis",
   "VISIBLE_SWITCH_ROW_TITLE": "Anwendung im Hauptmenü anzeigen",
   "CATEGORIES_COMBO_ROW_TITLE": "Traditionelle Menükategorien der Anwendung",
   "NOTIFY_SWITCH_ROW_TITLE": "Startanimation abspielen bis die Anwendung sichtbar ist",

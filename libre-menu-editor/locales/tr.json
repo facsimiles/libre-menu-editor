@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Simge Seç",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Yürütülebilir Dosyayı Seç",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Dizin Seç",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Başlatıcıyı Seç",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Kaydet",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Yorum",
   "KEYWORDS_ENTRY_ROW_TITLE": "Anahtar Kelimeler",
   "COMMAND_CHOOSER_ROW_TITLE": "Komut",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Dizin",
   "VISIBLE_SWITCH_ROW_TITLE": "Bu uygulamayı ana menüde göster",
   "CATEGORIES_COMBO_ROW_TITLE": "Uygulamanın geleneksel menü kategorileri",
   "NOTIFY_SWITCH_ROW_TITLE": "Uygulama görününceye kadar canlandırma göster",

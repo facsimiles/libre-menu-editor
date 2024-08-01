@@ -67,7 +67,6 @@
 
   "ICON_CHOOSER_ROW_DIALOG_TITLE": "Vælg ikon",
   "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Vælg eksekverbar fil",
-  "DIRECTORY_CHOOSER_ROW_DIALOG_TITLE": "Vælg mappe",
   "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Vælg starter",
 
   "SAVE_SETTINGS_BUTTON_LABEL": "Gem",
@@ -87,7 +86,6 @@
   "COMMENT_ENTRY_ROW_TITLE": "Kommentar",
   "KEYWORDS_ENTRY_ROW_TITLE": "Nøgleords",
   "COMMAND_CHOOSER_ROW_TITLE": "Kommando",
-  "DIRECTORY_CHOOSER_ROW_TITLE": "Mappe",
   "VISIBLE_SWITCH_ROW_TITLE": "Vis denne applikation i hovedmenuen",
   "CATEGORIES_COMBO_ROW_TITLE": "Traditionelle menukategorier for applikationen",
   "NOTIFY_SWITCH_ROW_TITLE": "Vis en animation, indtil applikationen er synlig",
