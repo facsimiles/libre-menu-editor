@@ -2188,7 +2188,7 @@ class Application(gui.Application):
 
             "edit-find-symbolic",
 
-            "{ignore_prefix}system-search-symbolic"
+            f"{ignore_prefix}system-search-symbolic"
 
             )
 
@@ -2196,7 +2196,7 @@ class Application(gui.Application):
 
             "document-open-symbolic",
 
-            "{ignore_prefix}document-open-symbolic"
+            f"{ignore_prefix}document-open-symbolic"
 
             )
 
@@ -2204,7 +2204,7 @@ class Application(gui.Application):
 
             "action-unavailable-symbolic",
 
-            "{ignore_prefix}action-unavailable-symbolic"
+            f"{ignore_prefix}action-unavailable-symbolic"
 
             )
 
@@ -2214,7 +2214,7 @@ class Application(gui.Application):
 
             "application-menu-symbolic",
 
-            "{ignore_prefix}open-menu-symbolic"
+            f"{ignore_prefix}open-menu-symbolic"
 
             )
 
@@ -2224,7 +2224,7 @@ class Application(gui.Application):
 
             "add-symbolic",
 
-            "{ignore_prefix}list-add-symbolic"
+            f"{ignore_prefix}list-add-symbolic"
 
             )
 
@@ -2234,7 +2234,7 @@ class Application(gui.Application):
 
             "remove-symbolic",
 
-            "{ignore_prefix}list-remove-symbolic"
+            f"{ignore_prefix}list-remove-symbolic"
 
             )
 
@@ -2242,7 +2242,7 @@ class Application(gui.Application):
 
             "view-refresh-symbolic",
 
-            "{ignore_prefix}view-refresh-symbolic"
+            f"{ignore_prefix}view-refresh-symbolic"
 
             )
 
@@ -2250,7 +2250,7 @@ class Application(gui.Application):
 
             "dialog-warning-symbolic",
 
-            "{ignore_prefix}dialog-warning-symbolic"
+            f"{ignore_prefix}dialog-warning-symbolic"
 
             )
 
@@ -2258,7 +2258,7 @@ class Application(gui.Application):
 
             "edit-find-replace-symbolic",
 
-            "{ignore_prefix}edit-find-replace-symbolic"
+            f"{ignore_prefix}edit-find-replace-symbolic"
 
             )
 
@@ -2266,7 +2266,7 @@ class Application(gui.Application):
 
             "system-run-symbolic",
 
-            "{ignore_prefix}system-run-symbolic"
+            f"{ignore_prefix}system-run-symbolic"
 
             )
 
@@ -2274,7 +2274,7 @@ class Application(gui.Application):
 
             "window-close-symbolic",
 
-            "{ignore_prefix}window-close-symbolic"
+            f"{ignore_prefix}window-close-symbolic"
 
             )
 
@@ -2282,7 +2282,7 @@ class Application(gui.Application):
 
             "page.codeberg.libre_menu_editor.LibreMenuEditor",
 
-            "{ignore_prefix}libre-menu-editor"
+            f"{ignore_prefix}libre-menu-editor"
 
             )
 
@@ -2290,7 +2290,7 @@ class Application(gui.Application):
 
             "applications-multimedia",
 
-            "{ignore_prefix}applications-multimedia"
+            f"{ignore_prefix}applications-multimedia"
 
             )
 
@@ -2298,7 +2298,7 @@ class Application(gui.Application):
 
             "applications-development",
 
-            "{ignore_prefix}applications-development"
+            f"{ignore_prefix}applications-development"
 
             )
 
@@ -2306,7 +2306,7 @@ class Application(gui.Application):
 
             "applications-education",
 
-            "{ignore_prefix}applications-education"
+            f"{ignore_prefix}applications-education"
 
             )
 
@@ -2314,7 +2314,7 @@ class Application(gui.Application):
 
             "applications-games",
 
-            "{ignore_prefix}applications-games"
+            f"{ignore_prefix}applications-games"
 
             )
 
@@ -2322,7 +2322,7 @@ class Application(gui.Application):
 
             "applications-graphics",
 
-            "{ignore_prefix}applications-graphics"
+            f"{ignore_prefix}applications-graphics"
 
             )
 
@@ -2332,7 +2332,7 @@ class Application(gui.Application):
 
             "applications-internet",
 
-            "{ignore_prefix}applications-network"
+            f"{ignore_prefix}applications-network"
 
             )
 
@@ -2340,7 +2340,7 @@ class Application(gui.Application):
 
             "applications-office",
 
-            "{ignore_prefix}applications-office"
+            f"{ignore_prefix}applications-office"
 
             )
 
@@ -2348,7 +2348,7 @@ class Application(gui.Application):
 
             "applications-science",
 
-            "{ignore_prefix}applications-science"
+            f"{ignore_prefix}applications-science"
 
             )
 
@@ -2358,7 +2358,7 @@ class Application(gui.Application):
 
             "preferences-system",
 
-            "{ignore_prefix}applications-settings"
+            f"{ignore_prefix}applications-settings"
 
             )
 
@@ -2366,7 +2366,7 @@ class Application(gui.Application):
 
             "applications-system",
 
-            "{ignore_prefix}applications-system"
+            f"{ignore_prefix}applications-system"
 
             )
 
@@ -2376,7 +2376,7 @@ class Application(gui.Application):
 
             "applications-accessories",
 
-            "{ignore_prefix}applications-utilities"
+            f"{ignore_prefix}applications-utilities"
 
             )
 
