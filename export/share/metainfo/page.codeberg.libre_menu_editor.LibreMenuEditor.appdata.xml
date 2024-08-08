@@ -16,6 +16,7 @@
   <name xml:lang="no">Hovedmeny</name>
   <name xml:lang="pl">Menu Główne</name>
   <name xml:lang="pt">Menu Principal</name>
+  <name xml:lang="ru">Главное меню</name>
   <name xml:lang="sv">Huvudmeny</name>
   <name xml:lang="tr">Ana Menü</name>
   <name xml:lang="uk">Головне меню</name>
@@ -33,6 +34,7 @@
   <summary xml:lang="no">Tilpass menyen</summary>
   <summary xml:lang="pl">Edycja menu</summary>
   <summary xml:lang="pt">Personalize o menu</summary>
+  <summary xml:lang="ru">Настройка меню</summary>
   <summary xml:lang="sv">Anpassa menyn</summary>
   <summary xml:lang="tr">Menüyü Özelleştir</summary>
   <summary xml:lang="uk">Налаштування меню</summary>
@@ -120,7 +122,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.7.0" date="2024-08-01"/>
+    <release version="1.7.1" date="2024-08-09"/>
   </releases>
   <recommends>
     <control>touch</control>

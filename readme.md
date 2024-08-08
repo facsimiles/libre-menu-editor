@@ -78,3 +78,5 @@ If you have written bug fixes and want to merge them into the upstream project, 
 
 **2024-07-29**: [SomeTr](https://translate.codeberg.org/user/SomeTr) improved ukrainian translations: [uk.json](libre-menu-editor/locales/uk.json)
 
+**2024-08-09**: [NaumovSN](https://translate.codeberg.org/user/NaumovSN) added russian translations: [ru.json](libre-menu-editor/locales/ru.json)
+

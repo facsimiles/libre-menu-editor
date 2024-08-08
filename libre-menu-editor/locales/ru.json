@@ -1,0 +1,126 @@
+{
+
+  "APPLICATION_NAME": "Главное меню",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Неназванное приложение",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Неназванное действие",
+
+  "GREETER_PAGE_HEAD": "Информация",
+  "GREETER_PAGE_BODY": "Эта программа изменяет файлы конфигурации, которые не предназначены для редактирования пользователем. Поэтому в некоторых системах может случиться так, что некоторые изменения станут видны только через длительное время или после повторного входа пользователя в систему",
+  "GREETER_PAGE_BUTTON_LABEL": "Продолжить",
+
+  "START_PAGE_HEAD": "Настройка меню",
+  "START_PAGE_BODY": "Создайте новую программу запуска приложений или выберите существующую на боковой панели",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Открыть",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Отмена",
+
+  "INSTALL_DIALOG_HEAD": "Установка",
+  "INSTALL_DIALOG_BODY": "Вы хотите добавить это приложение в главное меню?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Назад",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Сохранить",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Установить",
+
+  "DISCARD_DIALOG_HEAD": "Несохраненные изменения",
+  "DISCARD_DIALOG_BODY": "Вы хотите отменить изменения?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Назад",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Сохранить",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Отказ",
+
+  "RESET_DIALOG_HEAD": "Сброс",
+  "RESET_DIALOG_BODY": "Вы хотите сбросить настройки этого приложения? Это действие невозможно отменить",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Назад",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Далее",
+
+  "DELETE_DIALOG_HEAD": "Удалить",
+  "DELETE_DIALOG_BODY": "Вы хотите удалить это приложение? Это действие невозможно отменить",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Назад",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Далее",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Показать скрытое",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Новая установка",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Открыть установку",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Редактировать документ",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Сброс установки",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Удалить установку",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Откат установки",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Сочетания клавиш",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Об этом приложении",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Поиск установки",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Показать скрытое",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Выйти из приложения",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Показывать ярлыки",
+  "SHOW_MENU_SHORTCUT_TEXT": "Открыть меню",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Сохранить изменения",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Отменить изменения",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Удалить изменения",
+  "NEW_STARTER_SHORTCUT_TEXT": "Новая установка",
+  "EDIT_FILE_SHORTCUT_TEXT": "Редактировать документ",
+  "OPEN_FILE_SHORTCUT_TEXT": "Открыть установку",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Редактировать",
+  "FIND_SHORTCUT_GROUP_TITLE": "Найти",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Главное",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Выберите иконку",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Выберите исполняемый файл",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Выберите программу запуска",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Сохранить",
+
+  "BANNER_LABEL_TEXT": "Пожалуйста, выберите действия, которые вы хотите удалить",
+  "BANNER_CANCEL_BUTTON_LABEL": "Готово",
+
+  "APPEARANCE_GROUP_TITLE": "Внешний вид",
+  "DESCRIPTION_GROUP_TITLE": "Описание",
+  "DISCOVERY_GROUP_TITLE": "Поиск",
+  "EXECUTION_GROUP_TITLE": "Выполнить",
+  "ACTIONS_GROUP_TITLE": "Действие",
+  "VISIBLE_GROUP_TITLE": "Обзор",
+
+  "ICON_CHOOSER_ROW_TITLE": "Иконка",
+  "NAME_ENTRY_ROW_TITLE": "Имя",
+  "COMMENT_ENTRY_ROW_TITLE": "Комментарий",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Ключевые слова",
+  "COMMAND_CHOOSER_ROW_TITLE": "Команда",
+  "VISIBLE_SWITCH_ROW_TITLE": "Покажите это приложение в главном меню",
+  "CATEGORIES_COMBO_ROW_TITLE": "Традиционные категории меню приложения",
+  "NOTIFY_SWITCH_ROW_TITLE": "Показывайте анимацию до тех пор, пока приложение не станет видимым",
+  "TERMINAL_SWITCH_ROW_TITLE": "Показывать окно терминала во время выполнения",
+
+  "LINK_CONVERTER_ROW_LABEL": "Преобразовать ссылку в команду",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Мультимедия",
+  "DEVELOPMENT_CATEGORY_LABEL": "Разработка",
+  "EDUCATION_CATEGORY_LABEL": "Образование",
+  "GAME_CATEGORY_LABEL": "Игры",
+  "GRAPHICS_CATEGORY_LABEL": "Графика",
+  "NETWORK_CATEGORY_LABEL": "Интернет",
+  "OFFICE_CATEGORY_LABEL": "Офис",
+  "SCIENCE_CATEGORY_LABEL": "Наука",
+  "SETTINGS_CATEGORY_LABEL": "Настройки",
+  "SYSTEM_CATEGORY_LABEL": "Система",
+  "UTILITY_CATEGORY_LABEL": "Аксессуары",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "Не удалось загрузить %s файлы",
+  "LOAD_SINGLE_ERROR_TEXT": "Не удалось загрузить файл '%s'",
+  "OPEN_FILE_ERROR_TEXT": "Не удалось открыть конфигурации",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "Настройки для '%s' были сохранены",
+  "STARTER_SAVE_ERROR_TEXT": "Не удалось сохранить конфигурации",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "Создана программа запуска для '%s'",
+  "STARTER_CREATE_ERROR_TEXT": "Не удалось создать программу запуска",
+
+  "STARTER_RESET_MESSAGE_TEXT": "Программа запуска для '%s' была сброшена",
+  "STARTER_RESET_ERROR_TEXT": "Не удалось перезагрузить программу запуска",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "Программа запуска для '%s' была удалена",
+  "STARTER_DELETE_ERROR_TEXT": "Не удалось удалить программу запуска",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "Программа запуска для '%s' была стёрта"
+
+}
