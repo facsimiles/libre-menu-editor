@@ -1189,6 +1189,12 @@ class SettingsPage(Gtk.Box):
 
         self._clamp_threshold = 240
 
+        self._reload_button_fade_duration = 45
+
+        self._reload_button_fade_timeout_id = None
+
+        self._loading_desktop_starter = False
+
         self._changed = False
 
         self._current_name = None
@@ -1925,25 +1931,59 @@ class SettingsPage(Gtk.Box):
 
         self._bottom_box.set_sensitive(value)
 
-    def _update_action_children_sensitive(self, value=True):
+    def _update_action_children_sensitive(self, value=True, skip_reload_button=False):
 
-        if value and not self._get_input_children_changed():
+        if not self._loading_desktop_starter:
 
-            value = False
+            if value and not self._get_input_children_changed():
 
-        if value or self._always_show_save_button:
+                value = False
 
-            self._save_button.set_sensitive(True)
+            if value or self._always_show_save_button:
 
-            self._save_button.add_css_class("suggested-action")
+                self._save_button.set_sensitive(True)
 
-        else:
+                self._save_button.add_css_class("suggested-action")
 
-            self._save_button.set_sensitive(False)
+            else:
 
-            self._save_button.remove_css_class("suggested-action")
+                self._save_button.set_sensitive(False)
 
-        self._reload_button.set_visible(value)
+                self._save_button.remove_css_class("suggested-action")
+
+            if not skip_reload_button:
+
+                if self._reload_button_fade_timeout_id:
+
+                    GLib.source_remove(self._reload_button_fade_timeout_id)
+
+                if value:
+
+                    self._reload_button.set_visible(True)
+
+                    self._reload_button_fade_timeout_id = GLib.timeout_add(self._reload_button_fade_duration, self._after_reload_button_show)
+
+                else:
+
+                    self._reload_button.set_sensitive(False)
+
+                    self._reload_button_fade_timeout_id = GLib.timeout_add(self._reload_button_fade_duration, self._after_reload_button_hide)
+
+    def _after_reload_button_show(self):
+
+        self._reload_button.set_sensitive(True)
+
+        self._reload_button_fade_timeout_id = None
+
+        return GLib.SOURCE_REMOVE
+
+    def _after_reload_button_hide(self):
+
+        self._reload_button.set_visible(False)
+
+        self._reload_button_fade_timeout_id = None
+
+        return GLib.SOURCE_REMOVE
 
     def get_delete_mode_enabled(self):
 
@@ -1972,6 +2012,8 @@ class SettingsPage(Gtk.Box):
                 self._current_desktop_action_groups[self._current_desktop_actions[0]].grab_focus()
 
     def load_desktop_starter(self, name, parser):
+
+        self._loading_desktop_starter = True
 
         self.reset(reset_children=False)
 
@@ -2006,6 +2048,10 @@ class SettingsPage(Gtk.Box):
         self._terminal_switch_row.set_active(self._current_parser.get_terminal())
 
         self._icon_browser_row.set_default_text(self._icon_chooser_row.get_text())
+
+        self._loading_desktop_starter = False
+
+        self._update_action_children_sensitive(False)
 
     def save_desktop_starter(self):
 
@@ -2069,7 +2115,7 @@ class SettingsPage(Gtk.Box):
 
         self._always_show_save_button = value
 
-        self._update_action_children_sensitive()
+        self._update_action_children_sensitive(skip_reload_button=True)
 
     def get_save_button(self):
 
@@ -2444,6 +2490,8 @@ class Application(gui.Application):
 
         self._save_settings_button.set_label(self._locale_manager.get("SAVE_SETTINGS_BUTTON_LABEL"))
 
+        self._save_settings_button.set_focus_on_click(False)
+
         self._save_settings_button.connect("clicked", self._on_save_settings_button_clicked)
 
         self._reload_settings_button = self._settings_page.get_reload_button()
@@ -2451,6 +2499,8 @@ class Application(gui.Application):
         self._reload_settings_button.add_css_class("flat")
 
         self._reload_settings_button.set_icon_name(self._icon_finder.get_name("view-refresh-symbolic"))
+
+        self._reload_settings_button.set_focus_on_click(False)
 
         self._reload_settings_button.connect("clicked", self._on_reload_settings_button_clicked)
 
@@ -3471,8 +3521,6 @@ class Application(gui.Application):
                 self.log(error, error=error)
 
     def _focus_settings_page(self):
-
-        #FIXME: self._settings_page.grab_focus()
 
         if hasattr(self._main_split_layout, "set_show_content"):
 
