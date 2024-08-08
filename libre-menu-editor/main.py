@@ -2220,6 +2220,8 @@ class Application(gui.Application):
 
         self._ignore_show_hidden_switch_changes = False
 
+        self._previous_discard_dialog = None
+
         ###############################################################################################################
 
         ignore_prefix = "page.codeberg.libre_menu_editor.LibreMenuEditor.fallback."
@@ -2994,7 +2996,13 @@ class Application(gui.Application):
 
     def _on_text_editor_update(self, event, name):
 
-        self._check_unsaved_data(self._after_text_editor_update, name)
+        if name == self._current_desktop_starter_name:
+
+            self._check_unsaved_data(self._after_text_editor_update, name)
+
+        else:
+
+            self._after_text_editor_update(name)
 
     def _after_text_editor_update(self, name):
 
@@ -3540,7 +3548,11 @@ class Application(gui.Application):
 
             if self._settings_page.get_changed():
 
-                self._show_discard_dialog(*callback_args, **callback_kwargs)
+                if self._previous_discard_dialog and self._previous_discard_dialog.get_visible():
+
+                    self._previous_discard_dialog.destroy()
+
+                self._previous_discard_dialog = self._show_discard_dialog(*callback_args, **callback_kwargs)
 
                 return True
 
@@ -3769,6 +3781,8 @@ class Application(gui.Application):
         discard_dialog.connect("response", self._on_discard_dialog_response)
 
         discard_dialog.show()
+
+        return discard_dialog
 
     def _show_reset_dialog(self, callback, *callback_args, **callback_kwargs):
 
@@ -4078,6 +4092,8 @@ class Application(gui.Application):
 
                 if not self._current_desktop_starter_name in self._unsaved_custom_starters or not self._unsaved_custom_starters[self._current_desktop_starter_name]["external"]:
 
+                    self._settings_page.set_always_show_save_button(False)
+
                     self._update_mime_data(parser)
 
                 self._settings_page.save_desktop_starter()
@@ -4085,8 +4101,6 @@ class Application(gui.Application):
                 if self._current_desktop_starter_name in self._text_editor.get_names():
 
                     parser.save(path=self._text_editor.get_path(self._current_desktop_starter_name))
-
-                self._settings_page.set_always_show_save_button(False)
 
             except Exception as error:
 
