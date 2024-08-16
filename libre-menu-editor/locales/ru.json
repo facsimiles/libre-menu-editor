@@ -25,7 +25,7 @@
   "DISCARD_DIALOG_BODY": "Вы хотите отменить изменения?",
   "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Назад",
   "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Сохранить",
-  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Отказ",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Не сохранять",
 
   "RESET_DIALOG_HEAD": "Сброс",
   "RESET_DIALOG_BODY": "Вы хотите сбросить настройки этого приложения? Это действие невозможно отменить",
@@ -45,7 +45,7 @@
   "DELETE_STARTER_MENU_BUTTON_LABEL": "Удалить установку",
   "DISCARD_STARTER_MENU_BUTTON_LABEL": "Откат установки",
   "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Сочетания клавиш",
-  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Об этом приложении",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "О приложении",
 
   "TOGGLE_SEARCH_SHORTCUT_TEXT": "Поиск установки",
   "SHOW_HIDDEN_SHORTCUT_TEXT": "Показать скрытое",
