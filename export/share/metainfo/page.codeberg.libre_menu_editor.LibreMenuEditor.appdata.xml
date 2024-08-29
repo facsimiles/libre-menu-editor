@@ -10,6 +10,7 @@
   <name xml:lang="es">Menú Principal</name>
   <name xml:lang="fi">Päävalikko</name>
   <name xml:lang="fr">Menu Principal</name>
+  <name xml:lang="hu">Főmenü</name>
   <name xml:lang="is">Aðalvalmynd</name>
   <name xml:lang="it">Menù Principale</name>
   <name xml:lang="nl">Hoofdmenu</name>
@@ -28,6 +29,7 @@
   <summary xml:lang="es">Modificar el menú</summary>
   <summary xml:lang="fi">Mukauta valikkoa</summary>
   <summary xml:lang="fr">Modifier le menu</summary>
+  <summary xml:lang="hu">Menü testreszabása</summary>
   <summary xml:lang="is">Sérsníða valmyndina</summary>
   <summary xml:lang="it">Modifica il menù</summary>
   <summary xml:lang="nl">Menu aanpassen</summary>

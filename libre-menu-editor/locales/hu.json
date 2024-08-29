@@ -1,0 +1,126 @@
+{
+
+  "APPLICATION_NAME": "Főmenü",
+
+  "UNNAMED_APPLICATION_PLACEHOLDER_TEXT": "Névtelen alkalmazás",
+  "UNNAMED_ACTION_PLACEHOLDER_TEXT": "Névtelen művelet",
+
+  "GREETER_PAGE_HEAD": "Információ",
+  "GREETER_PAGE_BODY": "Ez a program olyan konfigurációs fájlokat módosít, amelyeket nem a felhasználók általi szerkesztésre terveztek. Egyes rendszereken előfordulhat, hogy a módosítások csak hosszú idő után vagy újbóli bejelentkezés után válnak láthatóvá.",
+  "GREETER_PAGE_BUTTON_LABEL": "Folytatás",
+
+  "START_PAGE_HEAD": "Menü testreszabása",
+  "START_PAGE_BODY": "Hozzon létre egy új alkalmazásindítót vagy válasszon ki egy meglévőt az oldalsávban",
+
+  "PATH_CHOOSER_DIALOG_ACCEPT_BUTTON_LABEL": "Megnyitás",
+  "PATH_CHOOSER_DIALOG_CANCEL_BUTTON_LABEL": "Mégse",
+
+  "INSTALL_DIALOG_HEAD": "Telepítés",
+  "INSTALL_DIALOG_BODY": "Hozzáadja ezt az alkalmazást a főmenühöz?",
+  "INSTALL_DIALOG_BACK_BUTTON_LABEL": "Vissza",
+  "INSTALL_DIALOG_SAVE_BUTTON_LABEL": "Mentés",
+  "INSTALL_DIALOG_INSTALL_BUTTON_LABEL": "Telepítés",
+
+  "DISCARD_DIALOG_HEAD": "Mentetlen változtatások",
+  "DISCARD_DIALOG_BODY": "Biztos, hogy elveti a változtatásokat?",
+  "DISCARD_DIALOG_BACK_BUTTON_LABEL": "Vissza",
+  "DISCARD_DIALOG_SAVE_BUTTON_LABEL": "Mentés",
+  "DISCARD_DIALOG_DISCARD_BUTTON_LABEL": "Elvetés",
+
+  "RESET_DIALOG_HEAD": "Visszaállítás",
+  "RESET_DIALOG_BODY": "Visszaállítja ezt az alkalmazást? Ez a művelet nem vonható vissza.",
+  "RESET_DIALOG_BACK_BUTTON_LABEL": "Vissza",
+  "RESET_DIALOG_CONTINUE_BUTTON_LABEL": "Folytatás",
+
+  "DELETE_DIALOG_HEAD": "Törlés",
+  "DELETE_DIALOG_BODY": "Biztos, hogy törli ezt az alkalmazást? Ez a művelet nem vonható vissza.",
+  "DELETE_DIALOG_BACK_BUTTON_LABEL": "Vissza",
+  "DELETE_DIALOG_CONTINUE_BUTTON_LABEL": "Folytatás",
+
+  "SHOW_HIDDEN_SWITCH_LABEL": "Rejtettek megjelenítése",
+  "NEW_STARTER_MENU_BUTTON_LABEL": "Új indító",
+  "OPEN_FILE_MENU_BUTTON_LABEL": "Indító megnyitása",
+  "EDIT_FILE_MENU_BUTTON_LABEL": "Dokumentum szerkesztése",
+  "RESET_STARTER_MENU_BUTTON_LABEL": "Indító visszaállítása",
+  "DELETE_STARTER_MENU_BUTTON_LABEL": "Indító törlése",
+  "DISCARD_STARTER_MENU_BUTTON_LABEL": "Indító elvetése",
+  "SHOW_SHORTCUTS_MENU_BUTTON_LABEL": "Gyorsbillentyűk",
+  "SHOW_ABOUT_MENU_BUTTON_LABEL": "Az alkalmazás névjegye",
+
+  "TOGGLE_SEARCH_SHORTCUT_TEXT": "Indítók keresése",
+  "SHOW_HIDDEN_SHORTCUT_TEXT": "Rejtettek megjelenítése",
+
+  "QUIT_APPLICATION_SHORTCUT_TEXT": "Kilépés az alkalmazásból",
+  "SHOW_SHORTCUTS_SHORTCUT_TEXT": "Gyorsbillentyűk megjelenítése",
+  "SHOW_MENU_SHORTCUT_TEXT": "Menü megnyitása",
+
+  "SAVE_SETTINGS_SHORTCUT_TEXT": "Módosítások mentése",
+  "RELOAD_SETTINGS_SHORTCUT_TEXT": "Módosítások elvetése",
+  "REVERT_CHANGES_SHORTCUT_TEXT": "Módosítások eltávolítása",
+  "NEW_STARTER_SHORTCUT_TEXT": "Új indító",
+  "EDIT_FILE_SHORTCUT_TEXT": "Dokumentum szerkesztése",
+  "OPEN_FILE_SHORTCUT_TEXT": "Indító megnyitása",
+
+  "EDIT_SHORTCUT_GROUP_TITLE": "Szerkesztés",
+  "FIND_SHORTCUT_GROUP_TITLE": "Keresés",
+  "GENERAL_SHORTCUT_GROUP_TITLE": "Általános",
+
+  "ICON_CHOOSER_ROW_DIALOG_TITLE": "Válasszon ikont",
+  "COMMAND_CHOOSER_ROW_DIALOG_TITLE": "Válasszon végrehajtható fájlt",
+  "OPEN_FILE_CHOOSER_DIALOG_TITLE": "Válasszon indítót",
+
+  "SAVE_SETTINGS_BUTTON_LABEL": "Mentés",
+
+  "BANNER_LABEL_TEXT": "Válassza ki a törlendő műveleteket",
+  "BANNER_CANCEL_BUTTON_LABEL": "Kész",
+
+  "APPEARANCE_GROUP_TITLE": "Megjelenés",
+  "DESCRIPTION_GROUP_TITLE": "Leírás",
+  "DISCOVERY_GROUP_TITLE": "Keresés",
+  "EXECUTION_GROUP_TITLE": "Végrehajtás",
+  "ACTIONS_GROUP_TITLE": "Műveletek",
+  "VISIBLE_GROUP_TITLE": "Láthatóság",
+
+  "ICON_CHOOSER_ROW_TITLE": "Ikon",
+  "NAME_ENTRY_ROW_TITLE": "Név",
+  "COMMENT_ENTRY_ROW_TITLE": "Megjegyzés",
+  "KEYWORDS_ENTRY_ROW_TITLE": "Kulcsszavak",
+  "COMMAND_CHOOSER_ROW_TITLE": "Parancs",
+  "VISIBLE_SWITCH_ROW_TITLE": "Az alkalmazás megjelenítése a főmenüben",
+  "CATEGORIES_COMBO_ROW_TITLE": "Az alkalmazás hagyományos menükategóriái",
+  "NOTIFY_SWITCH_ROW_TITLE": "Animáció megjelenítése az alkalmazás megjelenéséig",
+  "TERMINAL_SWITCH_ROW_TITLE": "Terminálablak megjelenítése a végrehajtás során",
+
+  "LINK_CONVERTER_ROW_LABEL": "Hivatkozás paranccsá alakítása",
+
+  "MULTIMEDIA_CATEGORY_LABEL": "Multimédia",
+  "DEVELOPMENT_CATEGORY_LABEL": "Fejlesztés",
+  "EDUCATION_CATEGORY_LABEL": "Oktatás",
+  "GAME_CATEGORY_LABEL": "Játékok",
+  "GRAPHICS_CATEGORY_LABEL": "Grafika",
+  "NETWORK_CATEGORY_LABEL": "Internet",
+  "OFFICE_CATEGORY_LABEL": "Iroda",
+  "SCIENCE_CATEGORY_LABEL": "Tudomány",
+  "SETTINGS_CATEGORY_LABEL": "Beállítások",
+  "SYSTEM_CATEGORY_LABEL": "Rendszer",
+  "UTILITY_CATEGORY_LABEL": "Segédeszközök",
+
+  "LOAD_MULTIPLE_ERROR_TEXT": "A(z) %s fájlok betöltése sikertelen",
+  "LOAD_SINGLE_ERROR_TEXT": "A(z) „%s” fájl betöltése sikertelen",
+  "OPEN_FILE_ERROR_TEXT": "A konfigurációk megnyitása sikertelen",
+
+  "STARTER_SAVE_MESSAGE_TEXT": "A(z) „%s” konfigurációi mentve lettek",
+  "STARTER_SAVE_ERROR_TEXT": "A konfigurációk mentése sikertelen",
+
+  "STARTER_CREATE_MESSAGE_TEXT": "A(z) „%s” indítója létre lett hozva",
+  "STARTER_CREATE_ERROR_TEXT": "Az indító létrehozása sikertelen",
+
+  "STARTER_RESET_MESSAGE_TEXT": "A(z) „%s” indítója vissza lett állítva",
+  "STARTER_RESET_ERROR_TEXT": "Az indító visszaállítása sikertelen",
+
+  "STARTER_DELETE_MESSAGE_TEXT": "A(z) „%s” indítója törölve lett",
+  "STARTER_DELETE_ERROR_TEXT": "Az indító törlése sikertelen",
+
+  "STARTER_REMOVE_MESSAGE_TEXT": "A(z) „%s” indítója el lett távolítva"
+
+}
