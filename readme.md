@@ -80,3 +80,5 @@ If you have written bug fixes and want to merge them into the upstream project, 
 
 **2024-08-09**: [NaumovSN](https://translate.codeberg.org/user/NaumovSN) added russian translations: [ru.json](libre-menu-editor/locales/ru.json)
 
+**2024-08-26**: [meskobalazs](https://translate.codeberg.org/user/meskobalazs) added hungarian translations: [hu.json](libre-menu-editor/locales/hu.json)
+
